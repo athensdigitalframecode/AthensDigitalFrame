@@ -498,6 +498,7 @@ html.leaving{opacity:0;transition:opacity .28s ease}
  .hw-cols .hw-col+.hw-col::before{content:"";position:absolute;left:-28px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(201,169,110,.4),transparent)}
 }
 @media (prefers-reduced-motion:reduce){.how.live .hw-step{opacity:1;transform:none}}
+#stage.hwgone{opacity:0!important;transform:translateY(18px) scale(.94)!important;pointer-events:none!important}
 /* lead form */
 .lead-form{max-width:420px;margin:6px auto 22px;text-align:left;display:grid;gap:12px}
 .lf-row label{display:block;font-size:13px;letter-spacing:.04em;color:var(--gold-soft);margin:0 0 6px}
@@ -932,8 +933,7 @@ var hidden=false,offT=0;
 function tower(vh){
   if(!babel)return;
   var r=sec.getBoundingClientRect(),gone=r.top<vh*.9,st=document.getElementById('stage');
-  if(st){if(gone&&!st.classList.contains('mini')){st.classList.add('mini');st.setAttribute('data-hw','1')}
-    else if(!gone&&st.getAttribute('data-hw')){st.classList.remove('mini');st.removeAttribute('data-hw')}}
+  if(st)st.classList.toggle('hwgone',gone);
   if(gone&&!hidden){hidden=true;babel.classList.add('gone');window.__noTower=true;clearTimeout(offT);offT=setTimeout(function(){if(hidden)babel.classList.add('off')},650)}
   else if(!gone&&hidden){hidden=false;clearTimeout(offT);babel.classList.remove('off');void babel.offsetWidth;babel.classList.remove('gone');window.__noTower=false}
 }
@@ -1130,9 +1130,9 @@ var tx=document.createElement('div');tx.className='stxt';
 if(window.EN)tx.innerHTML='<h4>The Tower of Babel</h4><p>Once, a tower was left unfinished, because people could not understand each other\'s language.</p><p><strong>Today we build again.</strong> A site that speaks your customers\' language and an e-shop that sells while you sleep.</p>';
 else tx.innerHTML='<h4>Ο Πύργος της Βαβέλ</h4><p>Κάποτε, ένας πύργος έμεινε ημιτελής, γιατί οι άνθρωποι δεν κατάλαβαν ο ένας τη γλώσσα του άλλου.</p><p><strong>Σήμερα χτίζουμε ξανά.</strong> Ένα site που μιλά τη γλώσσα των πελατών σου και ένα e-shop που πουλάει όσο κοιμάσαι.</p>';
 st.appendChild(tx);st.appendChild(im);st.appendChild(nm);document.body.appendChild(st);
-var armed=true,tm=null;
+var armed=true,tm=null,opened=false;setTimeout(function(){opened=true;check()},1400);
 function check(){var y=yy();
-  if(armed&&y>450){armed=false;st.classList.add('on');
+  if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
     if(window.innerWidth<700){clearTimeout(tm);tm=setTimeout(function(){st.classList.add('mini')},6500)}}
   }
 st.addEventListener('click',function(){if(window.innerWidth<700){st.classList.toggle('mini');clearTimeout(tm)}});

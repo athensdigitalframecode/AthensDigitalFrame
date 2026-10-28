@@ -499,6 +499,7 @@ html.leaving{opacity:0;transition:opacity .28s ease}
 }
 @media (prefers-reduced-motion:reduce){.how.live .hw-step{opacity:1;transform:none}}
 #stage.hwgone{opacity:0!important;transform:translateY(18px) scale(.94)!important;pointer-events:none!important}
+#how{background:linear-gradient(180deg,rgba(26,24,19,.985),rgba(20,20,17,.985))!important}
 /* portfolio */
 .pf{padding:26px 18px 26px}
 .pf .pf-lead{margin:6px 0 22px;color:var(--muted);font-size:15px;line-height:1.5}
@@ -1009,8 +1010,8 @@ function paint(col,p){
 var hidden=false,offT=0;
 function tower(vh){
   if(!babel)return;
-  var r=sec.getBoundingClientRect(),gone=r.top<vh*.9,st=document.getElementById('stage');
-  if(st)st.classList.toggle('hwgone',gone);
+  var r=sec.getBoundingClientRect(),gone=r.top<vh*.04,st=document.getElementById('stage');
+  if(st)st.classList.toggle('hwgone',r.top<vh*.9);
   if(gone&&!hidden){hidden=true;babel.classList.add('gone');window.__noTower=true;clearTimeout(offT);offT=setTimeout(function(){if(hidden)babel.classList.add('off')},650)}
   else if(!gone&&hidden){hidden=false;clearTimeout(offT);babel.classList.remove('off');void babel.offsetWidth;babel.classList.remove('gone');window.__noTower=false}
 }

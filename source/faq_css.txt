@@ -1,0 +1,12 @@
+/* faq */
+.faq2{padding:26px 18px 22px}
+.faq2 h2{margin-bottom:16px}
+.fq{border-top:1px solid rgba(201,169,110,.28)}
+.fq:last-of-type{border-bottom:1px solid rgba(201,169,110,.28)}
+.fq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:14px 2px;font-family:var(--display);font-size:18px;font-weight:600;color:var(--cream)}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{content:"+";flex:none;width:28px;height:28px;border-radius:50%;border:1px solid rgba(201,169,110,.5);display:grid;place-items:center;color:var(--gold);font:400 20px/1 var(--body);transition:transform .25s}
+.fq[open] summary::after{content:"\2212"}
+.fq summary:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
+.fq p{margin:0 2px 18px;font-size:15px;line-height:1.6;color:var(--muted)}
+@media (min-width:900px){#faq{width:min(1080px,calc(100vw - max(21px,5vw)*2));align-self:flex-start;padding:34px 36px 30px}.fq summary{font-size:20px}.fq p{max-width:760px}}

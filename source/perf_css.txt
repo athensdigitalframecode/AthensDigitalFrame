@@ -1,0 +1,7 @@
+
+/* perf: compositor-only animations, contained background */
+.bg{contain:layout paint}
+.bg .neb{filter:none!important}
+.bg .stars,.bg .px,.mist,#babel{will-change:transform}
+@keyframes shimmer{0%,60%{transform:translateX(0) skewX(-20deg)}100%{transform:translateX(450%) skewX(-20deg)}}
+.btn:not(.ghost)::after{left:-60%!important}

@@ -1,0 +1,12 @@
+/* portfolio */
+.pf{padding:26px 18px 26px}
+.pf .pf-lead{margin:6px 0 22px;color:var(--muted);font-size:15px;line-height:1.5}
+.pf-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.pf-card{border:1px solid rgba(201,169,110,.3);border-radius:16px;background:rgba(14,13,10,.6);padding:12px 12px 14px}
+.pf-bar{display:flex;gap:6px;padding:2px 4px 10px}.pf-bar i{width:8px;height:8px;border-radius:50%;background:rgba(201,169,110,.35)}
+.pf-body{position:relative;height:150px;border-radius:10px;border:1px dashed rgba(201,169,110,.4);display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,rgba(201,169,110,.06),rgba(201,169,110,.01))}
+.pf-body::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(230,207,159,.14),transparent);animation:pfs 5s ease-in-out infinite}
+@keyframes pfs{0%,55%{left:-60%}100%{left:130%}}
+.pf-body span{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.pf-card p{margin:12px 4px 0;font-size:13px;letter-spacing:.06em;color:var(--muted)}
+@media (min-width:900px){#portfolio{width:min(1080px,calc(100vw - max(21px,5vw)*2));align-self:flex-start;padding:34px 36px 38px}.pf-grid{grid-template-columns:repeat(3,1fr);gap:22px}.pf-body{height:190px}}

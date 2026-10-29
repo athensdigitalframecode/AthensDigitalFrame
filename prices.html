@@ -378,7 +378,10 @@ section.compact{padding-left:18px;padding-right:18px}
 .dock{padding-left:max(21px,env(safe-area-inset-left,0px));padding-right:max(21px,env(safe-area-inset-right,0px))}
 .dock .dockrow{max-width:620px}
 .toast{left:max(21px,env(safe-area-inset-left,0px))}
-.homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
+</style>
+</head>
+<body>
+<style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}.homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .tile{background:linear-gradient(180deg,rgba(26,24,19,.82),rgba(20,20,17,.82))!important}
@@ -387,8 +390,8 @@ html{animation:pgin .45s ease both}
 html.leaving{opacity:0;transition:opacity .28s ease}
 @media (prefers-reduced-motion:reduce){html{animation:none}html.leaving{transition:none}}
 </style>
-</head>
-<body>
+
+
 <div class="bg" aria-hidden="true">
   <canvas class="stars" id="stars"></canvas>
   <span class="px neb n1" data-s=".10"></span><span class="px neb n2" data-s=".16"></span>
@@ -832,6 +835,7 @@ document.addEventListener('click',function(e){
 },true);
 })();
 </script>
+<script>(function(){var s=[].slice.call(document.querySelectorAll('.snd')),l=0;function f(){var y=window.pageYOffset||document.documentElement.scrollTop||0;if(y>l+4&&y>90)s.forEach(function(b){b.classList.add('away')});else if(y<l-4||y<=90)s.forEach(function(b){b.classList.remove('away')});l=y}window.addEventListener('scroll',f,{passive:true})})();</script>
 <script>
 (function(){
 try{history.scrollRestoration='manual'}catch(e){}

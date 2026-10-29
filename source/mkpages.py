@@ -35,6 +35,12 @@ pr=pr.replace('<button class="snd lang" id="lang"','<a class="snd back" href="in
 assert 'snd back' in pr
 pr=inject_extra(pr)
 
+css_hide = "<style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}</style>\n"
+js_hide = """<script>(function(){var s=[].slice.call(document.querySelectorAll('.snd')),l=0;function f(){var y=window.pageYOffset||document.documentElement.scrollTop||0;if(y>l+4&&y>90)s.forEach(function(b){b.classList.add('away')});else if(y<l-4||y<=90)s.forEach(function(b){b.classList.remove('away')});l=y}window.addEventListener('scroll',f,{passive:true})})();</script>
+"""
+_k=pr.rindex('</style>')+len('</style>');pr=pr[:_k]+'\n'+css_hide+pr[_k:]
+pr=pr.rstrip()+'\n'+js_hide
+
 # ---------- home page
 m=re.search(r'<main>.*?</main>',P,flags=re.S); main=m.group(0)
 hero=re.search(r'<header class="hero">.*?</header>',main,flags=re.S).group(0)
@@ -83,7 +89,7 @@ svc=f'''<section class="s-site svc" id="svc-sec" aria-labelledby="svc1">
   </section>'''
 tiles='''<p class="eyebrow menuhead">Μενού</p>
   <nav class="tiles" aria-label="Μενού">
-    <a class="tile" href="prices.html"><span class="ti">__PRICE__</span><span class="tt"><strong>Τιμές &amp; Υπηρεσίες</strong><em>Ιστοσελίδες από 300€<br>E-shop από 200€</em></span><span class="go" aria-hidden="true">→</span></a>
+    <a class="tile" href="prices.html"><span class="ti">__PRICE__</span><span class="tt"><strong>Τιμές &amp; Υπηρεσίες</strong><em>Ιστοσελίδες από 300€<br>E-shop από 200€ <span style="white-space:nowrap">+ 30€/μήνα</span></em></span><span class="go" aria-hidden="true">→</span></a>
     <a class="tile" href="#contact-sec"><span class="ti">__CHAT__</span><span class="tt"><strong>Επικοινωνία</strong><em>DM, WhatsApp, τηλέφωνο, email</em></span><span class="go" aria-hidden="true">→</span></a>
   </nav>'''
 ic=lambda d:'<svg viewBox="0 0 24 24" aria-hidden="true">'+d+'</svg>'

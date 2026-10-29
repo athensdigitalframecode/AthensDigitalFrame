@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" fill="none" stroke="#C9A96E" stroke-linecap="round" stroke-linejoin="round">
+<g stroke-width="1.4"><rect x="4" y="4" width="632" height="512" rx="10"/></g>
+<g stroke-width=".8" opacity=".7"><rect x="14" y="14" width="612" height="492" rx="6"/></g>
+<g stroke-width="1"><path d="M14 58H626"/><circle cx="36" cy="36" r="5"/><circle cx="54" cy="36" r="5"/><circle cx="72" cy="36" r="5"/><rect x="112" y="24" width="420" height="24" rx="12"/><path d="M130 36h46" opacity=".5"/><path d="M590 30v12M584 36h12" opacity=".6"/></g>
+<g stroke-width=".7" opacity=".55"><path d="M60 100h4M110 130h4M540 96h4M580 140h4M90 186h4M556 188h4M300 90h4M420 120h4M200 150h4"/><path d="M62 98v4M112 128v4M542 94v4M582 138v4M92 184v4M558 186v4M302 88v4M422 118v4M202 148v4"/></g>
+<g stroke-width="1.1"><path d="M14 440C80 428 130 396 170 384H470C510 396 560 424 626 440"/><path d="M24 470C120 452 200 440 320 438C440 440 520 452 616 470" opacity=".5"/></g>
+<g stroke-width="1"><path d="M170 384H470M180 388H460M190 392H450" opacity=".7"/>
+<path d="M184 306H456M184 298H456"/><path d="M178 298L320 248L462 298" /><path d="M200 292L320 252L440 292" opacity=".5"/>
+<path d="M190 380V306M202 380V306"/><path d="M188 306h16M188 382h16" opacity=".6"/><path d="M222 380V306M234 380V306"/><path d="M220 306h16M220 382h16" opacity=".6"/><path d="M254 380V306M266 380V306"/><path d="M252 306h16M252 382h16" opacity=".6"/><path d="M286 380V306M298 380V306"/><path d="M284 306h16M284 382h16" opacity=".6"/><path d="M318 380V306M330 380V306"/><path d="M316 306h16M316 382h16" opacity=".6"/><path d="M350 380V306M362 380V306"/><path d="M348 306h16M348 382h16" opacity=".6"/><path d="M382 380V306M394 380V306"/><path d="M380 306h16M380 382h16" opacity=".6"/><path d="M414 380V306M426 380V306"/><path d="M412 306h16M412 382h16" opacity=".6"/><path d="M446 380V306M458 380V306"/><path d="M444 306h16M444 382h16" opacity=".6"/>
+</g>
+<g stroke-width="1" opacity=".8"><path d="M470 412C510 392 540 372 566 352C580 372 600 396 626 410"/><path d="M566 352v-14M560 338h12" /></g>
+<g stroke-width=".7" opacity=".5"><path d="M14 500H626"/><path d="M40 478h120M40 488h70"/></g>
+</svg>

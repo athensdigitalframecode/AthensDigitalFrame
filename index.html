@@ -1055,9 +1055,9 @@ var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 var main=ctx,LA=document.createElement('canvas'),LB=document.createElement('canvas'),built=false;
 function size(){W=Math.min(window.innerWidth*.94,600);H=Math.min(window.innerHeight*.78,720);
  cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';ctx=main;ctx.setTransform(dpr,0,0,dpr,0,0);built=false}
-var RT=[1,.88,.74,.64,.58,.48,.38],WT=[.8,1,1.05,.8,1.05,.85,1.1];
+var RT=[1,.88,.79,.71,.66,.58,.51,.46,.42],WT=[1.15,1.07,.9,1,.93,.62,.6,.6,.78];
 function lay(base,top){var sm=0,i,yb=[],st=[],y=base;for(i=0;i<WT.length;i++)sm+=WT[i];for(i=0;i<WT.length;i++){st[i]=(base-top)*WT[i]/sm;yb[i]=y;y-=st[i]}return{yb:yb,st:st}}
-function geo(){var N=7,base=H*.93,top=H*.2,rs=[],i,R0=Math.min(W*.47,(base-top)*.3);for(i=0;i<N;i++)rs[i]=R0*RT[i];return{cx:W*.5,base:base,top:top,N:N,step:(base-top)/N,k:.17,rs:rs}}
+function geo(){var N=9,base=H*.93,top=H*.2,rs=[],i,R0=Math.min(W*.47,(base-top)*.6);for(i=0;i<N;i++)rs[i]=R0*RT[i];return{cx:W*.5,base:base,top:top,N:N,step:(base-top)/N,k:.17,rs:rs}}
 function build(){
  var g=geo(),cx=g.cx,base=g.base,top=g.top,N=g.N,step=g.step,k=g.k,rs=g.rs,i,j,L=lay(base,top);
  LA.width=LB.width=W*dpr;LA.height=LB.height=H*dpr;
@@ -1082,7 +1082,7 @@ function build(){
   var gb=ctx.createLinearGradient(cx-r,0,cx+r,0);
   gb.addColorStop(0,'rgba(8,8,8,.9)');gb.addColorStop(.28,'rgba(18,16,12,.88)');gb.addColorStop(.72,'rgba(52,43,28,.8)');gb.addColorStop(1,'rgba(120,98,58,.55)');
   ctx.fillStyle=gb;ctx.beginPath();ctx.moveTo(cx-rT,yt);ctx.lineTo(cx-r,yb);ctx.ellipse(cx,yb,r,ry,0,Math.PI,0,true);ctx.lineTo(cx+rT,yt);ctx.ellipse(cx,yt,rT,ryT,0,0,Math.PI,false);ctx.closePath();ctx.fill();
-  ctx.fillStyle='rgba(201,169,110,.10)';ctx.beginPath();ctx.ellipse(cx,yt,rT,ryT,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(201,169,110,.2)';ctx.beginPath();ctx.ellipse(cx,yt,rT,ryT,0,0,Math.PI*2);ctx.fill();
   stroke(.12,4);ctx.beginPath();ctx.ellipse(cx,yt,rT,ryT,0,0,Math.PI*2);ctx.stroke();
   stroke(.6,1.3);
   ctx.beginPath();ctx.moveTo(cx-r,yb);ctx.lineTo(cx-rT,yt);ctx.moveTo(cx+r,yb);ctx.lineTo(cx+rT,yt);ctx.stroke();
@@ -1097,12 +1097,12 @@ function build(){
  }
  ctx=main;built=true}
 function stroke(a,w){ctx.strokeStyle='rgba(201,169,110,'+a+')';ctx.lineWidth=w}
-function rad(rs,N,i,f){return rs[i]*(1-.014*f)}
+function rad(rs,N,i,f){return rs[i]*(1-.022*f)}
 function hash(i,j){var x=Math.sin(i*127.1+j*311.7)*43758.5453;return x-Math.floor(x)}
 function draw(th,tm){
  if(!built)build();
  ctx.clearRect(0,0,W,H);
- var cx=W*.5,base=H*.93,top=H*.2,N=7,step=(base-top)/N,R0=Math.min(W*.47,(base-H*.2)*.3),k=.17,i,j,rs=[],L=lay(base,top);
+ var cx=W*.5,base=H*.93,top=H*.2,N=9,step=(base-top)/N,R0=Math.min(W*.47,(base-H*.2)*.6),k=.17,i,j,rs=[],L=lay(base,top);
  ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
  for(i=0;i<N;i++)rs[i]=R0*RT[i];
  ctx.drawImage(LA,0,0,W,H);
@@ -1113,11 +1113,11 @@ function draw(th,tm){
   var r=rs[i],ry=r*k,yb=L.yb[i],stp=L.st[i];
   ctx.globalAlpha=1-i*.04;
  // two arcades with filled openings; some windows glow
-  var n=Math.max(22,Math.round(r*(i?.42:.3))),rowsY=i?[.1]:[.06,.52],nr=rowsY.length;
+  var n=Math.max(24,Math.round(r*.36)),rowsY=i<5?[.07,.38,.68]:[.08,.54],nr=rowsY.length;
   for(var rw=0;rw<nr;rw++){
    for(j=0;j<n;j++){
     var a=th+j*2*Math.PI/n+rw*Math.PI/n,c=Math.cos(a),sn=Math.sin(a);if(c<.1)continue;
-    var rq=rad(rs,N,i,rowsY[rw]),x=cx+rq*sn,w=Math.max(.9,rq*(i?.011:.02)*c+.6),y0=yb+rq*k*c-stp*rowsY[rw],y1=y0-stp*(i==0?.36:.6);
+    var rq=rad(rs,N,i,rowsY[rw]),x=cx+rq*sn,w=Math.max(.9,rq*.014*c+.6),y0=yb+rq*k*c-stp*rowsY[rw],y1=y0-stp*(i<5?.22:.34);
     ctx.beginPath();ctx.moveTo(x-w,y0);ctx.lineTo(x-w,y1+w);ctx.arc(x,y1+w,w,Math.PI,0);ctx.lineTo(x+w,y0);
     if(i==N-1&&hash(j,rw+9)<.45)continue;var lit=hash(i*3+rw,j)>.86&&c>.35;
     ctx.fillStyle=lit?'rgba(241,205,130,'+(.35+.3*Math.sin(tm/700+i+j))*c+')':'rgba(0,0,0,.55)';ctx.fill();
@@ -1128,8 +1128,8 @@ function draw(th,tm){
  }
  ctx.globalAlpha=1;
  // spiral ramp: lit edge + shadow edge
- var turns=N*.58,segs=460,prev=null,pts=[];
- ctx.beginPath();stroke(.98,3);
+ var turns=N*.9,segs=460,prev=null,pts=[];
+ ctx.beginPath();stroke(.98,2.2);
  for(i=0;i<=segs;i++){
   var u=i/segs,f=u*N,ti=Math.min(N-1,Math.floor(f)),rr=rad(rs,N,ti,f-ti)*1.012,ryy=rr*k,y=L.yb[ti]-L.st[ti]*(f-ti)+L.st[ti]*.04,a2=th+u*turns*2*Math.PI;
   var p={x:cx+rr*Math.sin(a2),y:y+ryy*Math.cos(a2),c:Math.cos(a2)};
@@ -1137,14 +1137,14 @@ function draw(th,tm){
   prev=p;
  }
  ctx.stroke();stroke(.5,1);ctx.beginPath();
- for(i=0;i<pts.length;i+=4){ctx.moveTo(pts[i],pts[i+1]+9);ctx.lineTo(pts[i+2],pts[i+3]+9)}
+ for(i=0;i<pts.length;i+=4){ctx.moveTo(pts[i],pts[i+1]+6);ctx.lineTo(pts[i+2],pts[i+3]+6)}
  ctx.stroke();
  stroke(.16,3);ctx.beginPath();
- for(i=0;i<pts.length;i+=4){ctx.moveTo(pts[i],pts[i+1]+16);ctx.lineTo(pts[i+2],pts[i+3]+16)}
+ for(i=0;i<pts.length;i+=4){ctx.moveTo(pts[i],pts[i+1]+11);ctx.lineTo(pts[i+2],pts[i+3]+11)}
  ctx.stroke();
  // ruined crown: broken wall of arches, jagged stumps, cranes
- var rt=rs[N-1]*.92,ty=top-L.st[N-1]*.04;stroke(.7,1.3);
- for(j=0;j<30;j++){var aa=th+j*.21,cc=Math.cos(aa);if(cc<.02)continue;var xx=cx+rt*Math.sin(aa),hh=6+hash(j,3)*32*(.4+.6*Math.abs(Math.sin(aa*.5+1))),yy=ty+rt*k*cc;
+ var rt=rs[N-1]*.95,ty=top-L.st[N-1]*.04;stroke(.7,1.3);
+ for(j=0;j<46;j++){var aa=th+j*.137,cc=Math.cos(aa);if(cc<.02)continue;var xx=cx+rt*Math.sin(aa),an=((aa%6.2832)+6.2832)%6.2832,h1=Math.max(0,Math.cos(an-1.2)),h2=Math.max(0,Math.cos(an-4.1)),hh=7+hash(j,3)*12+70*h1*h1*h1+52*h2*h2*h2,yy=ty+rt*k*cc;
   ctx.beginPath();ctx.moveTo(xx-2.2,yy);ctx.lineTo(xx-2.2,yy-hh);ctx.lineTo(xx+(hash(j,4)-.5)*3,yy-hh-3-hash(j,5)*4);ctx.lineTo(xx+2.2,yy-hh);ctx.lineTo(xx+2.2,yy);ctx.stroke();
   if(hh>16){ctx.beginPath();ctx.arc(xx,yy-hh*.55,1.4,Math.PI,0);ctx.stroke()}}
  stroke(.4,1);ctx.beginPath();ctx.moveTo(cx-rt*.9,ty+4);ctx.lineTo(cx-rt*.7,ty-46);ctx.lineTo(cx-rt*.52,ty-30);ctx.lineTo(cx-rt*.4,ty-52);ctx.lineTo(cx-rt*.2,ty-18);ctx.lineTo(cx-rt*.1,ty+2);ctx.moveTo(cx-rt*.8,ty-20);ctx.lineTo(cx-rt*.3,ty-20);ctx.stroke();

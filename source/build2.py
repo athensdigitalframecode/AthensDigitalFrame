@@ -1,11 +1,15 @@
-import re,sys
+import re,sys,os
 head=open('head_tpl.txt',encoding='utf-8').read()
 fav=open('fav_uri.txt').read()
 def build(src,out,title,ogtitle,desc,url,preview=None):
     s=open(src,encoding='utf-8').read()
     i=s.index('<link rel="preconnect"')
     rest=s[i:]
-    j=rest.index('</style>')+len('</style>')
+    # self-hosted fonts instead of Google Fonts
+    rest=re.sub(r'<link[^>]*(fonts\.googleapis\.com|fonts\.gstatic\.com)[^>]*>\s*','',rest)
+    _f=open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'fonts_head.txt'),encoding='utf-8').read()
+    j=rest.index('</style>')+len('</style>')+len(_f)
+    rest=_f+rest
     h=head
     h=re.sub(r'<title>.*?</title>','<title>'+title+'</title>',h,count=1)
     h=re.sub(r'(<meta name="description" content=")[^"]*','\\g<1>'+desc,h,count=1)

@@ -40,3 +40,16 @@ a.tile:hover,a.tile:focus-visible,a.tile:active{border-color:rgba(201,169,110,.7
 #babel{height:min(54vh,480px);width:auto;max-width:92vw}
 .babel{opacity:.3!important}
 @media (min-width:900px){.babel{opacity:.5!important}}
+
+/* first-screen audit fixes */
+.herotxt h1{text-wrap:balance}
+@media (min-width:700px){.herotxt{max-width:410px}.herotxt h1{font-size:34px;line-height:1.18}}
+@media (max-width:699px){.herotxt{max-width:340px}.herotxt h1{font-size:32px;line-height:1.16}}
+.typed{text-wrap:balance}
+/* readability: nothing below 13px, body text 16px */
+.hw-day,.pf-body span,.tile .badge{font-size:13px!important}
+h4,.hw-head p{font-size:13px}
+.hw-lead,.pf-lead,.faq2 p,.contact p,section>p:not(.eyebrow){font-size:16px}
+#stage .stxt{font-size:14.5px}
+/* phone: collapsed Babel badge must not cover the menu tiles */
+@media (max-width:699px){#stage.mini #stagename{display:none}#stage.mini{padding:8px 10px}#stage.mini img{width:40px;margin:0}}

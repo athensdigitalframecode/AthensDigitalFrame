@@ -116,6 +116,12 @@ hero=_re.sub(r'\s*<div class="qp">.*?</div>','',hero,count=1,flags=_re.S)
 hero=_re.sub(r'\s*<p class="seeall">.*?</p>','',hero,count=1,flags=_re.S)
 newmain='<main>\n  '+hero+'\n  '+tiles+'\n\n  '+why+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'
 home=P.replace(m.group(0),newmain,1)
+_h1o='<em>για επιχειρήσεις στην Αθήνα</em></h1>'
+assert _h1o in home
+home=home.replace(_h1o,'<em>για επιχειρήσεις</em></h1>',1)
+_to='"για επιχειρήσεις στην Αθήνα": "for businesses in Athens"'
+assert _to in home
+home=home.replace(_to,_to+', "για επιχειρήσεις": "for businesses"',1)
 home=home.replace('<span class="gridbg"></span>','<span class="gridbg"></span>\n  '+open('frame.svg.txt',encoding='utf-8').read().replace('\n',''),1)
 assert 'id="babel"' in home
 home=home.replace('<h1>','</header>\n  <header class="hero herotxt">\n    <h1>',1)

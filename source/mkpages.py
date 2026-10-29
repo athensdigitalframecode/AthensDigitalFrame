@@ -116,7 +116,7 @@ hero=_re.sub(r'\s*<div class="qp">.*?</div>','',hero,count=1,flags=_re.S)
 hero=_re.sub(r'\s*<p class="seeall">.*?</p>','',hero,count=1,flags=_re.S)
 newmain='<main>\n  '+hero+'\n  '+tiles+'\n\n  '+why+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'
 home=P.replace(m.group(0),newmain,1)
-home=home.replace('<span class="gridbg"></span>','<span class="gridbg"></span>\n  <img id="babel" class="babel" src="img/frame.svg" alt="" aria-hidden="true" width="640" height="520" decoding="async">',1)
+home=home.replace('<span class="gridbg"></span>','<span class="gridbg"></span>\n  '+open('frame.svg.txt',encoding='utf-8').read().replace('\n',''),1)
 assert 'id="babel"' in home
 home=home.replace('<h1>','</header>\n  <header class="hero herotxt">\n    <h1>',1)
 import re as _re
@@ -270,6 +270,6 @@ for name,h,css in (('home',home,css_home),('prices',pr,css_prices)):
         h=h.replace(o1,n1,1)
         assert 'var ex=window.__ex' in h and 'draw(y+ex' in h
         h=h.replace('family=Noto+Serif:wght@500;600&display=swap','family=Noto+Serif:wght@500;600&family=Marcellus&family=Noto+Serif+Display:ital,wght@1,400&family=Noto+Serif+Display:wght@500&display=swap',1)
-        h+=open('extra.js',encoding='utf-8').read()+open('brand.js',encoding='utf-8').read()
+        h+=open('frame.js',encoding='utf-8').read()+open('extra.js',encoding='utf-8').read()+open('brand.js',encoding='utf-8').read()
     open(name+'_src.html','w',encoding='utf-8').write(h)
 print('ok')

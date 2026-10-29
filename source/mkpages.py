@@ -270,6 +270,9 @@ for name,h,css in (('home',home,css_home),('prices',pr,css_prices)):
         h=h.replace(o1,n1,1)
         assert 'var ex=window.__ex' in h and 'draw(y+ex' in h
         h=h.replace('family=Noto+Serif:wght@500;600&display=swap','family=Noto+Serif:wght@500;600&family=Marcellus&family=Noto+Serif+Display:ital,wght@1,400&family=Noto+Serif+Display:wght@500&display=swap',1)
+        _d="function draw(y,t){\n  cx.clearRect(0,0,W,H);"
+        assert h.count(_d)==1
+        h=h.replace(_d,"function draw(y,t){\n  return; /* calm: starfield hidden */\n  cx.clearRect(0,0,W,H);",1)
         h+=open('babel.js',encoding='utf-8').read()+open('extra.js',encoding='utf-8').read()+open('brand.js',encoding='utf-8').read()
     open(name+'_src.html','w',encoding='utf-8').write(h)
 print('ok')

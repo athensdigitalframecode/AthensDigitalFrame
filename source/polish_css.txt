@@ -14,3 +14,7 @@ section>p,.hw-body p,.pf-card p,.inccols ul.list li{max-width:64ch}
 }
 .rvjs .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
 .rvjs .rv.in{opacity:1;transform:none}
+/* calm hero: quieter background, no floating ornaments or starfield (tower stays as a soft backdrop) */
+.bg .ob,.bg .stars,.bg .mist{display:none!important}
+.babel{opacity:.2!important}
+@media (min-width:900px){.babel{opacity:.32!important}}

@@ -421,6 +421,10 @@ section>p,.hw-body p,.pf-card p,.inccols ul.list li{max-width:64ch}
 }
 .rvjs .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
 .rvjs .rv.in{opacity:1;transform:none}
+/* calm hero: quieter background, no floating ornaments or starfield (tower stays as a soft backdrop) */
+.bg .ob,.bg .stars,.bg .mist{display:none!important}
+.babel{opacity:.2!important}
+@media (min-width:900px){.babel{opacity:.32!important}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

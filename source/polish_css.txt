@@ -37,6 +37,6 @@ a.tile:hover,a.tile:focus-visible,a.tile:active{border-color:rgba(201,169,110,.7
 .dock .btn.ghost.call,.dock .call{border-color:rgba(245,241,232,.4)!important;color:var(--cream)!important}
 .steps b{border-color:rgba(245,241,232,.35)!important;color:var(--cream)!important}
 /* background art: browser-window frame with Athens skyline */
-#babel{height:min(58vh,520px);width:auto;max-width:92vw}
-.babel{opacity:.4!important}
-@media (min-width:900px){.babel{opacity:.7!important}}
+#babel{height:min(54vh,480px);width:auto;max-width:92vw}
+.babel{opacity:.3!important}
+@media (min-width:900px){.babel{opacity:.5!important}}

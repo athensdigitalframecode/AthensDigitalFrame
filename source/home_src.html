@@ -1156,7 +1156,7 @@ function loop(now){
   requestAnimationFrame(loop);
   if(!vis||window.__noTower)return;
   var dt=Math.min(.05,(now-last)/1000);last=now;
-  var tgt=(sy()+(window.__ex||0))*.0029;cur+=(tgt-cur)*.14;idle+=dt*.07;
+  var tgt=(sy()+(window.__ex||0))*.0015;cur+=(tgt-cur)*.14;idle+=dt*.07;
   var th=cur+idle+.5,moving=Math.abs(tgt-cur)>.0008;
   if(Math.abs(th-lastTh)<.0035&&now-lastDraw<90)return;
   if(!moving&&now-lastDraw<50)return;

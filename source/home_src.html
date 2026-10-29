@@ -528,7 +528,6 @@ html.fgate main{opacity:0}
 /* reduced motion: everything calm */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 .btn{min-height:44px;box-sizing:border-box}.actions .btn{display:inline-flex;align-items:center;justify-content:center}
-
 /* premium pass: same palette, lighter type, more air, calmer cards and buttons */
 h1,h2,.hw-head h3,.hw-body strong,.tile strong,.fq summary,.qp .v,.inccols h3{font-weight:500!important}
 h1{letter-spacing:-.005em;line-height:1.26}
@@ -544,6 +543,22 @@ section p,section li,.hw-body p{line-height:1.72}
 .dock .btn:not(.ghost){font-weight:600}
 .dock .btn.ghost#wa{background:rgba(245,241,232,.06)!important;color:var(--cream)!important;border-color:rgba(245,241,232,.4)!important;font-weight:600!important;-webkit-backdrop-filter:blur(8px)!important;backdrop-filter:blur(8px)!important}
 .tile{border-color:rgba(201,169,110,.22)!important}
+/* polish: readability, hero legibility, scroll reveal */
+:root{--muted:#dcd6c5}
+.for,.note,.tile em,.toplead,.contact .alt,.hw-body p,.pf-card p,.price small,.qp .v small,.price-row>span:first-child,.inccols ul.list li,.fq p,footer{font-size:15px!important}
+.toplead{font-size:14px!important}
+.hw-body p,.fq p,.inccols ul.list li{line-height:1.7}
+@media (min-width:900px){
+section>p,.hw-body p,.pf-card p,.inccols ul.list li{max-width:64ch}
+.fq p{max-width:66ch}
+}
+@media (max-width:699px){
+.herotxt{position:relative}
+.herotxt::before{display:block!important;content:"";position:absolute;inset:-22px -14px -10px -18px;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 70% at 38% 50%,rgba(5,5,5,.78),rgba(5,5,5,.5) 62%,rgba(5,5,5,0) 100%)}
+.herotxt>*{position:relative;z-index:1}
+}
+.rvjs .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rvjs .rv.in{opacity:1;transform:none}
 </style>
 
 <div class="bg" aria-hidden="true">
@@ -978,6 +993,17 @@ document.getElementById('lf-mail').addEventListener('click',function(){var v=val
 
 <script>
 (function(){
+if(!('IntersectionObserver' in window)||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;
+var els=[].slice.call(document.querySelectorAll('section:not(.how):not(.hero),footer'));if(!els.length)return;
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.04});
+document.documentElement.classList.add('rvjs');
+els.forEach(function(e){e.classList.add('rv');io.observe(e)});
+setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},7000);
+})();
+</script>
+
+<script>
+(function(){
 var cv=document.getElementById('babel');if(!cv)return;
 var ctx=cv.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,1.5);
 var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -1129,9 +1155,9 @@ st.appendChild(tx);st.appendChild(im);st.appendChild(nm);document.body.appendChi
 var armed=true,tm=null,opened=false;setTimeout(function(){opened=true;check()},1400);
 function check(){var y=yy();
   if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
-    if(window.innerWidth<700){clearTimeout(tm);tm=setTimeout(function(){st.classList.add('mini')},4000)}}
+    if(window.innerWidth<700){clearTimeout(tm);st.classList.add('mini')}}
   }
-st.addEventListener('click',function(){if(window.innerWidth<700){st.classList.toggle('mini');clearTimeout(tm)}});
+st.addEventListener('click',function(){if(window.innerWidth<700){st.classList.toggle('mini');clearTimeout(tm);if(!st.classList.contains('mini'))tm=setTimeout(function(){st.classList.add('mini')},8000)}});
 var lastY=0,snds=[].slice.call(document.querySelectorAll('.snd'));
 function dirCheck(){var y=yy();
   var hide=(y>lastY+4&&y>90);var show=(y<lastY-4||y<=90);

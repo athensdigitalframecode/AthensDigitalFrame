@@ -361,7 +361,39 @@ section.compact{padding-left:18px;padding-right:18px}
 .dock .dockrow{max-width:620px}
 .toast{left:max(21px,env(safe-area-inset-left,0px))}
 </style>
-<style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}.homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
+<style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}</style>
+<style>/* premium pass: same palette, lighter type, more air, calmer cards and buttons */
+h1,h2,.hw-head h3,.hw-body strong,.tile strong,.fq summary,.qp .v,.inccols h3{font-weight:500!important}
+h1{letter-spacing:-.005em;line-height:1.26}
+h2{font-size:24px!important;letter-spacing:.005em}
+section{border-color:rgba(201,169,110,.2)!important;box-shadow:inset 0 1px 0 rgba(245,241,232,.05),0 28px 60px -36px #000!important}
+.how{padding:34px 22px 34px!important}.pf{padding:34px 22px!important}.faq2{padding:34px 22px 28px!important}
+section p,section li,.hw-body p{line-height:1.72}
+.eyebrow{letter-spacing:.32em!important;color:var(--gold);opacity:.92}
+.fq summary{font-size:17px!important}
+.fq,.fq details{border-color:rgba(201,169,110,.16)!important}
+.btn{letter-spacing:.03em;font-weight:600;box-shadow:0 6px 18px rgba(201,169,110,.14)}
+.btn:hover{box-shadow:0 8px 22px rgba(201,169,110,.22)}
+.dock .btn:not(.ghost){font-weight:600}
+.dock .btn.ghost#wa{background:rgba(245,241,232,.06)!important;color:var(--cream)!important;border-color:rgba(245,241,232,.4)!important;font-weight:600!important;-webkit-backdrop-filter:blur(8px)!important;backdrop-filter:blur(8px)!important}
+.tile{border-color:rgba(201,169,110,.22)!important}
+/* polish: readability, hero legibility, scroll reveal */
+:root{--muted:#dcd6c5}
+.for,.note,.tile em,.toplead,.contact .alt,.hw-body p,.pf-card p,.price small,.qp .v small,.price-row>span:first-child,.inccols ul.list li,.fq p,footer{font-size:15px!important}
+.toplead{font-size:14px!important}
+.hw-body p,.fq p,.inccols ul.list li{line-height:1.7}
+@media (min-width:900px){
+section>p,.hw-body p,.pf-card p,.inccols ul.list li{max-width:64ch}
+.fq p{max-width:66ch}
+}
+@media (max-width:699px){
+.herotxt{position:relative}
+.herotxt::before{display:block!important;content:"";position:absolute;inset:-22px -14px -10px -18px;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 70% at 38% 50%,rgba(5,5,5,.78),rgba(5,5,5,.5) 62%,rgba(5,5,5,0) 100%)}
+.herotxt>*{position:relative;z-index:1}
+}
+.rvjs .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rvjs .rv.in{opacity:1;transform:none}
+.homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .tile{background:linear-gradient(180deg,rgba(26,24,19,.82),rgba(20,20,17,.82))!important}
@@ -737,6 +769,17 @@ document.addEventListener('click',function(e){
 })();
 </script>
 <script>(function(){var s=[].slice.call(document.querySelectorAll('.snd')),l=0;function f(){var y=window.pageYOffset||document.documentElement.scrollTop||0;if(y>l+4&&y>90)s.forEach(function(b){b.classList.add('away')});else if(y<l-4||y<=90)s.forEach(function(b){b.classList.remove('away')});l=y}window.addEventListener('scroll',f,{passive:true})})();</script>
+
+<script>
+(function(){
+if(!('IntersectionObserver' in window)||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;
+var els=[].slice.call(document.querySelectorAll('section:not(.how):not(.hero),footer'));if(!els.length)return;
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px',threshold:.04});
+document.documentElement.classList.add('rvjs');
+els.forEach(function(e){e.classList.add('rv');io.observe(e)});
+setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},7000);
+})();
+</script>
 <script>
 (function(){
 try{history.scrollRestoration='manual'}catch(e){}

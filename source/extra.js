@@ -21,9 +21,9 @@ st.appendChild(tx);st.appendChild(im);st.appendChild(nm);document.body.appendChi
 var armed=true,tm=null,opened=false;setTimeout(function(){opened=true;check()},1400);
 function check(){var y=yy();
   if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
-    if(window.innerWidth<700){clearTimeout(tm);tm=setTimeout(function(){st.classList.add('mini')},4000)}}
+    if(window.innerWidth<700){clearTimeout(tm);st.classList.add('mini')}}
   }
-st.addEventListener('click',function(){if(window.innerWidth<700){st.classList.toggle('mini');clearTimeout(tm)}});
+st.addEventListener('click',function(){if(window.innerWidth<700){st.classList.toggle('mini');clearTimeout(tm);if(!st.classList.contains('mini'))tm=setTimeout(function(){st.classList.add('mini')},8000)}});
 var lastY=0,snds=[].slice.call(document.querySelectorAll('.snd'));
 function dirCheck(){var y=yy();
   var hide=(y>lastY+4&&y>90);var show=(y<lastY-4||y<=90);

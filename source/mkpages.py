@@ -42,8 +42,9 @@ pr=inject_extra(pr)
 css_hide = "<style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}</style>\n"
 js_hide = """<script>(function(){var s=[].slice.call(document.querySelectorAll('.snd')),l=0;function f(){var y=window.pageYOffset||document.documentElement.scrollTop||0;if(y>l+4&&y>90)s.forEach(function(b){b.classList.add('away')});else if(y<l-4||y<=90)s.forEach(function(b){b.classList.remove('away')});l=y}window.addEventListener('scroll',f,{passive:true})})();</script>
 """
+css_hide=css_hide+'<style>'+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+'</style>\n'
 _k=pr.rindex('</style>')+len('</style>');pr=pr[:_k]+'\n'+css_hide+pr[_k:]
-pr=pr.rstrip()+'\n'+js_hide
+pr=pr.rstrip()+'\n'+js_hide+'\n'+open('reveal.js',encoding='utf-8').read()
 
 # ---------- home page
 m=re.search(r'<main>.*?</main>',P,flags=re.S); main=m.group(0)
@@ -258,8 +259,8 @@ for name,h,css in (('home',home,css_home),('prices',pr,css_prices)):
         assert _pre in h
         h=h.replace(_pre,_pre+'<script>document.documentElement.classList.add("fgate");(function(){function d(){document.documentElement.classList.remove("fgate")}setTimeout(d,1400);try{document.fonts.ready.then(d)}catch(e){d()}})()</script>',1)
         h=h.replace('<link rel="stylesheet" href="https://fonts.googleapis.com/css2','<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Noto+Serif:wght@500;600&family=Marcellus&family=Noto+Serif+Display:ital,wght@1,400&family=Noto+Serif+Display:wght@500&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2',1)
-        k=h.rindex('</style>');h=h[:k]+open('extra_css.txt',encoding='utf-8').read()+h[k:]
-        h=h.rstrip()+'\n'+open('form.js',encoding='utf-8').read()+'\n'
+        k=h.rindex('</style>');h=h[:k]+open('extra_css.txt',encoding='utf-8').read()+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+h[k:]
+        h=h.rstrip()+'\n'+open('form.js',encoding='utf-8').read()+'\n'+open('reveal.js',encoding='utf-8').read()+'\n'
         h=h.replace('px.forEach(function(e){','if(!reduce)px.forEach(function(e){',1).replace('draw(y+ex,now-t0);','draw(y+ex,reduce?0:now-t0);',1)
         h=h.replace('function frame(now){\n  var diff=target-cur;','function frame(now){\n  var ex=window.__ex||0;var diff=target-cur;',1)
         h=h.replace('m.style.backgroundPositionY=(-y*.4).toFixed(1)','m.style.backgroundPositionY=(-(y+ex)*.4).toFixed(1)',1).replace('draw(y,now-t0);','draw(y+ex,now-t0);',1)

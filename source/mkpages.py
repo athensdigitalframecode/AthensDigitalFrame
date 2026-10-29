@@ -1,5 +1,9 @@
 import re,json
 P=open('prices_v46_backup.html',encoding='utf-8').read()
+# ---------- ambient sound removed (button + audio script)
+_m=re.search(r'<button class="snd" id="snd".*?</button>\n?',P,re.S);assert _m;P=P.replace(_m.group(0),'')
+_i=P.index("var btn=document.getElementById('snd')");_s=P.rindex('<script>',0,_i);_e=P.index('</script>',_i)+len('</script>');P=P[:_s]+P[_e:].lstrip('\n')
+assert "id=\"snd\"" not in P and 'AudioContext' not in P
 
 # ---------- extra translations (home + shared)
 EXTRA={
@@ -197,7 +201,7 @@ _NEWBG_CSS_
 .hero:not(.herotxt) .brand::after{transform:scaleX(-1)}
 @media (min-width:700px){.hero:not(.herotxt) .brand{font-size:21px!important}.hero:not(.herotxt) .brand::before,.hero:not(.herotxt) .brand::after{width:34px}}
 @media (min-width:700px){.hero:not(.herotxt){position:absolute;top:12px;left:calc(50vw - max(21px,5vw) - 29px);animation:none;transform:none;margin:0 0 0 -160px;width:320px;padding-top:0}.herotxt{margin-top:10px}}
-.snd.lang{left:auto;right:calc(max(34px,calc(env(safe-area-inset-right,0px) + 20px)) + 98px)}
+.snd.lang{left:auto;right:calc(max(34px,calc(env(safe-area-inset-right,0px) + 20px)))}
 .tile{padding:14px 12px;gap:10px;background:linear-gradient(180deg,rgba(26,24,19,.58),rgba(20,20,17,.58));-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 @media (min-width:900px){main{margin-left:max(21px,5vw);margin-right:auto;max-width:430px}}
 .tile .badge{flex:none;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-soft);border:1px solid rgba(201,169,110,.45);border-radius:999px;padding:4px 10px}

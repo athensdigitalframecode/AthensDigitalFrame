@@ -18,3 +18,25 @@ section>p,.hw-body p,.pf-card p,.inccols ul.list li{max-width:64ch}
 .bg .ob,.bg .stars,.bg .mist{display:none!important}
 .babel{opacity:.2!important}
 @media (min-width:900px){.babel{opacity:.32!important}}
+/* restrained gold: gold is for the main button, prices, wordmark and small accents; headings, labels, icons and frames go cream */
+body::before{border-color:rgba(201,169,110,.3)!important}
+body::after{border-color:rgba(201,169,110,.12)!important}
+h1 em,.typed{color:var(--muted)!important}
+.eyebrow,.eyebrow.menuhead{color:var(--muted)!important;opacity:.85!important}
+.eyebrow::after{background:linear-gradient(90deg,rgba(245,241,232,.3),rgba(245,241,232,0))!important}
+section::before{background:linear-gradient(90deg,transparent,rgba(245,241,232,.22),transparent)!important}
+section,.tile,.pf-card,.guar.guar{border-color:rgba(245,241,232,.12)!important}
+.tile{border-color:rgba(245,241,232,.14)!important}
+.tile .ti,.hw-ic{border-color:rgba(245,241,232,.22)!important;background:rgba(245,241,232,.04)!important}
+.tile .ti svg,.hw-ic svg{stroke:var(--cream)!important}
+.tile .go,.qp .go{color:var(--muted)!important}
+a.tile:hover,a.tile:focus-visible,a.tile:active{border-color:rgba(201,169,110,.7)!important}
+.hw-head p,.hw-day,.pf-body span,.cmp thead th,.qp .k,.lf-row label,.tile .badge,.jump a,.inccols h3{color:var(--muted)!important}
+.tile .badge,.jump,.pf-body,.pf-bar i{border-color:rgba(245,241,232,.2)!important}
+.pf-body{border-color:rgba(245,241,232,.2)!important}
+.hw-rail{background:rgba(245,241,232,.14)!important}
+.fq,.fq:last-of-type,.fq,.fq details{border-color:rgba(245,241,232,.14)!important}
+.fq summary::after{border-color:rgba(245,241,232,.3)!important;color:var(--muted)!important}
+.btn.ghost{color:var(--cream)!important;border-color:rgba(245,241,232,.4)!important}
+.dock .btn.ghost.call,.dock .call{border-color:rgba(245,241,232,.4)!important;color:var(--cream)!important}
+.steps b{border-color:rgba(245,241,232,.35)!important;color:var(--cream)!important}

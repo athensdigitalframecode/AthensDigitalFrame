@@ -318,10 +318,6 @@ section.guar{background:linear-gradient(180deg,rgba(201,169,110,.16),rgba(201,16
 .bg .sales .od.on{opacity:.95;filter:drop-shadow(0 0 5px rgba(230,207,159,.9))}
 .bg .mea{position:absolute;top:22px;bottom:22px;width:8px;opacity:.38;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='16' viewBox='0 0 8 16'%3E%3Cpath d='M1 16V1h6v9H3V5h2' fill='none' stroke='%23C9A96E' stroke-width='1'/%3E%3C/svg%3E") repeat-y}
 .bg .mea.l{left:19px}.bg .mea.r{right:19px}
-.toast{position:fixed;z-index:4;left:max(26px,env(safe-area-inset-left,0px));bottom:calc(86px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;padding:7px 13px 7px 10px;border:1px solid rgba(201,169,110,.5);border-radius:999px;background:rgba(11,11,11,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--gold-soft);font-size:12px;font-weight:600;letter-spacing:.03em;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;pointer-events:none}
-.toast i{width:7px;height:7px;border-radius:50%;background:#fff3d6;box-shadow:0 0 8px 2px rgba(230,207,159,.8)}
-.toast.show{opacity:.92;transform:none}
-@media (prefers-reduced-motion:reduce){.toast{display:none}}
 .qp .k{white-space:nowrap}
 /* v40 more Athens elements */
 .bg .o-acro{left:2%;top:60%;width:156px}
@@ -359,7 +355,6 @@ section{padding-left:18px;padding-right:18px}
 section.compact{padding-left:18px;padding-right:18px}
 .dock{padding-left:max(21px,env(safe-area-inset-left,0px));padding-right:max(21px,env(safe-area-inset-right,0px))}
 .dock .dockrow{max-width:620px}
-.toast{left:max(21px,env(safe-area-inset-left,0px))}
 </style>
 
 <div class="bg" aria-hidden="true">
@@ -506,7 +501,6 @@ section.compact{padding-left:18px;padding-right:18px}
 </main>
 <button class="snd lang" id="lang" type="button" aria-label="Language">EN</button>
 <button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Ambient μουσική"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="sndl">Ήχος</span></button>
-<div class="toast" id="toast" aria-hidden="true"><i></i><span id="toastt"></span></div>
 <div class="prog" id="prog" aria-hidden="true"></div>
 <div class="dock"><div class="dockrow"><a class="btn" id="dm" href="https://ig.me/m/athens.digitalframe">Στείλε μας DM</a><a class="btn ghost" id="wa" hidden rel="noopener">WhatsApp</a><a class="btn ghost call" id="call" href="tel:+306981862732" aria-label="Κάλεσε μας"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a></div></div>
 <script>
@@ -759,10 +753,6 @@ function buildSales(){
 buildSales();window.addEventListener('resize',buildSales);
 function updSales(p){if(!sl)return;sl.style.strokeDashoffset=(slen*(1-p)).toFixed(1);for(var i=0;i<sdots.length;i++){sdots[i].classList.toggle('on',p>sdots[i]._f)}}
 var meas=[].slice.call(document.querySelectorAll('.bg .mea'));
-var toast=document.getElementById('toast'),toastt=document.getElementById('toastt'),ti=0;
-var msgsEl=['Νέα παραγγελία','+1 πώληση','Νέο μήνυμα','Νέα κράτηση'],msgsEn=['New order','+1 sale','New message','New booking'];
-function showToast(){if(!toast)return;var m=window.EN?msgsEn:msgsEl;toastt.textContent=m[ti++%m.length];toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},3200)}
-if(!reduce){setTimeout(function(){showToast();setInterval(showToast,11000)},7000)}
 
 function shoot(){
   var e=document.createElement('i');e.className='shoot';

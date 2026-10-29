@@ -116,8 +116,7 @@ hero=_re.sub(r'\s*<div class="qp">.*?</div>','',hero,count=1,flags=_re.S)
 hero=_re.sub(r'\s*<p class="seeall">.*?</p>','',hero,count=1,flags=_re.S)
 newmain='<main>\n  '+hero+'\n  '+tiles+'\n\n  '+why+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'
 home=P.replace(m.group(0),newmain,1)
-home=home.replace('<span class="gridbg"></span>','<span class="gridbg"></span>\n  <img id="babel" class="babel" src="img/babel.webp" alt="" aria-hidden="true" width="540" height="760" decoding="async">',1)
-assert 'id="babel"' in home
+# tower removed: no #babel element
 home=home.replace('<h1>','</header>\n  <header class="hero herotxt">\n    <h1>',1)
 import re as _re
 _lead=_re.search(r'\s*<p class="lead">.*?</p>',home,flags=_re.S).group(0)
@@ -273,6 +272,6 @@ for name,h,css in (('home',home,css_home),('prices',pr,css_prices)):
         _d="function draw(y,t){\n  cx.clearRect(0,0,W,H);"
         assert h.count(_d)==1
         h=h.replace(_d,"function draw(y,t){\n  return; /* calm: starfield hidden */\n  cx.clearRect(0,0,W,H);",1)
-        h+=open('babel.js',encoding='utf-8').read()+open('extra.js',encoding='utf-8').read()+open('brand.js',encoding='utf-8').read()
+        h+=open('extra.js',encoding='utf-8').read()+open('brand.js',encoding='utf-8').read()
     open(name+'_src.html','w',encoding='utf-8').write(h)
 print('ok')

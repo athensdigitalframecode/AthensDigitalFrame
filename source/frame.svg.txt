@@ -1,9 +1,9 @@
 <svg id="babel" class="babel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" width="640" height="520" fill="none" stroke="#C9A96E" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-<defs><clipPath id="flwin"><rect x="15" y="59" width="610" height="446"/></clipPath></defs>
+<defs><clipPath id="flwin"><rect x="15" y="59" width="610" height="446"/></clipPath><filter id="flwave" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="turbulence" baseFrequency="0.006 0.02" numOctaves="1" seed="4" result="t"/><feDisplacementMap id="flmap" in="SourceGraphic" in2="t" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></defs>
 <g stroke-width="1.4"><rect x="4" y="4" width="632" height="512" rx="10"/></g>
 <g stroke-width=".8" opacity=".7"><rect x="14" y="14" width="612" height="492" rx="6"/></g>
 <g stroke-width="1"><path d="M14 58H626"/><circle cx="36" cy="36" r="5"/><circle cx="54" cy="36" r="5"/><circle cx="72" cy="36" r="5"/><rect x="112" y="24" width="420" height="24" rx="12"/><path d="M130 36h46" opacity=".5"/><path d="M590 30v12M584 36h12" opacity=".6"/></g>
-<g clip-path="url(#flwin)">
+<g id="flgrp" clip-path="url(#flwin)">
 <g data-d="0.4" stroke-width=".7" opacity=".5"><path d="M60 100h4M110 130h4M540 96h4M580 140h4M90 186h4M556 188h4M300 90h4M420 120h4M200 150h4"/><path d="M62 98v4M112 128v4M542 94v4M582 138v4M92 184v4M558 186v4M302 88v4M422 118v4M202 148v4"/><path d="M80 210q30 -10 60 0q25 -8 50 2M470 170q30 -8 60 0q22 -6 44 2" opacity=".6"/></g>
 <g data-d="0.8" stroke-width="1" opacity=".8"><path d="M440 426C490 396 530 372 566 352C584 374 604 398 640 414V440H440Z" opacity=".9"/><path d="M566 352v-14M560 338h12M556 350h20M560 350v-8h12v8"/><path d="M470 418l30 -8l22 -14l16 -12M500 410l-6 12" opacity=".5"/><path d="M-10 436C40 424 100 408 150 396" opacity=".5"/></g>
 <g data-d="1.4" stroke-width="1">

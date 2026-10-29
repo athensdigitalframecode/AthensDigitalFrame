@@ -390,8 +390,9 @@ section>p,.hw-body p,.pf-card p,.inccols ul.list li{max-width:64ch}
 .rvjs .rv.in{opacity:1;transform:none}
 /* calm hero: quieter background, no floating ornaments or starfield (tower stays as a soft backdrop) */
 .bg .ob,.bg .stars,.bg .mist{display:none!important}
-.babel{opacity:.2!important}
-@media (min-width:900px){.babel{opacity:.32!important}}
+#babel{height:min(90vh,840px);width:auto;max-width:94vw;object-fit:contain}
+.babel{opacity:.5!important}
+@media (min-width:900px){.babel{opacity:.85!important}}
 /* restrained gold: gold is for the main button, prices, wordmark and small accents; headings, labels, icons and frames go cream */
 body::before{border-color:rgba(201,169,110,.3)!important}
 body::after{border-color:rgba(201,169,110,.12)!important}

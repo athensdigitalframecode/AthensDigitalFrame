@@ -581,8 +581,6 @@ section>p,.hw-body p,.pf-card p,.inccols ul.list li{max-width:64ch}
 }
 .rvjs .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
 .rvjs .rv.in{opacity:1;transform:none}
-/* calm hero: quieter background, no floating ornaments or starfield (tower stays as a soft backdrop) */
-.bg .ob,.bg .stars,.bg .mist{display:none!important}
 /* restrained gold: gold is for the main button, prices, wordmark and small accents; headings, labels, icons and frames go cream */
 body::before{border-color:rgba(201,169,110,.3)!important}
 body::after{border-color:rgba(201,169,110,.12)!important}
@@ -858,7 +856,6 @@ var layers=[{n:70,r:.7,a:.35,sp:.06},{n:46,r:1.1,a:.55,sp:.16},{n:26,r:1.7,a:.85
 layers.forEach(function(L,li){for(var i=0;i<L.n;i++)stars.push({x:rnd(),y:rnd(),l:li,tw:rnd()*6.28})});
 function size(){W=window.innerWidth||320;H=window.innerHeight||640;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
 function draw(y,t){
-  return; /* calm: starfield hidden */
   cx.clearRect(0,0,W,H);
   for(var i=0;i<stars.length;i++){var st=stars[i],L=layers[st.l];
     var yy=((st.y*H-y*L.sp)%H+H)%H,xx=st.x*W;

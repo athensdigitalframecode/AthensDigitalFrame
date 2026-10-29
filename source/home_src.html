@@ -1025,9 +1025,9 @@ var cv=document.getElementById('babel');if(!cv)return;
 var ctx=cv.getContext('2d'),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,1.5);
 var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 var main=ctx,LA=document.createElement('canvas'),LB=document.createElement('canvas'),built=false;
-function size(){W=Math.min(window.innerWidth*.94,540);H=Math.min(window.innerHeight*.9,840);
+function size(){W=Math.min(window.innerWidth*.94,600);H=Math.min(window.innerHeight*.78,720);
  cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';ctx=main;ctx.setTransform(dpr,0,0,dpr,0,0);built=false}
-function geo(){var N=8,base=H*.92,top=H*.21,rs=[],i;for(i=0;i<N;i++)rs[i]=W*.4*Math.pow(.935,i);return{cx:W*.5,base:base,top:top,N:N,step:(base-top)/N,k:.2,rs:rs}}
+function geo(){var N=7,base=H*.93,top=H*.17,rs=[],i;for(i=0;i<N;i++)rs[i]=W*.45*Math.pow(.915,i);return{cx:W*.5,base:base,top:top,N:N,step:(base-top)/N,k:.17,rs:rs}}
 function build(){
  var g=geo(),cx=g.cx,base=g.base,top=g.top,N=g.N,step=g.step,k=g.k,rs=g.rs,i,j;
  LA.width=LB.width=W*dpr;LA.height=LB.height=H*dpr;
@@ -1071,9 +1071,9 @@ function hash(i,j){var x=Math.sin(i*127.1+j*311.7)*43758.5453;return x-Math.floo
 function draw(th,tm){
  if(!built)build();
  ctx.clearRect(0,0,W,H);
- var cx=W*.5,base=H*.92,top=H*.21,N=8,step=(base-top)/N,R0=W*.4,k=.2,i,j,rs=[];
+ var cx=W*.5,base=H*.93,top=H*.17,N=7,step=(base-top)/N,R0=W*.45,k=.17,i,j,rs=[];
  ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
- for(i=0;i<N;i++)rs[i]=R0*Math.pow(.935,i);
+ for(i=0;i<N;i++)rs[i]=R0*Math.pow(.915,i);
  ctx.drawImage(LA,0,0,W,H);
  for(j=0;j<3;j++){var ra=(j-1)*.34+Math.sin(tm/5200+j)*.03,rg=ctx.createLinearGradient(cx,top,cx+Math.sin(ra)*H*.8,top+H*.7);rg.addColorStop(0,'rgba(241,221,176,.07)');rg.addColorStop(1,'rgba(241,221,176,0)');
   ctx.fillStyle=rg;ctx.beginPath();ctx.moveTo(cx-6,top-4);ctx.lineTo(cx+6,top-4);ctx.lineTo(cx+Math.sin(ra)*H*.8+W*.12,top+H*.7);ctx.lineTo(cx+Math.sin(ra)*H*.8-W*.12,top+H*.7);ctx.closePath();ctx.fill()}
@@ -1082,13 +1082,13 @@ function draw(th,tm){
   var r=rs[i],ry=r*k,yb=base-i*step;
   ctx.globalAlpha=1-i*.045;
  // two arcades with filled openings; some windows glow
-  var n=Math.max(14,Math.round(r*.22)),rowsY=[.06,.52];
-  for(var rw=0;rw<2;rw++){
+  var n=Math.max(18,Math.round(r*.3)),rowsY=[.05,.37,.69];
+  for(var rw=0;rw<3;rw++){
    for(j=0;j<n;j++){
     var a=th+j*2*Math.PI/n+rw*Math.PI/n,c=Math.cos(a),sn=Math.sin(a);if(c<.1)continue;
-    var x=cx+r*sn,w=Math.max(1.1,r*.02*c+.7),y0=yb+ry*c-step*rowsY[rw],y1=y0-step*.34;
+    var x=cx+r*sn,w=Math.max(1.1,r*.02*c+.7),y0=yb+ry*c-step*rowsY[rw],y1=y0-step*.24;
     ctx.beginPath();ctx.moveTo(x-w,y0);ctx.lineTo(x-w,y1+w);ctx.arc(x,y1+w,w,Math.PI,0);ctx.lineTo(x+w,y0);
-    if(i==N-1&&hash(j,rw+9)<.35)continue;var lit=hash(i*3+rw,j)>.86&&c>.35;
+    if(i==N-1&&hash(j,rw+9)<.45)continue;var lit=hash(i*3+rw,j)>.86&&c>.35;
     ctx.fillStyle=lit?'rgba(241,205,130,'+(.35+.3*Math.sin(tm/700+i+j))*c+')':'rgba(0,0,0,.55)';ctx.fill();
     stroke(.14+.5*c,1);ctx.stroke();
     if(c>.55){ctx.fillStyle='rgba(224,196,140,'+(.5*c)+')';ctx.fillRect(x-.8,y1+w-w-1.5,1.6,2.2)}
@@ -1111,13 +1111,15 @@ function draw(th,tm){
  stroke(.16,3);ctx.beginPath();
  for(i=0;i<pts.length;i+=4){ctx.moveTo(pts[i],pts[i+1]+9);ctx.lineTo(pts[i+2],pts[i+3]+9)}
  ctx.stroke();
- // unfinished crown: broken piers, scaffolding, cranes
- var rt=rs[N-1]*.9,ty=top-step*.04;stroke(.65,1.2);
- for(j=0;j<11;j++){var aa=th+j*.58,cc=Math.cos(aa);if(cc<0)continue;var xx=cx+rt*Math.sin(aa),h=4+((j*5)%4)*4;ctx.beginPath();ctx.moveTo(xx,ty+rt*k*cc);ctx.lineTo(xx,ty+rt*k*cc-h);ctx.stroke()}
- stroke(.4,1);ctx.beginPath();ctx.moveTo(cx-rt*.8,ty+4);ctx.lineTo(cx-rt*.5,ty-34);ctx.lineTo(cx-rt*.2,ty+2);ctx.moveTo(cx-rt*.65,ty-12);ctx.lineTo(cx-rt*.35,ty-12);ctx.stroke();
+ // ruined crown: broken wall of arches, jagged stumps, cranes
+ var rt=rs[N-1]*.97,ty=top-step*.04;stroke(.7,1.3);
+ for(j=0;j<30;j++){var aa=th+j*.21,cc=Math.cos(aa);if(cc<.02)continue;var xx=cx+rt*Math.sin(aa),hh=6+hash(j,3)*30*(.4+.6*Math.abs(Math.sin(aa*.5+1))),yy=ty+rt*k*cc;
+  ctx.beginPath();ctx.moveTo(xx-2.2,yy);ctx.lineTo(xx-2.2,yy-hh);ctx.lineTo(xx+(hash(j,4)-.5)*3,yy-hh-3-hash(j,5)*4);ctx.lineTo(xx+2.2,yy-hh);ctx.lineTo(xx+2.2,yy);ctx.stroke();
+  if(hh>16){ctx.beginPath();ctx.arc(xx,yy-hh*.55,1.4,Math.PI,0);ctx.stroke()}}
+ stroke(.4,1);ctx.beginPath();ctx.moveTo(cx-rt*.9,ty+4);ctx.lineTo(cx-rt*.7,ty-46);ctx.lineTo(cx-rt*.52,ty-30);ctx.lineTo(cx-rt*.4,ty-52);ctx.lineTo(cx-rt*.2,ty-18);ctx.lineTo(cx-rt*.1,ty+2);ctx.moveTo(cx-rt*.8,ty-20);ctx.lineTo(cx-rt*.3,ty-20);ctx.stroke();
  stroke(.75,1.3);
- ctx.beginPath();ctx.moveTo(cx-6,ty);ctx.lineTo(cx-6,ty-30);ctx.lineTo(cx+22,ty-38);ctx.moveTo(cx-6,ty-30);ctx.lineTo(cx-20,ty-24);ctx.moveTo(cx+18,ty-37);ctx.lineTo(cx+18,ty-22);ctx.stroke();
- ctx.beginPath();ctx.moveTo(cx+rt*.5,ty+3);ctx.lineTo(cx+rt*.5,ty-20);ctx.lineTo(cx+rt*.5+14,ty-26);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(cx+rt*.2,ty);ctx.lineTo(cx+rt*.2,ty-42);ctx.lineTo(cx+rt*.2+30,ty-52);ctx.moveTo(cx+rt*.2,ty-42);ctx.lineTo(cx+rt*.2-16,ty-34);ctx.moveTo(cx+rt*.2+26,ty-51);ctx.lineTo(cx+rt*.2+26,ty-34);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(cx+rt*.62,ty+3);ctx.lineTo(cx+rt*.62,ty-28);ctx.lineTo(cx+rt*.62+16,ty-36);ctx.stroke();
  // birds circling the tower
  stroke(.55,1.2);ctx.beginPath();
  for(j=0;j<6;j++){var ba=tm/4200+j*1.05,bx2=cx+Math.cos(ba)*(W*.34+j*7),by2=H*.3+Math.sin(ba*1.3)*(H*.1)+j*H*.06,fl=Math.sin(tm/160+j)*2.4;

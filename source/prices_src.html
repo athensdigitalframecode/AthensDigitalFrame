@@ -443,6 +443,10 @@ h4,.hw-head p{font-size:13px}
 .faqmore:hover{background:rgba(245,241,232,.08);transform:translateY(-2px)}
 @media (min-width:700px){.herotxt{max-width:430px}.herotxt h1{font-size:40px;line-height:1.14}}
 @media (max-width:699px){#stage.mini{padding:7px 9px 6px;border-radius:14px}#stage.mini img{width:30px;margin:0 auto}#stage.mini #stagename{display:block;font-size:12px;letter-spacing:0;text-align:center;line-height:1;margin-top:2px}}
+.flglow{animation:flb 9s ease-in-out infinite}@keyframes flb{0%,100%{opacity:.5}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.flglow{animation:none}}
+#babel{height:min(66vh,600px)}
+@media (max-width:699px){.babel{opacity:.5!important}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

@@ -435,6 +435,14 @@ h4,.hw-head p{font-size:13px}
 #stage:focus-visible{outline:3px solid #D9BE86;outline-offset:3px}
 #stage.mini img{width:42px;margin:0 auto 4px}
 @media (min-width:700px){#stage.mini #stagename{font-size:11px;letter-spacing:.14em}}
+
+/* home polish: FAQ shows the first 6, h1 larger, compact story button on phone */
+.faq2 details.fq:nth-of-type(n+7){display:none}
+.faq2.all details.fq{display:block}
+.faqmore{margin:22px 0 4px;background:transparent;color:var(--cream);border:1px solid rgba(245,241,232,.4);border-radius:14px;padding:13px 22px;font:600 15px var(--body);cursor:pointer;min-height:44px;transition:background .2s,transform .2s}
+.faqmore:hover{background:rgba(245,241,232,.08);transform:translateY(-2px)}
+@media (min-width:700px){.herotxt{max-width:430px}.herotxt h1{font-size:40px;line-height:1.14}}
+@media (max-width:699px){#stage.mini{padding:7px 9px 6px;border-radius:14px}#stage.mini img{width:30px;margin:0 auto}#stage.mini #stagename{display:block;font-size:12px;letter-spacing:0;text-align:center;line-height:1;margin-top:2px}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

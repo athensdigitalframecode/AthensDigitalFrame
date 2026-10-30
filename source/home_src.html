@@ -601,6 +601,14 @@ h4,.hw-head p{font-size:13px}
 #stage:focus-visible{outline:3px solid #D9BE86;outline-offset:3px}
 #stage.mini img{width:42px;margin:0 auto 4px}
 @media (min-width:700px){#stage.mini #stagename{font-size:11px;letter-spacing:.14em}}
+
+/* home polish: FAQ shows the first 6, h1 larger, compact story button on phone */
+.faq2 details.fq:nth-of-type(n+7){display:none}
+.faq2.all details.fq{display:block}
+.faqmore{margin:22px 0 4px;background:transparent;color:var(--cream);border:1px solid rgba(245,241,232,.4);border-radius:14px;padding:13px 22px;font:600 15px var(--body);cursor:pointer;min-height:44px;transition:background .2s,transform .2s}
+.faqmore:hover{background:rgba(245,241,232,.08);transform:translateY(-2px)}
+@media (min-width:700px){.herotxt{max-width:430px}.herotxt h1{font-size:40px;line-height:1.14}}
+@media (max-width:699px){#stage.mini{padding:7px 9px 6px;border-radius:14px}#stage.mini img{width:30px;margin:0 auto}#stage.mini #stagename{display:block;font-size:12px;letter-spacing:0;text-align:center;line-height:1;margin-top:2px}}
 </style>
 
 <div class="bg" aria-hidden="true">
@@ -702,6 +710,8 @@ h4,.hw-head p{font-size:13px}
 <p data-el="Ναι. Για κάθε επιχείρηση που κλείνει μαζί μας, παίρνεις 50€ μετρητά ή 2 μήνες δωρεάν συντήρηση. Ο φίλος σου παίρνει 10% έκπτωση." data-en="Yes. For each business that signs up with us, you get €50 cash or 2 months of free maintenance. Your friend gets 10% off.">Ναι. Για κάθε επιχείρηση που κλείνει μαζί μας, παίρνεις 50€ μετρητά ή 2 μήνες δωρεάν συντήρηση. Ο φίλος σου παίρνει 10% έκπτωση.</p></details>
 <details class="fq"><summary data-el="Πώς επικοινωνώ μαζί σας;" data-en="How do I contact you?">Πώς επικοινωνώ μαζί σας;</summary>
 <p data-el="Με DM στο Instagram, στο WhatsApp, τηλεφωνικά ή με email." data-en="By DM on Instagram, on WhatsApp, by phone or by email.">Με DM στο Instagram, στο WhatsApp, τηλεφωνικά ή με email.</p></details>
+<button type="button" class="faqmore" aria-expanded="false" data-el="Δες όλες τις ερωτήσεις" data-en="Show all questions">Δες όλες τις ερωτήσεις</button>
+<script>(function(){var b=document.querySelector('.faqmore'),s=document.getElementById('faq');if(!b||!s)return;b.addEventListener('click',function(){var o=s.classList.toggle('all');b.setAttribute('aria-expanded',o);var en=document.documentElement.lang==='en'||window.EN;b.textContent=o?(en?'Show fewer':'Λιγότερες ερωτήσεις'):(en?'Show all questions':'Δες όλες τις ερωτήσεις')})})();</script>
 </section>
 
 
@@ -1092,7 +1102,7 @@ function check(){var y=yy();
   if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
     st.classList.add('mini');nm.textContent=lb}
   }
-var bn=nm.textContent,lb=window.EN?'Our story +':'Η ιστορία μας +';
+var bn=nm.textContent,lb=window.EN?'Story +':'Ιστορία +';
 function tog(o){var m=st.classList.contains('mini');if(o===undefined)o=m;st.classList.toggle('mini',!o);st.setAttribute('aria-expanded',o?'true':'false');nm.textContent=o?bn:lb}
 st.addEventListener('click',function(e){e.stopPropagation();tog()});
 st.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog()}});

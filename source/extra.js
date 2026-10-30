@@ -23,7 +23,7 @@ function check(){var y=yy();
   if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
     st.classList.add('mini');nm.textContent=lb}
   }
-var bn=nm.textContent,lb=window.EN?'Our story +':'Η ιστορία μας +';
+var bn=nm.textContent,lb=window.EN?'Story +':'Ιστορία +';
 function tog(o){var m=st.classList.contains('mini');if(o===undefined)o=m;st.classList.toggle('mini',!o);st.setAttribute('aria-expanded',o?'true':'false');nm.textContent=o?bn:lb}
 st.addEventListener('click',function(e){e.stopPropagation();tog()});
 st.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog()}});

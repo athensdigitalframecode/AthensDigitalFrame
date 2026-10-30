@@ -478,6 +478,9 @@ h4,.hw-head p{font-size:13px}
 @media (max-width:699px){.herotxt+#babel{position:relative;left:auto;top:auto;transform:none;display:block;width:min(100%,280px);height:auto;aspect-ratio:520/360;margin:0 auto 4px;opacity:.9!important;z-index:1}}
 @media (min-width:1280px) and (max-width:1399px){.herotxt h1{font-size:34px;line-height:1.18}}
 @media (min-width:700px) and (max-width:1279px){.herotxt{margin-top:96px}.babel{left:64%}#babel{height:min(52vh,470px)}}
+.flspin{transform-box:view-box;transform-origin:260px 250px;animation:flsp 150s linear infinite}@keyframes flsp{to{transform:rotate(360deg)}}
+.flmote{opacity:0;animation:flmote 15s ease-in-out infinite}@keyframes flmote{0%{opacity:0;transform:translate(0,0)}18%{opacity:.8}80%{opacity:.45}100%{opacity:0;transform:translate(var(--dx,0),-90px)}}
+@media (prefers-reduced-motion:reduce){.flspin{animation:none}.flmote{display:none}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

@@ -613,7 +613,7 @@ h4,.hw-head p{font-size:13px}
 @media (prefers-reduced-motion:reduce){.flglow{animation:none}}
 #babel{height:min(66vh,600px)}
 @media (max-width:699px){.babel{opacity:.5!important}}
-@media (max-width:699px){.herotxt+#babel{position:relative;left:auto;top:auto;transform:none;display:block;width:min(100%,280px);height:auto;aspect-ratio:520/360;margin:0 auto 4px;opacity:.9!important;z-index:1}}
+@media (max-width:699px){.herotxt+#babel{position:relative;left:auto;top:auto;transform:none;display:block;width:min(100%,230px);height:auto;aspect-ratio:520/360;margin:0 auto 4px;opacity:.9!important;z-index:1}}
 @media (min-width:1280px) and (max-width:1399px){.herotxt h1{font-size:34px;line-height:1.18}}
 @media (min-width:700px) and (max-width:1279px){.herotxt{margin-top:96px}.babel{left:64%}#babel{height:min(52vh,470px)}}
 .flspin{transform-box:view-box;transform-origin:260px 250px;animation:flsp 150s linear infinite}@keyframes flsp{to{transform:rotate(360deg)}}
@@ -646,6 +646,8 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 .pf-body span{position:absolute;right:14px;bottom:10px;z-index:1}
 .contact>h2,.why>h2{text-wrap:balance}
 @media (min-width:900px){.contact{align-content:start;grid-template-rows:auto auto auto auto 1fr}.contact>.actions{grid-column:1;justify-self:start;margin:6px 0 0}.contact>.lead-form{grid-row:1/span 5}}
+@media (min-width:900px){.why{align-items:center}}
+@media (max-width:699px){.menuhead,.tiles{max-width:none}.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tiles .tile{padding:13px 12px;min-height:0;align-items:flex-start}.tiles .tile .go,.tiles .tile .ti{display:none}.tiles .tile strong{font-size:16px;line-height:1.2}.tiles .tile em{font-size:13.5px!important;line-height:1.4}}
 </style>
 
 <div class="bg" aria-hidden="true">
@@ -1135,7 +1137,7 @@ else tx.innerHTML='<h4>Ο Πύργος της Βαβέλ</h4><p>Κάποτε, έ
 st.appendChild(tx);st.appendChild(im);st.appendChild(nm);document.body.appendChild(st);
 var armed=true,tm=null,opened=false;setTimeout(function(){opened=true;check()},1400);
 function check(){var y=yy();
-  if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
+  if(armed&&(y>450||(opened&&!matchMedia("(max-width:699px)").matches))){armed=false;st.classList.add('on');
     st.classList.add('mini');nm.textContent=lb}
   }
 var bn=nm.textContent,lb=window.EN?'Story +':'Ιστορία +';

@@ -20,7 +20,7 @@ else tx.innerHTML='<h4>Ο Πύργος της Βαβέλ</h4><p>Κάποτε, έ
 st.appendChild(tx);st.appendChild(im);st.appendChild(nm);document.body.appendChild(st);
 var armed=true,tm=null,opened=false;setTimeout(function(){opened=true;check()},1400);
 function check(){var y=yy();
-  if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
+  if(armed&&(y>450||(opened&&!matchMedia("(max-width:699px)").matches))){armed=false;st.classList.add('on');
     st.classList.add('mini');nm.textContent=lb}
   }
 var bn=nm.textContent,lb=window.EN?'Story +':'Ιστορία +';

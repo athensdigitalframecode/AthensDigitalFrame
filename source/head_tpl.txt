@@ -9,10 +9,10 @@
 <meta property="og:title" content="Athens DigitalFrame – Ιστοσελίδες από 300€">
 <meta property="og:description" content="Ιστοσελίδες & e-shops για επιχειρήσεις στην Αθήνα. Live σε 3–5 ημέρες. Δωρεάν demo.">
 <meta property="og:url" content="https://athensdigitalframe.vercel.app/">
-<meta property="og:image" content="https://athensdigitalframe.vercel.app/og.png">
+<meta property="og:image" content="https://athensdigitalframe.vercel.app/og-v2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://athensdigitalframe.vercel.app/og.png">
+<meta name="twitter:image" content="https://athensdigitalframe.vercel.app/og-v2.png">
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>

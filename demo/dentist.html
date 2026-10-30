@@ -9,7 +9,7 @@
 <style>
 @font-face{font-family:'Manrope';font-style:normal;font-weight:400 700;font-display:swap;src:url(../fonts/manrope.woff2) format('woff2')}
 @font-face{font-family:'Noto Serif';font-style:normal;font-weight:500 600;font-display:swap;src:url(../fonts/notoserif.woff2) format('woff2')}
-:root{--bg:#eef3f1;--surface:#e1eae7;--ink:#12302f;--muted:#4a6360;--field:#12302f;--field-ink:#eef3f1;--accent:#12302f;--accent-ink:#eef3f1;
+:root{--bg:#f1f1ed;--surface:#e6e6e0;--ink:#1b2622;--muted:#4f5a54;--field:#16231f;--field-ink:#f1f1ed;--accent:#16231f;--accent-ink:#f1f1ed;--brass:#765830;
 --serif:'Noto Serif',Georgia,serif;--sans:'Manrope',system-ui,sans-serif;
 --m:clamp(20px,4vw,56px);--r:0px;--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box;margin:0}
@@ -26,33 +26,33 @@ a{color:inherit}
 .col{padding:clamp(40px,7vw,96px) var(--m) 0 clamp(28px,5vw,72px)}
 .col>section,.col>header{max-width:640px;margin:0 auto 0 0}
 h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-height:1.12}
-h1{font-size:clamp(34px,4.2vw,54px);margin:22px 0 18px;max-width:18ch}
-h2{font-size:clamp(30px,3.2vw,42px);margin-bottom:20px}
-.name{font:500 20px var(--serif)}
-.lead{font-size:18px;max-width:36ch;color:var(--muted)}
-.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);padding:15px 26px;font:600 16px var(--sans);text-decoration:none;border:0;cursor:pointer;transition:transform .2s var(--ease),background .2s}
+h1{font-size:clamp(40px,4.9vw,68px);line-height:1.05;margin:26px 0 22px;max-width:18ch;letter-spacing:-.02em}
+h2{font-size:clamp(34px,3.8vw,52px);line-height:1.08;margin-bottom:28px;letter-spacing:-.015em}
+.name{font:500 20px var(--serif);color:var(--brass)}
+.lead{font-size:20px;line-height:1.5;max-width:34ch;color:var(--muted)}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);padding:18px 32px;font:600 16px var(--sans);text-decoration:none;border:0;cursor:pointer;transition:transform .2s var(--ease),background .2s}
 .btn:hover{transform:translateY(-2px)}.btn:active{transform:none}
 .status{margin-top:22px;font-size:16px;color:var(--muted)}
-.status b{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2f8f6f;margin-right:9px}
+.status b{display:inline-block;width:9px;height:9px;border-radius:50%;background:#6f8a5a;margin-right:9px}
 .status.off b{background:#a17b4a}
 .links{margin-top:34px;display:flex;gap:26px;flex-wrap:wrap;font-size:16px}
-section{padding-top:clamp(96px,14vw,180px)}
+section{padding-top:clamp(120px,16vw,220px)}
 /* services */
 .svc{list-style:none;padding:0;margin:0 0 28px}
-.svc li{margin:0 0 6px}
-.svc button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1fr auto;gap:2px 18px;width:100%;padding:16px 18px;cursor:pointer;background:var(--surface);transition:background .2s,color .2s,transform .2s var(--ease)}
-.svc button:hover{transform:translateX(4px)}
+.svc li{margin:0 0 4px}
+.svc button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:1fr auto;gap:4px 24px;width:100%;padding:22px 20px;cursor:pointer;transition:background .25s,color .25s,padding .25s var(--ease)}
+.svc button:hover{background:var(--surface);padding-left:30px}
 .svc button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-.svc button[aria-pressed=true]{background:var(--field);color:var(--field-ink)}
-.svc strong{font:500 19px var(--serif)}.svc span{font-size:16px;text-align:right}.svc small{grid-column:1/-1;font-size:15px;opacity:.8}
-.pick{background:var(--field);color:var(--field-ink);padding:26px}
+.svc button[aria-pressed=true]{background:var(--field);color:var(--field-ink);padding-left:30px}
+.svc strong{font:500 24px/1.2 var(--serif)}.svc span{font-size:16px;text-align:right;padding-top:6px}.svc small{grid-column:1/-1;font-size:16px;opacity:.75}
+.pick{background:var(--surface);padding:30px;margin-top:20px}
 .pick p{font:500 20px/1.35 var(--serif);margin-bottom:18px}
-.pick .btn{background:var(--field-ink);color:var(--field)}
+
 /* letter */
 .letter{max-width:520px}
 .letter .av{width:44px;height:44px;border-radius:50%;background:var(--field);margin-bottom:28px;display:grid;place-items:center}
 .letter p{margin:0 0 1em;font-size:18px}
-.letter mark{background:#cfe5dc;color:inherit;padding:0 3px}
+.letter mark{background:#e6d7b6;color:inherit;padding:0 3px}
 .sign{font:500 22px var(--serif);margin-top:30px}.role{font-size:15px;color:var(--muted)}
 /* slip */
 .how{display:grid;gap:30px}
@@ -108,12 +108,43 @@ footer p{padding:0 var(--m) 48px clamp(28px,5vw,72px);font-size:15px;color:var(-
 <div class="demo"><span>Demo concept · Παράδειγμα σχεδίασης. Δεν είναι πραγματικό ιατρείο.</span><a href="../index.html#portfolio">← Athens Digital Frame</a></div>
 <div class="wrap">
 <div class="stage" aria-hidden="true">
-<!-- scene 0: the window -->
-<svg class="on" id="s0" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice"><rect width="600" height="800" fill="#cfe0da"/><rect y="610" width="600" height="190" fill="#a9c7be"/><path d="M130 610V250a170 170 0 0 1 340 0v360z" fill="#f7faf8"/><path d="M130 610V250a170 170 0 0 1 340 0v360z" fill="none" stroke="#12302f" stroke-width="12"/><path d="M300 80v530M130 330h340" stroke="#12302f" stroke-width="8"/><path d="M130 250a170 170 0 0 1 340 0" fill="none" stroke="#12302f" stroke-width="8"/><path d="M160 610V250M440 610V250" stroke="#cfe0da" stroke-width="4"/><path d="M140 610h320l90 190H50z" fill="#f3e7c9" opacity=".75"/><path d="M180 610h110l50 190H110z" fill="#f3e7c9" opacity=".5"/><rect x="100" y="602" width="400" height="18" fill="#12302f"/><g><rect x="446" y="560" width="64" height="52" fill="#12302f"/><path d="M478 560c-40-70-70-60-86-110 40 6 70 30 86 110zM478 560c10-80 40-110 70-120-2 50-30 90-70 120zM478 560c-6-60 4-110 20-140 14 40 6 100-20 140z" fill="#12302f"/></g><rect x="48" y="150" width="46" height="62" fill="#f7faf8" stroke="#12302f" stroke-width="5"/><path d="M58 172h26M58 184h26M58 196h16" stroke="#12302f" stroke-width="3"/></svg>
-<!-- scene 1: the tooth -->
-<svg id="s1" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice"><rect width="600" height="800" fill="#12302f"/><circle cx="300" cy="400" r="250" fill="#1b4543"/><path d="M300 190c-70-52-170-20-170 78 0 62 22 98 30 168 8 70 20 154 54 154 36 0 28-120 86-120s50 120 86 120c34 0 46-84 54-154 8-70 30-106 30-168 0-98-100-130-170-78z" fill="#f7faf8"/><path d="M215 250c-26 10-40 36-38 70" fill="none" stroke="#cfe0da" stroke-width="10" stroke-linecap="round"/><g transform="rotate(-24 480 620)"><rect x="474" y="520" width="12" height="240" fill="#cfe0da"/><circle cx="480" cy="500" r="40" fill="#a9c7be" stroke="#cfe0da" stroke-width="8"/><circle cx="480" cy="500" r="30" fill="#eef3f1"/></g><path d="M470 130v26M457 143h26M130 650v18M121 659h18M520 330v14M513 337h14" stroke="#cfe0da" stroke-width="4"/></svg>
-<!-- scene 2: the street -->
-<svg id="s2" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice"><rect width="600" height="800" fill="#e1eae7"/><g fill="#cfe0da"><rect x="30" y="40" width="150" height="150"/><rect x="230" y="40" width="130" height="150"/><rect x="410" y="40" width="160" height="150"/><rect x="30" y="250" width="150" height="130"/><rect x="410" y="250" width="160" height="130"/><rect x="30" y="440" width="150" height="150"/><rect x="230" y="440" width="130" height="150"/><rect x="410" y="440" width="160" height="150"/><rect x="30" y="650" width="330" height="120"/><rect x="410" y="650" width="160" height="120"/></g><rect x="230" y="250" width="130" height="130" fill="#b9d3c6"/><g fill="none" stroke="#a9c7be" stroke-width="3"><circle cx="520" cy="110" r="60"/><circle cx="520" cy="110" r="42"/><circle cx="520" cy="110" r="24"/></g><path d="M0 215H600M0 415H600M0 620H600M205 0V800M385 0V800" stroke="#f7faf8" stroke-width="16"/><path d="M0 415L600 300" stroke="#f7faf8" stroke-width="10"/><g transform="translate(205 415)"><circle r="34" fill="#12302f"/><circle r="12" fill="#f7faf8"/><path d="M0 34v34" stroke="#12302f" stroke-width="6"/></g><text x="222" y="212" font-family="Manrope,sans-serif" font-weight="700" font-size="20" fill="#4a6360" letter-spacing="3">ΣΚΟΥΦΑ</text></svg>
+<svg class="on" id="s0" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+<rect width="600" height="800" fill="#16231f"/>
+<g stroke="#1f322c" stroke-width="3"><path d="M0 200H600M0 240H600M0 280H600M0 320H600M0 360H600M0 400H600M0 440H600M0 480H600M0 520H600M0 560H600M0 600H600M0 640H600M0 680H600"/></g>
+<rect y="40" width="600" height="26" fill="#cfc3ae"/><rect y="66" width="600" height="14" fill="#a89c85"/><rect y="80" width="600" height="8" fill="#0f1814"/>
+<path d="M140 610V300a160 160 0 0 1 320 0v310z" fill="#f2dfb5"/>
+<path d="M300 140v470M140 380h320" stroke="#16231f" stroke-width="7"/>
+<path d="M170 610V320a130 130 0 0 1 130-130" fill="none" stroke="#e9c987" stroke-width="3" opacity=".7"/>
+<path d="M300 190v70" stroke="#16231f" stroke-width="3"/><path d="M300 260c-22 0-34 14-34 30h68c0-16-12-30-34-30z" fill="#16231f" opacity=".85"/><circle cx="300" cy="298" r="9" fill="#e9c987"/>
+<path d="M140 610V300a160 160 0 0 1 320 0v310" fill="none" stroke="#cfc3ae" stroke-width="22"/>
+<path d="M118 610V300a182 182 0 0 1 364 0v310" fill="none" stroke="#a89c85" stroke-width="5"/>
+<path d="M276 126h48l10 38h-68z" fill="#cfc3ae"/>
+<rect x="96" y="610" width="408" height="26" fill="#e8dfcf"/><rect x="108" y="636" width="384" height="12" fill="#a89c85"/>
+<g fill="#0f1814"><rect x="140" y="560" width="320" height="50" opacity=".28"/></g>
+<g stroke="#0f1814" stroke-width="5"><path d="M148 562v48M176 562v48M204 562v48M232 562v48M260 562v48M288 562v48M316 562v48M344 562v48M372 562v48M400 562v48M428 562v48M452 562v48M140 562H460"/></g>
+<path d="M120 700H480L520 800H80z" fill="#f2dfb5" opacity=".12"/>
+<path d="M210 800V745a90 90 0 0 1 180 0v55z" fill="#0f1814" stroke="#cfc3ae" stroke-width="10"/>
+<rect x="436" y="690" width="58" height="76" fill="#b08d52"/><rect x="444" y="702" width="42" height="5" fill="#16231f"/><rect x="444" y="716" width="42" height="4" fill="#16231f" opacity=".6"/><rect x="444" y="728" width="30" height="4" fill="#16231f" opacity=".6"/>
+<circle cx="368" cy="752" r="6" fill="#b08d52"/>
+<g fill="#2d4a3f"><path d="M70 650c-4-40 10-70 30-86 4 36-6 66-30 86zM70 650c10-30 32-48 58-52-8 30-28 46-58 52zM70 650c-20-20-24-46-14-70 18 18 22 44 14 70z"/></g><rect x="52" y="650" width="46" height="46" fill="#0f1814"/>
+</svg>
+<svg id="s1" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+<rect width="600" height="800" fill="#16231f"/><circle cx="300" cy="360" r="270" fill="#1d332c"/><circle cx="300" cy="360" r="190" fill="#244037"/>
+<path d="M0 640L600 540V800H0z" fill="#e8dfcf"/><path d="M0 640L600 540V556L0 660z" fill="#a89c85"/>
+<g transform="rotate(-18 300 380)"><rect x="288" y="470" width="24" height="330" fill="#b08d52"/><rect x="288" y="470" width="8" height="330" fill="#d4b178"/><circle cx="300" cy="360" r="130" fill="#b08d52"/><circle cx="300" cy="360" r="116" fill="#f1f1ed"/>
+<path d="M214 360a86 86 0 0 1 172 0v70H214z" fill="#f2dfb5"/><path d="M244 430V332a56 56 0 0 1 112 0v98" fill="none" stroke="#16231f" stroke-width="6"/><path d="M300 276v154M244 360h112" stroke="#16231f" stroke-width="5"/></g>
+<path d="M470 130v34M453 147h34M120 220v20M110 230h20" stroke="#d4b178" stroke-width="4"/>
+<g fill="#2d4a3f"><path d="M470 650c-10-50 6-90 34-110 6 44-6 84-34 110zM470 650c14-34 40-54 70-56-10 34-34 52-70 56z"/></g>
+</svg>
+<svg id="s2" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+<rect width="600" height="800" fill="#e6e6e0"/>
+<g fill="#dcd2c0"><rect x="30" y="40" width="150" height="150"/><rect x="230" y="40" width="130" height="150"/><rect x="410" y="40" width="160" height="150"/><rect x="30" y="250" width="150" height="130"/><rect x="410" y="250" width="160" height="130"/><rect x="30" y="440" width="150" height="150"/><rect x="230" y="440" width="130" height="150"/><rect x="410" y="440" width="160" height="150"/><rect x="30" y="680" width="330" height="90"/><rect x="410" y="680" width="160" height="90"/></g>
+<rect x="230" y="250" width="130" height="130" fill="#c7d0b8"/>
+<g fill="none" stroke="#cfc4ae" stroke-width="3"><circle cx="520" cy="110" r="64"/><circle cx="520" cy="110" r="46"/><circle cx="520" cy="110" r="28"/></g>
+<path d="M0 215H600M0 415H600M0 625H600M205 0V800M385 0V800" stroke="#f6f1e8" stroke-width="16"/><path d="M0 415L600 300" stroke="#f6f1e8" stroke-width="10"/>
+<g transform="translate(205 415)"><circle r="40" fill="#16231f"/><circle r="30" fill="none" stroke="#b08d52" stroke-width="4"/><circle r="9" fill="#b08d52"/><path d="M0 40v38" stroke="#16231f" stroke-width="6"/></g>
+<text x="222" y="210" font-family="Manrope,sans-serif" font-weight="700" font-size="22" fill="#55605a" letter-spacing="4">ΣΚΟΥΦΑ</text>
+</svg>
 </div>
 <main class="col" id="top">
 <header data-scene="0" class="in">
@@ -140,7 +171,7 @@ footer p{padding:0 var(--m) 48px clamp(28px,5vw,72px);font-size:15px;color:var(-
 </section>
 
 <section id="visit" data-scene="2" class="in how" aria-labelledby="h-v">
-<div><h2 id="h-v">Μια επίσκεψη, από την πόρτα ως την έξοδο</h2><p class="lead">Ξέρεις από πριν τι θα γίνει και πόση ώρα θα πάρει.</p></div>
+<div><h2 id="h-v">Η επίσκεψή σου, βήμα βήμα</h2><p class="lead">Ξέρεις από πριν τι θα γίνει και πόση ώρα θα πάρει.</p></div>
 <div class="slip">
 <h3>Πριν έρθεις</h3>
 <div class="row"><span>Κράτηση με τηλέφωνο ή μήνυμα</span><i></i><span>2′</span></div>

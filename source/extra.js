@@ -37,4 +37,7 @@ function dirCheck(){var y=yy();
 window.addEventListener('scroll',dirCheck,{passive:true});
 window.addEventListener('scroll',check,{passive:true});setInterval(check,300);
 })();
+(function(){var m=matchMedia('(max-width:699px)'),b=document.getElementById('babel'),h=document.querySelector('.herotxt'),bg=b&&b.parentNode;
+if(!b||!h)return;function pl(){if(m.matches){h.parentNode.insertBefore(b,h.nextSibling);b.setAttribute('viewBox','0 70 520 360')}else{bg.insertBefore(b,bg.firstChild);b.setAttribute('viewBox','0 0 520 640')}}
+pl();m.addEventListener&&m.addEventListener('change',pl)})();
 </script>

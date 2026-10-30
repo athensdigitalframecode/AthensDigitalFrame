@@ -614,7 +614,6 @@ h4,.hw-head p{font-size:13px}
 #babel{height:min(66vh,600px)}
 @media (max-width:699px){.babel{opacity:.5!important}}
 @media (max-width:699px){.herotxt+#babel{position:relative;left:auto;top:auto;transform:none;display:block;width:min(100%,280px);height:auto;aspect-ratio:520/360;margin:0 auto 4px;opacity:.9!important;z-index:1}}
-@media (min-width:900px){.babel{opacity:.7!important}}
 </style>
 
 <div class="bg" aria-hidden="true">
@@ -996,7 +995,7 @@ function paint(col,p){
 var hidden=false,offT=0;
 function tower(vh){
   if(!babel)return;
-  var r=sec.getBoundingClientRect(),gone=false,st=document.getElementById('stage');
+  var r=sec.getBoundingClientRect(),gone=r.top<vh*.04,st=document.getElementById('stage');
   if(st)st.classList.toggle('hwgone',r.top<vh*.9);
   if(gone&&!hidden){hidden=true;babel.classList.add('gone');window.__noTower=true;clearTimeout(offT);offT=setTimeout(function(){if(hidden)babel.classList.add('off')},650)}
   else if(!gone&&hidden){hidden=false;clearTimeout(offT);babel.classList.remove('off');void babel.offsetWidth;babel.classList.remove('gone');window.__noTower=false}
@@ -1072,7 +1071,7 @@ function frame(){
   L[i].style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
  }
  var t=Math.min(cur,900)/900;
- if(dl){var z=1+t*.04;dl.setAttribute('transform','translate(260 400) scale('+z.toFixed(4)+') translate(-260 -400)')}
+ if(dl){var z=1+t*.07;dl.setAttribute('transform','translate(260 400) scale('+z.toFixed(4)+') translate(-260 -400)');dl.style.opacity=(1-t*.55).toFixed(3)}
  if(ray)ray.setAttribute('transform','rotate('+(cur*.04).toFixed(2)+' 260 250)');
  if(ring){var r=1+t*.12;ring.setAttribute('transform','translate(260 250) scale('+r.toFixed(4)+') translate(-260 -250)')}
  if(Math.abs(sy-cur)>.4)q();

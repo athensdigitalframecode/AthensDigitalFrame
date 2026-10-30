@@ -23,7 +23,7 @@ function paint(col,p){
 var hidden=false,offT=0;
 function tower(vh){
   if(!babel)return;
-  var r=sec.getBoundingClientRect(),gone=false,st=document.getElementById('stage');
+  var r=sec.getBoundingClientRect(),gone=r.top<vh*.04,st=document.getElementById('stage');
   if(st)st.classList.toggle('hwgone',r.top<vh*.9);
   if(gone&&!hidden){hidden=true;babel.classList.add('gone');window.__noTower=true;clearTimeout(offT);offT=setTimeout(function(){if(hidden)babel.classList.add('off')},650)}
   else if(!gone&&hidden){hidden=false;clearTimeout(offT);babel.classList.remove('off');void babel.offsetWidth;babel.classList.remove('gone');window.__noTower=false}

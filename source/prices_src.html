@@ -426,7 +426,15 @@ h4,.hw-head p{font-size:13px}
 .hw-lead,.pf-lead,.faq2 p,.contact p,section>p:not(.eyebrow){font-size:16px}
 #stage .stxt{font-size:14.5px}
 /* phone: collapsed Babel badge must not cover the menu tiles */
-@media (max-width:699px){#stage.mini #stagename{display:none}#stage.mini{padding:8px 10px}#stage.mini img{width:40px;margin:0}}
+@media (max-width:699px){#stage.mini{padding:8px 12px 7px}#stage.mini img{width:36px;margin:0 auto 3px}#stage.mini #stagename{font-size:10.5px;letter-spacing:.12em}}
+
+/* Tower of Babel story: hidden behind a small button, opens on click */
+#stage.on{pointer-events:auto;cursor:pointer}
+#stage.mini{width:auto;padding:10px 14px 8px;transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s}
+#stage.mini:hover{transform:translateY(-3px);border-color:rgba(201,169,110,.7)}
+#stage:focus-visible{outline:3px solid #D9BE86;outline-offset:3px}
+#stage.mini img{width:42px;margin:0 auto 4px}
+@media (min-width:700px){#stage.mini #stagename{font-size:11px;letter-spacing:.14em}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

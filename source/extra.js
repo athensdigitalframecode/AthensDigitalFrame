@@ -11,7 +11,7 @@ window.addEventListener('touchmove',function(e){if(ty==null)return;var ny=e.touc
 /* centre logo + name reveal after some scrolling */
 var logo=document.querySelector('.hero .logo'),brand=document.querySelector('.hero .brand');
 if(!logo)return;
-var st=document.createElement('div');st.id='stage';st.setAttribute('aria-hidden','true');
+var st=document.createElement('div');st.id='stage';st.setAttribute('role','button');st.tabIndex=0;st.setAttribute('aria-expanded','false');st.setAttribute('aria-label',window.EN?'Our story: the Tower of Babel':'Η ιστορία μας: ο Πύργος της Βαβέλ');
 var im=document.createElement('img');im.src=logo.src;im.alt='';
 var nm=document.createElement('span');nm.id='stagename';nm.textContent=brand?brand.textContent:'Athens Digital Frame';
 var tx=document.createElement('div');tx.className='stxt';
@@ -21,9 +21,14 @@ st.appendChild(tx);st.appendChild(im);st.appendChild(nm);document.body.appendChi
 var armed=true,tm=null,opened=false;setTimeout(function(){opened=true;check()},1400);
 function check(){var y=yy();
   if(armed&&(y>450||opened)){armed=false;st.classList.add('on');
-    if(window.innerWidth<700){clearTimeout(tm);st.classList.add('mini')}}
+    st.classList.add('mini');nm.textContent=lb}
   }
-st.addEventListener('click',function(){if(window.innerWidth<700){st.classList.toggle('mini');clearTimeout(tm);if(!st.classList.contains('mini'))tm=setTimeout(function(){st.classList.add('mini')},8000)}});
+var bn=nm.textContent,lb=window.EN?'Our story +':'Η ιστορία μας +';
+function tog(o){var m=st.classList.contains('mini');if(o===undefined)o=m;st.classList.toggle('mini',!o);st.setAttribute('aria-expanded',o?'true':'false');nm.textContent=o?bn:lb}
+st.addEventListener('click',function(e){e.stopPropagation();tog()});
+st.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog()}});
+document.addEventListener('click',function(){if(!st.classList.contains('mini'))tog(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!st.classList.contains('mini'))tog(false)});
 var lastY=0,snds=[].slice.call(document.querySelectorAll('.snd'));
 function dirCheck(){var y=yy();
   var hide=(y>lastY+4&&y>90);var show=(y<lastY-4||y<=90);

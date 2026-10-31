@@ -28,3 +28,4 @@ if __name__=='__main__':
     O=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..')+'/'
     build('home_src.html',O+'index.html','Athens DigitalFrame | Ιστοσελίδες &amp; e-shops στην Αθήνα','Athens DigitalFrame – Ιστοσελίδες &amp; e-shops στην Αθήνα','Ιστοσελίδες και e-shops για επιχειρήσεις στην Αθήνα. Live σε 3–5 ημέρες, ξεκάθαρες τιμές, δωρεάν demo.','https://athensdigitalframe.vercel.app/')
     build('prices_src.html',O+'prices.html','Athens DigitalFrame | Ιστοσελίδες από 300€','Athens DigitalFrame – Ιστοσελίδες από 300€','Τιμές για ιστοσελίδες και e-shop leasing από την Athens DigitalFrame. Live σε 3–5 ημέρες.','https://athensdigitalframe.vercel.app/prices.html')
+    _p=O+'prices.html';_t=open(_p,encoding='utf-8').read().replace('<body>','<body class="pricespage">',1);open(_p,'w',encoding='utf-8').write(_t)

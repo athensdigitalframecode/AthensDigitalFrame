@@ -1,0 +1,13 @@
+/* prices page only: a quieter background so the numbers get the focus */
+.pricespage .bg .vl,.pricespage .bg .dot,.pricespage .bg .wf,.pricespage .bg .sales,.pricespage .bg .orb.o2,
+.pricespage .bg .ob:not(.o-acro):not(.o-olive):not(.o-col){display:none!important}
+.pricespage .bg .stars{opacity:.6}
+.pricespage .bg::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .8 0 0 0 0 .7 0 0 0 0 .5 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.pricespage .bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 380px 62% at 50% 40%,rgba(201,169,110,.08),transparent 72%)}
+.pricespage section{background:linear-gradient(180deg,rgba(26,24,19,.94),rgba(20,20,17,.94))}
+.pricespage .s-shop{background:linear-gradient(180deg,rgba(34,29,20,.94),rgba(21,19,14,.94))}
+.pricespage .s-site{box-shadow:inset 0 1px 0 rgba(217,190,134,.55)}
+.pricespage .typed .lt{animation-name:lpopq}
+@keyframes lpopq{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+@media (max-width:699px){.pricespage .bg::before,.pricespage .bg .o-acro{display:none!important}}
+@media (prefers-reduced-motion:reduce){.pricespage .typed .lt{animation:none;opacity:1;transform:none}}

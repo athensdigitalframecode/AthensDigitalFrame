@@ -383,7 +383,7 @@ section.compact{padding-left:18px;padding-right:18px}
 .dock .dockrow{max-width:620px}
 </style>
 </head>
-<body>
+<body class="pricespage">
 <style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}</style>
 <style>/* premium pass: same palette, lighter type, more air, calmer cards and buttons */
 h1,h2,.hw-head h3,.hw-body strong,.tile strong,.fq summary,.qp .v,.inccols h3{font-weight:500!important}
@@ -529,6 +529,19 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 
 /* phones: arch-shaped scroll indicator in the right page margin */
 #archprog{position:fixed;right:4px;top:calc(50% - 29px);z-index:3;pointer-events:none;display:none}
+/* prices page only: a quieter background so the numbers get the focus */
+.pricespage .bg .vl,.pricespage .bg .dot,.pricespage .bg .wf,.pricespage .bg .sales,.pricespage .bg .orb.o2,
+.pricespage .bg .ob:not(.o-acro):not(.o-olive):not(.o-col){display:none!important}
+.pricespage .bg .stars{opacity:.6}
+.pricespage .bg::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .8 0 0 0 0 .7 0 0 0 0 .5 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.pricespage .bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 380px 62% at 50% 40%,rgba(201,169,110,.08),transparent 72%)}
+.pricespage section{background:linear-gradient(180deg,rgba(26,24,19,.94),rgba(20,20,17,.94))}
+.pricespage .s-shop{background:linear-gradient(180deg,rgba(34,29,20,.94),rgba(21,19,14,.94))}
+.pricespage .s-site{box-shadow:inset 0 1px 0 rgba(217,190,134,.55)}
+.pricespage .typed .lt{animation-name:lpopq}
+@keyframes lpopq{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+@media (max-width:699px){.pricespage .bg::before,.pricespage .bg .o-acro{display:none!important}}
+@media (prefers-reduced-motion:reduce){.pricespage .typed .lt{animation:none;opacity:1;transform:none}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
@@ -769,7 +782,7 @@ if(!reduce&&'IntersectionObserver' in window){
     if(!e.isIntersecting)return;cio.unobserve(e.target);
     var el=e.target,orig=el.textContent;if(!/\d/.test(orig))return;
     var nums=orig.match(/\d+/g).map(Number),t0=null,dur=3200;
-    function step(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/dur),k=1-Math.pow(1-p,2),i=0;
+    function step(ts){if(!t0)t0=ts;var p=1,k=1-Math.pow(1-p,2),i=0;
       el.textContent=orig.replace(/\d+/g,function(){return Math.round(nums[i++]*k)});
       if(p<1)requestAnimationFrame(step);else{el.textContent=orig;el.classList.add('land');var sec=el.closest('section'),all=[].slice.call(sec.querySelectorAll('.price .w.num')),ix=Math.max(0,all.indexOf(el));el.style.setProperty('--ud',(0.5+ix*0.55)+'s');el.classList.add('ul');setTimeout(function(){el.classList.remove('land')},1600)}}
     requestAnimationFrame(step);

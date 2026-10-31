@@ -64,4 +64,20 @@ build();addEventListener('resize',build);addEventListener('scroll',upd,{passive:
 var b=document.getElementById('babel');if(!b||!window.IntersectionObserver)return;
 new IntersectionObserver(function(es){es.forEach(function(e){b.classList.toggle('apause',!e.isIntersecting)})}).observe(b);
 })();
+(function(){/* phones: a small arch-shaped scroll indicator on the right edge (the hero arch scrolls away with the page, so the ring there would not stay visible) */
+var m=matchMedia('(max-width:699px)'),NS='http://www.w3.org/2000/svg',el=null,bar=null;
+function make(){
+ el=document.createElement('div');el.id='archprog';el.setAttribute('aria-hidden','true');
+ el.innerHTML='<svg xmlns="'+NS+'" viewBox="0 0 14 58" width="14" height="58" fill="none" stroke-linecap="round"><path d="M1.5 57V13A5.5 5.5 0 0 1 12.5 13V57" stroke="#F5F1E8" stroke-opacity=".18" stroke-width="1.2"/><path id="archprogbar" d="M1.5 57V13A5.5 5.5 0 0 1 12.5 13V57" pathLength="100" stroke="#C9A96E" stroke-width="1.6" stroke-dasharray="100" stroke-dashoffset="100"/></svg>';
+ document.body.appendChild(el);bar=document.getElementById('archprogbar');
+}
+function upd(){
+ if(!m.matches){if(el)el.style.display='none';return}
+ if(!el)make();el.style.display='block';
+ var y=pageYOffset||0,mx=document.documentElement.scrollHeight-innerHeight,p=mx>0?Math.min(1,y/mx):0;
+ /* the path runs bottom -> top, so fill it from the bottom up */
+ bar.setAttribute('stroke-dashoffset',(100-p*100).toFixed(1));
+}
+upd();addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
+})();
 </script>

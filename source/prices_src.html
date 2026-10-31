@@ -498,6 +498,9 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 /* battery: paused while off screen (extra.js); phones get half the dust motes */
 .apause,.apause *{animation-play-state:paused!important}
 @media (max-width:699px){.flmote:nth-of-type(n+8){display:none}}
+
+/* phones: arch-shaped scroll indicator in the right page margin */
+#archprog{position:fixed;right:4px;top:calc(50% - 29px);z-index:3;pointer-events:none;display:none}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

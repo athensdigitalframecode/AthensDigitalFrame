@@ -29,3 +29,4 @@
  .pricespage main>.s-shop{grid-column:2}
  .pricespage .pbabel{left:calc(50% + 486px);height:230px}
 }
+.pricespage .contact>p{margin-left:auto;margin-right:auto;text-align:center}

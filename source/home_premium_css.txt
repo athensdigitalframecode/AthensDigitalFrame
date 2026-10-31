@@ -44,3 +44,7 @@ a.tile:hover .go,a.tile:focus-visible .go{background:var(--gold);border-color:va
  .tiles .tile{position:relative;padding:13px 12px 44px;background:linear-gradient(180deg,rgba(245,241,232,.06),rgba(245,241,232,.014)),linear-gradient(180deg,rgba(28,26,21,.97),rgba(20,20,17,.97));border-color:rgba(201,169,110,.4)}
  .tiles .tile .go{display:grid!important;position:absolute;right:10px;bottom:10px;width:26px;height:26px;font-size:13px}
 }
+
+/* decorative frames that sat behind the menu tiles */
+body:not(.pricespage) .ob.k-fr1,body:not(.pricespage) .ob.k-lz1{display:none!important}
+@media (max-width:699px){body:not(.pricespage) .ob.k-fr2{display:none!important}}

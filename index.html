@@ -679,6 +679,10 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 /* arch frame: gilded gradient rim; soft glow on desktop only (no filter on phones) */
 @media (min-width:700px){#babel{filter:drop-shadow(0 0 14px rgba(201,169,110,.28))}}
 
+/* right-side mini arch (desktop): sits in the right gutter, fades in as the hero arch fades; below dock/story button, never clickable */
+#archside{position:fixed;bottom:0;z-index:1;pointer-events:none;display:none;opacity:0;transition:opacity .5s ease}
+#archside svg{filter:none}
+@media (prefers-reduced-motion:reduce){#archside{transition:none}}
 </style>
 </head>
 <body>
@@ -1060,7 +1064,7 @@ function paint(col,p){
 }
 var hidden=false,offT=0;
 function tower(vh){
-  if(!babel||window.__dock)return;
+  if(!babel)return;
   var r=sec.getBoundingClientRect(),gone=r.top<vh*.04,st=document.getElementById('stage');
   if(st)st.classList.toggle('hwgone',r.top<vh*.9);
   if(gone&&!hidden){hidden=true;babel.classList.add('gone');window.__noTower=true;clearTimeout(offT);offT=setTimeout(function(){if(hidden)babel.classList.add('off')},650)}
@@ -1137,7 +1141,7 @@ function frame(){
   L[i].style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
  }
  var t=Math.min(cur,900)/900;
- if(dl){var z=1+(window.__dock?0:t*.07);dl.setAttribute('transform','translate(260 400) scale('+z.toFixed(4)+') translate(-260 -400)');dl.style.opacity=(window.__dock?1:1-t*.55).toFixed(3)}
+ if(dl){var z=1+t*.07;dl.setAttribute('transform','translate(260 400) scale('+z.toFixed(4)+') translate(-260 -400)');dl.style.opacity=(1-t*.55).toFixed(3)}
  if(ray)ray.setAttribute('transform','rotate('+(cur*.04).toFixed(2)+' 260 250)');
  if(ring){var r=1+t*.12;ring.setAttribute('transform','translate(260 250) scale('+r.toFixed(4)+') translate(-260 -250)')}
  if(Math.abs(sy-cur)>.4)q();
@@ -1189,36 +1193,22 @@ window.addEventListener('scroll',check,{passive:true});setInterval(check,300);
 (function(){var m=matchMedia('(max-width:699px)'),b=document.getElementById('babel'),h=document.querySelector('.herotxt'),bg=b&&b.parentNode;
 if(!b||!h)return;function pl(){if(m.matches){h.parentNode.insertBefore(b,h.nextSibling);b.setAttribute('viewBox','0 8 520 400')}else{bg.insertBefore(b,bg.firstChild);b.setAttribute('viewBox','0 0 520 640')}}
 pl();m.addEventListener&&m.addEventListener('change',pl)})();
-(function(){/* dock: the hero arch itself shrinks and slides into the right gutter while scrolling (desktop >=1240px); it also shows page progress (ring) and the "how it works" step (dots) */
-var b=document.getElementById('babel'),w=document.querySelector('section.why'),how=document.getElementById('how'),ring=b&&b.querySelector('#flring');
-if(!b||!w||!ring||!window.matchMedia)return;
-var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,NS='http://www.w3.org/2000/svg',g={ok:false,dx:0,dy:0,s:1};
-function mk(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);ring.appendChild(e);return e}
-var prog=mk('circle',{cx:260,cy:250,r:150,pathLength:100,fill:'none',stroke:'#fff3d6','stroke-width':1.6,'stroke-dasharray':100,'stroke-dashoffset':100,transform:'rotate(-90 260 250)',opacity:0}),dots=[];
-for(var i=0;i<5;i++){var a=(-160+i*35)*Math.PI/180;dots.push(mk('circle',{cx:(260+128*Math.cos(a)).toFixed(1),cy:(250+128*Math.sin(a)).toFixed(1),r:2.2,fill:'#C9A96E',opacity:0}))}
-function measure(){
- var vw=innerWidth,vh=innerHeight,r=w.getBoundingClientRect().right,W=Math.min(vw-r-30,230);
- b.style.transform='';
- var o=b.getBoundingClientRect(),m=new DOMMatrix(getComputedStyle(b).transform),ok=vw>=1240&&W>=110&&o.width>0;
- if(ok){var s=W/o.width;g.s=s;g.dx=(vw+r)/2-(o.left+o.width/2)+(1-s)*m.e;g.dy=(vh-o.height*s/2)-(o.top+o.height/2)+(1-s)*m.f;g.tx=m.e;g.ty=m.f}
- g.ok=ok;window.__dock=ok;
- if(ok){b.classList.remove('gone','off');window.__noTower=false}
+(function(){/* right-side copy of the SAME arch (all CSS effects kept): fades in as the hero arch fades, stands in the right gutter, desktop only */
+var b=document.getElementById('babel'),w=document.querySelector('section.why');
+if(!b||!w||!window.matchMedia)return;
+var el=document.createElement('div');el.id='archside';el.setAttribute('aria-hidden','true');
+var h=b.outerHTML.replace(/ id="(fl\w+)"/g,' id="$1s"').replace(/url\(#(fl\w+)\)/g,'url(#$1s)').replace(' id="babel"','').replace('class="babel"','class="bside"').replace(/ data-d="[^"]*"/g,'');
+el.innerHTML=h;document.body.appendChild(el);
+var on=false,svg=el.firstChild;
+function build(){
+ var vw=innerWidth,r=w.getBoundingClientRect().right,gut=vw-r,W=Math.min(gut-30,230);
+ on=vw>=1240&&W>=70;el.style.display=on?'block':'none';if(!on)return;
+ el.style.left=((vw+r)/2-W/2).toFixed(1)+'px';el.style.width=W.toFixed(1)+'px';
+ svg.setAttribute('width',W.toFixed(1));svg.setAttribute('height',(W*640/520).toFixed(1));svg.style.cssText='display:block;width:'+W.toFixed(1)+'px;height:'+(W*640/520).toFixed(1)+'px;opacity:1';
  upd();
 }
-function upd(){
- if(!g.ok){b.style.transform='';b.style.removeProperty('opacity');prog.setAttribute('opacity',0);dots.forEach(function(d){d.setAttribute('opacity',0)});return}
- var y=pageYOffset||0,vh=innerHeight,t=Math.max(0,Math.min(1,y/(vh*.8)));
- if(reduce)t=t>.5?1:0;
- var e=t*t*(3-2*t);
- b.style.transform='translate('+(g.dx*e).toFixed(1)+'px,'+(g.dy*e).toFixed(1)+'px) scale('+(1+(g.s-1)*e).toFixed(4)+') translate('+g.tx.toFixed(1)+'px,'+g.ty.toFixed(1)+'px)';
- b.style.setProperty('opacity',(.5+.3*e).toFixed(2),'important');
- var max=document.documentElement.scrollHeight-vh,p=max>0?Math.min(1,y/max):0;
- prog.setAttribute('stroke-dashoffset',(100-p*100).toFixed(1));prog.setAttribute('opacity',e.toFixed(2));
- var col=how&&how.querySelector('.hw-col'),st=col?col.querySelectorAll('.hw-step'):[],hr=how?how.getBoundingClientRect():null,vis=hr&&hr.top<vh&&hr.bottom>0?e:0;
- dots.forEach(function(d,i){var on=st[i]&&st[i].classList.contains('on');d.setAttribute('opacity',vis?(on?1:.3)*vis:0);d.setAttribute('fill',on?'#fff3d6':'#C9A96E');d.setAttribute('r',on?3.4:2.2)});
-}
-var q=false;function req(){if(!q){q=true;requestAnimationFrame(function(){q=false;upd()})}}
-measure();addEventListener('resize',measure);addEventListener('scroll',req,{passive:true});addEventListener('load',measure);
+function upd(){if(!on)return;var y=pageYOffset||0,o=Math.max(0,Math.min(1,(y-380)/520));el.style.opacity=(o*.5).toFixed(3)}
+build();addEventListener('resize',build);addEventListener('scroll',upd,{passive:true});
 })();
 </script>
 <script>

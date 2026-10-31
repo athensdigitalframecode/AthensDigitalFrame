@@ -131,13 +131,7 @@ nextb='''<section class="nextb" aria-labelledby="nexth">
       <li><b>3</b><span><strong>Live σε 3–5 ημέρες</strong>Αν σου αρέσει, ανεβαίνει και είναι έτοιμο.</span></li>
     </ol>
   </section>'''
-offer='''<aside class="offer" aria-labelledby="offerh">
-    <h2 id="offerh"><span class="big">3–5</span> ημέρες</h2>
-    <ol class="tl">
-      <li><b>Ημέρα 1</b><span>Brief</span></li>
-      <li><b>Ημέρα 1–2</b><span>Δωρεάν demo</span></li>
-      <li><b>Ημέρα 5</b><span>Live</span></li>
-    </ol>
+offer='''<aside class="offer" aria-hidden="true">
     <svg class="offerart" viewBox="0 0 160 92" fill="none" stroke="#C9A96E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 90C20 82 30 64 44 58h72c14 6 24 24 44 32"/><path d="M14 80c18-6 28-8 40-8M104 72c14 0 28 4 44 10"/><path d="M48 26L80 9l32 17z"/><rect x="48" y="26" width="64" height="5"/><path d="M54 31v22M64 31v22M74 31v22M86 31v22M96 31v22M106 31v22"/><rect x="48" y="53" width="64" height="5"/></svg>
   </aside>'''
 newmain='<main>\n  '+hero+'\n  '+offer+'\n  '+tiles+'\n\n  '+why+'\n\n  '+nextb+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'

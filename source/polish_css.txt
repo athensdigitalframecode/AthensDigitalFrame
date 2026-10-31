@@ -111,3 +111,7 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 
 /* arch frame: gilded gradient rim; soft glow on desktop only (no filter on phones) */
 @media (min-width:700px){#babel{filter:drop-shadow(0 0 14px rgba(201,169,110,.28))}}
+
+/* right-side mini arch (desktop): sits in the right gutter, fades in as the hero arch fades; below dock/story button, never clickable */
+#archside{position:fixed;z-index:1;pointer-events:none;display:none;opacity:0;transition:opacity .5s ease}
+@media (prefers-reduced-motion:reduce){#archside{transition:none}}

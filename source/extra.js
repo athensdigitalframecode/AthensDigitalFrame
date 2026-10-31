@@ -40,4 +40,23 @@ window.addEventListener('scroll',check,{passive:true});setInterval(check,300);
 (function(){var m=matchMedia('(max-width:699px)'),b=document.getElementById('babel'),h=document.querySelector('.herotxt'),bg=b&&b.parentNode;
 if(!b||!h)return;function pl(){if(m.matches){h.parentNode.insertBefore(b,h.nextSibling);b.setAttribute('viewBox','0 8 520 400')}else{bg.insertBefore(b,bg.firstChild);b.setAttribute('viewBox','0 0 520 640')}}
 pl();m.addEventListener&&m.addEventListener('change',pl)})();
+(function(){/* right-side mini arch: appears as the hero arch fades, runs down to the bottom (desktop only) */
+var b=document.getElementById('babel'),w=document.querySelector('section.why'),T=b&&b.querySelector('g[data-d="1.4"]');
+if(!b||!w||!T||!window.matchMedia)return;
+var NS='http://www.w3.org/2000/svg',el=document.createElement('div');el.id='archside';el.setAttribute('aria-hidden','true');document.body.appendChild(el);
+var on=false;
+function build(){
+ var vw=innerWidth,gut=vw-w.getBoundingClientRect().right,W=Math.min(gut-30,190),top=Math.round(innerHeight*.16),H=innerHeight-top;
+ on=vw>=1240&&W>=70;el.style.display=on?'block':'none';if(!on)return;
+ var r=W/2,x=(vw+w.getBoundingClientRect().right)/2-W/2,k=(W-18)/460;
+ el.style.cssText='display:block;left:'+x.toFixed(1)+'px;top:'+top+'px;width:'+W.toFixed(1)+'px;height:'+H+'px';
+ function arc(i){var a=i,rr=r-i;return 'M'+a+' '+H+'V'+(r)+'A'+rr+' '+rr+' 0 0 1 '+(W-a)+' '+r+'V'+H}
+ el.innerHTML='<svg xmlns="'+NS+'" width="'+W+'" height="'+H+'" fill="none" stroke="#C9A96E" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="flgold2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3d6"/><stop offset=".18" stop-color="#C9A96E"/><stop offset="1" stop-color="#C9A96E" stop-opacity=".1"/></linearGradient></defs>'
+ +'<path d="'+arc(1.5)+'" stroke="url(#flgold2)" stroke-width="2"/><path d="'+arc(7)+'" stroke="url(#flgold2)" stroke-width=".7"/>'
+ +'<svg x="9" y="'+(r+6)+'" width="'+(W-18)+'" height="'+(270*k).toFixed(1)+'" viewBox="30 280 460 270" stroke-width="'+(1/k*.8).toFixed(2)+'" opacity=".8">'+T.innerHTML+'</svg></svg>';
+ upd();
+}
+function upd(){if(!on)return;var y=pageYOffset||0,o=Math.max(0,Math.min(1,(y-380)/520));el.style.opacity=(o*.5).toFixed(3)}
+build();addEventListener('resize',build);addEventListener('scroll',upd,{passive:true});
+})();
 </script>

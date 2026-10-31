@@ -38,6 +38,10 @@ pr=pr.replace('<footer>','<footer><a class="homelink" href="index.html">← Αρ
 pr=pr.replace('<button class="snd lang" id="lang"','<a class="snd back" href="index.html" aria-label="Αρχική" title="Αρχική"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>\n<button class="snd lang" id="lang"',1)
 assert 'snd back' in pr
 pr=inject_extra(pr)
+_pa=open('frame.svg.txt',encoding='utf-8').read().replace('\n','').replace('id="babel" class="babel"','id="pbabel" class="pbabel"',1)
+assert 'id="pbabel"' in _pa
+pr=pr.replace('<canvas class="stars" id="stars"></canvas>','<canvas class="stars" id="stars"></canvas>\n  '+_pa,1)
+assert 'id="pbabel"' in pr
 
 css_hide = "<style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}</style>\n"
 js_hide = """<script>(function(){var s=[].slice.call(document.querySelectorAll('.snd')),l=0;function f(){var y=window.pageYOffset||document.documentElement.scrollTop||0;if(y>l+4&&y>90)s.forEach(function(b){b.classList.add('away')});else if(y<l-4||y<=90)s.forEach(function(b){b.classList.remove('away')});l=y}window.addEventListener('scroll',f,{passive:true})})();</script>

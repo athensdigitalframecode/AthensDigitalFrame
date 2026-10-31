@@ -683,6 +683,10 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 #archside{position:fixed;bottom:0;z-index:1;pointer-events:none;display:none;opacity:0;transition:opacity .5s ease}
 #archside svg{filter:none}
 @media (prefers-reduced-motion:reduce){#archside{transition:none}}
+
+/* prices page: the same arch (static, no scroll JS) as a small mark in the header; larger beside the price cards on wide screens */
+.pbabel{position:absolute;right:16px;top:14px;height:78px;width:auto;opacity:.85;pointer-events:none}
+@media (min-width:1200px){.pbabel{right:auto;left:calc(50% + 336px);top:118px;height:310px;opacity:.55}}
 </style>
 </head>
 <body>

@@ -56,8 +56,12 @@ function build(){
  svg.setAttribute('width',W.toFixed(1));svg.setAttribute('height',(W*640/520).toFixed(1));svg.style.cssText='display:block;width:'+W.toFixed(1)+'px;height:'+(W*640/520).toFixed(1)+'px;opacity:1';
  upd();
 }
-function upd(){if(!on)return;var y=pageYOffset||0,o=Math.max(0,Math.min(1,(y-380)/520));el.style.opacity=(o*.5).toFixed(3);
+function upd(){if(!on)return;var y=pageYOffset||0,o=Math.max(0,Math.min(1,(y-380)/520));el.style.opacity=(o*.5).toFixed(3);el.classList.toggle('apause',o===0);
  if(pc){var mx=document.documentElement.scrollHeight-innerHeight;pc.setAttribute('stroke-dashoffset',(100-(mx>0?Math.min(1,y/mx):0)*100).toFixed(1))}}
 build();addEventListener('resize',build);addEventListener('scroll',upd,{passive:true});
+})();
+(function(){/* battery: pause the arch's CSS animations while it is off screen */
+var b=document.getElementById('babel');if(!b||!window.IntersectionObserver)return;
+new IntersectionObserver(function(es){es.forEach(function(e){b.classList.toggle('apause',!e.isIntersecting)})}).observe(b);
 })();
 </script>

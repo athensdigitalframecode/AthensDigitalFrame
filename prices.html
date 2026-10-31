@@ -522,6 +522,10 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 /* prices page: the same arch (static, no scroll JS) as a small mark in the header; larger beside the price cards on wide screens */
 .pbabel{position:absolute;right:16px;top:14px;height:78px;width:auto;opacity:.85;pointer-events:none}
 @media (min-width:1200px){.pbabel{right:auto;left:calc(50% + 336px);top:118px;height:310px;opacity:.55}}
+
+/* battery: paused while off screen (extra.js); phones get half the dust motes */
+.apause,.apause *{animation-play-state:paused!important}
+@media (max-width:699px){.flmote:nth-of-type(n+8){display:none}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

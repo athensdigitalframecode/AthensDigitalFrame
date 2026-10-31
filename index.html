@@ -1244,6 +1244,14 @@ function upd(){
 }
 upd();addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
 })();
+(function(){/* progress ring on the hero arch too (same look as the right-side copy) */
+var b=document.getElementById('babel'),rg=b&&b.querySelector('#flring');if(!rg)return;
+var NS='http://www.w3.org/2000/svg',c=document.createElementNS(NS,'circle');
+[['cx',260],['cy',250],['r',150],['pathLength',100],['fill','none'],['stroke','#fff3d6'],['stroke-width',2.6],['stroke-dasharray',100],['stroke-dashoffset',100],['transform','rotate(-90 260 250)']].forEach(function(k){c.setAttribute(k[0],k[1])});
+rg.appendChild(c);
+function upd(){var y=pageYOffset||0,mx=document.documentElement.scrollHeight-innerHeight;c.setAttribute('stroke-dashoffset',(100-(mx>0?Math.min(1,y/mx):0)*100).toFixed(1))}
+upd();addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
+})();
 </script>
 <script>
 (function(){

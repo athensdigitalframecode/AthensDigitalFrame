@@ -897,6 +897,8 @@ els.forEach(function(e){e.classList.add('rv');io.observe(e)});
 setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},7000);
 })();
 </script>
+
+<script>(function(){var b=document.getElementById('pbabel'),rg=b&&b.querySelector('#flring');if(!rg)return;var c=document.createElementNS('http://www.w3.org/2000/svg','circle');[['cx',260],['cy',250],['r',150],['pathLength',100],['fill','none'],['stroke','#fff3d6'],['stroke-width',2.6],['stroke-dasharray',100],['stroke-dashoffset',100],['transform','rotate(-90 260 250)']].forEach(function(k){c.setAttribute(k[0],k[1])});rg.appendChild(c);function u(){var y=pageYOffset||0,m=document.documentElement.scrollHeight-innerHeight;c.setAttribute('stroke-dashoffset',(100-(m>0?Math.min(1,y/m):0)*100).toFixed(1))}u();addEventListener('scroll',u,{passive:true});addEventListener('resize',u)})();</script>
 <script>
 (function(){
 try{history.scrollRestoration='manual'}catch(e){}

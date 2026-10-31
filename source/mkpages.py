@@ -51,7 +51,8 @@ js_hide = """<script>(function(){var s=[].slice.call(document.querySelectorAll('
 """
 css_hide=css_hide+'<style>'+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+open('prices_clean_css.txt',encoding='utf-8').read()+'</style>\n'
 _k=pr.rindex('</style>')+len('</style>');pr=pr[:_k]+'\n'+css_hide+pr[_k:]
-pr=pr.rstrip()+'\n'+js_hide+'\n'+open('reveal.js',encoding='utf-8').read()
+_pg="""<script>(function(){var b=document.getElementById('pbabel'),rg=b&&b.querySelector('#flring');if(!rg)return;var c=document.createElementNS('http://www.w3.org/2000/svg','circle');[['cx',260],['cy',250],['r',150],['pathLength',100],['fill','none'],['stroke','#fff3d6'],['stroke-width',2.6],['stroke-dasharray',100],['stroke-dashoffset',100],['transform','rotate(-90 260 250)']].forEach(function(k){c.setAttribute(k[0],k[1])});rg.appendChild(c);function u(){var y=pageYOffset||0,m=document.documentElement.scrollHeight-innerHeight;c.setAttribute('stroke-dashoffset',(100-(m>0?Math.min(1,y/m):0)*100).toFixed(1))}u();addEventListener('scroll',u,{passive:true});addEventListener('resize',u)})();</script>"""
+pr=pr.rstrip()+'\n'+js_hide+'\n'+open('reveal.js',encoding='utf-8').read()+'\n'+_pg
 
 # ---------- home page
 m=re.search(r'<main>.*?</main>',P,flags=re.S); main=m.group(0)

@@ -35,3 +35,6 @@ a.tile:hover .go,a.tile:focus-visible .go{background:var(--gold);border-color:va
 @media (min-width:900px){
  section.how{background:none!important;border-color:transparent!important;box-shadow:none!important}
 }
+
+/* footer centred under the full-width cards on desktop */
+@media (min-width:900px){main>footer{width:min(1080px,calc(100vw - max(21px,5vw)*2));align-self:flex-start;text-align:center}main>footer img{display:block;margin:0 auto 8px}}

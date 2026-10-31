@@ -73,7 +73,7 @@ h4,.hw-head p{font-size:13px}
 @media (prefers-reduced-motion:reduce){.flglow{animation:none}}
 #babel{height:min(66vh,600px)}
 @media (max-width:699px){.babel{opacity:.5!important}}
-@media (max-width:699px){.herotxt+#babel{position:relative;left:auto;top:auto;transform:none;display:block;width:min(100%,230px);height:auto;aspect-ratio:520/360;margin:0 auto 4px;opacity:.9!important;z-index:1}}
+@media (max-width:699px){.herotxt+#babel{position:relative;left:auto;top:auto;transform:none;display:block;width:min(100%,230px);height:auto;aspect-ratio:520/400;margin:0 auto 4px;opacity:.9!important;z-index:1}}
 @media (min-width:1280px) and (max-width:1399px){.herotxt h1{font-size:34px;line-height:1.18}}
 @media (min-width:700px) and (max-width:1279px){.herotxt{margin-top:96px}.babel{left:64%}#babel{height:min(52vh,470px)}}
 .flspin{transform-box:view-box;transform-origin:260px 250px;animation:flsp 150s linear infinite}@keyframes flsp{to{transform:rotate(360deg)}}
@@ -108,3 +108,6 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 @media (min-width:900px){.contact{align-content:start;grid-template-rows:auto auto auto auto 1fr}.contact>.actions{grid-column:1;justify-self:start;margin:6px 0 0}.contact>.lead-form{grid-row:1/span 5}}
 @media (min-width:900px){.why{align-items:center}}
 @media (max-width:699px){.menuhead,.tiles{max-width:none}.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tiles .tile{padding:13px 12px;min-height:0;align-items:flex-start}.tiles .tile .go,.tiles .tile .ti{display:none}.tiles .tile strong{font-size:16px;line-height:1.2}.tiles .tile em{font-size:13.5px!important;line-height:1.4}}
+
+/* arch frame: gilded gradient rim; soft glow on desktop only (no filter on phones) */
+@media (min-width:700px){#babel{filter:drop-shadow(0 0 14px rgba(201,169,110,.28))}}

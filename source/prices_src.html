@@ -486,10 +486,6 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 /* arch frame: gilded gradient rim; soft glow on desktop only (no filter on phones) */
 @media (min-width:700px){#babel{filter:drop-shadow(0 0 14px rgba(201,169,110,.28))}}
 
-/* right-side mini arch (desktop): sits in the right gutter, fades in as the hero arch fades; below dock/story button, never clickable */
-#archside{position:fixed;bottom:0;z-index:1;pointer-events:none;display:none;opacity:0;transition:opacity .5s ease}
-#archside svg{filter:none}
-@media (prefers-reduced-motion:reduce){#archside{transition:none}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

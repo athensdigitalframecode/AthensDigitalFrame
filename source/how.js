@@ -22,7 +22,7 @@ function paint(col,p){
 }
 var hidden=false,offT=0;
 function tower(vh){
-  if(!babel)return;
+  if(!babel||window.__dock)return;
   var r=sec.getBoundingClientRect(),gone=r.top<vh*.04,st=document.getElementById('stage');
   if(st)st.classList.toggle('hwgone',r.top<vh*.9);
   if(gone&&!hidden){hidden=true;babel.classList.add('gone');window.__noTower=true;clearTimeout(offT);offT=setTimeout(function(){if(hidden)babel.classList.add('off')},650)}

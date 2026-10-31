@@ -6,7 +6,7 @@ _i=P.index("var btn=document.getElementById('snd')");_s=P.rindex('<script>',0,_i
 assert "id=\"snd\"" not in P and 'AudioContext' not in P
 
 # ---------- extra translations (home + shared)
-EXTRA={"Πρώτο έτος: 300€ + 50€ hosting & domain = 350€. Η συντήρηση, αν τη θες, είναι 20€ τον μήνα.":"First year: 300€ + 50€ hosting & domain = 350€. Maintenance, if you want it, is 20€ a month.",
+EXTRA={"Δημοφιλές":"Most popular","Επόμενο βήμα":"Next step","Τι γίνεται μετά το DM":"What happens after the DM","Πρώτο έτος: 300€ + 50€ hosting & domain = 350€. Η συντήρηση, αν τη θες, είναι 20€ τον μήνα.":"First year: 300€ + 50€ hosting & domain = 350€. Maintenance, if you want it, is 20€ a month.",
 'Αρχική':'Home','Υπηρεσίες':'Services','Τιμές':'Prices',
 'Ένα μικρό στούντιο στην Αθήνα. Ξεκάθαρες τιμές, χωρίς κρυφά κόστη και δωρεάν demo πριν πληρώσεις.':'A small studio in Athens. Clear prices, no hidden costs, and a free demo before you pay.',
 'Δες όλες τις τιμές →':'See all prices →',
@@ -122,7 +122,16 @@ why='''<section class="why" aria-labelledby="whyh">
 import re as _re
 hero=_re.sub(r'\s*<div class="qp">.*?</div>','',hero,count=1,flags=_re.S)
 hero=_re.sub(r'\s*<p class="seeall">.*?</p>','',hero,count=1,flags=_re.S)
-newmain='<main>\n  '+hero+'\n  '+tiles+'\n\n  '+why+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'
+nextb='''<section class="nextb" aria-labelledby="nexth">
+    <p class="eyebrow">Επόμενο βήμα</p>
+    <h2 id="nexth">Τι γίνεται μετά το DM</h2>
+    <ol class="steps">
+      <li><b>1</b><span><strong>Στέλνεις DM</strong>Μας λες τι δουλειά κάνεις και τι χρειάζεσαι.</span></li>
+      <li><b>2</b><span><strong>Δωρεάν demo</strong>Φτιάχνουμε ένα demo για την επιχείρησή σου.</span></li>
+      <li><b>3</b><span><strong>Live σε 3–5 ημέρες</strong>Αν σου αρέσει, ανεβαίνει και είναι έτοιμο.</span></li>
+    </ol>
+  </section>'''
+newmain='<main>\n  '+hero+'\n  '+tiles+'\n\n  '+why+'\n\n  '+nextb+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'
 home=P.replace(m.group(0),newmain,1)
 _h1o='<em>για επιχειρήσεις στην Αθήνα</em></h1>'
 assert _h1o in home

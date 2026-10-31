@@ -23,3 +23,15 @@ a.tile:hover .go,a.tile:focus-visible .go{background:var(--gold);border-color:va
 .why ul.list li:hover .wi{border-color:rgba(201,169,110,.7);background:rgba(201,169,110,.08)}
 .why ul.list li:hover .wi svg{stroke:var(--gold-soft)}
 @media (max-width:699px){.why ul.list li{font-size:16px;padding:11px 0}.why .wi{width:34px;height:34px}.why .wi svg{width:17px;height:17px}.why h2::after{margin-top:14px}}
+
+/* home: "what next" strip and a lighter "how" section */
+.nextb h2{margin-bottom:6px}
+@media (min-width:900px){
+ .nextb{width:min(1080px,calc(100vw - max(21px,5vw)*2));align-self:flex-start;padding:34px 36px 32px}
+ .nextb .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:18px}
+ .nextb .steps li{display:flex;gap:14px;align-items:flex-start}
+}
+.nextb .steps li b{flex:none}
+@media (min-width:900px){
+ section.how{background:none!important;border-color:transparent!important;box-shadow:none!important}
+}

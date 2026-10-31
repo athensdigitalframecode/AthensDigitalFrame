@@ -1,0 +1,25 @@
+
+/* home: premium Menu tiles and "Why us" rows */
+.tile{background:linear-gradient(180deg,rgba(245,241,232,.055),rgba(245,241,232,.012)),linear-gradient(180deg,rgba(26,24,19,.9),rgba(20,20,17,.9));box-shadow:inset 0 1px 0 rgba(245,241,232,.09),0 10px 26px rgba(0,0,0,.34);transition:border-color .3s,box-shadow .3s,transform .25s,background .3s}
+a.tile:hover,a.tile:focus-visible{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(245,241,232,.15),0 16px 36px rgba(0,0,0,.5),0 0 0 1px rgba(201,169,110,.22)}
+.tile .go{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1px solid rgba(245,241,232,.22);font-size:14px;transition:background .25s,border-color .25s,color .25s,transform .25s}
+a.tile:hover .go,a.tile:focus-visible .go{background:var(--gold);border-color:var(--gold);color:#0b0b0b!important;transform:translateX(3px)}
+@media (min-width:1100px){
+ .menuhead,.tiles{max-width:318px}
+ .tiles .tile .ti{display:grid!important;width:42px;height:42px;border-radius:50%;transition:border-color .3s}
+ a.tile:hover .ti,a.tile:focus-visible .ti{border-color:rgba(201,169,110,.7)!important}
+ a.tile:hover .ti svg,a.tile:focus-visible .ti svg{stroke:var(--gold-soft)!important}
+}
+@media (max-width:699px){.tile .go{width:24px;height:24px;font-size:13px}}
+
+.why{background:radial-gradient(ellipse 55% 140% at 0% 0%,rgba(201,169,110,.10),transparent 62%),linear-gradient(180deg,rgba(26,24,19,.92),rgba(20,20,17,.92))!important;box-shadow:inset 0 1px 0 rgba(217,190,134,.35)}
+.why h2::after{content:"";display:block;width:44px;height:1px;margin-top:18px;background:var(--gold)}
+.why ul.list{gap:0;margin-top:0}
+.why ul.list li{display:flex;align-items:center;gap:14px;padding:13px 0;font-size:17px;border-top:1px solid rgba(245,241,232,.08)}
+.why ul.list li:first-child{border-top:0}
+.why ul.list li::before{display:none}
+.why .wi{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid rgba(245,241,232,.2);background:rgba(245,241,232,.04);transition:border-color .3s,background .3s}
+.why .wi svg{width:19px;height:19px;fill:none;stroke:var(--cream);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.why ul.list li:hover .wi{border-color:rgba(201,169,110,.7);background:rgba(201,169,110,.08)}
+.why ul.list li:hover .wi svg{stroke:var(--gold-soft)}
+@media (max-width:699px){.why ul.list li{font-size:16px;padding:11px 0}.why .wi{width:34px;height:34px}.why .wi svg{width:17px;height:17px}.why h2::after{margin-top:14px}}

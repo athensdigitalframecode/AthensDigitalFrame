@@ -111,11 +111,11 @@ why='''<section class="why" aria-labelledby="whyh">
     <p class="eyebrow">Γιατί εμείς</p>
     <h2 id="whyh">Γιατί να μας διαλέξεις</h2>
     <ul class="list">
-      <li>Live σε 3–5 ημέρες</li>
-      <li>Ξεκάθαρες τιμές, χωρίς κρυφά κόστη</li>
-      <li>Σχεδιασμός πρώτα για κινητά</li>
-      <li>Μικρό στούντιο στην Αθήνα, μιλάς απευθείας με εμάς</li>
-      <li>Δωρεάν demo πριν πληρώσεις</li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>Live σε 3–5 ημέρες</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l9-9h8v8l-9 9z"/><circle cx="16" cy="8" r="1.4"/></svg></span><span>Ξεκάθαρες τιμές, χωρίς κρυφά κόστη</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg></span><span>Σχεδιασμός πρώτα για κινητά</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg></span><span>Μικρό στούντιο στην Αθήνα, μιλάς απευθείας με εμάς</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M12 9v11M3.5 13h17M12 9C10.5 5 6.5 5 6.5 7.5 6.5 9 9.5 9 12 9zm0 0c1.5-4 5.5-4 5.5-1.5C17.5 9 14.5 9 12 9z"/></svg></span><span>Δωρεάν demo πριν πληρώσεις</span></li>
     </ul>
   </section>'''
 # hub hero: no price cards, no seeall
@@ -273,7 +273,7 @@ for name,h,css in (('home',home,css_home),('prices',pr,css_prices)):
         assert _pre in h
         h=h.replace(_pre,_pre+'<script>document.documentElement.classList.add("fgate");(function(){function d(){document.documentElement.classList.remove("fgate")}setTimeout(d,1400);try{document.fonts.ready.then(d)}catch(e){d()}})()</script>',1)
         h=h.replace('<link rel="stylesheet" href="https://fonts.googleapis.com/css2','<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Noto+Serif:wght@500;600&family=Marcellus&family=Noto+Serif+Display:ital,wght@1,400&family=Noto+Serif+Display:wght@500&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2',1)
-        k=h.rindex('</style>');h=h[:k]+open('extra_css.txt',encoding='utf-8').read()+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+h[k:]
+        k=h.rindex('</style>');h=h[:k]+open('extra_css.txt',encoding='utf-8').read()+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+open('home_premium_css.txt',encoding='utf-8').read()+h[k:]
         h=h.rstrip()+'\n'+open('form.js',encoding='utf-8').read()+'\n'+open('reveal.js',encoding='utf-8').read()+'\n'
         h=h.replace('px.forEach(function(e){','if(!reduce)px.forEach(function(e){',1).replace('draw(y+ex,now-t0);','draw(y+ex,reduce?0:now-t0);',1)
         h=h.replace('function frame(now){\n  var diff=target-cur;','function frame(now){\n  var ex=window.__ex||0;var diff=target-cur;',1)

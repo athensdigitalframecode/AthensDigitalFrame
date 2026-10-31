@@ -667,6 +667,31 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 
 /* phones: arch-shaped scroll indicator in the right page margin */
 #archprog{position:fixed;right:4px;top:calc(50% - 29px);z-index:3;pointer-events:none;display:none}
+
+/* home: premium Menu tiles and "Why us" rows */
+.tile{background:linear-gradient(180deg,rgba(245,241,232,.055),rgba(245,241,232,.012)),linear-gradient(180deg,rgba(26,24,19,.9),rgba(20,20,17,.9));box-shadow:inset 0 1px 0 rgba(245,241,232,.09),0 10px 26px rgba(0,0,0,.34);transition:border-color .3s,box-shadow .3s,transform .25s,background .3s}
+a.tile:hover,a.tile:focus-visible{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(245,241,232,.15),0 16px 36px rgba(0,0,0,.5),0 0 0 1px rgba(201,169,110,.22)}
+.tile .go{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1px solid rgba(245,241,232,.22);font-size:14px;transition:background .25s,border-color .25s,color .25s,transform .25s}
+a.tile:hover .go,a.tile:focus-visible .go{background:var(--gold);border-color:var(--gold);color:#0b0b0b!important;transform:translateX(3px)}
+@media (min-width:1100px){
+ .menuhead,.tiles{max-width:318px}
+ .tiles .tile .ti{display:grid!important;width:42px;height:42px;border-radius:50%;transition:border-color .3s}
+ a.tile:hover .ti,a.tile:focus-visible .ti{border-color:rgba(201,169,110,.7)!important}
+ a.tile:hover .ti svg,a.tile:focus-visible .ti svg{stroke:var(--gold-soft)!important}
+}
+@media (max-width:699px){.tile .go{width:24px;height:24px;font-size:13px}}
+
+.why{background:radial-gradient(ellipse 55% 140% at 0% 0%,rgba(201,169,110,.10),transparent 62%),linear-gradient(180deg,rgba(26,24,19,.92),rgba(20,20,17,.92))!important;box-shadow:inset 0 1px 0 rgba(217,190,134,.35)}
+.why h2::after{content:"";display:block;width:44px;height:1px;margin-top:18px;background:var(--gold)}
+.why ul.list{gap:0;margin-top:0}
+.why ul.list li{display:flex;align-items:center;gap:14px;padding:13px 0;font-size:17px;border-top:1px solid rgba(245,241,232,.08)}
+.why ul.list li:first-child{border-top:0}
+.why ul.list li::before{display:none}
+.why .wi{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid rgba(245,241,232,.2);background:rgba(245,241,232,.04);transition:border-color .3s,background .3s}
+.why .wi svg{width:19px;height:19px;fill:none;stroke:var(--cream);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.why ul.list li:hover .wi{border-color:rgba(201,169,110,.7);background:rgba(201,169,110,.08)}
+.why ul.list li:hover .wi svg{stroke:var(--gold-soft)}
+@media (max-width:699px){.why ul.list li{font-size:16px;padding:11px 0}.why .wi{width:34px;height:34px}.why .wi svg{width:17px;height:17px}.why h2::after{margin-top:14px}}
 </style>
 
 <div class="bg" aria-hidden="true">
@@ -714,11 +739,11 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
     <p class="eyebrow">Γιατί εμείς</p>
     <h2 id="whyh">Γιατί να μας διαλέξεις</h2>
     <ul class="list">
-      <li>Live σε 3–5 ημέρες</li>
-      <li>Ξεκάθαρες τιμές, χωρίς κρυφά κόστη</li>
-      <li>Σχεδιασμός πρώτα για κινητά</li>
-      <li>Μικρό στούντιο στην Αθήνα, μιλάς απευθείας με εμάς</li>
-      <li>Δωρεάν demo πριν πληρώσεις</li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>Live σε 3–5 ημέρες</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l9-9h8v8l-9 9z"/><circle cx="16" cy="8" r="1.4"/></svg></span><span>Ξεκάθαρες τιμές, χωρίς κρυφά κόστη</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg></span><span>Σχεδιασμός πρώτα για κινητά</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg></span><span>Μικρό στούντιο στην Αθήνα, μιλάς απευθείας με εμάς</span></li>
+      <li><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M12 9v11M3.5 13h17M12 9C10.5 5 6.5 5 6.5 7.5 6.5 9 9.5 9 12 9zm0 0c1.5-4 5.5-4 5.5-1.5C17.5 9 14.5 9 12 9z"/></svg></span><span>Δωρεάν demo πριν πληρώσεις</span></li>
     </ul>
   </section>
 

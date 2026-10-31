@@ -6,7 +6,7 @@ _i=P.index("var btn=document.getElementById('snd')");_s=P.rindex('<script>',0,_i
 assert "id=\"snd\"" not in P and 'AudioContext' not in P
 
 # ---------- extra translations (home + shared)
-EXTRA={"← Αρχική":"← Home","Δημοφιλές":"Most popular","Επόμενο βήμα":"Next step","Τι γίνεται μετά το DM":"What happens after the DM","Πρώτο έτος: 300€ + 50€ hosting & domain = 350€. Η συντήρηση, αν τη θες, είναι 20€ τον μήνα.":"First year: 300€ + 50€ hosting & domain = 350€. Maintenance, if you want it, is 20€ a month.",
+EXTRA={"Δωρεάν demo πριν πληρώσεις":"Free demo before you pay","Στείλε μας DM και φτιάχνουμε μια πρώτη εικόνα για την επιχείρησή σου. Αν δεν σου αρέσει, δεν πληρώνεις τίποτα.":"Send us a DM and we build a first look for your business. If you don't like it, you pay nothing.","Στείλε DM":"Send DM","← Αρχική":"← Home","Δημοφιλές":"Most popular","Επόμενο βήμα":"Next step","Τι γίνεται μετά το DM":"What happens after the DM","Πρώτο έτος: 300€ + 50€ hosting & domain = 350€. Η συντήρηση, αν τη θες, είναι 20€ τον μήνα.":"First year: 300€ + 50€ hosting & domain = 350€. Maintenance, if you want it, is 20€ a month.",
 'Αρχική':'Home','Υπηρεσίες':'Services','Τιμές':'Prices',
 'Ένα μικρό στούντιο στην Αθήνα. Ξεκάθαρες τιμές, χωρίς κρυφά κόστη και δωρεάν demo πριν πληρώσεις.':'A small studio in Athens. Clear prices, no hidden costs, and a free demo before you pay.',
 'Δες όλες τις τιμές →':'See all prices →',
@@ -131,7 +131,13 @@ nextb='''<section class="nextb" aria-labelledby="nexth">
       <li><b>3</b><span><strong>Live σε 3–5 ημέρες</strong>Αν σου αρέσει, ανεβαίνει και είναι έτοιμο.</span></li>
     </ol>
   </section>'''
-newmain='<main>\n  '+hero+'\n  '+tiles+'\n\n  '+why+'\n\n  '+nextb+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'
+offer='''<aside class="offer" aria-labelledby="offerh">
+    <h2 id="offerh">Δωρεάν demo πριν πληρώσεις</h2>
+    <p>Στείλε μας DM και φτιάχνουμε μια πρώτη εικόνα για την επιχείρησή σου. Αν δεν σου αρέσει, δεν πληρώνεις τίποτα.</p>
+    <a class="btn" href="https://ig.me/m/athens.digitalframe">Στείλε DM</a>
+    <svg class="offerart" viewBox="0 0 160 92" fill="none" stroke="#C9A96E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 90C20 82 30 64 44 58h72c14 6 24 24 44 32"/><path d="M14 80c18-6 28-8 40-8M104 72c14 0 28 4 44 10"/><path d="M48 26L80 9l32 17z"/><rect x="48" y="26" width="64" height="5"/><path d="M54 31v22M64 31v22M74 31v22M86 31v22M96 31v22M106 31v22"/><rect x="48" y="53" width="64" height="5"/></svg>
+  </aside>'''
+newmain='<main>\n  '+hero+'\n  '+offer+'\n  '+tiles+'\n\n  '+why+'\n\n  '+nextb+'\n\n  '+contact+'\n\n  '+foot+'\n</main>'
 home=P.replace(m.group(0),newmain,1)
 _h1o='<em>για επιχειρήσεις στην Αθήνα</em></h1>'
 assert _h1o in home

@@ -48,3 +48,13 @@ a.tile:hover .go,a.tile:focus-visible .go{background:var(--gold);border-color:va
 /* decorative frames that sat behind the menu tiles */
 body:not(.pricespage) .ob.k-fr1,body:not(.pricespage) .ob.k-lz1{display:none!important}
 @media (max-width:699px){body:not(.pricespage) .ob.k-fr2{display:none!important}}
+
+/* hero right side: the free-demo offer and an Acropolis line drawing (desktop only) */
+.offer{display:none}
+@media (min-width:1400px){
+ .offer{display:block;position:absolute;top:238px;left:calc(45vw + 261px);width:268px;padding:22px 22px 20px;border:1px solid rgba(201,169,110,.4);border-radius:18px;background:linear-gradient(180deg,rgba(245,241,232,.05),rgba(245,241,232,.012)),linear-gradient(180deg,rgba(28,26,21,.94),rgba(20,20,17,.94));box-shadow:inset 0 1px 0 rgba(245,241,232,.09),0 14px 34px rgba(0,0,0,.4);z-index:2}
+ .offer h2{margin:0 0 8px;font-size:21px;line-height:1.25}
+ .offer p{margin:0 0 16px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+ .offer .btn{display:inline-flex;justify-content:center;width:100%}
+ .offer .offerart{position:absolute;left:0;top:calc(100% + 34px);width:150px;opacity:.5;pointer-events:none}
+}

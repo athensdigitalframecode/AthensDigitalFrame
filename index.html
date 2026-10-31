@@ -695,6 +695,13 @@ linear-gradient(rgba(245,241,232,.12),rgba(245,241,232,.12)) 78% 64px/22% 44px n
 /* phones: arch-shaped scroll indicator in the right page margin */
 #archprog{position:fixed;right:4px;top:calc(50% - 29px);z-index:3;pointer-events:none;display:none}
 
+/* readability pass: floating nav, dock clearance, labels, hero subline */
+.jump{top:10px!important;background:rgba(11,11,11,.94)!important}
+section[id],[id$="-sec"]{scroll-margin-top:72px}
+body{padding-bottom:max(112px,env(safe-area-inset-bottom,0px) + 112px)}
+.eyebrow{font-size:12px!important;opacity:1!important;color:rgba(245,241,232,.9)!important}
+@media (min-width:900px){.herotxt .typed{font-size:20px;line-height:1.35}}
+
 /* home: premium Menu tiles and "Why us" rows */
 .tile{background:linear-gradient(180deg,rgba(245,241,232,.055),rgba(245,241,232,.012)),linear-gradient(180deg,rgba(26,24,19,.9),rgba(20,20,17,.9));box-shadow:inset 0 1px 0 rgba(245,241,232,.09),0 10px 26px rgba(0,0,0,.34);transition:border-color .3s,box-shadow .3s,transform .25s,background .3s}
 a.tile:hover,a.tile:focus-visible{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(245,241,232,.15),0 16px 36px rgba(0,0,0,.5),0 0 0 1px rgba(201,169,110,.22)}

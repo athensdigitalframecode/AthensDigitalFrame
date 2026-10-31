@@ -6,7 +6,7 @@ _i=P.index("var btn=document.getElementById('snd')");_s=P.rindex('<script>',0,_i
 assert "id=\"snd\"" not in P and 'AudioContext' not in P
 
 # ---------- extra translations (home + shared)
-EXTRA={
+EXTRA={"Πρώτο έτος: 300€ + 50€ hosting & domain = 350€. Μετά, 50€ τον χρόνο και 20€ τον μήνα για τη συντήρηση.":"First year: 300€ + 50€ hosting & domain = 350€. After that, 50€ a year and 20€ a month for maintenance.",
 'Αρχική':'Home','Υπηρεσίες':'Services','Τιμές':'Prices',
 'Ένα μικρό στούντιο στην Αθήνα. Ξεκάθαρες τιμές, χωρίς κρυφά κόστη και δωρεάν demo πριν πληρώσεις.':'A small studio in Athens. Clear prices, no hidden costs, and a free demo before you pay.',
 'Δες όλες τις τιμές →':'See all prices →',

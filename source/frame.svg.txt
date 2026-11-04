@@ -1,7 +1,7 @@
 <svg id="babel" class="babel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 640" width="520" height="640" fill="none" stroke="#C9A96E" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 <defs><clipPath id="flrayc"><path d="M0 0H520V348H458L260 286L62 348H0Z"/></clipPath><clipPath id="flwin"><path d="M32 640V262A228 228 0 0 1 488 262V640Z"/></clipPath><radialGradient id="flg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#C9A96E" stop-opacity=".34"/><stop offset=".6" stop-color="#C9A96E" stop-opacity=".08"/><stop offset="1" stop-color="#C9A96E" stop-opacity="0"/></radialGradient><linearGradient id="flgold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3d6"/><stop offset=".3" stop-color="#C9A96E"/><stop offset="1" stop-color="#C9A96E" stop-opacity=".25"/></linearGradient></defs>
-<g id="fldolly"><path d="M16 640V262A244 244 0 0 1 504 262V640" stroke="url(#flgold)" stroke-width="3"/>
-<path d="M26 640V262A234 234 0 0 1 494 262V640" stroke="url(#flgold)" stroke-width=".8"/>
+<g id="fldolly"><path pathLength="1" d="M16 640V262A244 244 0 0 1 504 262V640" stroke="url(#flgold)" stroke-width="3"/>
+<path pathLength="1" d="M26 640V262A234 234 0 0 1 494 262V640" stroke="url(#flgold)" stroke-width=".8"/>
 <path d="M32 640V262A228 228 0 0 1 488 262V640Z" fill="#C9A96E" fill-opacity=".05" stroke="none"/>
 <path d="M254 12L266 12L264 32L256 32Z" fill="url(#flgold)" stroke="none"/>
 <g id="flgrp" clip-path="url(#flwin)">

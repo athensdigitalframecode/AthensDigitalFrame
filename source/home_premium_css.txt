@@ -53,7 +53,7 @@ body:not(.pricespage) .ob.k-fr1,body:not(.pricespage) .ob.k-lz1{display:none!imp
 .offer{display:none}
 @media (min-width:1400px){
  .offer{display:block;position:absolute;top:440px;left:calc(70vw - 64px);width:150px;pointer-events:none;z-index:2}
- .offer .offerart{display:block;width:150px;opacity:.5}
+ .offer .offerart{display:block;width:96px;margin-left:27px;opacity:.5}
 }
 
 /* arch centred on the same 50vw axis as the logo (scrollbar-safe) */

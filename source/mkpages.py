@@ -100,7 +100,8 @@ svc=f'''<section class="s-site svc" id="svc-sec" aria-labelledby="svc1">
       <li>Δωρεάν demo πριν πληρώσεις</li>
     </ul>
   </section>'''
-tiles='''<p class="eyebrow menuhead">Μενού</p>
+tiles='''<script>/* phone: place the arch under the hero text before the tiles are parsed, so they do not jump when extra.js runs later */(function(){var b=document.getElementById('babel'),h=document.querySelector('.herotxt');if(b&&h&&matchMedia('(max-width:699px)').matches){h.parentNode.insertBefore(b,h.nextSibling);b.setAttribute('viewBox','0 8 520 400')}})();</script>
+  <p class="eyebrow menuhead">Μενού</p>
   <nav class="tiles" aria-label="Μενού">
     <a class="tile" href="prices.html"><span class="ti">__PRICE__</span><span class="tt"><strong>Τιμές &amp; Υπηρεσίες</strong><em>Ιστοσελίδες από 300€<br>E-shop από 200€ <span style="white-space:nowrap">+ 30€/μήνα</span></em></span><span class="go" aria-hidden="true">→</span></a>
     <a class="tile" href="#contact-sec"><span class="ti">__CHAT__</span><span class="tt"><strong>Επικοινωνία</strong><em>DM, WhatsApp, τηλέφωνο, email</em></span><span class="go" aria-hidden="true">→</span></a>

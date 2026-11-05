@@ -3,15 +3,21 @@ head=open('head_tpl.txt',encoding='utf-8').read()
 fav=open('fav_uri.txt').read()
 
 SEO_HEAD='''<link rel="canonical" href="__URL__">
+<link rel="alternate" hreflang="el" href="__URL__">
+<link rel="alternate" hreflang="en" href="__URL__?lang=en">
+<link rel="alternate" hreflang="x-default" href="__URL__">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Athens DigitalFrame","url":"https://athensdigitalframe.vercel.app/","image":"https://athensdigitalframe.vercel.app/og-v3.png","description":"Ιστοσελίδες και e-shops για επιχειρήσεις στην Αθήνα.","telephone":"+306981862732","email":"athens.digitalframe@gmail.com","areaServed":{"@type":"City","name":"Athens"},"sameAs":["https://www.instagram.com/athens.digitalframe/"],"knowsAbout":["Web design","E-shops","Local SEO"]}</script>
 <style>.skip{position:fixed;left:12px;top:-80px;z-index:100;padding:12px 18px;border-radius:12px;background:#0b0b0b;color:#F5F1E8;border:1px solid rgba(201,169,110,.7);font:600 15px/1 Manrope,system-ui,sans-serif;text-decoration:none;transition:top .15s}
 .skip:focus{top:12px;outline:2px solid #F5F1E8;outline-offset:2px}
 main:focus{outline:none}
 body .jump a,body .snd{min-height:44px;min-width:44px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center}
 :focus-visible{outline:2px solid #F5F1E8;outline-offset:3px}
-.dock a:focus-visible,.snd:focus-visible,.jump a:focus-visible{outline-offset:-3px}</style>
+.dock a:focus-visible,.snd:focus-visible,.jump a:focus-visible{outline-offset:-3px}
+.btn,.dock a,.tile{-webkit-tap-highlight-color:transparent}
+.btn:active,.dock a:active,a.tile:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){.btn:active,.dock a:active,a.tile:active{transform:none}}</style>
 '''
-SKIP='''<a class="skip" href="#main" id="skip">Μετάβαση στο περιεχόμενο</a><script>if(/[?&]lang=en/.test(location.search))document.getElementById('skip').textContent='Skip to content'</script>'''
+SKIP='''<a class="skip" href="#main" id="skip">Μετάβαση στο περιεχόμενο</a><script>if(/[?&]lang=en/.test(location.search)){document.getElementById('skip').textContent='Skip to content';document.documentElement.lang='en';var T=/prices/.test(location.pathname)?['Athens DigitalFrame | Websites from 300€','Prices for websites and e-shop leasing from Athens DigitalFrame. Live in 3–5 days.']:['Athens DigitalFrame | Websites & e-shops in Athens','Websites and e-shops for businesses in Athens. Live in 3–5 days, clear prices, free demo.'];document.title=T[0];var d=document.querySelector('meta[name=description]');if(d)d.content=T[1]}</script>'''
 def build(src,out,title,ogtitle,desc,url,preview=None):
     s=open(src,encoding='utf-8').read()
     i=s.index('<link rel="preconnect"')

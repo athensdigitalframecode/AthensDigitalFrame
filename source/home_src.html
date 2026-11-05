@@ -523,6 +523,7 @@ html.fgate main{opacity:0}
 /* reduced motion: everything calm */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 .btn{min-height:44px;box-sizing:border-box}.actions .btn{display:inline-flex;align-items:center;justify-content:center}
+.lf-ok{margin:0!important;color:var(--gold-soft)!important;font-size:14px;line-height:1.5}
 /* premium pass: same palette, lighter type, more air, calmer cards and buttons */
 h1,h2,.hw-head h3,.hw-body strong,.tile strong,.fq summary,.qp .v,.inccols h3{font-weight:500!important}
 h1{letter-spacing:-.005em;line-height:1.26}
@@ -884,6 +885,7 @@ body:not(.pricespage) .ob.k-fr1,body:not(.pricespage) .ob.k-lz1{display:none!imp
       <div class="lf-row"><label for="lf-b" data-el="Τι επιχείρηση έχεις;" data-en="What kind of business?">Τι επιχείρηση έχεις;</label><input id="lf-b" name="b" autocomplete="organization" maxlength="80" placeholder="" data-pel="π.χ. οδοντίατρος" data-pen="e.g. dentist"></div>
       <div class="lf-row"><label for="lf-p" data-el="Τηλέφωνο" data-en="Phone">Τηλέφωνο</label><input id="lf-p" name="p" type="tel" inputmode="tel" autocomplete="tel" required maxlength="24"></div>
       <p class="lf-err" id="lf-err" role="alert" hidden></p>
+      <p class="lf-ok" id="lf-ok" role="status" hidden></p>
       <div class="lf-act"><button class="btn" type="submit" id="lf-wa" data-el="Στείλε στο WhatsApp" data-en="Send via WhatsApp">Στείλε στο WhatsApp</button><button class="btn ghost" type="button" id="lf-mail" data-el="Ή με email" data-en="Or by email">Ή με email</button></div>
     </form>
 
@@ -1181,21 +1183,22 @@ var f=document.getElementById('leadform');if(!f)return;
 var EN=!!window.EN,WA='306981862732',MAIL='athens.digitalframe@gmail.com';
 f.querySelectorAll('[data-el]').forEach(function(e){e.textContent=EN?e.getAttribute('data-en'):e.getAttribute('data-el')});
 f.querySelectorAll('[data-pel]').forEach(function(e){e.placeholder=EN?e.getAttribute('data-pen'):e.getAttribute('data-pel')});
-var err=document.getElementById('lf-err');
+var err=document.getElementById('lf-err'),ok=document.getElementById('lf-ok');
+function done(k){ok.textContent=k==='wa'?(EN?'Thank you. WhatsApp opened with your message, just press send.':'Ευχαριστούμε. Άνοιξε το WhatsApp με το μήνυμά σου, πάτα αποστολή.'):(EN?'Thank you. Your email app opened with your message, just press send.':'Ευχαριστούμε. Άνοιξε η εφαρμογή email με το μήνυμά σου, πάτα αποστολή.');ok.hidden=false}
 function val(){
   var n=f.n.value.trim(),b=f.b.value.trim(),p=f.p.value.trim();
   if(n.length<2){err.textContent=EN?'Please add your name.':'Γράψε το όνομά σου.';err.hidden=false;f.n.focus();return null}
   if(p.replace(/\D/g,'').length<8){err.textContent=EN?'Please add a valid phone number.':'Γράψε ένα έγκυρο τηλέφωνο.';err.hidden=false;f.p.focus();return null}
-  err.hidden=true;
+  err.hidden=true;ok.hidden=true;
   var msg=EN?('Hi! I\'m '+n+(b?' ('+b+')':'')+'. I\'d like a free demo. My phone: '+p)
            :('Γεια σας! Είμαι ο/η '+n+(b?' ('+b+')':'')+'. Θέλω ένα δωρεάν demo. Τηλέφωνο: '+p);
   return{n:n,b:b,p:p,msg:msg}
 }
 function ev(n){if(window.va){try{window.va('event',{name:n})}catch(x){}}}
 f.addEventListener('submit',function(e){e.preventDefault();var v=val();if(!v)return;ev('form_whatsapp');
-  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(v.msg),'_blank','noopener')});
+  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(v.msg),'_blank','noopener');done('wa')});
 document.getElementById('lf-mail').addEventListener('click',function(){var v=val();if(!v)return;ev('form_email');
-  location.href='mailto:'+MAIL+'?subject='+encodeURIComponent(EN?'Free demo request':'Αίτημα για δωρεάν demo')+'&body='+encodeURIComponent(v.msg)});
+  location.href='mailto:'+MAIL+'?subject='+encodeURIComponent(EN?'Free demo request':'Αίτημα για δωρεάν demo')+'&body='+encodeURIComponent(v.msg);done('mail')});
 })();
 </script>
 

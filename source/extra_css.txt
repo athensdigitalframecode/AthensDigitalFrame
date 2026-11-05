@@ -20,3 +20,4 @@ html.fgate main{opacity:0}
 /* reduced motion: everything calm */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 .btn{min-height:44px;box-sizing:border-box}.actions .btn{display:inline-flex;align-items:center;justify-content:center}
+.lf-ok{margin:0!important;color:var(--gold-soft)!important;font-size:14px;line-height:1.5}

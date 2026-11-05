@@ -49,7 +49,7 @@ assert 'id="pbabel"' in pr
 css_hide = "<style>.snd{transition:opacity .35s ease,transform .35s ease,background .2s,border-color .2s}.snd.away{opacity:0;transform:translateY(-10px);pointer-events:none}</style>\n"
 js_hide = """<script>(function(){var s=[].slice.call(document.querySelectorAll('.snd')),l=0;function f(){var y=window.pageYOffset||document.documentElement.scrollTop||0;if(y>l+4&&y>90)s.forEach(function(b){b.classList.add('away')});else if(y<l-4||y<=90)s.forEach(function(b){b.classList.remove('away')});l=y}window.addEventListener('scroll',f,{passive:true})})();</script>
 """
-css_hide=css_hide+'<style>'+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+open('prices_clean_css.txt',encoding='utf-8').read()+'</style>\n'
+css_hide=css_hide+'<style>'+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+open('prices_clean_css.txt',encoding='utf-8').read()+open('mobile_css.txt',encoding='utf-8').read()+'</style>\n'
 _k=pr.rindex('</style>')+len('</style>');pr=pr[:_k]+'\n'+css_hide+pr[_k:]
 _pg="""<script>(function(){var b=document.getElementById('pbabel'),rg=b&&b.querySelector('#flring');if(!rg)return;var c=document.createElementNS('http://www.w3.org/2000/svg','circle');[['cx',260],['cy',250],['r',150],['pathLength',100],['fill','none'],['stroke','#fff3d6'],['stroke-width',2.6],['stroke-dasharray',100],['stroke-dashoffset',100],['transform','rotate(-90 260 250)']].forEach(function(k){c.setAttribute(k[0],k[1])});rg.appendChild(c);function u(){var y=pageYOffset||0,m=document.documentElement.scrollHeight-innerHeight;c.setAttribute('stroke-dashoffset',(100-(m>0?Math.min(1,y/m):0)*100).toFixed(1))}u();addEventListener('scroll',u,{passive:true});addEventListener('resize',u)})();</script>"""
 pr=pr.rstrip()+'\n'+js_hide+'\n'+open('reveal.js',encoding='utf-8').read()+'\n'+_pg
@@ -286,7 +286,7 @@ for name,h,css in (('home',home,css_home),('prices',pr,css_prices)):
         assert _pre in h
         h=h.replace(_pre,_pre+'<script>document.documentElement.classList.add("fgate");(function(){function d(){document.documentElement.classList.remove("fgate")}setTimeout(d,1400);try{document.fonts.ready.then(d)}catch(e){d()}})()</script>',1)
         h=h.replace('<link rel="stylesheet" href="https://fonts.googleapis.com/css2','<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Noto+Serif:wght@500;600&family=Marcellus&family=Noto+Serif+Display:ital,wght@1,400&family=Noto+Serif+Display:wght@500&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2',1)
-        k=h.rindex('</style>');h=h[:k]+open('extra_css.txt',encoding='utf-8').read()+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+open('home_premium_css.txt',encoding='utf-8').read()+h[k:]
+        k=h.rindex('</style>');h=h[:k]+open('extra_css.txt',encoding='utf-8').read()+open('premium_css.txt',encoding='utf-8').read()+open('polish_css.txt',encoding='utf-8').read()+open('home_premium_css.txt',encoding='utf-8').read()+open('mobile_css.txt',encoding='utf-8').read()+h[k:]
         h=h.rstrip()+'\n'+open('form.js',encoding='utf-8').read()+'\n'+open('reveal.js',encoding='utf-8').read()+'\n'
         h=h.replace('px.forEach(function(e){','if(!reduce)px.forEach(function(e){',1).replace('draw(y+ex,now-t0);','draw(y+ex,reduce?0:now-t0);',1)
         h=h.replace('function frame(now){\n  var diff=target-cur;','function frame(now){\n  var ex=window.__ex||0;var diff=target-cur;',1)

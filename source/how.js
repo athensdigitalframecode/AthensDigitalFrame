@@ -37,6 +37,12 @@ function update(){
   tower(vh);
 }
 function req(){if(!busy){busy=true;requestAnimationFrame(update)}}
+var tabs=[].slice.call(sec.querySelectorAll('.hw-tab'));
+tabs.forEach(function(t){t.addEventListener('click',function(){
+  tabs.forEach(function(x){var on=x===t;x.classList.toggle('sel',on);x.setAttribute('aria-selected',on)});
+  cols.forEach(function(c){c.classList.toggle('sel',c.getAttribute('data-col')===t.getAttribute('data-t'))});
+  req();
+})});
 sec.classList.add('live');
 window.addEventListener('scroll',req,{passive:true});document.addEventListener('scroll',req,{passive:true,capture:true});
 window.addEventListener('resize',req);window.addEventListener('touchmove',req,{passive:true});

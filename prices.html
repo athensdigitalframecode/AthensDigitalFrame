@@ -593,6 +593,38 @@ body{padding-bottom:max(112px,env(safe-area-inset-bottom,0px) + 112px)}
 .pricespage .contact>p{margin-left:auto;margin-right:auto;text-align:center}
 /* comfortable tap targets for the two small text links */
 .pricespage .homelink,.pricespage .contact .alt a{display:inline-flex;align-items:center;min-height:44px}
+/* Mobile (<700px) refinements, 05.11. Both pages. Desktop and tablet are untouched. */
+.hw-tabs{display:none}
+@media (max-width:699px){
+/* How it works: one track at a time (Website / E-shop) instead of two long stacked ones */
+.how .hw-tabs{display:flex;gap:6px;margin:6px 0 18px;padding:4px;border:1px solid rgba(245,241,232,.2);border-radius:999px;background:rgba(11,11,11,.6)}
+.hw-tab{flex:1;min-height:44px;padding:10px 12px;border:0;border-radius:999px;background:transparent;color:var(--muted);font:600 15px/1 var(--body);cursor:pointer;transition:background .2s,color .2s}
+.hw-tab.sel{background:linear-gradient(135deg,#D9BE86,#C9A96E);color:#0b0b0b}
+.hw-tab:focus-visible{outline:2px solid var(--cream);outline-offset:2px}
+.how .hw-col:not(.sel){display:none}
+.how .hw-col .hw-head{display:none}
+/* First screen: close the empty gap above the arch and calm the decor, so the menu starts higher */
+body:not(.pricespage) .herotxt+#babel{margin-top:-28px!important;width:min(100%,214px)!important}
+body:not(.pricespage) .bg .px.ob:not(.k-col1):not(.k-col2){display:none!important}
+/* Portfolio: the three frames become a swipeable row (about 250px instead of 800px) */
+.pf-grid{display:flex!important;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin-inline:-6px;padding:2px 6px 10px;scrollbar-width:none}
+.pf-grid::-webkit-scrollbar{display:none}
+.pf-card{flex:0 0 78%;scroll-snap-align:center}
+.pf-body{height:120px}
+}
+/* Very narrow phones (320-359px) */
+@media (max-width:359px){
+.dock .dockrow{gap:6px}
+.dock .btn{font-size:13.5px;padding:12px 4px;min-width:0}
+.dock .btn.call,.dock .call{flex:0 0 46px!important}
+.qp a{padding-left:12px!important;padding-right:12px!important;gap:6px!important}
+.qp .k{font-size:11px!important;letter-spacing:.14em!important}
+.qp .v{font-size:19px!important;white-space:nowrap}
+.qp .v small{font-size:11px!important}
+.brand{font-size:12px}
+}
+/* Prices page: the sticky section menu must not show text through it */
+@media (max-width:699px){.jump{background:rgba(11,11,11,.98)!important}.brand{font-size:12px}}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

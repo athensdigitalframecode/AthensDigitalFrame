@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://athensdigitalframe.vercel.app/sitemap.xml

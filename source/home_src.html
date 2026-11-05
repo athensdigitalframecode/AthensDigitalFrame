@@ -733,7 +733,7 @@ body:not(.pricespage) .ob.k-fr1,body:not(.pricespage) .ob.k-lz1{display:none!imp
 /* hero right side: an Acropolis line drawing (desktop only) */
 .offer{display:none}
 @media (min-width:1400px){
- .offer{display:block;position:absolute;top:440px;left:calc(70vw - 64px);width:150px;pointer-events:none;z-index:2}
+ .offer{display:block;position:absolute;top:440px;left:calc(var(--ox,70vw) - 69px);width:150px;pointer-events:none;z-index:2}
  .offer .offerart{display:block;width:96px;margin-left:27px;opacity:.5}
 }
 
@@ -767,11 +767,15 @@ body:not(.pricespage) .ob.k-fr1,body:not(.pricespage) .ob.k-lz1{display:none!imp
 @media (min-width:1360px){
 body:not(.pricespage) .bg .px.ob{--gw:calc(95vw - 1157px)}
 body:not(.pricespage) .bg .px.k-fr3,body:not(.pricespage) .bg .px.k-key:not(.k-key2),body:not(.pricespage) .bg .px.k-lz2,body:not(.pricespage) .bg .px.k-st2,body:not(.pricespage) .bg .px.k-key2{display:none!important}
-body:not(.pricespage) .bg .px.k-st1,body:not(.pricespage) .bg .px.k-s8,body:not(.pricespage) .bg .px.k-fr2,body:not(.pricespage) .bg .px.k-col1{left:calc(5vw + 1133px)!important;right:auto!important}
-body:not(.pricespage) .bg .px.k-st1{width:min(130px,var(--gw))!important}
-body:not(.pricespage) .bg .px.k-s8{width:min(70px,var(--gw))!important}
-body:not(.pricespage) .bg .px.k-fr2{width:min(90px,var(--gw))!important}
-body:not(.pricespage) .bg .px.k-col1{width:min(46px,var(--gw))!important}
+/* Right-gutter decor (>=1360px): column, amphora, frame, star and constellation are moved by extra.js into #rgut,
+   which scrolls with the page exactly like the amphora, so their spacing never changes. One axis (--gx = centre of the gutter),
+   vertical gaps all about 46px (page y, top of each piece). */
+#rgut{--gw:calc(95vw - 1157px);position:absolute;left:0;top:0;width:0;height:0;z-index:0;pointer-events:none}
+#rgut .px{position:absolute;left:calc(var(--gx,1300px) - var(--w)/2);right:auto;transform:none;will-change:auto}
+#rgut .k-st1{--w:min(130px,var(--gw));width:var(--w);top:110px}
+#rgut .k-col1{--w:min(46px,var(--gw));width:var(--w);top:237px}
+#rgut .k-fr2{--w:min(90px,var(--gw));width:var(--w);top:660px}
+#rgut .k-s8{--w:min(70px,var(--gw));width:var(--w);top:822px}
 body:not(.pricespage) .bg .px.k-col2{right:calc(95vw - 14px)!important;left:auto!important;width:42px!important}
 }
 /* Same fine grain as on the prices page (desktop only), so both pages share one surface */
@@ -1399,6 +1403,19 @@ var NS='http://www.w3.org/2000/svg',c=document.createElementNS(NS,'circle');
 rg.appendChild(c);
 function upd(){var y=pageYOffset||0,mx=document.documentElement.scrollHeight-innerHeight;c.setAttribute('stroke-dashoffset',(100-(mx>0?Math.min(1,y/mx):0)*100).toFixed(1))}
 upd();addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
+})();
+(function(){/* wide desktop: right-gutter decor rides with the page (same as the amphora) on one axis, so it never crosses it */
+var q=matchMedia('(min-width:1360px)'),w=document.querySelector('section.why'),L=['k-st1','k-col1','k-fr2','k-s8'],els=[],box=null;
+if(!w)return;
+L.forEach(function(c){var e=document.querySelector('.bg .px.'+c);if(e)els.push({e:e,p:e.parentNode,n:e.nextSibling,s:e.getAttribute('data-s'),r:e.getAttribute('data-r')})});
+if(!els.length)return;
+function axis(){var r=w.getBoundingClientRect().right;var g=(innerWidth+r)/2,m=document.querySelector('main'),ml=m?m.getBoundingClientRect().left:0;document.documentElement.style.setProperty('--gx',g.toFixed(1)+'px');document.documentElement.style.setProperty('--ox',(g-ml).toFixed(1)+'px')}
+function fit(){
+ if(q.matches&&!box){box=document.createElement('div');box.id='rgut';box.setAttribute('aria-hidden','true');document.body.appendChild(box);
+  els.forEach(function(o){o.e.removeAttribute('data-s');o.e.removeAttribute('data-r');o.e.style.transform='none';box.appendChild(o.e)})}
+ else if(!q.matches&&box){els.forEach(function(o){o.e.setAttribute('data-s',o.s);if(o.r)o.e.setAttribute('data-r',o.r);o.e.style.transform='';o.p.insertBefore(o.e,o.n)});box.remove();box=null}
+ if(box)axis()}
+fit();addEventListener('resize',fit);q.addEventListener&&q.addEventListener('change',fit);
 })();
 </script>
 <script>

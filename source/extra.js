@@ -88,4 +88,17 @@ rg.appendChild(c);
 function upd(){var y=pageYOffset||0,mx=document.documentElement.scrollHeight-innerHeight;c.setAttribute('stroke-dashoffset',(100-(mx>0?Math.min(1,y/mx):0)*100).toFixed(1))}
 upd();addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
 })();
+(function(){/* wide desktop: right-gutter decor rides with the page (same as the amphora) on one axis, so it never crosses it */
+var q=matchMedia('(min-width:1360px)'),w=document.querySelector('section.why'),L=['k-st1','k-col1','k-fr2','k-s8'],els=[],box=null;
+if(!w)return;
+L.forEach(function(c){var e=document.querySelector('.bg .px.'+c);if(e)els.push({e:e,p:e.parentNode,n:e.nextSibling,s:e.getAttribute('data-s'),r:e.getAttribute('data-r')})});
+if(!els.length)return;
+function axis(){var r=w.getBoundingClientRect().right;var g=(innerWidth+r)/2,m=document.querySelector('main'),ml=m?m.getBoundingClientRect().left:0;document.documentElement.style.setProperty('--gx',g.toFixed(1)+'px');document.documentElement.style.setProperty('--ox',(g-ml).toFixed(1)+'px')}
+function fit(){
+ if(q.matches&&!box){box=document.createElement('div');box.id='rgut';box.setAttribute('aria-hidden','true');document.body.appendChild(box);
+  els.forEach(function(o){o.e.removeAttribute('data-s');o.e.removeAttribute('data-r');o.e.style.transform='none';box.appendChild(o.e)})}
+ else if(!q.matches&&box){els.forEach(function(o){o.e.setAttribute('data-s',o.s);if(o.r)o.e.setAttribute('data-r',o.r);o.e.style.transform='';o.p.insertBefore(o.e,o.n)});box.remove();box=null}
+ if(box)axis()}
+fit();addEventListener('resize',fit);q.addEventListener&&q.addEventListener('change',fit);
+})();
 </script>

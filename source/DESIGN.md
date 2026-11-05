@@ -125,3 +125,8 @@
 
 ## Фон темнее (05.11, по просьбе владельца)
 Базовый цвет `#050505` не менялся; приглушены золотые «заливки» фона (`source/dark_css.txt`, обе страницы): свечения у body .09/.03 → .045/.015, дымка .075 → .035, туманности .3 → .16, нижнее свечение главной .09 → .04, пятно за колонкой цен .08 → .04; виньетка сильнее (чёрный .6 → .8, начало с 36%). Звёзды, арка, декор и карточки не трогались. Замер средней яркости фона (без контента): главная 1440px 14 → 10, 390px 9.7 → 5.7; цены 1440px 12.2 → 7.8, 390px 12.2 → 7.4 (из 255). Если нужно светлее, поднять значения в `dark_css.txt` или удалить файл и его подключение в `mkpages.py`.
+
+## Right-gutter decor spacing (05.11, desktop >=1360px)
+Constellation, column, amphora, frame and star sit on one vertical axis (centre of the right gutter, `--gx`) with equal ~46px gaps.
+`extra.js` moves `.k-st1/.k-col1/.k-fr2/.k-s8` into `#rgut` (scrolls with the page, same as the amphora) so parallax speeds can no longer make them cross.
+Below 1360px and on phones they stay in the parallax `.bg` layer as before.

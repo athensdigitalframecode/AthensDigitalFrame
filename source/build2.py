@@ -1,6 +1,17 @@
 import re,sys,os
 head=open('head_tpl.txt',encoding='utf-8').read()
 fav=open('fav_uri.txt').read()
+
+SEO_HEAD='''<link rel="canonical" href="__URL__">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Athens DigitalFrame","url":"https://athensdigitalframe.vercel.app/","image":"https://athensdigitalframe.vercel.app/og-v3.png","description":"Ιστοσελίδες και e-shops για επιχειρήσεις στην Αθήνα.","telephone":"+306981862732","email":"athens.digitalframe@gmail.com","areaServed":{"@type":"City","name":"Athens"},"sameAs":["https://www.instagram.com/athens.digitalframe/"],"knowsAbout":["Web design","E-shops","Local SEO"]}</script>
+<style>.skip{position:fixed;left:12px;top:-80px;z-index:100;padding:12px 18px;border-radius:12px;background:#0b0b0b;color:#F5F1E8;border:1px solid rgba(201,169,110,.7);font:600 15px/1 Manrope,system-ui,sans-serif;text-decoration:none;transition:top .15s}
+.skip:focus{top:12px;outline:2px solid #F5F1E8;outline-offset:2px}
+main:focus{outline:none}
+body .jump a,body .snd{min-height:44px;min-width:44px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center}
+:focus-visible{outline:2px solid #F5F1E8;outline-offset:3px}
+.dock a:focus-visible,.snd:focus-visible,.jump a:focus-visible{outline-offset:-3px}</style>
+'''
+SKIP='''<a class="skip" href="#main" id="skip">Μετάβαση στο περιεχόμενο</a><script>if(/[?&]lang=en/.test(location.search))document.getElementById('skip').textContent='Skip to content'</script>'''
 def build(src,out,title,ogtitle,desc,url,preview=None):
     s=open(src,encoding='utf-8').read()
     i=s.index('<link rel="preconnect"')
@@ -19,6 +30,10 @@ def build(src,out,title,ogtitle,desc,url,preview=None):
     body=rest[:j]+'\n</head>\n<body>\n'+rest[j:].lstrip()
     if '</body>' not in body: body+='\n</body>\n</html>\n'
     outs=h+'\n'+icon+body
+    # SEO + accessibility additions (see DESIGN.md, "Доступность и SEO")
+    outs=outs.replace('</head>',SEO_HEAD.replace('__URL__',url)+'</head>',1)
+    outs=outs.replace('<body>','<body>\n'+SKIP,1)
+    outs=outs.replace('<main>','<main id="main" tabindex="-1">',1)
     if preview:
         for a,b in preview.items(): outs=outs.replace(a,b)
     open(out,'w',encoding='utf-8').write(outs)

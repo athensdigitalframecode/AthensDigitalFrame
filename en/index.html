@@ -804,6 +804,11 @@ body:not(.pricespage) .bg .px.k-col2{right:calc(95vw - 14px)!important;left:auto
 }
 /* Same fine grain as on the prices page (desktop only), so both pages share one surface */
 @media (min-width:700px){body:not(.pricespage) .bg::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .8 0 0 0 0 .7 0 0 0 0 .5 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(0deg,rgba(201,169,110,.09),rgba(201,169,110,0) 26%)}}
+
+/* Arch (05.11): more present on the home page. Was 50% opacity on desktop (30% on tablets), now stronger; glow slightly brighter.
+   Only the home #babel is touched; the small right copy and the prices-page arch keep their own values. */
+@media (min-width:700px){body:not(.pricespage) #babel.babel{opacity:.62!important;filter:drop-shadow(0 0 16px rgba(201,169,110,.36))}}
+@media (min-width:900px){body:not(.pricespage) #babel.babel{opacity:.92!important}}
 </style>
 <link rel="canonical" href="https://athensdigitalframe.vercel.app/en/">
 <link rel="alternate" hreflang="el" href="https://athensdigitalframe.vercel.app/">

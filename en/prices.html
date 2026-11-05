@@ -626,6 +626,19 @@ body:not(.pricespage) .bg .px.ob:not(.k-col1):not(.k-col2){display:none!importan
 }
 /* Prices page: the sticky section menu must not show text through it */
 @media (max-width:699px){.jump{background:rgba(11,11,11,.98)!important}.brand{font-size:12px}}
+/* Darker background (05.11, owner request): the base stays #050505; the gold ambient washes are dimmed.
+   Stars, arch, decor and cards are untouched. Both pages. */
+body{background:
+  radial-gradient(ellipse 70% 30% at 50% 0%,rgba(201,169,110,.045),transparent 70%),
+  radial-gradient(ellipse 60% 26% at 100% 62%,rgba(201,169,110,.015),transparent 70%),
+  radial-gradient(ellipse 60% 26% at 0% 88%,rgba(201,169,110,.015),transparent 70%),
+  var(--bg)!important;background-attachment:fixed!important}
+.mist{background:radial-gradient(closest-side,rgba(201,169,110,.035),rgba(201,169,110,0))!important}
+.bg .neb{opacity:.16!important}
+.bg::after{background:radial-gradient(ellipse at 50% 48%,rgba(0,0,0,0) 36%,rgba(0,0,0,.8) 100%)!important}
+body:not(.pricespage) .bg::before{background:linear-gradient(0deg,rgba(201,169,110,.04),rgba(201,169,110,0) 22%)!important}
+@media (min-width:700px){body:not(.pricespage) .bg::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .8 0 0 0 0 .7 0 0 0 0 .5 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(0deg,rgba(201,169,110,.04),rgba(201,169,110,0) 22%)!important}}
+.pricespage .bg::after{background:radial-gradient(ellipse 380px 62% at 50% 40%,rgba(201,169,110,.04),transparent 72%),radial-gradient(ellipse at 50% 48%,rgba(0,0,0,0) 36%,rgba(0,0,0,.8) 100%)!important}
 .homelink{color:var(--gold-soft);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
 .snd.back{right:auto;left:max(88px,calc(env(safe-area-inset-left,0px) + 74px));padding:8px 11px;display:flex;align-items:center;text-decoration:none}
 *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

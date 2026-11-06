@@ -130,3 +130,8 @@
 Constellation, column, amphora, frame and star sit on one vertical axis (centre of the right gutter, `--gx`) with equal ~46px gaps.
 `extra.js` moves `.k-st1/.k-col1/.k-fr2/.k-s8` into `#rgut` (scrolls with the page, same as the amphora) so parallax speeds can no longer make them cross.
 Below 1360px and on phones they stay in the parallax `.bg` layer as before.
+
+## Portfolio: первый demo concept (07.11)
+- Карточка 1 в Portfolio теперь живая: «Olivane Estate · Demo concept · φανταστική εταιρεία», превью `olivane/thumb.webp`, ссылка `/olivane/` в новой вкладке. Карточки 2 и 3 остаются серыми «Σύντομα» (решение владельца). Заголовок секции «Demo concepts», плитка меню «Πρώτο demo concept».
+- `olivane/` лежит в корне репозитория как отдельная статичная страница (не генерируется из `source/`). Везде подписана как концепт вымышленной компании, формы демонстрационные, ничего не отправляют. Не выдавать за реального клиента.
+- Исключение по CSP: для `/olivane/` в `vercel.json` разрешены Google Fonts (стили и шрифты), потому что демо использует Archivo, Inter Tight и Instrument Serif. Остальной сайт без изменений, шрифты только свои.

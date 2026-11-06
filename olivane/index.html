@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Olivane Estate: concept website by Athens Digital Frame</title>
+<meta name="description" content="Concept website by Athens Digital Frame for a fictional Cyprus real-estate developer, Olivane Estate. Scroll-to-build story, sample listings.">
+<meta name="theme-color" content="#0e0807">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Olivane Estate: homes built in Cyprus">
+<meta property="og:description" content="A concept project by Athens Digital Frame: watch a villa go from blueprint to finished home. Fictional company.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0807'/%3E%3Cpath d='M7 25V14l9-8 9 8v11z' fill='none' stroke='%23f3cd9c' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<!--
+  CONCEPT PROJECT by Athens Digital Frame. Olivane Estate is fictional; forms are demo-only (nothing is sent).
+  If this is ever turned into a real client site, replace (all sample/placeholder):
+  - Stats numbers + labels in #stats (410 / 30 / 96% / 12)
+  - Listings: the HOMES array in the script (names, areas, sizes, prices, status)
+  - Contact details and opening hours in #cta, and make the forms send somewhere real
+  - Section copy in the hero captions, carousel cards and "Building Cyprus" paragraph
+-->
+<style>
+:root{
+  --peach:#f3cd9c; --peach-d:#ee9f6a; --bg:#0e0807; --muted:rgba(255,255,255,.66);
+  --sans:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --serif:'Instrument Serif','Times New Roman',serif;
+  --disp:'Archivo','Arial Black',Arial,sans-serif;
+  --pad:clamp(16px,2.4vw,36px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:#fff;font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;scroll-behavior:smooth}
+html.loading,html.lock{overflow:hidden}
+body{overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--peach);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;left:12px;top:-60px;z-index:120;background:var(--peach);color:#2a160b;padding:10px 14px;border-radius:10px;font:500 13px var(--sans);text-decoration:none;transition:top .2s}
+.skip:focus{top:12px}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity .7s ease,visibility .7s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .lw{display:flex;align-items:center;gap:10px;font:700 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+#loader .lw svg{width:18px;height:18px}
+#loader .lb{width:min(220px,50vw);height:2px;background:rgba(255,255,255,.16);overflow:hidden;border-radius:2px}
+#loader .lb i{display:block;height:100%;width:100%;background:var(--peach);transform-origin:left;transform:scaleX(.04);transition:transform .4s ease}
+
+/* concept tag */
+.concept{position:fixed;top:62px;left:50%;transform:translateX(-50%);z-index:58;white-space:nowrap;font:500 10.5px/1 var(--sans);letter-spacing:.04em;color:rgba(255,255,255,.92);background:rgba(14,8,7,.62);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 12px;pointer-events:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.concept b{font-weight:600;color:var(--peach)}
+@media (max-width:760px){.concept{top:84px;font-size:9.5px;padding:5px 10px}}
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:60;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px var(--pad);pointer-events:none}
+.nav>*{pointer-events:auto}
+.brand{display:inline-flex;align-items:center;gap:8px;font:700 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;justify-self:start}
+.brand svg{width:14px;height:14px}
+.nav ul{display:flex;gap:30px;list-style:none}
+.nav ul a{font-size:13px;color:rgba(255,255,255,.82);text-decoration:none;transition:color .2s;padding:6px 0;border-bottom:1px solid transparent}
+.nav ul a:hover{color:#fff}
+.nav ul a[aria-current=true]{color:#fff;border-bottom-color:var(--peach)}
+.pill{justify-self:end;display:inline-block;background:var(--peach);color:#2a160b;border:0;cursor:pointer;border-radius:99px;padding:11px 19px;font:500 13px/1 var(--sans);text-decoration:none;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .2s}
+.pill:hover{background:#ffe0b9;transform:translateY(-1px)}
+.pill:active{transform:scale(.97)}
+@media (max-width:760px){.nav ul{display:none}.nav{grid-template-columns:1fr auto}}
+
+/* side marker */
+.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;gap:6px}
+.dots a{position:relative;display:flex;align-items:center;justify-content:flex-end;width:28px;height:22px;text-decoration:none}
+.dots a i{width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(255,255,255,.7);background:rgba(0,0,0,.25);transition:all .3s}
+.dots a[aria-current=true] i{background:var(--peach);border-color:var(--peach);transform:scale(1.25)}
+.dots a span{position:absolute;right:30px;white-space:nowrap;font:500 12px var(--sans);background:rgba(14,8,7,.82);padding:5px 10px;border-radius:99px;opacity:0;transform:translateX(6px);transition:all .25s;pointer-events:none}
+.dots a:hover span,.dots a:focus-visible span{opacity:1;transform:none}
+@media (max-width:900px){.dots{display:none}}
+
+/* shared stage mechanics */
+.wrap{position:relative}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+canvas.fill{position:absolute;inset:0;width:100%;height:100%;display:block}
+h2,h3,p{font-weight:inherit}
+.hd{font-family:var(--sans);font-weight:600;letter-spacing:-.035em;line-height:.98}
+.it{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach);letter-spacing:-.01em}
+.eyebrow{font:600 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--peach-d)}
+
+/* 1 hero */
+#hero{height:720vh;z-index:1}
+.scrim{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(90deg,rgba(10,6,12,.5),rgba(10,6,12,0) 46%),
+  linear-gradient(0deg,rgba(10,6,8,.55),rgba(10,6,8,0) 28%),
+  linear-gradient(180deg,rgba(10,6,8,.35),rgba(10,6,8,0) 18%)}
+.caps{position:absolute;left:var(--pad);top:0;bottom:0;width:min(560px,86vw);pointer-events:none}
+.cap{position:absolute;left:0;top:37%;opacity:0;transform:translateY(26px);filter:blur(10px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1),filter .8s ease;will-change:transform,opacity}
+.cap.on{opacity:1;transform:none;filter:none}
+.cap .eyebrow{display:block;margin-bottom:20px;color:rgba(255,255,255,.85)}
+.cap h2{font-size:clamp(44px,6vw,98px)}
+.cap h2 span{display:block}
+.cap p{margin-top:20px;max-width:340px;font-size:clamp(12.5px,1vw,14.5px);line-height:1.5;color:rgba(255,255,255,.94);text-wrap:pretty}
+.hud{position:absolute;left:var(--pad);right:var(--pad);bottom:22px;display:flex;align-items:center;gap:18px;font-size:10.5px;color:rgba(255,255,255,.85);pointer-events:none}
+.hud b{font-weight:600;min-width:34px}
+.hud .name{min-width:84px}
+.hud .line{flex:1;height:1px;background:rgba(255,255,255,.28);position:relative}
+.hud .line i{position:absolute;inset:0;background:var(--peach);transform-origin:left;transform:scaleX(0)}
+.loc{white-space:nowrap}
+.plan{position:absolute;right:var(--pad);bottom:56px;width:clamp(40px,4vw,58px);pointer-events:none}
+.plan rect{fill:none;stroke:#fff;stroke-width:1.6}
+.hint{position:absolute;left:50%;bottom:56px;transform:translateX(-50%);font:600 10px/1 var(--sans);letter-spacing:.2em;color:rgba(255,255,255,.92);transition:opacity .5s;pointer-events:none;text-align:center;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.hint:after{content:"";display:block;width:26px;height:4px;border-radius:4px;background:rgba(255,255,255,.85);margin:12px auto 0}
+@media (max-width:760px){
+  .scrim{background:linear-gradient(180deg,rgba(10,6,8,.78),rgba(10,6,8,.35) 38%,rgba(10,6,8,0) 58%),linear-gradient(0deg,rgba(10,6,8,.6),rgba(10,6,8,0) 26%)}
+  .cap{top:14%}.cap h2{font-size:clamp(40px,12vw,64px)}.cap p{max-width:300px;font-size:13px}
+  .hud .name{display:none}.plan{display:none}.hint{bottom:60px}
+}
+
+/* 2 HOME */
+#home{height:520vh;z-index:2;margin-top:-100vh}
+#home .pin{background:#0f0907}
+#homeImg{position:absolute;inset:0}
+#homeSvg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.built{position:absolute;left:0;right:0;top:25%;text-align:center;font:500 clamp(9px,.9vw,12px)/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,236,214,.85)}
+.yours{position:absolute;left:0;right:0;bottom:17%;text-align:center;font:italic 400 clamp(15px,1.5vw,22px)/1 var(--serif);color:rgba(255,236,214,.7)}
+.keys{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(20px,5vh,56px);display:flex;align-items:flex-end;justify-content:space-between;gap:24px;opacity:0;transform:translateY(24px);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.keys.on{opacity:1;transform:none}
+.keys:before{content:"";position:absolute;left:calc(var(--pad) * -1);right:calc(var(--pad) * -1);bottom:calc(clamp(20px,5vh,56px) * -1);top:-30vh;z-index:-1;background:linear-gradient(0deg,rgba(10,6,8,.62),rgba(10,6,8,0));pointer-events:none}
+.keys h2{font-size:clamp(42px,6.2vw,104px)}
+.keys h2 span{display:block}
+.glass{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:min(56vw,760px)}
+.glass div{padding:18px 18px 20px;border-radius:14px;background:rgba(16,9,6,.5);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);min-height:110px}
+.glass h3{font:italic 400 clamp(20px,1.9vw,28px)/1 var(--serif);color:var(--peach);margin-bottom:12px}
+.glass p{font-size:clamp(11px,.85vw,13px);line-height:1.45;color:rgba(255,255,255,.9)}
+@media (max-width:860px){.keys{flex-direction:column;align-items:flex-start}.glass{width:100%}.glass div{min-height:0;padding:12px}.glass p{font-size:11px}}
+
+/* 3 what we build */
+#work{height:900vh;z-index:3;margin-top:-100vh}
+#work .pin{background:#120a07}
+.amb{position:absolute;inset:-8%;filter:blur(36px) saturate(1.35)}
+.amb i{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0}
+.ambShade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(10,5,4,.15),rgba(10,5,4,.78) 78%)}
+.whead{position:absolute;left:var(--pad);top:clamp(88px,13vh,130px)}
+.whead h2{font-size:clamp(34px,4.1vw,64px);margin-top:12px}
+.count{position:absolute;right:var(--pad);top:clamp(88px,13vh,130px);font:italic 400 clamp(38px,4.4vw,70px)/1 var(--serif);color:var(--peach);text-align:right}
+.count small{font:400 13px/1 var(--sans);color:var(--muted);font-style:normal;margin-left:4px}
+.rail{position:absolute;inset:0;perspective:1500px;perspective-origin:50% 48%}
+.card{position:absolute;left:50%;top:54%;width:clamp(230px,26vw,390px);aspect-ratio:4/5;margin-left:calc(clamp(230px,26vw,390px)/-2);margin-top:calc(clamp(230px,26vw,390px)*-.62);border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.38);background:#2a1a12;will-change:transform,opacity,filter;transform-style:preserve-3d;box-shadow:0 40px 90px -30px rgba(0,0,0,.7)}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,0) 22%,rgba(10,5,3,0) 52%,rgba(10,5,3,.82))}
+.card .no{position:absolute;left:12px;top:12px;z-index:2;font:500 10px/1 var(--sans);color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:5px 8px}
+.card .tx{position:absolute;left:16px;right:16px;bottom:16px;z-index:2}
+.card h3{font:400 clamp(20px,1.8vw,27px)/1.05 var(--serif);margin-bottom:7px}
+.card p{font-size:clamp(10px,.8vw,12px);line-height:1.4;color:rgba(255,255,255,.82)}
+.segs{position:absolute;left:var(--pad);right:var(--pad);bottom:24px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.segs i{display:block;height:2px;background:rgba(255,255,255,.22);position:relative;overflow:hidden}
+.segs i b{position:absolute;inset:0;background:var(--peach);transform-origin:left;transform:scaleX(0)}
+@media (max-width:760px){.whead h2{font-size:34px}.count{font-size:36px}}
+
+/* 4 stats */
+#stats{height:230vh;z-index:4;margin-top:-100vh}
+#stats .pin{background:#1a0f0b}
+.sshade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,8,7,.62),rgba(14,8,7,.2) 60%),linear-gradient(0deg,rgba(14,8,7,.5),rgba(14,8,7,0) 40%)}
+.sleft{position:absolute;left:var(--pad);top:clamp(100px,22vh,220px);width:min(720px,88vw)}
+.sleft h2{font-size:clamp(40px,5.2vw,86px);white-space:nowrap}
+.sleft h2 span{display:block}
+.sleft p{margin-top:24px;max-width:380px;font-size:clamp(13px,1.05vw,15px);line-height:1.55;color:rgba(255,255,255,.9)}
+.nums{position:absolute;right:var(--pad);top:clamp(110px,24vh,240px);display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:clamp(30px,6vh,64px) clamp(36px,6vw,110px)}
+.nums b{display:block;font:500 clamp(46px,5.6vw,96px)/.95 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.nums span{display:block;margin-top:12px;max-width:170px;font-size:clamp(11.5px,.9vw,13.5px);line-height:1.4;color:rgba(255,255,255,.82)}
+.bl{transition:filter .9s ease,opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1);opacity:0;filter:blur(12px);transform:translateY(14px)}
+.bl.in{opacity:1;filter:none;transform:none}
+@media (max-width:760px){
+  .sshade{background:linear-gradient(180deg,rgba(14,8,7,.82),rgba(14,8,7,.3) 55%,rgba(14,8,7,.7))}
+  .sleft h2{font-size:clamp(36px,10.5vw,52px)}
+  .nums{left:var(--pad);right:var(--pad);top:auto;bottom:9%;grid-template-columns:1fr 1fr}.sleft{top:15%}
+}
+
+/* 5 listings */
+#listings{position:relative;z-index:5;margin-top:-100vh;background:#120a07;padding:clamp(96px,14vh,150px) var(--pad) clamp(64px,10vh,110px);min-height:100vh}
+.lhead{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:34px}
+.lhead h2{font-size:clamp(40px,5.2vw,86px)}
+.lhead h2 span{display:block}
+.lhead p{max-width:340px;font-size:14px;line-height:1.55;color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-end;padding:18px 0 22px;margin-bottom:10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid rgba(255,255,255,.26);background:transparent;cursor:pointer;border-radius:99px;padding:10px 16px;font:500 13px var(--sans);transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:#fff}
+.chip[aria-pressed=true]{background:var(--peach);color:#2a160b;border-color:var(--peach)}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted)}
+.fld select,.fld input[type=range]{font:500 13px var(--sans);color:#fff}
+.fld select{background:#1d130e;border:1px solid rgba(255,255,255,.26);border-radius:10px;padding:10px 12px;min-width:140px}
+.fld input[type=range]{accent-color:var(--peach);width:min(220px,60vw)}
+.fld output{color:#fff;font-weight:500}
+.count-l{margin-left:auto;font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:22px}
+.home{border-radius:18px;overflow:hidden;background:#1b120d;border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.home:hover{transform:translateY(-4px);border-color:rgba(243,205,156,.5)}
+.home .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#241811}
+.home .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.home:hover .ph img{transform:scale(1.05)}
+.badge{position:absolute;left:12px;top:12px;font:500 11px/1 var(--sans);padding:7px 10px;border-radius:99px;background:rgba(14,8,7,.75);border:1px solid rgba(255,255,255,.25)}
+.home .bd{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.home h3{font:400 28px/1.05 var(--serif)}
+.home .where{font-size:13px;color:var(--muted)}
+.specs{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.9)}
+.home .row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px}
+.price{font:600 22px/1 var(--sans);letter-spacing:-.02em}
+.price small{display:block;font:400 11px var(--sans);color:var(--muted);letter-spacing:0;margin-bottom:5px}
+.enq{border:1px solid rgba(255,255,255,.35);background:transparent;cursor:pointer;border-radius:99px;padding:10px 16px;font:500 13px var(--sans);transition:background .2s,color .2s}
+.enq:hover{background:var(--peach);color:#2a160b;border-color:var(--peach)}
+.empty{padding:40px 0;color:var(--muted)}
+.empty button{margin-left:8px}
+.note{margin-top:28px;font-size:12px;color:rgba(255,255,255,.5)}
+
+/* 6 cta */
+#cta{height:100vh;height:100svh;z-index:6;position:relative;overflow:hidden;background:#0c0a1c}
+.cleft{position:absolute;left:var(--pad);top:clamp(100px,17vh,180px)}
+.cleft h2{font-size:clamp(52px,7vw,118px)}
+.cleft h2 span{display:block}
+.btns{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.ghost{display:inline-block;padding:11px 19px;border-radius:99px;font:500 13px/1 var(--sans);text-decoration:none;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .2s,transform .25s}
+.ghost:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.btns .pill{justify-self:auto}
+.cright{position:absolute;right:var(--pad);top:clamp(150px,29vh,300px);text-align:right;font-style:normal;font-size:clamp(11px,.9vw,13px);line-height:1.7;color:rgba(255,255,255,.92);text-shadow:0 1px 10px rgba(0,0,0,.45)}
+.cright strong{display:block;font-weight:600;color:#fff}
+.word{position:absolute;left:0;right:0;bottom:.03em;text-align:center;font:900 clamp(44px,17vw,380px)/.82 var(--disp);letter-spacing:-.025em;color:rgba(255,238,230,.96);white-space:nowrap;user-select:none}
+.word span{display:inline-block;transform:translateY(70%);opacity:0;transition:transform 1.1s cubic-bezier(.2,.8,.2,1),opacity .9s}
+.word.in span{transform:none;opacity:1}
+.word.in span:nth-child(2){transition-delay:.07s}.word.in span:nth-child(3){transition-delay:.14s}.word.in span:nth-child(4){transition-delay:.21s}.word.in span:nth-child(5){transition-delay:.28s}.word.in span:nth-child(6){transition-delay:.35s}.word.in span:nth-child(7){transition-delay:.42s}
+.cscrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,6,20,.5),rgba(8,6,20,0) 55%),linear-gradient(0deg,rgba(8,6,20,.35),rgba(8,6,20,0) 45%)}
+@media (max-width:760px){
+  .cscrim{background:linear-gradient(180deg,rgba(8,6,20,.7),rgba(8,6,20,.2) 45%,rgba(8,6,20,.3))}
+  .cright{left:var(--pad);right:auto;text-align:left;top:auto;bottom:34%}
+}
+
+/* booking panel */
+#ov{position:fixed;inset:0;z-index:79;background:rgba(5,3,2,.6);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+#ov.open{opacity:1;visibility:visible}
+#panel{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(460px,100vw);background:#17100c;border-left:1px solid rgba(255,255,255,.12);padding:28px clamp(20px,3vw,32px) 28px;overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1),visibility .5s}
+#panel.open{transform:none;visibility:visible}
+#panel .x{position:absolute;right:16px;top:16px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;font-size:20px;line-height:1}
+#panel .x:hover{background:rgba(255,255,255,.1)}
+#panel h2{font:400 36px/1.05 var(--serif);margin:26px 40px 8px 0}
+#panel .sub{font-size:14px;line-height:1.5;color:var(--muted);margin-bottom:22px}
+#form{display:flex;flex-direction:column;gap:14px}
+#form label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--muted)}
+#form input,#form textarea{font:400 15px var(--sans);color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:12px;color-scheme:dark}
+#form textarea{min-height:90px;resize:vertical}
+#form input[readonly]{opacity:.8}
+#form input:focus,#form textarea:focus{outline:2px solid var(--peach);outline-offset:1px;border-color:transparent}
+#form [aria-invalid=true]{border-color:#ff8a7a}
+#form .err{color:#ffa294;font-size:13px;min-height:1em}
+#form .pill{justify-self:stretch;padding:14px 20px;font-size:14px}
+#form[hidden],#done[hidden],#form label[hidden]{display:none}
+#done{display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.9)}
+#done textarea{font:400 13px/1.45 var(--sans);color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:12px;min-height:150px;color-scheme:dark}
+#done .row{display:flex;gap:10px;flex-wrap:wrap}
+#done a.ghost,#done button{justify-self:auto}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cap,.keys,.bl,.word span,#panel,#ov,.home,.home .ph img,#loader{transition:none}
+  .bl{filter:none;transform:none;opacity:1}
+  .word span{transform:none;opacity:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#listings">Skip to homes for sale</a>
+<div id="loader" role="status" aria-live="polite">
+  <div class="lw"><svg viewBox="0 0 16 16" fill="none" stroke="#f3cd9c" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2 14V7l6-5 6 5v7z"/></svg>Olivane Estate</div>
+  <div class="lb"><i id="lbar"></i></div><span class="sr">Loading photos</span><p style="font:400 11px var(--sans);color:rgba(255,255,255,.55);text-align:center;padding:0 20px">Concept project by Athens Digital Frame · fictional company</p>
+</div>
+
+<header class="nav">
+  <a class="brand" href="#hero" aria-label="Olivane Estate, back to top">
+    <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2 14V7l6-5 6 5v7z"/></svg>Olivane Estate
+  </a>
+  <nav aria-label="Primary"><ul id="navlinks">
+    <li><a href="#listings" data-sec="listings">Homes</a></li><li><a href="#hero" data-sec="hero">Process</a></li><li><a href="#work" data-sec="work">Projects</a></li><li><a href="#stats" data-sec="stats">About</a></li>
+  </ul></nav>
+  <button class="pill" type="button" data-open="visit">Book a site visit</button>
+</header>
+
+<p class="concept"><b>Concept project</b> by <a href="/" style="pointer-events:auto;color:inherit;text-decoration:underline;text-underline-offset:2px">Athens Digital Frame</a></p>
+<nav class="dots" id="dots" aria-label="Page sections"></nav>
+
+<main>
+<!-- 1 · scroll to build -->
+<section id="hero" class="wrap" aria-label="How an Olivane home is built">
+  <h1 class="sr">Olivane Estate: homes built in Limassol, Cyprus</h1>
+  <div class="pin">
+    <canvas class="fill" id="heroC" role="img" aria-label="A blueprint held up over a bare hillside plot at sunset"></canvas>
+    <div class="scrim"></div>
+    <div class="caps" id="caps">
+      <div class="cap on"><span class="eyebrow">01 · The plan</span><h2 class="hd"><span>It starts</span><span class="it">on paper.</span></h2><p>Every Olivane Estate home is drawn around the land, the light and the view, before a single stone moves.</p></div>
+      <div class="cap"><span class="eyebrow">02 · Foundations</span><h2 class="hd"><span>Rooted in</span><span class="it">the hill.</span></h2><p>We cut into the slope, not across it, so the house sits low and the view stays open.</p></div>
+      <div class="cap"><span class="eyebrow">03 · Structure</span><h2 class="hd"><span>Then it</span><span class="it">rises.</span></h2><p>Concrete frames, stone walls and deep terraces go up floor by floor under one site team.</p></div>
+      <div class="cap"><span class="eyebrow">04 · Finish</span><h2 class="hd"><span>Finished</span><span class="it">by hand.</span></h2><p>Local stone, oak and glass are fitted by craftsmen who have worked with us for years.</p></div>
+      <div class="cap"><span class="eyebrow">05 · Inside</span><h2 class="hd"><span>Made for</span><span class="it">long summers.</span></h2><p>Rooms that open onto the pool, the olive trees and the sea.</p></div>
+    </div>
+    <div class="hint" id="hint">SCROLL TO BUILD</div>
+    <svg class="plan" id="plan" viewBox="0 0 60 50" aria-hidden="true"><rect x="2" y="2" width="22" height="20"/><rect x="24" y="2" width="16" height="12"/><rect x="40" y="2" width="18" height="20"/><rect x="2" y="22" width="14" height="26"/><rect x="16" y="22" width="24" height="26"/><rect x="40" y="22" width="18" height="26"/></svg>
+    <div class="hud" aria-hidden="true"><b id="pct">0%</b><span class="name" id="stage">The plan</span><span class="line"><i id="bar"></i></span><span class="loc">Limassol · Cyprus</span></div>
+  </div>
+</section>
+
+<!-- 2 · HOME -->
+<section id="home" class="wrap" aria-label="Homes, finished and handed over">
+  <div class="pin">
+    <canvas class="fill" id="homeImg" role="img" aria-label="A finished clifftop villa with an infinity pool at sunset"></canvas>
+    <svg id="homeSvg" aria-hidden="true">
+      <defs><mask id="hm" maskUnits="userSpaceOnUse"><rect id="hmr" fill="#fff" x="0" y="0" width="100" height="100"/><text id="hmt" fill="#000" text-anchor="middle" font-family="Archivo, Arial Black, sans-serif" font-weight="900">HOME</text></mask></defs>
+      <rect id="hmo" x="0" y="0" width="100" height="100" fill="#0f0907" mask="url(#hm)"/>
+    </svg>
+    <p class="built" id="built">Built, finished, handed over</p>
+    <p class="yours" id="yours">and then it's yours.</p>
+    <div class="keys" id="keys">
+      <h2 class="hd"><span>Your keys,</span><span class="it">ready.</span></h2>
+      <div class="glass">
+        <div><h3>Fixed</h3><p>price, signed on day one. No surprises at handover.</p></div>
+        <div><h3>Dated</h3><p>handover, written into the contract.</p></div>
+        <div><h3>One</h3><p>project manager, from the plot to the keys.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · what we build -->
+<section id="work" class="wrap" aria-label="What we build">
+  <div class="pin">
+    <div class="amb" id="amb" aria-hidden="true"></div>
+    <div class="ambShade"></div>
+    <div class="whead"><span class="eyebrow">What we do</span><h2 class="hd">What <span class="it">we build.</span></h2></div>
+    <div class="count" aria-live="polite"><span id="cnt">01</span><small>/ 06</small></div>
+    <div class="rail" id="rail"></div>
+    <div class="segs" id="segs" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- 4 · stats -->
+<section id="stats" class="wrap" aria-label="About Olivane Estate">
+  <div class="pin">
+    <canvas class="fill" id="statC" role="img" aria-label="A raw concrete villa frame under construction on a hillside"></canvas>
+    <div class="sshade"></div>
+    <div class="sleft">
+      <span class="eyebrow bl">Who we are</span>
+      <h2 class="hd bl" style="margin-top:16px"><span>Building Cyprus</span><span class="it">since 1996.</span></h2>
+      <p class="bl">Three decades of villas, apartments and commercial buildings on the island, delivered by one team that stays on site until the keys change hands.</p>
+    </div>
+    <div class="nums">
+      <div><b data-n="410">0</b><span>Homes handed over</span></div>
+      <div><b data-n="30">0</b><span>Years building in Cyprus</span></div>
+      <div><b data-n="96" data-s="%">0%</b><span>Handed over on the agreed date</span></div>
+      <div><b data-n="12">0</b><span>Projects on site today</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · homes for sale -->
+<section id="listings" aria-labelledby="lh">
+  <div class="lhead">
+    <h2 class="hd" id="lh"><span>Homes</span><span class="it">for sale.</span></h2>
+    <p>Filter by type, area and price. Every home is built and handed over by the same team.</p>
+  </div>
+  <div class="filters" role="group" aria-label="Filter homes">
+    <div class="fld"><span id="typeLbl">Type</span>
+      <div class="chips" id="chips" role="group" aria-labelledby="typeLbl"></div></div>
+    <label class="fld">Area<select id="fArea"><option value="">All areas</option><option>Limassol</option><option>Paphos</option><option>Larnaca</option></select></label>
+    <label class="fld">Bedrooms<select id="fBeds"><option value="0">Any</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></label>
+    <label class="fld">Up to <output id="fPriceOut">Any price</output><input id="fPrice" type="range" min="300000" max="3500000" step="50000" value="3500000"></label>
+    <label class="fld">Sort<select id="fSort"><option value="feat">Featured</option><option value="asc">Price, low to high</option><option value="desc">Price, high to low</option></select></label>
+    <p class="count-l" id="lcount" aria-live="polite"></p>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>No homes match these filters.<button class="enq" type="button" id="clear">Clear filters</button></p>
+  <p class="note">Concept project by Athens Digital Frame. Olivane Estate is a fictional company: listings, prices and figures are samples. The forms are demo-only and send nothing.</p>
+</section>
+
+<!-- 6 · cta -->
+<section id="cta" aria-label="Contact">
+  <canvas class="fill" id="ctaC" role="img" aria-label="The villa lit up at dusk above the sea"></canvas>
+  <div class="cscrim"></div>
+  <div class="cleft">
+    <h2 class="hd"><span>Start</span><span class="it">yours.</span></h2>
+    <div class="btns"><button class="pill" type="button" data-open="visit">Book a site visit</button><button class="ghost" type="button" data-open="brochure">Request the brochure</button></div>
+  </div>
+  <address class="cright"><strong>Concept project</strong>by Athens Digital Frame<br>Fictional company.</address>
+  <div class="word" id="word" aria-hidden="true"><span>O</span><span>L</span><span>I</span><span>V</span><span>A</span><span>N</span><span>E</span></div>
+</section>
+</main>
+
+<div id="ov"></div>
+<aside id="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle" inert>
+  <button class="x" type="button" id="pClose" aria-label="Close panel">×</button>
+  <h2 id="pTitle">Book a site visit</h2>
+  <p class="sub" id="pSub"></p>
+  <form id="form" novalidate>
+    <label>Full name<input name="name" autocomplete="name" required></label>
+    <label id="lPhone">Phone<input name="phone" type="tel" autocomplete="tel"></label>
+    <label id="lEmail">Email<input name="email" type="email" autocomplete="email"></label>
+    <label id="lDate">Preferred date<input name="date" type="date"></label>
+    <label id="lProp">Home<input name="prop" readonly></label>
+    <label id="lMsg">Message (optional)<textarea name="msg"></textarea></label>
+    <p class="err" id="err" role="alert"></p>
+    <button class="pill" type="submit" id="pSubmit">Send (demo)</button>
+  </form>
+  <div id="done" hidden>
+    <p id="doneTxt"></p>
+    <textarea id="doneMsg" readonly aria-label="Your message"></textarea>
+    <div class="row"><button class="pill" type="button" id="doneClose">Close</button></div>
+  </div>
+</aside>
+
+<script>
+(()=>{
+'use strict';
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const ss=(a,b,v)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const $=id=>document.getElementById(id);
+const load=src=>new Promise(res=>{const i=new Image();i.decoding='async';i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src});
+const SFX=innerWidth<=900?'-m':'';
+
+/* ---------- content ---------- */
+const SEQ=[['blueprint',0,.5,'A blueprint held up over a bare hillside plot at sunset'],['bare',.2,.5,'The bare hillside plot at sunset, marked with red survey stakes'],['foundations',.38,.45,'Concrete foundations and a pool shell being built on the plot'],['structure',.56,.3,'The raw concrete frame of the villa rising above the sea'],['finished',.72,.25,'The finished villa with glass walls and an infinity pool at sunset'],['dusk',.86,.25,'The same villa lit up at dusk'],['interior',.97,.6,'A living room opening onto the pool and the sea at sunset']];
+const CARDS=[
+  ['Private villas','Villas drawn around one plot, one view and one family.','card1',25,'A modern villa with an infinity pool above the sea at sunset'],
+  ['Residences','Low-rise apartments with terraces facing the sea.','card2',72,'A white apartment building with stepped sea-view terraces'],
+  ['Restorations','Old stone houses brought back to full health.','card3',45,'A restored stone house with blue shutters and red bougainvillea'],
+  ['Commercial','Hotels, offices and retail built to open on time.','card4',55,'A modern glass office building with young trees in front'],
+  ['Pools & gardens','Infinity pools, stone terraces and olive planting.','card5',50,'An infinity pool with olive trees and a view of the sea'],
+  ['Turnkey interiors','Furnished and ready to live in on handover day.','card6',40,'A furnished living room with a sofa and a view of the sea']
+];
+const HOMES=[
+  {id:'h1',name:'Clifftop Villa',type:'villa',area:'Limassol',beds:4,baths:4,size:380,price:2450000,status:'Ready to move in',img:'finished',alt:'Clifftop villa with infinity pool at sunset'},
+  {id:'h2',name:'Sea Terrace Residences',type:'apartment',area:'Paphos',beds:2,baths:2,size:112,price:485000,status:'Ready to move in',img:'card2',alt:'White apartment building with sea terraces'},
+  {id:'h3',name:'The Stone House',type:'restoration',area:'Larnaca',beds:3,baths:2,size:210,price:690000,status:'Ready to move in',img:'card3',alt:'Restored stone house with bougainvillea'},
+  {id:'h4',name:'Harbour Offices',type:'commercial',area:'Limassol',beds:0,baths:0,size:620,price:3100000,status:'Ready to move in',img:'card4',alt:'Modern glass office building'},
+  {id:'h5',name:'Olive Pool Estate',type:'villa',area:'Paphos',beds:5,baths:5,size:460,price:3200000,status:'Ready to move in',img:'card5',alt:'Estate with infinity pool and olive trees'},
+  {id:'h6',name:'Hillside Villa, Phase 2',type:'villa',area:'Limassol',beds:4,baths:3,size:340,price:2150000,status:'Handover 2027',img:'structure',alt:'Villa under construction on the hillside'},
+  {id:'h7',name:'Sunset Residence',type:'apartment',area:'Larnaca',beds:3,baths:2,size:148,price:620000,status:'Handover 2027',img:'card6',alt:'Furnished apartment living room facing the sea'}
+];
+const TYPES=[['all','All homes'],['villa','Villas'],['apartment','Apartments'],['restoration','Restorations'],['commercial','Commercial']];
+const SECTIONS=[['hero','Process'],['home','Reveal'],['work','Projects'],['stats','About'],['listings','Homes'],['cta','Contact']];
+
+const IM={};
+let DPR=Math.min(devicePixelRatio||1,1.5),VW=innerWidth,VH=innerHeight;
+const portrait=()=>VW<VH*.9;
+function size(cv){cv.width=Math.round(VW*DPR);cv.height=Math.round(VH*DPR)}
+function cover(cv,img,o={}){
+  if(!img||!img.naturalWidth)return;
+  const {zoom=1,fx=.5,fy=.5,alpha=1}=o,c=cv.getContext('2d'),dw=cv.width,dh=cv.height;
+  const s=Math.max(dw/img.naturalWidth,dh/img.naturalHeight)*zoom,w=img.naturalWidth*s,h=img.naturalHeight*s;
+  c.globalAlpha=alpha;c.drawImage(img,(dw-w)*fx,(dh-h)*fy,w,h);c.globalAlpha=1;
+}
+
+/* ---------- hero ---------- */
+const heroEl=$('hero'),heroC=$('heroC');
+let heroLabel='';
+function renderHero(p){
+  const c=heroC.getContext('2d');c.fillStyle='#0e0807';c.fillRect(0,0,heroC.width,heroC.height);
+  let i=0;while(i<SEQ.length-2&&p>=SEQ[i+1][1])i++;
+  const A=SEQ[i],B=SEQ[i+1],t=ss(.3,.7,(p-A[1])/(B[1]-A[1]));
+  const zoom=reduce?1:1+.07*p,fxOf=s=>portrait()?s[2]:.5;
+  // fall back to the closest loaded photo if one is still downloading
+  const a=IM[A[0]]||IM[B[0]],b=IM[B[0]]||IM[A[0]];
+  cover(heroC,a,{zoom,fx:fxOf(A),fy:.5});
+  if(t>0)cover(heroC,b,{zoom,fx:fxOf(B),fy:.5,alpha:t});
+  const lab=(t>.5?B:A)[3];if(lab!==heroLabel){heroLabel=lab;heroC.setAttribute('aria-label',lab)}
+}
+const caps=[...document.querySelectorAll('.cap')],stageNames=['The plan','Foundations','Structure','Finish','Inside'];
+const pct=$('pct'),stageEl=$('stage'),bar=$('bar'),hint=$('hint'),plan=$('plan');
+const planRects=[...plan.querySelectorAll('rect')];planRects.forEach(r=>{const l=2*(+r.getAttribute('width')+ +r.getAttribute('height'));r.style.strokeDasharray=l;r.style.strokeDashoffset=l;r._l=l});
+let capIdx=-1;
+function hudHero(p){
+  const i=Math.min(4,Math.floor(p*5));
+  if(i!==capIdx){capIdx=i;caps.forEach((c,j)=>c.classList.toggle('on',j===i));stageEl.textContent=stageNames[i]}
+  pct.textContent=Math.round(p*100)+'%';bar.style.transform=`scaleX(${p})`;hint.style.opacity=p<.03?1:0;
+  planRects.forEach((r,j)=>{r.style.strokeDashoffset=r._l*(1-ss(.1+j*.1,.3+j*.1,p))});
+}
+
+/* ---------- HOME ---------- */
+const homeEl=$('home'),homeImg=$('homeImg'),svg=$('homeSvg');
+const hmt=$('hmt'),hmr=$('hmr'),hmo=$('hmo');
+const builtEl=$('built'),yoursEl=$('yours'),keys=$('keys');
+let org={x:0,y:0};
+function layoutHome(){
+  svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`);[hmr,hmo].forEach(e=>{e.setAttribute('width',VW);e.setAttribute('height',VH)});
+  const fs=Math.min(VW*.275,VH*.62),base=VH*.5+fs*.36;
+  hmt.setAttribute('font-size',fs);hmt.setAttribute('x',VW/2);hmt.setAttribute('y',base);
+  try{const r=hmt.getExtentOfChar(1);org={x:r.x+r.width*.15,y:base-fs*.36}}catch(e){org={x:VW*.42,y:VH*.5}}
+}
+function renderHome(p){
+  const pz=ss(.1,.74,p),s=reduce?1:Math.exp(Math.log(70)*Math.pow(pz,1.6));
+  hmt.setAttribute('transform',`translate(${org.x} ${org.y}) scale(${s}) translate(${-org.x} ${-org.y})`);
+  hmo.style.opacity=reduce?1-ss(.25,.7,p):1-ss(.7,.8,p);
+  const lab=1-ss(.1,.2,p),ent=ss(0,.07,p);
+  builtEl.style.opacity=lab*ent;builtEl.style.filter=reduce?'none':`blur(${(1-ent)*8}px)`;
+  yoursEl.style.opacity=lab*ent;
+  keys.classList.toggle('on',p>.8);
+  homeImg.style.transform=reduce?'none':`scale(${1+.06*pz})`;
+}
+
+/* ---------- carousel ---------- */
+const workEl=$('work');
+const rail=$('rail'),amb=$('amb'),segs=$('segs'),cnt=$('cnt');
+const cardEls=[],ambEls=[],segFill=[];
+CARDS.forEach((it,i)=>{
+  const d=document.createElement('article');d.className='card';
+  const im=new Image();im.alt=it[4];im.decoding='async';im.src=`img/${it[2]}.webp`;im.style.objectPosition=it[3]+'% 50%';d.appendChild(im);
+  d.insertAdjacentHTML('beforeend',`<span class="no" aria-hidden="true">0${i+1}</span><div class="tx"><h3>${it[0].replace('&','&amp;')}</h3><p>${it[1]}</p></div>`);
+  rail.appendChild(d);cardEls.push(d);
+  const a=document.createElement('i');a.style.backgroundImage=`url(img/${it[2]}-t.png)`;amb.appendChild(a);ambEls.push(a);
+  const s=document.createElement('i');s.innerHTML='<b></b>';segs.appendChild(s);segFill.push(s.firstChild);
+});
+function renderWork(p){
+  const t=p*(CARDS.length-1);
+  cnt.textContent='0'+(Math.round(t)+1);
+  cardEls.forEach((d,i)=>{
+    const o=i-t,a=Math.abs(o);
+    const x=Math.sign(o)*Math.min(a,2.6)*(portrait()?.62:.34)*VW;
+    const z=reduce?0:-Math.min(a,2.6)*320,ry=reduce?0:clamp(-o*54,-72,72),sc2=1-Math.min(a,1.6)*.06;
+    d.style.transform=`translate3d(${x}px,0,${z}px) rotateY(${ry}deg) scale(${sc2})`;
+    d.style.opacity=(1-ss(1.15,2.3,a)).toFixed(3);
+    d.style.filter=(a<.02||reduce)?'none':`blur(${Math.min(a,2)*2.4}px) brightness(${1-Math.min(a,1)*.25})`;
+    d.style.zIndex=100-Math.round(a*10);d.style.pointerEvents=a<.5?'auto':'none';
+    d.setAttribute('aria-hidden',a<.6?'false':'true');
+    ambEls[i].style.opacity=clamp(1-a*1.1).toFixed(3);
+  });
+  segFill.forEach((b,i)=>b.style.transform=`scaleX(${clamp(t-i+1)})`);
+}
+
+/* ---------- stats ---------- */
+const statsEl=$('stats'),statC=$('statC'),nums=[...document.querySelectorAll('[data-n]')];
+const bls=[...document.querySelectorAll('#stats .bl')];
+function renderStats(){
+  const r=statsEl.getBoundingClientRect(),s=clamp((VH-r.top)/(VH*1.05)),e=reduce?(s>.1?1:0):1-Math.pow(1-s,3);
+  nums.forEach(n=>{n.textContent=Math.round(+n.dataset.n*e)+(n.dataset.s||'')});
+  bls.forEach((b,i)=>b.classList.toggle('in',s>.18+i*.08));
+}
+
+/* ---------- cta ---------- */
+const ctaEl=$('cta'),ctaC=$('ctaC'),word=$('word');
+
+/* ---------- listings ---------- */
+const fmt=new Intl.NumberFormat('en-IE',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const st={type:'all',area:'',beds:0,max:3500000,sort:'feat'};
+const chips=$('chips'),grid=$('grid');
+TYPES.forEach(([k,l])=>{const b=document.createElement('button');b.type='button';b.className='chip';b.dataset.k=k;b.textContent=l;b.setAttribute('aria-pressed',k==='all');chips.appendChild(b)});
+function renderHomes(){
+  let list=HOMES.filter(h=>(st.type==='all'||h.type===st.type)&&(!st.area||h.area===st.area)&&h.beds>=st.beds&&(st.max>=3500000||h.price<=st.max));
+  if(st.sort==='asc')list.sort((a,b)=>a.price-b.price);else if(st.sort==='desc')list.sort((a,b)=>b.price-a.price);
+  grid.innerHTML=list.map(h=>`<article class="home"><div class="ph"><img src="img/${h.img}${h.img.startsWith('card')?'':SFX}.webp" alt="${h.alt}" loading="lazy" decoding="async"><span class="badge">${h.status}</span></div><div class="bd"><h3>${h.name}</h3><p class="where">${h.area}, Cyprus</p><div class="specs">${h.beds?`<span>${h.beds} bed</span><span>${h.baths} bath</span>`:'<span>Commercial</span>'}<span>${h.size} m²</span></div><div class="row"><p class="price"><small>Price</small>${fmt.format(h.price)}</p><button class="enq" type="button" data-enq="${h.id}" aria-label="Enquire about ${h.name}">Enquire</button></div></div></article>`).join('');
+  $('lcount').textContent=list.length+(list.length===1?' home':' homes');
+  $('empty').hidden=list.length>0;
+}
+chips.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;st.type=b.dataset.k;[...chips.children].forEach(c=>c.setAttribute('aria-pressed',c===b));renderHomes()});
+$('fArea').addEventListener('change',e=>{st.area=e.target.value;renderHomes()});
+$('fBeds').addEventListener('change',e=>{st.beds=+e.target.value;renderHomes()});
+$('fSort').addEventListener('change',e=>{st.sort=e.target.value;renderHomes()});
+$('fPrice').addEventListener('input',e=>{st.max=+e.target.value;$('fPriceOut').textContent=st.max>=3500000?'Any price':fmt.format(st.max);renderHomes()});
+$('clear').addEventListener('click',()=>{Object.assign(st,{type:'all',area:'',beds:0,max:3500000,sort:'feat'});$('fArea').value='';$('fBeds').value='0';$('fSort').value='feat';$('fPrice').value=3500000;$('fPriceOut').textContent='Any price';[...chips.children].forEach(c=>c.setAttribute('aria-pressed',c.dataset.k==='all'));renderHomes()});
+grid.addEventListener('click',e=>{const b=e.target.closest('[data-enq]');if(b)openPanel('enquiry',HOMES.find(h=>h.id===b.dataset.enq),b)});
+renderHomes();
+
+/* ---------- booking / enquiry panel ---------- */
+const panel=$('panel'),ov=$('ov'),form=$('form'),done=$('done');
+let lastFocus=null,mode='visit',curHome=null;
+const show=(id,on)=>{$(id).hidden=!on};
+function openPanel(m,home,opener){
+  mode=m;curHome=home||null;lastFocus=opener||document.activeElement;
+  form.reset();$('err').textContent='';form.querySelectorAll('[aria-invalid]').forEach(x=>x.removeAttribute('aria-invalid'));
+  form.hidden=false;done.hidden=true;
+  const T={visit:['Book a site visit','Choose a date. (Demo form: nothing is sent.)'],enquiry:['Enquire about '+(home?home.name:''),home?`${home.area}, Cyprus · ${fmt.format(home.price)}`:''],brochure:['Request the brochure','Demo form: nothing is sent.']}[m];
+  $('pTitle').textContent=T[0];$('pSub').textContent=T[1];
+  show('lPhone',m!=='brochure');show('lEmail',m!=='visit');show('lDate',m==='visit');show('lProp',m==='enquiry');show('lMsg',m!=='brochure');
+  if(home)form.elements.prop.value=home.name;
+  form.elements.date.min=new Date().toISOString().slice(0,10);
+  $('pSubmit').textContent='Send (demo)';
+  panel.inert=false;panel.classList.add('open');ov.classList.add('open');document.documentElement.classList.add('lock');
+  setTimeout(()=>form.elements.name.focus(),60);
+}
+function closePanel(){
+  panel.classList.remove('open');ov.classList.remove('open');document.documentElement.classList.remove('lock');
+  setTimeout(()=>{panel.inert=true},500);if(lastFocus&&lastFocus.focus)lastFocus.focus();
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b){e.preventDefault();openPanel(b.dataset.open,null,b)}});
+$('pClose').addEventListener('click',closePanel);ov.addEventListener('click',closePanel);
+addEventListener('keydown',e=>{
+  if(!panel.classList.contains('open'))return;
+  if(e.key==='Escape'){closePanel();return}
+  if(e.key==='Tab'){
+    const f=[...panel.querySelectorAll('button,input,textarea,a[href]')].filter(x=>!x.closest('[hidden]')&&!x.disabled&&x.offsetParent!==null);
+    if(!f.length)return;const a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+  }
+});
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=Object.fromEntries(new FormData(form).entries());
+  form.querySelectorAll('[aria-invalid]').forEach(x=>x.removeAttribute('aria-invalid'));
+  let err='';
+  if(!v.name.trim()){err='Please enter your name.';form.elements.name.setAttribute('aria-invalid','true')}
+  else if(mode==='brochure'&&!/^\S+@\S+\.\S+$/.test(v.email||'')){err='Please enter a valid email address.';form.elements.email.setAttribute('aria-invalid','true')}
+  else if(mode==='visit'&&!(v.phone||'').trim()){err='Please enter a phone number so we can confirm your visit.';form.elements.phone.setAttribute('aria-invalid','true')}
+  else if(mode==='enquiry'&&!(v.phone||'').trim()&&!/^\S+@\S+\.\S+$/.test(v.email||'')){err='Please add a phone number or a valid email address.';form.elements.phone.setAttribute('aria-invalid','true')}
+  $('err').textContent=err;if(err){form.querySelector('[aria-invalid]').focus();return}
+  const L=[];
+  let subject;
+  if(mode==='visit'){subject='Site visit request: '+v.name;L.push('I would like to book a site visit.');if(v.date)L.push('Preferred date: '+v.date)}
+  else if(mode==='enquiry'){subject='Enquiry: '+curHome.name;L.push('I am interested in '+curHome.name+' ('+curHome.area+', '+fmt.format(curHome.price)+').')}
+  else{subject='Brochure request: '+v.name;L.push('Please send me the Olivane Estate brochure.')}
+  L.push('','Name: '+v.name);if(v.phone)L.push('Phone: '+v.phone);if(v.email)L.push('Email: '+v.email);if(v.msg&&v.msg.trim())L.push('','Message: '+v.msg.trim());
+  const body=L.join('\n');
+  form.hidden=true;done.hidden=false;
+  $('doneTxt').textContent='Demo only: this is a concept project by Athens Digital Frame, so nothing has been sent and nothing is stored. A real site would deliver this message to the company:';
+  $('doneMsg').value='Subject: '+subject+'\n\n'+body;
+  setTimeout(()=>$('doneClose').focus(),50);
+});
+$('doneClose').addEventListener('click',closePanel);
+
+/* ---------- section marker ---------- */
+const dots=$('dots'),navLinks=[...document.querySelectorAll('#navlinks a')];
+SECTIONS.forEach(([id,l])=>{const a=document.createElement('a');a.href='#'+id;a.setAttribute('aria-label',l);a.innerHTML=`<span>${l}</span><i></i>`;dots.appendChild(a)});
+const dotEls=[...dots.children];let curSec='';
+function markSection(){
+  let cur=SECTIONS[0][0];
+  for(const [id] of SECTIONS){if($(id).getBoundingClientRect().top<=VH*.5)cur=id}
+  if(cur===curSec)return;curSec=cur;
+  dotEls.forEach((a,i)=>a.toggleAttribute('aria-current',SECTIONS[i][0]===cur)||a.removeAttribute('aria-current'));
+  dotEls.forEach((a,i)=>SECTIONS[i][0]===cur?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current'));
+  const navId=cur==='home'?'hero':cur==='cta'?'listings':cur;
+  navLinks.forEach(a=>a.dataset.sec===navId?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current'));
+}
+
+/* ---------- loop ---------- */
+const prog=(el,k=2)=>{const r=el.getBoundingClientRect();return clamp(-r.top/(el.offsetHeight-VH*k))};
+let sp={hero:-1,home:-1,work:-1},tg={hero:0,home:0,work:0},cur={hero:0,home:0,work:0};
+const ease=reduce?1:.13;
+function tick(){
+  tg.hero=prog(heroEl);tg.home=prog(homeEl);tg.work=prog(workEl);
+  for(const k in cur){cur[k]+=(tg[k]-cur[k])*ease;if(Math.abs(tg[k]-cur[k])<.0004)cur[k]=tg[k]}
+  if(Math.abs(cur.hero-sp.hero)>.0003){sp.hero=cur.hero;renderHero(cur.hero);hudHero(cur.hero)}
+  if(Math.abs(cur.home-sp.home)>.0003){sp.home=cur.home;renderHome(cur.home)}
+  if(Math.abs(cur.work-sp.work)>.0003){sp.work=cur.work;renderWork(cur.work)}
+  renderStats();markSection();
+  const cr=ctaEl.getBoundingClientRect();word.classList.toggle('in',cr.top<VH*.85);
+  requestAnimationFrame(tick);
+}
+function paintStatic(){
+  [homeImg,statC,ctaC].forEach(cv=>cv.getContext('2d').clearRect(0,0,cv.width,cv.height));
+  const fx=portrait()?.25:.5;
+  cover(homeImg,IM.finished,{fx});
+  cover(statC,IM.structure,{fx});const sc=statC.getContext('2d');sc.fillStyle='rgba(12,7,6,.38)';sc.fillRect(0,0,statC.width,statC.height);
+  cover(ctaC,IM.dusk,{fx});
+}
+function layout(){
+  VW=innerWidth;VH=innerHeight;DPR=Math.min(devicePixelRatio||1,1.5);
+  [heroC,homeImg,statC,ctaC].forEach(size);
+  paintStatic();layoutHome();sp={hero:-1,home:-1,work:-1};
+}
+addEventListener('resize',layout);
+
+/* ---------- boot: load the first photos, show a progress bar, then reveal ---------- */
+const lbar=$('lbar'),loader=$('loader');
+document.documentElement.classList.add('loading');
+const CRIT=['blueprint','bare','foundations'];let ready=0;
+const tick1=()=>{ready++;lbar.style.transform=`scaleX(${Math.max(.08,ready/(CRIT.length+1))})`};
+const get=n=>load(`img/${n}${SFX}.webp`).then(i=>{IM[n]=i;return i});
+const crit=Promise.all([...CRIT.map(n=>get(n).then(tick1)),document.fonts&&document.fonts.ready?document.fonts.ready.then(tick1):Promise.resolve(tick1())]);
+const timeout=new Promise(r=>setTimeout(r,7000));
+Promise.race([crit,timeout]).then(()=>{
+  layout();layoutHome();
+  requestAnimationFrame(tick);
+  loader.classList.add('done');document.documentElement.classList.remove('loading');
+  setTimeout(()=>{loader.style.display='none'},800);
+  // everything else downloads in the background and is painted as soon as it arrives
+  ['structure','finished','dusk','interior'].forEach(n=>{if(!IM[n])get(n).then(()=>{paintStatic();sp.hero=-1;sp.home=-1})});
+  CRIT.forEach(n=>{if(!IM[n])get(n).then(()=>{sp.hero=-1})});
+  document.fonts&&document.fonts.ready&&document.fonts.ready.then(()=>{layoutHome();sp.home=-1});
+});
+})();
+</script>
+</body>
+</html>

@@ -275,7 +275,7 @@ for name,h,css in (('home',home,css_home),('prices',pr,css_prices)):
         h=h.replace('<section class="contact"',_how+'\n\n  '+open('portfolio.html',encoding='utf-8').read()+'\n\n  '+open('faq.html',encoding='utf-8').read()+'\n\n  <section class="contact"',1)
         _tile='<a class="tile" id="hwtile" href="#how"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="6" cy="19" r="2"/><path d="M11 5h9M11 12h9M11 19h9"/></svg></span><span class="tt"><strong>Πώς δουλεύουμε</strong><em>Από το brief ως το live, βήμα βήμα</em></span><span class="go" aria-hidden="true">→</span></a>'
         _k=h.index('<a class="tile" href="#contact-sec"')
-        _tile2='<a class="tile" id="pftile" href="#portfolio"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 15l5-4 4 3 3-2 6 4"/></svg></span><span class="tt"><strong>Portfolio</strong><em>Έρχεται σύντομα</em></span><span class="go" aria-hidden="true">→</span></a>'
+        _tile2='<a class="tile" id="pftile" href="#portfolio"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 15l5-4 4 3 3-2 6 4"/></svg></span><span class="tt"><strong>Portfolio</strong><em>Πρώτο demo concept</em></span><span class="go" aria-hidden="true">→</span></a>'
         h=h[:_k]+_tile+'\n    '+_tile2+'\n    '+h[_k:]
         k=h.rindex('</style>');h=h[:k]+open('how_css.txt',encoding='utf-8').read()+open('pf_css.txt',encoding='utf-8').read()+open('faq_css.txt',encoding='utf-8').read()+h[k:]
         h=h.rstrip()+'\n'+open('how.js',encoding='utf-8').read()+'\n'

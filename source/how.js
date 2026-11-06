@@ -7,7 +7,7 @@ var fq=document.getElementById('faq');
 if(fq)fq.querySelectorAll('[data-el]').forEach(function(e){e.textContent=EN?e.getAttribute('data-en'):e.getAttribute('data-el')});
 var pf=document.getElementById('portfolio');
 if(pf)pf.querySelectorAll('[data-el]').forEach(function(e){e.textContent=EN?e.getAttribute('data-en'):e.getAttribute('data-el')});
-var pt=document.getElementById('pftile');if(pt&&EN){pt.querySelector('em').textContent='Coming soon'}
+var pt=document.getElementById('pftile');if(pt&&EN){pt.querySelector('em').textContent='First demo concept'}
 var tt=document.getElementById('hwtile');
 if(tt&&EN){tt.querySelector('strong').textContent='How it works';tt.querySelector('em').textContent='From brief to live, step by step'}
 var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;

@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/((?!(?:olivane|arclines)/).*)",
+      "source": "/((?!(olivane|arclines)/).*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "source": "/(?:olivane|arclines)/(.*)",
+      "source": "/(olivane|arclines)/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",

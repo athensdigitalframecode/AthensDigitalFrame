@@ -65,7 +65,21 @@ button{font:inherit;color:inherit}
 .pill{justify-self:end;display:inline-block;background:var(--peach);color:#2a160b;border:0;cursor:pointer;border-radius:99px;padding:11px 19px;font:500 13px/1 var(--sans);text-decoration:none;transition:transform .25s cubic-bezier(.2,.8,.2,1),background .2s}
 .pill:hover{background:#ffe0b9;transform:translateY(-1px)}
 .pill:active{transform:scale(.97)}
-@media (max-width:760px){.nav ul{display:none}.nav{grid-template-columns:1fr auto}}
+.burger{display:none}
+@media (max-width:760px){
+  .nav{grid-template-columns:1fr auto auto;gap:8px}
+  .burger{display:inline-flex;flex-direction:column;justify-content:center;gap:4px;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(16,9,6,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);cursor:pointer;padding:0 11px}
+  .burger i{display:block;height:1.6px;background:#fff;border-radius:2px;transition:transform .25s,opacity .2s}
+  .nav.open .burger i:nth-child(1){transform:translateY(5.6px) rotate(45deg)}
+  .nav.open .burger i:nth-child(2){opacity:0}
+  .nav.open .burger i:nth-child(3){transform:translateY(-5.6px) rotate(-45deg)}
+  .nav nav{position:absolute;left:var(--pad);right:var(--pad);top:62px}
+  .nav ul{display:none;flex-direction:column;gap:0;background:rgba(16,9,6,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:6px 18px}
+  .nav.open ul{display:flex}
+  .nav ul a{display:block;font-size:16px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .nav ul li:last-child a{border-bottom:0}
+  .pill{padding:11px 15px}
+}
 
 /* side marker */
 .dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;gap:6px}
@@ -279,6 +293,7 @@ h2,h3,p{font-weight:inherit}
     <li><a href="#listings" data-sec="listings">Homes</a></li><li><a href="#hero" data-sec="hero">Process</a></li><li><a href="#work" data-sec="work">Projects</a></li><li><a href="#stats" data-sec="stats">About</a></li>
   </ul></nav>
   <button class="pill" type="button" data-open="visit">Book a site visit</button>
+  <button class="burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navlinks"><i></i><i></i><i></i></button>
 </header>
 
 <p class="concept"><b>Concept project</b> by <a href="/" style="pointer-events:auto;color:inherit;text-decoration:underline;text-underline-offset:2px">Athens Digital Frame</a></p>
@@ -451,6 +466,14 @@ function size(cv){cv.width=Math.round(VW*DPR);cv.height=Math.round(VH*DPR)}
 function cover(cv,img,o={}){
   if(!img||!img.naturalWidth)return;
   const {zoom=1,fx=.5,fy=.5,alpha=1}=o,c=cv.getContext('2d'),dw=cv.width,dh=cv.height;
+  if(portrait()){/* phones: show the WHOLE photo, centred, over a soft blurred copy of itself */
+    if(!img._bl){const t=document.createElement('canvas');t.width=16;t.height=Math.max(1,Math.round(16*img.naturalHeight/img.naturalWidth));t.getContext('2d').drawImage(img,0,0,t.width,t.height);img._bl=t}
+    const bs=Math.max(dw/img._bl.width,dh/img._bl.height);c.globalAlpha=alpha;c.imageSmoothingQuality='high';
+    c.drawImage(img._bl,(dw-img._bl.width*bs)/2,(dh-img._bl.height*bs)/2,img._bl.width*bs,img._bl.height*bs);
+    c.fillStyle='rgba(10,6,8,.55)';c.fillRect(0,0,dw,dh);
+    const f=Math.min(dw/img.naturalWidth,dh/img.naturalHeight)*zoom,fw=img.naturalWidth*f,fh=img.naturalHeight*f;
+    c.drawImage(img,(dw-fw)/2,(dh-fh)/2+dh*.07,fw,fh);c.globalAlpha=1;return;
+  }
   const s=Math.max(dw/img.naturalWidth,dh/img.naturalHeight)*zoom,w=img.naturalWidth*s,h=img.naturalHeight*s;
   c.globalAlpha=alpha;c.drawImage(img,(dw-w)*fx,(dh-h)*fy,w,h);c.globalAlpha=1;
 }
@@ -681,6 +704,14 @@ Promise.race([crit,timeout]).then(()=>{
   document.fonts&&document.fonts.ready&&document.fonts.ready.then(()=>{layoutHome();sp.home=-1});
 });
 })();
+
+/* mobile menu */
+(function(){const n=document.querySelector('.nav'),b=document.getElementById('burger');if(!n||!b)return;
+const set=o=>{n.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false')};
+b.addEventListener('click',e=>{e.stopPropagation();set(!n.classList.contains('open'))});
+n.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>set(false)));
+document.addEventListener('click',e=>{if(!n.contains(e.target))set(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});})();
 </script>
 </body>
 </html>

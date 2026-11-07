@@ -6,10 +6,18 @@
 <title>Olivane Estate: concept website by Athens Digital Frame</title>
 <meta name="description" content="Concept website by Athens Digital Frame for a fictional Cyprus real-estate developer, Olivane Estate. Scroll-to-build story, sample listings.">
 <meta name="theme-color" content="#070a12">
+<link rel="canonical" href="https://athensdigitalframe.vercel.app/olivane/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Olivane Estate, a concept project by Athens Digital Frame">
+<meta property="og:url" content="https://athensdigitalframe.vercel.app/olivane/">
+<meta property="og:image" content="https://athensdigitalframe.vercel.app/olivane/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A finished clifftop villa with an infinity pool above the sea at sunset">
 <meta property="og:title" content="Olivane Estate: homes built in Cyprus">
 <meta property="og:description" content="A concept project by Athens Digital Frame: watch a villa go from blueprint to finished home. Fictional company.">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://athensdigitalframe.vercel.app/olivane/og.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0807'/%3E%3Cpath d='M7 25V14l9-8 9 8v11z' fill='none' stroke='%23ffbd80' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -524,10 +532,96 @@ body{background:var(--bg)}
 }
 @media (prefers-reduced-motion:reduce){.rvx{opacity:1;transform:none;transition:none}.card img,.card[aria-hidden=false] img{transform:none;transition:none}}
 </style>
+<style id="v6">
+/* ===== v6 : glass menu over lists, footer, plan viewer, property view, grain, phone text sizes ===== */
+.nav{transition:background .35s,box-shadow .35s,backdrop-filter .35s}
+.nav.stuck{background:rgba(7,10,18,.8);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(255,255,255,.09)}
+.nav.stuck:before{opacity:0}
+.concept{transition:opacity .35s,visibility .35s}
+.inlist .concept{opacity:0;visibility:hidden}
+.tint{position:fixed;inset:0;z-index:49;pointer-events:none;opacity:.07;mix-blend-mode:normal}
+.grain{position:fixed;inset:0;z-index:51;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px}
+/* hero plan button */
+.planbtn{pointer-events:none;margin-top:18px;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;border:1px solid rgba(255,255,255,.4);background:rgba(10,14,28,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font:500 13px/1 var(--sans);cursor:pointer;opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s,background .2s}
+.planbtn.show{pointer-events:auto;opacity:1;transform:none}
+.cap:not(.on) .planbtn{pointer-events:none;opacity:0}
+.planbtn:hover{background:var(--peach);color:#240f0a;border-color:var(--peach)}
+.planbtn i{font-style:normal}
+/* footer */
+.foot{position:relative;z-index:7;background:#070a12;border-top:1px solid rgba(255,255,255,.08);padding:clamp(48px,8vh,84px) var(--pad) 28px}
+.foot-in{display:grid;grid-template-columns:1.4fr .8fr 1.1fr 1.4fr;gap:clamp(24px,4vw,64px)}
+.fcol h3{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--peach);margin-bottom:16px}
+.fcol p,.fcol a{display:block;font-size:14px;line-height:1.55;color:rgba(255,255,255,.78);text-decoration:none;margin-bottom:8px}
+.fcol a:not(.ghost):not(.fbrand):hover{color:#fff}
+.fbrand{display:flex!important;align-items:center;gap:10px;font:700 13px/1 var(--sans)!important;letter-spacing:.2em;text-transform:uppercase;color:#fff!important;margin-bottom:16px!important}
+.fbrand svg{width:20px;height:20px}
+.fcol .ghost{display:inline-block;margin-top:8px;color:#fff}
+.foot-b{margin-top:clamp(32px,6vh,56px);padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;color:rgba(255,255,255,.55)}
+@media (max-width:900px){.foot-in{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.foot-in{grid-template-columns:1fr}}
+/* listing title button + clickable cards */
+.home{cursor:pointer}
+.home h3 .vw{all:unset;cursor:pointer;display:block}
+.home h3 .vw:focus-visible{outline:2px solid var(--peach);outline-offset:4px;border-radius:6px}
+/* lightbox */
+.lb,.pv{position:fixed;inset:0;z-index:90;opacity:0;transition:opacity .26s}
+.lb.open,.pv.open{opacity:1}
+.lb{background:rgba(3,5,12,.94);display:flex;flex-direction:column}
+.lb[hidden],.pv[hidden]{display:none}
+.lb-s{flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;padding:clamp(56px,8vh,80px) 12px 8px;cursor:zoom-in}
+.lb-s img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb-s.z{cursor:zoom-out;align-items:flex-start;justify-content:flex-start}
+.lb-s.z img{max-width:none;max-height:none;width:min(260vw,3200px)}
+.lb-x,.pv-x{position:absolute;right:16px;top:16px;z-index:3;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(10,14,28,.7);color:#fff;font-size:24px;line-height:1;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.lb-x:hover,.pv-x:hover{background:rgba(255,255,255,.18)}
+.lb-h{text-align:center;font-size:12.5px;color:rgba(255,255,255,.65);padding:6px 16px 16px}
+/* property view */
+.pv{background:rgba(3,5,12,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:clamp(12px,4vh,48px) clamp(10px,3vw,40px)}
+.pv-box{position:relative;width:min(1120px,100%);display:grid;grid-template-columns:1.15fr 1fr;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#131b32,#0c1222);border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 100px -30px rgba(0,0,0,.8);transform:translateY(14px);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.pv.open .pv-box{transform:none}
+.pv-g{display:flex;flex-direction:column;background:#0a0e1a;min-width:0}
+.pv-m{position:relative;aspect-ratio:4/3;overflow:hidden}
+.pv-m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pv-th{display:flex;gap:8px;padding:10px}
+.pv-th button{flex:1;aspect-ratio:16/10;border:2px solid transparent;border-radius:10px;overflow:hidden;padding:0;cursor:pointer;background:#141b30;opacity:.65;transition:opacity .2s,border-color .2s}
+.pv-th button.on,.pv-th button:hover{opacity:1;border-color:var(--peach)}
+.pv-th img{width:100%;height:100%;object-fit:cover;display:block}
+.pv-i{padding:clamp(22px,3vw,38px);display:flex;flex-direction:column;gap:12px;min-width:0}
+.pv-st{align-self:flex-start;font:500 11px/1 var(--sans);padding:7px 10px;border-radius:99px;background:rgba(7,10,18,.75);border:1px solid rgba(255,255,255,.25)}
+.pv-i h2{font:400 clamp(30px,3.2vw,44px)/1.05 var(--serif);margin-right:36px}
+.pv-w{font-size:14px;color:var(--muted)}
+.pv-p{font:600 clamp(26px,2.6vw,34px)/1 var(--sans);letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.pv-p small{display:block;font:400 11px var(--sans);letter-spacing:0;color:var(--muted);-webkit-text-fill-color:var(--muted);margin-bottom:6px}
+.pv-i .specs{gap:10px}.pv-i .specs span{padding:7px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.2);font-size:13px}
+.pv-d{font-size:15px;line-height:1.6;color:rgba(255,255,255,.88)}
+.pv-i h3{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--peach);margin-top:6px}
+.pv-f{list-style:none;display:grid;gap:8px}
+.pv-f li{position:relative;padding-left:20px;font-size:14px;color:rgba(255,255,255,.88)}
+.pv-f li:before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--grad)}
+.pv-plan{padding:0;border:1px solid rgba(255,255,255,.2);border-radius:12px;overflow:hidden;cursor:zoom-in;background:#1f4ac4;display:block}
+.pv-plan img{width:100%;height:auto;display:block}
+.pv-np{font-size:13.5px;color:var(--muted)}
+.pv-b{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.pv-b .pill{justify-self:auto}
+@media (max-width:860px){.pv-box{grid-template-columns:1fr}.pv-m{aspect-ratio:16/11}}
+/* phones: readable small text */
+@media (max-width:760px){
+  .hud{font-size:12px}
+  .eyebrow,.cap .eyebrow{font-size:11.5px}
+  .card p{font-size:12px}
+  .nums span{font-size:12.5px}
+  .badge{font-size:12px}
+  .home .where,.specs{font-size:14px}
+  .fld{font-size:13px}.count-l,.note{font-size:13px}
+  .planbtn{font-size:13.5px}
+}
+@media (prefers-reduced-motion:reduce){.tint{display:none}.pv-box,.lb,.pv,.planbtn{transition:none}}
+</style>
 </head>
 <body>
 <a class="skip" href="#listings">Skip to homes for sale</a>
 <div class="spbar" id="spbar" aria-hidden="true"></div>
+<div class="tint" id="tint" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
 <div id="loader" role="status" aria-live="polite">
   <div class="lw"><svg viewBox="0 0 16 16" fill="none" stroke="#ffbd80" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2 14V7l6-5 6 5v7z"/></svg>Olivane Estate</div>
   <div class="lb"><i id="lbar"></i></div><span class="sr">Loading photos</span><p style="font:400 11px var(--sans);color:rgba(255,255,255,.55);text-align:center;padding:0 20px">Concept project by Athens Digital Frame · fictional company</p>
@@ -555,7 +649,7 @@ body{background:var(--bg)}
     <canvas class="fill" id="heroC" role="img" aria-label="A blueprint held up over a bare hillside plot at sunset"></canvas>
     <div class="scrim"></div>
     <div class="caps" id="caps">
-      <div class="cap on"><span class="eyebrow">01 · The plan</span><h2 class="hd"><span>It starts</span><span class="it">on paper.</span></h2><p>Every Olivane Estate home is drawn around the land, the light and the view, before a single stone moves.</p></div>
+      <div class="cap on"><span class="eyebrow">01 · The plan</span><h2 class="hd"><span>It starts</span><span class="it">on paper.</span></h2><p>Every Olivane Estate home is drawn around the land, the light and the view, before a single stone moves.</p><button class="planbtn" type="button" id="planBtn">View the full plan <i aria-hidden="true">↗</i></button></div>
       <div class="cap"><span class="eyebrow">02 · Foundations</span><h2 class="hd"><span>Rooted in</span><span class="it">the hill.</span></h2><p>We cut into the slope, not across it, so the house sits low and the view stays open.</p></div>
       <div class="cap"><span class="eyebrow">03 · Structure</span><h2 class="hd"><span>Then it</span><span class="it">rises.</span></h2><p>Concrete frames, stone walls and deep terraces go up floor by floor under one site team.</p></div>
       <div class="cap"><span class="eyebrow">04 · Finish</span><h2 class="hd"><span>Finished</span><span class="it">by hand.</span></h2><p>Local stone, oak and glass are fitted by craftsmen who have worked with us for years.</p></div>
@@ -653,6 +747,44 @@ body{background:var(--bg)}
 </main>
 
 <div id="ov"></div>
+<footer id="foot" class="foot">
+  <div class="foot-in">
+    <div class="fcol fabout">
+      <a class="fbrand" href="#hero"><svg viewBox="0 0 16 16" fill="none" stroke="#ffbd80" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2 14V7l6-5 6 5v7z"/></svg>Olivane Estate</a>
+      <p>Villas, apartments and commercial buildings across Cyprus, built and handed over by one team.</p>
+    </div>
+    <nav class="fcol" aria-label="Footer"><h3>Explore</h3><a href="#hero">Process</a><a href="#work">Projects</a><a href="#stats">About</a><a href="#listings">Homes</a></nav>
+    <div class="fcol"><h3>Visit</h3><p>Sample address, Limassol, Cyprus</p><p>+357 00 000 000</p><p>hello@olivane.example</p></div>
+    <div class="fcol"><h3>Concept project</h3><p>Olivane Estate is a fictional company, made by Athens Digital Frame to show a scroll-driven real-estate website.</p><a class="ghost" href="/">See more of our work</a></div>
+  </div>
+  <p class="foot-b">© 2026 Olivane Estate (fictional). Concept project by Athens Digital Frame.</p>
+</footer>
+
+<div id="lb" class="lb" role="dialog" aria-modal="true" aria-label="Site plan and ground floor" hidden>
+  <button class="lb-x" id="lbX" type="button" aria-label="Close">×</button>
+  <div class="lb-s" id="lbS"><img id="lbI" alt="Architectural sheet: site plan, ground floor, front elevation and area schedule for the Clifftop Villa"></div>
+  <p class="lb-h">Tap the drawing to zoom. Concept drawing, not for construction.</p>
+</div>
+
+<div id="pv" class="pv" role="dialog" aria-modal="true" aria-labelledby="pvT" hidden>
+  <div class="pv-box">
+    <button class="pv-x" id="pvX" type="button" aria-label="Close">×</button>
+    <div class="pv-g"><div class="pv-m"><img id="pvM" alt=""></div><div class="pv-th" id="pvTh"></div></div>
+    <div class="pv-i">
+      <span class="pv-st" id="pvSt"></span>
+      <h2 id="pvT"></h2>
+      <p class="pv-w" id="pvW"></p>
+      <p class="pv-p" id="pvP"></p>
+      <div class="specs" id="pvS"></div>
+      <p class="pv-d" id="pvD"></p>
+      <h3 id="pvFh"></h3>
+      <ul class="pv-f" id="pvF"></ul>
+      <div id="pvPlan"></div>
+      <div class="pv-b"><button class="pill" type="button" id="pvE"></button><button class="ghost" type="button" id="pvV"></button></div>
+    </div>
+  </div>
+</div>
+
 <aside id="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle" inert>
   <button class="x" type="button" id="pClose" aria-label="Close panel">×</button>
   <h2 id="pTitle">Book a site visit</h2>
@@ -683,11 +815,15 @@ const ss=(a,b,v)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t)};
 const lerp=(a,b,t)=>a+(b-a)*t;
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const $=id=>document.getElementById(id);
+const avifOK=new Promise(r=>{const i=new Image();i.onload=()=>r(i.width>0);i.onerror=()=>r(false);i.src='data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADrbWV0YQAAAAAAAAAhaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAAAAAAAOcGl0bQAAAAAAAQAAAB5pbG9jAAAAAEQAAAEAAQAAAAEAAAETAAAAJwAAAChpaW5mAAAAAAABAAAAGmluZmUCAAAAAAEAAGF2MDFDb2xvcgAAAABqaXBycAAAAEtpcGNvAAAAFGlzcGUAAAAAAAAAAgAAAAIAAAAQcGl4aQAAAAADCAgIAAAADGF2MUOBAAwAAAAAE2NvbHJuY2x4AAEADQAGgAAAABdpcG1hAAAAAAAAAAEAAQQBAoMEAAAAL21kYXQSAAoIGAA2iAhoNCAyGRTHh4ZlAgggnlAAAABIWtlcu9vRQxmukxg='});
+let FMT='webp';avifOK.then(ok=>{if(ok)FMT='avif'});
+const pic=(base,alt,extra='')=>`<picture><source type="image/avif" srcset="img/${base}.avif"><img src="img/${base}.webp" alt="${alt}" ${extra}></picture>`;
 const load=src=>new Promise(res=>{const i=new Image();i.decoding='async';i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src});
 const SFX=innerWidth<=900?'-m':'';
 const lang0=(()=>{try{const q=location.search.match(/[?&]lang=(en|el)/);if(q){try{localStorage.setItem('lang',q[1])}catch(e){}return q[1]}const v=localStorage.getItem('lang');if(v==='en'||v==='el')return v}catch(e){const q=location.search.match(/[?&]lang=(en|el)/);if(q)return q[1]}return 'en'})();
 let lang=lang0;
 const EL={"Olivane Estate: concept website by Athens Digital Frame": "Olivane Estate: concept ιστοσελίδα από την Athens Digital Frame", "Concept website by Athens Digital Frame for a fictional Cyprus real-estate developer, Olivane Estate. Scroll-to-build story, sample listings.": "Concept ιστοσελίδα της Athens Digital Frame για μια φανταστική κατασκευαστική εταιρεία στην Κύπρο, την Olivane Estate. Ιστορία κατασκευής με κύλιση και δείγματα αγγελιών.", "Olivane Estate: homes built in Cyprus": "Olivane Estate: σπίτια χτισμένα στην Κύπρο", "A concept project by Athens Digital Frame: watch a villa go from blueprint to finished home. Fictional company.": "Ένα concept έργο της Athens Digital Frame: δες μια βίλα να περνά από το σχέδιο στο έτοιμο σπίτι. Φανταστική εταιρεία.", "Concept project by Athens Digital Frame. Olivane Estate is a fictional company: listings, prices and figures are samples. The forms are demo-only and send nothing.": "Concept έργο της Athens Digital Frame. Η Olivane Estate είναι φανταστική εταιρεία: οι αγγελίες, οι τιμές και τα στοιχεία είναι δείγματα. Οι φόρμες είναι δοκιμαστικές και δεν στέλνουν τίποτα.", "Skip to homes for sale": "Μετάβαση στα διαθέσιμα σπίτια", "Loading photos": "Φόρτωση φωτογραφιών", "Concept project by Athens Digital Frame · fictional company": "Concept έργο της Athens Digital Frame · φανταστική εταιρεία", "Olivane Estate, back to top": "Olivane Estate, επιστροφή στην αρχή", "Homes": "Σπίτια", "Process": "Διαδικασία", "Projects": "Έργα", "About": "Η εταιρεία", "Menu": "Μενού", "Book a site visit": "Κλείσε επίσκεψη", "Primary": "Κύριο μενού", "Page sections": "Ενότητες σελίδας", "Concept project": "Concept έργο", "by": "από την", "by Athens Digital Frame": "από την Athens Digital Frame", "Fictional company.": "Φανταστική εταιρεία.", "Olivane Estate: homes built in Limassol, Cyprus": "Olivane Estate: σπίτια χτισμένα στη Λεμεσό της Κύπρου", "How an Olivane home is built": "Πώς χτίζεται ένα σπίτι Olivane", "A blueprint held up over a bare hillside plot at sunset": "Αρχιτεκτονικό σχέδιο υψωμένο μπροστά από ένα άδειο οικόπεδο στην πλαγιά, την ώρα του ηλιοβασιλέματος", "The bare hillside plot at sunset, marked with red survey stakes": "Το άδειο οικόπεδο στην πλαγιά στο ηλιοβασίλεμα, με κόκκινους πασσάλους χωροστάθμησης", "Concrete foundations and a pool shell being built on the plot": "Θεμέλια από σκυρόδεμα και κέλυφος πισίνας σε κατασκευή στο οικόπεδο", "The raw concrete frame of the villa rising above the sea": "Ο γυμνός σκελετός από σκυρόδεμα της βίλας να υψώνεται πάνω από τη θάλασσα", "The finished villa with glass walls and an infinity pool at sunset": "Η ολοκληρωμένη βίλα με τζαμαρίες και πισίνα infinity στο ηλιοβασίλεμα", "The same villa lit up at dusk": "Η ίδια βίλα φωτισμένη το σούρουπο", "A living room opening onto the pool and the sea at sunset": "Σαλόνι που ανοίγει προς την πισίνα και τη θάλασσα στο ηλιοβασίλεμα", "A finished clifftop villa with an infinity pool at sunset": "Ολοκληρωμένη βίλα στον γκρεμό με πισίνα infinity στο ηλιοβασίλεμα", "A raw concrete villa frame under construction on a hillside": "Γυμνός σκελετός βίλας από σκυρόδεμα υπό κατασκευή στην πλαγιά", "The villa lit up at dusk above the sea": "Η βίλα φωτισμένη το σούρουπο πάνω από τη θάλασσα", "01 · The plan": "01 · Το σχέδιο", "It starts": "Ξεκινά", "on paper.": "στο χαρτί.", "Every Olivane Estate home is drawn around the land, the light and the view, before a single stone moves.": "Κάθε σπίτι Olivane Estate σχεδιάζεται γύρω από το οικόπεδο, το φως και τη θέα, πριν μετακινηθεί έστω και μία πέτρα.", "02 · Foundations": "02 · Θεμέλια", "Rooted in": "Ριζωμένο", "the hill.": "στον λόφο.", "We cut into the slope, not across it, so the house sits low and the view stays open.": "Σκάβουμε μέσα στην πλαγιά και όχι πάνω της, ώστε το σπίτι να κάθεται χαμηλά και η θέα να μένει ανοιχτή.", "03 · Structure": "03 · Κατασκευή", "Then it": "Έπειτα", "rises.": "υψώνεται.", "Concrete frames, stone walls and deep terraces go up floor by floor under one site team.": "Σκελετοί από σκυρόδεμα, πέτρινοι τοίχοι και βαθιές βεράντες ανεβαίνουν όροφο προς όροφο από μία ομάδα εργοταξίου.", "04 · Finish": "04 · Φινίρισμα", "Finished": "Τελειωμένο", "by hand.": "στο χέρι.", "Local stone, oak and glass are fitted by craftsmen who have worked with us for years.": "Τοπική πέτρα, δρυς και γυαλί τοποθετούνται από τεχνίτες που συνεργάζονται μαζί μας εδώ και χρόνια.", "05 · Inside": "05 · Εσωτερικά", "Made for": "Φτιαγμένο για", "long summers.": "μεγάλα καλοκαίρια.", "Rooms that open onto the pool, the olive trees and the sea.": "Δωμάτια που ανοίγουν στην πισίνα, στις ελιές και στη θάλασσα.", "Scroll to build": "Κύλισε για να χτιστεί", "Limassol · Cyprus": "Λεμεσός · Κύπρος", "The plan": "Το σχέδιο", "Foundations": "Θεμέλια", "Structure": "Κατασκευή", "Finish": "Φινίρισμα", "Inside": "Εσωτερικά", "Homes, finished and handed over": "Σπίτια, έτοιμα και παραδομένα", "Built, finished, handed over": "Χτισμένο, τελειωμένο, παραδομένο", "and then it's yours.": "και μετά είναι δικό σου.", "Your keys,": "Τα κλειδιά σου,", "ready.": "έτοιμα.", "Fixed": "Σταθερή", "price, signed on day one. No surprises at handover.": "τιμή, υπογεγραμμένη από την πρώτη μέρα. Χωρίς εκπλήξεις στην παράδοση.", "Dated": "Συγκεκριμένη", "handover, written into the contract.": "ημερομηνία παράδοσης, γραμμένη στο συμβόλαιο.", "One": "Ένας", "project manager, from the plot to the keys.": "υπεύθυνος έργου, από το οικόπεδο μέχρι τα κλειδιά.", "What we build": "Τι χτίζουμε", "What we do": "Τι κάνουμε", "What": "Τι", "we build.": "χτίζουμε.", "About Olivane Estate": "Σχετικά με την Olivane Estate", "Who we are": "Ποιοι είμαστε", "Building Cyprus": "Χτίζουμε την Κύπρο", "since 1996.": "από το 1996.", "Three decades of villas, apartments and commercial buildings on the island, delivered by one team that stays on site until the keys change hands.": "Τρεις δεκαετίες βίλες, διαμερίσματα και επαγγελματικά κτίρια στο νησί, από μία ομάδα που μένει στο εργοτάξιο μέχρι να αλλάξουν χέρια τα κλειδιά.", "Homes handed over": "Σπίτια παραδομένα", "Years building in Cyprus": "Χρόνια στην Κύπρο", "Handed over on the agreed date": "Παραδόθηκαν στην ώρα τους", "Projects on site today": "Έργα σε εξέλιξη σήμερα", "for sale.": "προς πώληση.", "Filter by type, area and price. Every home is built and handed over by the same team.": "Φίλτραρε ανά τύπο, περιοχή και τιμή. Κάθε σπίτι χτίζεται και παραδίδεται από την ίδια ομάδα.", "Filter homes": "Φίλτρα σπιτιών", "Type": "Τύπος", "All homes": "Όλα", "Villas": "Βίλες", "Apartments": "Διαμερίσματα", "Restorations": "Αναπαλαιώσεις", "Commercial": "Επαγγελματικά", "Area": "Περιοχή", "All areas": "Όλες οι περιοχές", "Limassol": "Λεμεσός", "Paphos": "Πάφος", "Larnaca": "Λάρνακα", "Bedrooms": "Υπνοδωμάτια", "Any": "Οποιοδήποτε", "Up to": "Έως", "Any price": "Χωρίς όριο", "Sort": "Ταξινόμηση", "Featured": "Προτεινόμενα", "Price, low to high": "Τιμή, αύξουσα", "Price, high to low": "Τιμή, φθίνουσα", "No homes match these filters.": "Κανένα σπίτι δεν ταιριάζει με αυτά τα φίλτρα.", "Clear filters": "Καθαρισμός φίλτρων", "Contact": "Επικοινωνία", "Start": "Ξεκίνα", "yours.": "το δικό σου.", "Request the brochure": "Ζήτησε το φυλλάδιο", "Close panel": "Κλείσιμο", "Full name": "Ονοματεπώνυμο", "Phone": "Τηλέφωνο", "Email": "Email", "Preferred date": "Προτιμώμενη ημερομηνία", "Home": "Σπίτι", "Message (optional)": "Μήνυμα (προαιρετικό)", "Send (demo)": "Αποστολή (demo)", "Close": "Κλείσιμο", "Your message": "Το μήνυμά σου", "Reveal": "Αποκάλυψη", "Enquire about ": "Ενδιαφέρομαι για ", "Save ": "Αποθήκευση: ", "Cyprus": "Κύπρος", "Price": "Τιμή", "Enquire": "Ενδιαφέρομαι", "Choose a date. (Demo form: nothing is sent.)": "Διάλεξε ημερομηνία. (Δοκιμαστική φόρμα: δεν στέλνεται τίποτα.)", "Demo form: nothing is sent.": "Δοκιμαστική φόρμα: δεν στέλνεται τίποτα.", "Please enter your name.": "Συμπλήρωσε το όνομά σου.", "Please enter a valid email address.": "Συμπλήρωσε ένα έγκυρο email.", "Please enter a phone number so we can confirm your visit.": "Συμπλήρωσε τηλέφωνο για να επιβεβαιώσουμε την επίσκεψη.", "Please add a phone number or a valid email address.": "Πρόσθεσε τηλέφωνο ή ένα έγκυρο email.", "Demo only: this is a concept project by Athens Digital Frame, so nothing has been sent and nothing is stored. A real site would deliver this message to the company:": "Μόνο δοκιμαστικά: αυτό είναι concept έργο της Athens Digital Frame, οπότε τίποτα δεν στάλθηκε και τίποτα δεν αποθηκεύτηκε. Ένα πραγματικό site θα παρέδιδε αυτό το μήνυμα στην εταιρεία:", "I would like to book a site visit.": "Θα ήθελα να κλείσω μια επίσκεψη.", "Preferred date: ": "Προτιμώμενη ημερομηνία: ", "I am interested in ": "Ενδιαφέρομαι για ", "Please send me the Olivane Estate brochure.": "Παρακαλώ στείλτε μου το φυλλάδιο της Olivane Estate.", "Name: ": "Όνομα: ", "Phone: ": "Τηλέφωνο: ", "Email: ": "Email: ", "Message: ": "Μήνυμα: ", "Site visit request: ": "Αίτημα επίσκεψης: ", "Enquiry: ": "Ενδιαφέρον: ", "Brochure request: ": "Αίτημα φυλλαδίου: ", "Subject: ": "Θέμα: ", "Private villas": "Ιδιωτικές βίλες", "Villas drawn around one plot, one view and one family.": "Βίλες σχεδιασμένες γύρω από ένα οικόπεδο, μία θέα και μία οικογένεια.", "Residences": "Κατοικίες", "Low-rise apartments with terraces facing the sea.": "Χαμηλά διαμερίσματα με βεράντες στη θάλασσα.", "Old stone houses brought back to full health.": "Παλιά πέτρινα σπίτια που ξαναγυρίζουν στην παλιά τους αίγλη.", "Hotels, offices and retail built to open on time.": "Ξενοδοχεία, γραφεία και καταστήματα που ανοίγουν στην ώρα τους.", "Pools & gardens": "Πισίνες & κήποι", "Infinity pools, stone terraces and olive planting.": "Πισίνες infinity, πέτρινες βεράντες και φύτευση ελιών.", "Turnkey interiors": "Εσωτερικά με το κλειδί στο χέρι", "Furnished and ready to live in on handover day.": "Επιπλωμένα και έτοιμα να τα κατοικήσεις από την ημέρα της παράδοσης.", "A modern villa with an infinity pool above the sea at sunset": "Μοντέρνα βίλα με πισίνα infinity πάνω από τη θάλασσα στο ηλιοβασίλεμα", "A white apartment building with stepped sea-view terraces": "Λευκή πολυκατοικία με βεράντες σε σκαλοπάτια και θέα στη θάλασσα", "A restored stone house with blue shutters and red bougainvillea": "Αναπαλαιωμένο πέτρινο σπίτι με μπλε παντζούρια και κόκκινη βουκαμβίλια", "A modern glass office building with young trees in front": "Μοντέρνο γυάλινο κτίριο γραφείων με νεαρά δέντρα μπροστά", "An infinity pool with olive trees and a view of the sea": "Πισίνα infinity με ελιές και θέα στη θάλασσα", "A furnished living room with a sofa and a view of the sea": "Επιπλωμένο σαλόνι με καναπέ και θέα στη θάλασσα", "Clifftop Villa": "Βίλα στον Γκρεμό", "Sea Terrace Residences": "Κατοικίες Sea Terrace", "The Stone House": "Το Πέτρινο Σπίτι", "Harbour Offices": "Γραφεία στο Λιμάνι", "Olive Pool Estate": "Έπαυλη με Ελιές και Πισίνα", "Hillside Villa, Phase 2": "Βίλα στην Πλαγιά, Φάση 2", "Sunset Residence": "Κατοικία Sunset", "Clifftop villa with infinity pool at sunset": "Βίλα στον γκρεμό με πισίνα infinity στο ηλιοβασίλεμα", "White apartment building with sea terraces": "Λευκή πολυκατοικία με βεράντες στη θάλασσα", "Restored stone house with bougainvillea": "Αναπαλαιωμένο πέτρινο σπίτι με βουκαμβίλια", "Modern glass office building": "Μοντέρνο γυάλινο κτίριο γραφείων", "Estate with infinity pool and olive trees": "Έπαυλη με πισίνα infinity και ελιές", "Villa under construction on the hillside": "Βίλα υπό κατασκευή στην πλαγιά", "Furnished apartment living room facing the sea": "Επιπλωμένο σαλόνι διαμερίσματος με θέα στη θάλασσα", "Ready to move in": "Έτοιμο για μετοίκιση", "Handover 2027": "Παράδοση 2027"};
+Object.assign(EL,{"View the full plan": "Δες ολόκληρο το σχέδιο", "Site plan and ground floor": "Κάτοψη οικοπέδου και ισογείου", "Architectural sheet: site plan, ground floor, front elevation and area schedule for the Clifftop Villa": "Αρχιτεκτονικό φύλλο: κάτοψη οικοπέδου, ισόγειο, πρόσοψη και πίνακας επιφανειών για τη Βίλα στον Γκρεμό", "Tap the drawing to zoom. Concept drawing, not for construction.": "Πάτησε το σχέδιο για μεγέθυνση. Concept σχέδιο, όχι για κατασκευή.", "Villas, apartments and commercial buildings across Cyprus, built and handed over by one team.": "Βίλες, διαμερίσματα και επαγγελματικά κτίρια σε όλη την Κύπρο, χτισμένα και παραδομένα από μία ομάδα.", "Explore": "Εξερεύνηση", "Footer": "Υποσέλιδο", "Visit": "Επίσκεψη", "Sample address, Limassol, Cyprus": "Δείγμα διεύθυνσης, Λεμεσός, Κύπρος", "Olivane Estate is a fictional company, made by Athens Digital Frame to show a scroll-driven real-estate website.": "Η Olivane Estate είναι φανταστική εταιρεία, φτιαγμένη από την Athens Digital Frame για να δείξει μια ιστοσελίδα ακινήτων με κύλιση.", "See more of our work": "Δες περισσότερα έργα μας", "© 2026 Olivane Estate (fictional). Concept project by Athens Digital Frame.": "© 2026 Olivane Estate (φανταστική). Concept έργο της Athens Digital Frame.", "Gallery": "Συλλογή", "Features": "Χαρακτηριστικά", "Floor plan (sample)": "Κάτοψη (δείγμα)", "Floor plans on request.": "Κατόψεις κατόπιν αιτήματος.", "Book a visit": "Κλείσε επίσκεψη", "View details": "Δες λεπτομέρειες", "Enquire about this home": "Ενδιαφέρομαι για αυτό το σπίτι", "A four-bedroom villa cut into the cliff, with an infinity pool and glass walls facing the sea.": "Βίλα τεσσάρων υπνοδωματίων χτισμένη μέσα στον γκρεμό, με πισίνα infinity και τζαμαρίες προς τη θάλασσα.", "Infinity pool and stone terrace": "Πισίνα infinity και πέτρινη βεράντα", "Sea-view master suite": "Κύρια σουίτα με θέα στη θάλασσα", "Double garage": "Γκαράζ δύο θέσεων", "Underfloor heating": "Ενδοδαπέδια θέρμανση", "Existing olive trees kept on site": "Οι υπάρχουσες ελιές διατηρούνται στο οικόπεδο", "Light-filled apartments in a low-rise block, each with a deep terrace facing the sea.": "Φωτεινά διαμερίσματα σε χαμηλό συγκρότημα, το καθένα με βαθιά βεράντα προς τη θάλασσα.", "Private sea-view terrace": "Ιδιωτική βεράντα με θέα στη θάλασσα", "Shared pool and garden": "Κοινόχρηστη πισίνα και κήπος", "Covered parking": "Στεγασμένο πάρκινγκ", "Lift access": "Πρόσβαση με ασανσέρ", "Short walk to the harbour": "Λίγα λεπτά με τα πόδια από το λιμάνι", "A village stone house restored by local craftsmen, with new wiring, plumbing and a shaded courtyard.": "Πέτρινο σπίτι χωριού, αναπαλαιωμένο από ντόπιους τεχνίτες, με νέες ηλεκτρικές και υδραυλικές εγκαταστάσεις και σκιερή αυλή.", "Original stone walls kept": "Διατηρούνται οι αρχικοί πέτρινοι τοίχοι", "Shaded courtyard": "Σκιερή αυλή", "New roof and insulation": "Νέα στέγη και μόνωση", "Blue timber shutters": "Μπλε ξύλινα παντζούρια", "Walkable village location": "Τοποθεσία στο χωριό, προσβάσιμη με τα πόδια", "Open-plan offices over four floors with full-height glass and a landscaped forecourt.": "Γραφεία ανοιχτής διάταξης σε τέσσερις ορόφους, με τζάμι σε όλο το ύψος και διαμορφωμένη αυλή.", "Full-height glazing": "Τζαμαρίες σε όλο το ύψος", "Flexible floor plates": "Ευέλικτοι χώροι ορόφων", "Basement parking": "Πάρκινγκ υπογείου", "Meeting rooms on every floor": "Αίθουσες συσκέψεων σε κάθε όροφο", "Harbour views": "Θέα στο λιμάνι", "A five-bedroom estate set among old olive trees, with a long pool and an outdoor kitchen.": "Έπαυλη πέντε υπνοδωματίων ανάμεσα σε παλιές ελιές, με μακριά πισίνα και εξωτερική κουζίνα.", "Long infinity pool": "Μακριά πισίνα infinity", "Outdoor kitchen and dining": "Εξωτερική κουζίνα και τραπεζαρία", "Separate guest wing": "Ξεχωριστή πτέρυγα φιλοξενίας", "Mature olive grove": "Ώριμος ελαιώνας", "Smart-home lighting": "Έξυπνος φωτισμός", "Phase 2 of the hillside villas: the concrete frame is up and interiors start this winter.": "Φάση 2 των βιλών στην πλαγιά: ο σκελετός από σκυρόδεμα έχει ανέβει και τα εσωτερικά ξεκινούν αυτόν τον χειμώνα.", "Handover in 2027": "Παράδοση το 2027", "Choose your own finishes": "Διάλεξε τα δικά σου φινιρίσματα", "Fixed price and fixed date": "Σταθερή τιμή και σταθερή ημερομηνία", "Terrace and pool shell in place": "Βεράντα και κέλυφος πισίνας έτοιμα", "A furnished three-bedroom apartment, ready for the keys, facing the sunset.": "Επιπλωμένο διαμέρισμα τριών υπνοδωματίων, έτοιμο για παράδοση, με θέα στο ηλιοβασίλεμα.", "Furnished and ready to live in": "Επιπλωμένο και έτοιμο να το κατοικήσεις", "Sea-view living room": "Σαλόνι με θέα στη θάλασσα", "Shared pool": "Κοινόχρηστη πισίνα", "Two bathrooms": "Δύο μπάνια"});
 const t=k=>lang==='el'&&EL[k]!==undefined?EL[k]:k,tt=t;
 
 
@@ -702,13 +838,13 @@ const CARDS=[
   ['Turnkey interiors','Furnished and ready to live in on handover day.','card6',40,'A furnished living room with a sofa and a view of the sea']
 ];
 const HOMES=[
-  {id:'h1',name:'Clifftop Villa',type:'villa',area:'Limassol',beds:4,baths:4,size:380,price:2450000,status:'Ready to move in',img:'finished',alt:'Clifftop villa with infinity pool at sunset'},
-  {id:'h2',name:'Sea Terrace Residences',type:'apartment',area:'Paphos',beds:2,baths:2,size:112,price:485000,status:'Ready to move in',img:'card2',alt:'White apartment building with sea terraces'},
-  {id:'h3',name:'The Stone House',type:'restoration',area:'Larnaca',beds:3,baths:2,size:210,price:690000,status:'Ready to move in',img:'card3',alt:'Restored stone house with bougainvillea'},
-  {id:'h4',name:'Harbour Offices',type:'commercial',area:'Limassol',beds:0,baths:0,size:620,price:3100000,status:'Ready to move in',img:'card4',alt:'Modern glass office building'},
-  {id:'h5',name:'Olive Pool Estate',type:'villa',area:'Paphos',beds:5,baths:5,size:460,price:3200000,status:'Ready to move in',img:'card5',alt:'Estate with infinity pool and olive trees'},
-  {id:'h6',name:'Hillside Villa, Phase 2',type:'villa',area:'Limassol',beds:4,baths:3,size:340,price:2150000,status:'Handover 2027',img:'structure',alt:'Villa under construction on the hillside'},
-  {id:'h7',name:'Sunset Residence',type:'apartment',area:'Larnaca',beds:3,baths:2,size:148,price:620000,status:'Handover 2027',img:'card6',alt:'Furnished apartment living room facing the sea'}
+  {id:'h1',name:'Clifftop Villa',type:'villa',plan:1,gal:['finished','dusk','interior'],desc:'A four-bedroom villa cut into the cliff, with an infinity pool and glass walls facing the sea.',feats:['Infinity pool and stone terrace','Sea-view master suite','Double garage','Underfloor heating','Existing olive trees kept on site'],area:'Limassol',beds:4,baths:4,size:380,price:2450000,status:'Ready to move in',img:'finished',alt:'Clifftop villa with infinity pool at sunset'},
+  {id:'h2',name:'Sea Terrace Residences',type:'apartment',gal:['card2','card6','card5'],desc:'Light-filled apartments in a low-rise block, each with a deep terrace facing the sea.',feats:['Private sea-view terrace','Shared pool and garden','Covered parking','Lift access','Short walk to the harbour'],area:'Paphos',beds:2,baths:2,size:112,price:485000,status:'Ready to move in',img:'card2',alt:'White apartment building with sea terraces'},
+  {id:'h3',name:'The Stone House',type:'restoration',gal:['card3','card6'],desc:'A village stone house restored by local craftsmen, with new wiring, plumbing and a shaded courtyard.',feats:['Original stone walls kept','Shaded courtyard','New roof and insulation','Blue timber shutters','Walkable village location'],area:'Larnaca',beds:3,baths:2,size:210,price:690000,status:'Ready to move in',img:'card3',alt:'Restored stone house with bougainvillea'},
+  {id:'h4',name:'Harbour Offices',type:'commercial',gal:['card4'],desc:'Open-plan offices over four floors with full-height glass and a landscaped forecourt.',feats:['Full-height glazing','Flexible floor plates','Basement parking','Meeting rooms on every floor','Harbour views'],area:'Limassol',beds:0,baths:0,size:620,price:3100000,status:'Ready to move in',img:'card4',alt:'Modern glass office building'},
+  {id:'h5',name:'Olive Pool Estate',type:'villa',plan:1,gal:['card5','card1','dusk'],desc:'A five-bedroom estate set among old olive trees, with a long pool and an outdoor kitchen.',feats:['Long infinity pool','Outdoor kitchen and dining','Separate guest wing','Mature olive grove','Smart-home lighting'],area:'Paphos',beds:5,baths:5,size:460,price:3200000,status:'Ready to move in',img:'card5',alt:'Estate with infinity pool and olive trees'},
+  {id:'h6',name:'Hillside Villa, Phase 2',type:'villa',plan:1,gal:['structure','foundations','bare'],desc:'Phase 2 of the hillside villas: the concrete frame is up and interiors start this winter.',feats:['Handover in 2027','Choose your own finishes','Fixed price and fixed date','Terrace and pool shell in place'],area:'Limassol',beds:4,baths:3,size:340,price:2150000,status:'Handover 2027',img:'structure',alt:'Villa under construction on the hillside'},
+  {id:'h7',name:'Sunset Residence',type:'apartment',gal:['card6','card2','card5'],desc:'A furnished three-bedroom apartment, ready for the keys, facing the sunset.',feats:['Furnished and ready to live in','Sea-view living room','Shared pool','Two bathrooms','Covered parking'],area:'Larnaca',beds:3,baths:2,size:148,price:620000,status:'Handover 2027',img:'card6',alt:'Furnished apartment living room facing the sea'}
 ];
 const TYPES=[['all','All homes'],['villa','Villas'],['apartment','Apartments'],['restoration','Restorations'],['commercial','Commercial']];
 const SECTIONS=[['hero','Process'],['home','Reveal'],['work','Projects'],['stats','About'],['listings','Homes'],['cta','Contact']];
@@ -758,7 +894,7 @@ let capIdx=-1;
 function hudHero(p){
   const i=Math.min(4,Math.floor(p*5));
   if(i!==capIdx){capIdx=i;caps.forEach((c,j)=>c.classList.toggle('on',j===i));stageEl.textContent=t(stageNames[i])}
-  pct.textContent=Math.round(p*100)+'%';bar.style.transform=`scaleX(${p})`;hint.style.opacity=p<.03?1:0;
+  $('planBtn').classList.toggle('show',p<.14);pct.textContent=Math.round(p*100)+'%';bar.style.transform=`scaleX(${p})`;hint.style.opacity=p<.03?1:0;
   planRects.forEach((r,j)=>{r.style.strokeDashoffset=r._l*(1-ss(.1+j*.1,.3+j*.1,p))});
 }
 
@@ -769,7 +905,7 @@ const builtEl=$('built'),yoursEl=$('yours'),keys=$('keys');
 let org={x:0,y:0};
 function layoutHome(){
   svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`);[hmr,hmo].forEach(e=>{e.setAttribute('width',VW);e.setAttribute('height',VH)});
-  const fs=Math.min(VW*(lang==='el'?.3:.275),VH*.62),base=VH*.5+fs*.36;
+  const fs=Math.min(VW*(portrait()?(lang==='el'?.31:.36):(lang==='el'?.3:.275)),VH*.62),base=VH*.5+fs*.36;
   hmt.setAttribute('font-size',fs);hmt.setAttribute('x',VW/2);hmt.setAttribute('y',base);
   try{const r=hmt.getExtentOfChar(1);org={x:r.x+r.width*.15,y:base-fs*.36}}catch(e){org={x:VW*.42,y:VH*.5}}
 }
@@ -790,7 +926,7 @@ const rail=$('rail'),amb=$('amb'),segs=$('segs'),cnt=$('cnt');
 const cardEls=[],ambEls=[],segFill=[];
 CARDS.forEach((it,i)=>{
   const d=document.createElement('article');d.className='card';
-  const im=new Image();im.alt=t(it[4]);im.decoding='async';im.src=`img/${it[2]}.webp`;im.style.objectPosition=it[3]+'% 50%';d.appendChild(im);
+  d.insertAdjacentHTML('beforeend',pic(it[2],t(it[4]),'decoding="async"'));d.querySelector('img').style.objectPosition=it[3]+'% 50%';
   d.insertAdjacentHTML('beforeend',`<span class="no" aria-hidden="true">0${i+1}</span><div class="tx"><h3>${t(it[0]).replace('&','&amp;')}</h3><p>${t(it[1])}</p></div>`);
   rail.appendChild(d);cardEls.push(d);
   const a=document.createElement('i');a.style.backgroundImage=`url(img/${it[2]}-t.png)`;amb.appendChild(a);ambEls.push(a);
@@ -837,7 +973,7 @@ function reveal(){grid.querySelectorAll('.rv').forEach(el=>{if(rvIO&&!reduce)rvI
 function renderHomes(){
   let list=HOMES.filter(h=>(st.type==='all'||h.type===st.type)&&(!st.area||h.area===st.area)&&h.beds>=st.beds&&(st.max>=3500000||h.price<=st.max));
   if(st.sort==='asc')list.sort((a,b)=>a.price-b.price);else if(st.sort==='desc')list.sort((a,b)=>b.price-a.price);
-  grid.innerHTML=list.map((h,i)=>`<article class="home rv" style="--i:${i}"><div class="ph"><img src="img/${h.img}${h.img.startsWith('card')?'':SFX}.webp" alt="${t(h.alt)}" loading="lazy" decoding="async"><span class="badge ${h.status.startsWith('Ready')?'ok':'soon'}">${t(h.status)}</span><button class="fav" type="button" data-fav="${h.id}" aria-pressed="${favs.has(h.id)}" aria-label="${t('Save ')}${t(h.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.500s-7.500-4.400-7.500-10A4.300 4.300 0 0 1 12 7.800a4.300 4.300 0 0 1 7.500 2.700c0 5.600-7.500 10-7.500 10z"/></svg></button></div><div class="bd"><h3>${t(h.name)}</h3><p class="where">${t(h.area)}, ${t('Cyprus')}</p><div class="specs">${h.beds?`<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19V6M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.500 9H11v6"/><circle cx="7" cy="11.500" r="1.800"/></svg>${h.beds} ${lang==='el'?'υπν.':'bed'}</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v2.500a4.500 4.500 0 0 1-4.500 4.500h-7A4.500 4.500 0 0 1 4 14.500zM6 12V6.500A2.500 2.500 0 0 1 10 4.500M7.500 19l-1 2M16.500 19l1 2"/></svg>${h.baths} ${lang==='el'?(h.baths===1?'μπάνιο':'μπάνια'):'bath'}</span>`:`<span>${lang==='el'?'Επαγγελματικό':'Commercial'}</span>`}<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>${h.size} m²</span></div><div class="row"><p class="price"><small>${t('Price')}</small>${fmt.format(h.price)}</p><button class="enq" type="button" data-enq="${h.id}" aria-label="${t('Enquire about ')}${t(h.name)}">${t('Enquire')} <i aria-hidden="true">→</i></button></div></div></article>`).join('');
+  grid.innerHTML=list.map((h,i)=>`<article class="home rv" style="--i:${i}"><div class="ph">${pic(h.img+(h.img.startsWith('card')?'':SFX),t(h.alt),'loading="lazy" decoding="async"')}<span class="badge ${h.status.startsWith('Ready')?'ok':'soon'}">${t(h.status)}</span><button class="fav" type="button" data-fav="${h.id}" aria-pressed="${favs.has(h.id)}" aria-label="${t('Save ')}${t(h.name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.500s-7.500-4.400-7.500-10A4.300 4.300 0 0 1 12 7.800a4.300 4.300 0 0 1 7.500 2.700c0 5.600-7.500 10-7.500 10z"/></svg></button></div><div class="bd"><h3><button type="button" class="vw" data-view="${h.id}">${t(h.name)}</button></h3><p class="where">${t(h.area)}, ${t('Cyprus')}</p><div class="specs">${h.beds?`<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19V6M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.500 9H11v6"/><circle cx="7" cy="11.500" r="1.800"/></svg>${h.beds} ${lang==='el'?'υπν.':'bed'}</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v2.500a4.500 4.500 0 0 1-4.500 4.500h-7A4.500 4.500 0 0 1 4 14.500zM6 12V6.500A2.500 2.500 0 0 1 10 4.500M7.500 19l-1 2M16.500 19l1 2"/></svg>${h.baths} ${lang==='el'?(h.baths===1?'μπάνιο':'μπάνια'):'bath'}</span>`:`<span>${lang==='el'?'Επαγγελματικό':'Commercial'}</span>`}<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>${h.size} m²</span></div><div class="row"><p class="price"><small>${t('Price')}</small>${fmt.format(h.price)}</p><button class="enq" type="button" data-enq="${h.id}" aria-label="${t('Enquire about ')}${t(h.name)}">${t('Enquire')} <i aria-hidden="true">→</i></button></div></div></article>`).join('');
   reveal();
   $('lcount').textContent=lang==='el'?(list.length===1?'1 σπίτι':list.length+' σπίτια'):list.length+(list.length===1?' home':' homes');
   $('empty').hidden=list.length>0;
@@ -848,7 +984,7 @@ $('fBeds').addEventListener('change',e=>{st.beds=+e.target.value;renderHomes()})
 $('fSort').addEventListener('change',e=>{st.sort=e.target.value;renderHomes()});
 $('fPrice').addEventListener('input',e=>{st.max=+e.target.value;updPrice();renderHomes()});
 $('clear').addEventListener('click',()=>{Object.assign(st,{type:'all',area:'',beds:0,max:3500000,sort:'feat'});$('fArea').value='';$('fBeds').value='0';$('fSort').value='feat';$('fPrice').value=3500000;updPrice();[...chips.children].forEach(c=>c.setAttribute('aria-pressed',c.dataset.k==='all'));renderHomes()});
-grid.addEventListener('click',e=>{const f=e.target.closest('[data-fav]');if(f){const id=f.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);f.setAttribute('aria-pressed',favs.has(id));return}const b=e.target.closest('[data-enq]');if(b)openPanel('enquiry',HOMES.find(h=>h.id===b.dataset.enq),b)});
+grid.addEventListener('click',e=>{const f=e.target.closest('[data-fav]');if(f){const id=f.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);f.setAttribute('aria-pressed',favs.has(id));return}const b=e.target.closest('[data-enq]');if(b){openPanel('enquiry',HOMES.find(h=>h.id===b.dataset.enq),b);return}const v=e.target.closest('[data-view]')||(e.target.closest('.home')&&e.target.closest('.home').querySelector('[data-view]'));if(v)openHome(v.dataset.view,v)});
 renderHomes();
 
 /* ---------- booking / enquiry panel ---------- */
@@ -989,6 +1125,7 @@ function switchLang(next){
   lang=next;try{localStorage.setItem('lang',lang)}catch(e){}
   fmt=new Intl.NumberFormat(lang==='el'?'el-GR':'en-IE',{style:'currency',currency:'EUR',maximumFractionDigits:0});
   if(panel.classList.contains('open'))closePanel();
+  if(!pv.hidden){pv.hidden=true;pv.classList.remove('open')}if(!lb.hidden){lb.hidden=true;lb.classList.remove('open')}lockOff();
   const nv=document.querySelector('.nav');nv.classList.remove('open');$('burger').setAttribute('aria-expanded','false');
   applyLang();layoutHome();
   heroLabel='';capIdx=-1;sp={hero:-1,home:-1,work:-1};
@@ -1004,7 +1141,7 @@ const lbar=$('lbar'),loader=$('loader');
 document.documentElement.classList.add('loading');
 const CRIT=['blueprint','bare','foundations'];let ready=0;
 const tick1=()=>{ready++;lbar.style.transform=`scaleX(${Math.max(.08,ready/(CRIT.length+1))})`};
-const get=n=>load(`img/${n}${SFX}.webp`).then(i=>{IM[n]=i;return i});
+const get=n=>avifOK.then(ok=>load(`img/${n}${SFX}.${ok?'avif':'webp'}`)).then(i=>{IM[n]=i;return i});
 const crit=Promise.all([...CRIT.map(n=>get(n).then(tick1)),document.fonts&&document.fonts.ready?document.fonts.ready.then(tick1):Promise.resolve(tick1())]);
 const timeout=new Promise(r=>setTimeout(r,7000));
 Promise.race([crit,timeout]).then(()=>{
@@ -1017,7 +1154,56 @@ Promise.race([crit,timeout]).then(()=>{
   CRIT.forEach(n=>{if(!IM[n])get(n).then(()=>{sp.hero=-1})});
   document.fonts&&document.fonts.ready&&document.fonts.ready.then(()=>{layoutHome();sp.home=-1});
 });
+/* ---------- property view ---------- */
+const pv=$('pv');let pvFocus=null;
+const lockOn=()=>document.documentElement.classList.add('lock'),lockOff=()=>{if(!pv.hidden||!$('lb').hidden||panel.classList.contains('open'))return;document.documentElement.classList.remove('lock')};
+function openHome(id,opener){
+  const h=HOMES.find(x=>x.id===id);if(!h)return;pvFocus=opener||document.activeElement;
+  const src=b=>`img/${b}${/^card/.test(b)?'':SFX}.${FMT}`,gal=h.gal||[h.img];
+  const setMain=(b,alt)=>{const m=$('pvM');m.src=src(b);m.alt=alt};
+  setMain(gal[0],t(h.alt));
+  $('pvTh').innerHTML=gal.length>1?gal.map((b,i)=>`<button type="button" class="${i?'':'on'}" data-g="${b}" aria-label="${t('Gallery')} ${i+1}"><img src="${src(b)}" alt=""></button>`).join(''):'';
+  $('pvTh').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;[...$('pvTh').children].forEach(c=>c.classList.toggle('on',c===b));setMain(b.dataset.g,t(h.alt))};
+  $('pvSt').textContent=t(h.status);$('pvSt').className='pv-st '+(h.status.startsWith('Ready')?'ok':'soon');
+  $('pvT').textContent=t(h.name);$('pvW').textContent=`${t(h.area)}, ${t('Cyprus')}`;
+  $('pvP').innerHTML=`<small>${t('Price')}</small>${fmt.format(h.price)}`;
+  $('pvS').innerHTML=(h.beds?`<span>${h.beds} ${lang==='el'?'υπν.':'bed'}</span><span>${h.baths} ${lang==='el'?(h.baths===1?'μπάνιο':'μπάνια'):'bath'}</span>`:`<span>${lang==='el'?'Επαγγελματικό':'Commercial'}</span>`)+`<span>${h.size} m²</span>`;
+  $('pvD').textContent=t(h.desc);$('pvFh').textContent=t('Features');
+  $('pvF').innerHTML=h.feats.map(f=>`<li>${t(f)}</li>`).join('');
+  $('pvPlan').innerHTML=h.plan?`<h3>${t('Floor plan (sample)')}</h3><button type="button" class="pv-plan" id="pvPl" aria-label="${t('View the full plan')}"><img src="img/plan-sheet.${FMT}" alt="" loading="lazy"></button>`:`<p class="pv-np">${t('Floor plans on request.')}</p>`;
+  if(h.plan)$('pvPl').onclick=()=>openPlan($('pvPl'));
+  $('pvE').textContent=t('Enquire about this home');$('pvV').textContent=t('Book a visit');
+  $('pvE').onclick=()=>{closeHome(true);openPanel('enquiry',h,$('pvE'))};$('pvV').onclick=()=>{closeHome(true);openPanel('visit',null,$('pvV'))};
+  pv.hidden=false;requestAnimationFrame(()=>pv.classList.add('open'));lockOn();pv.scrollTop=0;$('pvX').focus();
+}
+function closeHome(silent){
+  pv.classList.remove('open');setTimeout(()=>{pv.hidden=true;if(!silent){lockOff();if(pvFocus&&pvFocus.focus)pvFocus.focus()}},260);
+}
+$('pvX').addEventListener('click',()=>closeHome());
+pv.addEventListener('click',e=>{if(e.target===pv)closeHome()});
+
+/* ---------- plan lightbox ---------- */
+const lb=$('lb'),lbI=$('lbI'),lbS=$('lbS');let lbFocus=null;
+function openPlan(opener){lbFocus=opener||document.activeElement;lbI.src=`img/plan-sheet.${FMT}`;lbS.classList.remove('z');lbS.scrollTo(0,0);lb.hidden=false;requestAnimationFrame(()=>lb.classList.add('open'));lockOn();$('lbX').focus()}
+function closePlan(){lb.classList.remove('open');setTimeout(()=>{lb.hidden=true;lockOff();if(lbFocus&&lbFocus.focus)lbFocus.focus()},260)}
+$('lbX').addEventListener('click',closePlan);
+lbI.addEventListener('click',()=>{const z=lbS.classList.toggle('z');if(z){lbS.scrollLeft=(lbS.scrollWidth-lbS.clientWidth)/2;lbS.scrollTop=(lbS.scrollHeight-lbS.clientHeight)/3}});
+lb.addEventListener('click',e=>{if(e.target===lb||e.target===lbS)closePlan()});
+$('planBtn').addEventListener('click',()=>openPlan($('planBtn')));
+addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!lb.hidden)closePlan();else if(!pv.hidden)closeHome()});
+
+/* ---------- menu bar over the homes list, gentle day-to-dusk tint ---------- */
+const navEl=document.querySelector('.nav'),lstEl=$('listings'),tintEl=$('tint');
+function pageState(){
+  const r=lstEl.getBoundingClientRect(),on=r.top<=60&&r.bottom>140;
+  navEl.classList.toggle('stuck',on);document.documentElement.classList.toggle('inlist',on);
+  if(tintEl){const p=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)),k=ss(.05,.8,p);
+    tintEl.style.background=`rgb(${Math.round(255-195*k)},${Math.round(150-60*k)},${Math.round(90+110*k)})`;tintEl.style.opacity=(.07+.05*k).toFixed(3)}
+}
+addEventListener('scroll',pageState,{passive:true});addEventListener('resize',pageState);pageState();
+
 })();
+
 
 /* mobile menu */
 (function(){const n=document.querySelector('.nav'),b=document.getElementById('burger');if(!n||!b)return;

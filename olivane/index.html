@@ -617,6 +617,20 @@ body{background:var(--bg)}
 }
 @media (prefers-reduced-motion:reduce){.tint{display:none}.pv-box,.lb,.pv,.planbtn{transition:none}}
 </style>
+<style id="v7">
+/* feathered top edge for the HOME panel */
+#home{position:relative}
+#home::before{content:"";position:absolute;left:0;right:0;top:-220px;height:220px;pointer-events:none;z-index:5;
+  background:linear-gradient(180deg,rgba(8,11,20,0) 0,rgba(8,11,20,.05) 18%,rgba(8,11,20,.2) 38%,rgba(8,11,20,.5) 62%,rgba(8,11,20,.82) 84%,#080b14 100%)}
+#home{box-shadow:none}
+/* desktop carousel: bigger cards, readable captions only on the centre card */
+.card{top:57%;width:clamp(250px,min(31vw,56vh),500px);margin-left:calc(clamp(250px,min(31vw,56vh),500px)/-2);margin-top:calc(clamp(250px,min(31vw,56vh),500px)*-.62)}
+.card .tx{transition:opacity .35s ease}
+.card.side .tx{opacity:0}
+@media (max-width:760px){
+  .card{top:59%;width:clamp(250px,78vw,350px);margin-left:calc(clamp(250px,78vw,350px)/-2);margin-top:calc(clamp(250px,78vw,350px)*-.62)}
+}
+</style>
 </head>
 <body>
 <a class="skip" href="#listings">Skip to homes for sale</a>
@@ -912,7 +926,7 @@ function layoutHome(){
 function renderHome(p){
   const pz=ss(.1,.74,p),s=reduce?1:Math.exp(Math.log(70)*Math.pow(pz,1.6));
   hmt.setAttribute('transform',`translate(${org.x} ${org.y}) scale(${s}) translate(${-org.x} ${-org.y})`);
-  hmo.style.opacity=reduce?1-ss(.25,.7,p):1-ss(.7,.8,p);hmo.setAttribute('fill-opacity',reduce?1:(.92-.5*ss(.08,.62,p)).toFixed(3));
+  hmo.style.opacity=reduce?1-ss(.25,.7,p):1-ss(.7,.8,p);hmo.setAttribute('fill-opacity',reduce?1:(.87-.46*ss(.08,.62,p)).toFixed(3));
   const lab=1-ss(.1,.2,p),ent=ss(0,.07,p);
   builtEl.style.opacity=lab*ent;builtEl.style.filter=reduce?'none':`blur(${(1-ent)*8}px)`;
   yoursEl.style.opacity=lab*ent;
@@ -942,7 +956,7 @@ function renderWork(p){
     d.style.transform=`translate3d(${x}px,0,${z}px) rotateY(${ry}deg) scale(${sc2})`;
     d.style.opacity=(1-ss(1.15,2.3,a)).toFixed(3);
     d.style.filter=(a<.02||reduce)?'none':`blur(${Math.min(a,2)*2.4}px) brightness(${1-Math.min(a,1)*.25})`;
-    d.style.zIndex=100-Math.round(a*10);d.style.pointerEvents=a<.5?'auto':'none';
+    d.style.zIndex=100-Math.round(a*10);d.classList.toggle('side',a>.45);d.style.pointerEvents=a<.5?'auto':'none';
     d.setAttribute('aria-hidden',a<.6?'false':'true');
     ambEls[i].style.opacity=clamp(1-a*1.1).toFixed(3);
   });
@@ -1197,6 +1211,7 @@ const navEl=document.querySelector('.nav'),lstEl=$('listings'),tintEl=$('tint');
 function pageState(){
   const r=lstEl.getBoundingClientRect(),on=r.top<=60&&r.bottom>140;
   navEl.classList.toggle('stuck',on);document.documentElement.classList.toggle('inlist',on);
+  {const ce=$('caps');if(ce){const he=clamp((scrollY+innerHeight-homeEl.offsetTop-innerHeight*.05)/(innerHeight*.45));ce.style.opacity=(1-he).toFixed(3)}}
   if(tintEl){const p=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)),k=ss(.05,.8,p);
     tintEl.style.background=`rgb(${Math.round(255-195*k)},${Math.round(150-60*k)},${Math.round(90+110*k)})`;tintEl.style.opacity=(.07+.05*k).toFixed(3)}
 }

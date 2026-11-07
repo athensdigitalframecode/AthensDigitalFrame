@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arclines Freight — Every leg of the journey (concept)</title>
+<meta name="description" content="Arclines Freight is a fictional Asia-Pacific logistics brand: air and ocean freight, customs brokerage, warehousing and project cargo. A scroll-driven concept site with placeholder content.">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://athensdigitalframe.vercel.app/arclines/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Arclines Freight — Every leg of the journey (concept)">
+<meta property="og:description" content="A scroll-driven concept site for a fictional Asia-Pacific freight forwarder. Placeholder content.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a10ff'/%3E%3Cpath d='M6 23 16 7l10 16' fill='none' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M11 23h10' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Tomorrow:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="assets/stacker-body.webp">
+<link rel="preload" as="image" href="assets/stacker-boom.webp">
+<link rel="preload" as="image" href="assets/stacker-cyl.webp">
+<link rel="preload" as="image" href="assets/truck.webp">
+<link rel="preload" as="image" href="assets/truck-top.webp">
+<link rel="preload" as="image" href="assets/ship-top.webp">
+</head>
+<body>
+
+<a class="skip" href="#about" data-go="about">Skip to main content</a>
+<!-- ============ FIXED UI ============ -->
+<div class="sec-label" id="secLabel" aria-hidden="true"><span>Our Services</span></div>
+<button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+<a class="pill pill--ice top-cta" href="#quote" data-go="quote">Talk with us</a>
+<aside class="tab" aria-label="Concept project"><span>Concept project</span></aside>
+<button class="sc-ind" id="scInd" aria-label="Back to top">
+  <svg viewBox="0 0 36 36"><circle class="bg" cx="18" cy="18" r="15"/><circle class="fg" id="scRing" cx="18" cy="18" r="15"/></svg>
+  <svg class="arr" viewBox="0 0 36 36"><path d="M18 11v14M12 19l6 6 6-6"/></svg>
+</button>
+
+<div class="drawer" id="drawer">
+  <nav>
+    <a href="#about" data-go="about">About</a>
+    <a href="#services" data-go="services">Services</a>
+    <a href="#industries" data-go="industries">Industries</a>
+    <a href="#insights" data-go="insights">Insights</a>
+    <a href="#faq" data-go="careers">FAQ</a>
+    <a href="#contact" data-go="contact">Contact</a>
+  </nav>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero" data-label="">
+  <canvas id="globe"></canvas>
+  <div class="hero__news">News: Sample concept update is here</div>
+  <a class="hero__logo" href="#top" aria-label="Arclines Freight"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18 12 4l9 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M7.5 18h9" stroke="currentColor" stroke-width="2.4"/></svg>ARCLINES<b>FREIGHT</b></a>
+  <nav class="hero__nav" aria-label="Primary">
+    <a href="#about" data-go="about">About</a>
+    <a href="#services" data-go="services">Services</a>
+    <a href="#industries" data-go="industries">Industries</a>
+    <a href="#insights" data-go="insights">Insights</a>
+    <a href="#faq" data-go="careers">FAQ</a>
+    <a href="#contact" data-go="contact">Contact</a>
+  </nav>
+  <div class="hero__body">
+    <p class="eyebrow">One operator</p>
+    <h1 class="gh display" id="heroTitle">
+      <span class="ln"><span>Every</span></span>
+      <span class="ln"><span>Leg of the</span></span>
+      <span class="ln"><span>Journey</span></span>
+    </h1>
+    <p class="hero__sub">Freight forwarding, road transport and customs brokerage, unified across the Asia-Pacific under one accountable team.</p>
+    <div class="hero__btns">
+      <a class="pill pill--white" href="#quote" data-go="quote">Get a quote</a>
+      <a class="pill pill--line" href="#services" data-go="services">Our services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats" id="stats" data-label="About" data-scene="S">
+  <div class="stats__sticky">
+    <figure class="stats__img" aria-hidden="true">
+      <svg viewBox="0 0 220 120" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="rd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9dde4"/><stop offset="1" stop-color="#3a3e46"/></linearGradient>
+        </defs>
+        <rect width="220" height="120" fill="url(#rd)"/>
+        <path d="M-10 100 C 40 70, 60 40, 110 60 S 190 20, 240 40" stroke="#14161a" stroke-width="22" fill="none"/>
+        <path d="M-10 100 C 40 70, 60 40, 110 60 S 190 20, 240 40" stroke="#f2f3f6" stroke-width="1.5" stroke-dasharray="7 7" fill="none"/>
+        <path d="M-10 120 C 50 95, 80 70, 130 90 S 200 60, 240 80" stroke="#0c0d10" stroke-width="22" fill="none"/>
+        <path d="M-10 120 C 50 95, 80 70, 130 90 S 200 60, 240 80" stroke="#f2f3f6" stroke-width="1.5" stroke-dasharray="7 7" fill="none"/>
+      </svg>
+    </figure>
+    <h2 class="stats__title display gh" id="statsTitle" data-split>We move|freight.|We own|the outcome.</h2>
+    <div class="stats__right" id="statsRight">
+      <div class="stats__copy">
+        <p>Freight is more than boxes moving between ports. It is a promise to the people waiting at the other end, and we run every leg of it on our own network, with our own people.</p>
+        <p>That means no finger-pointing between vendors. No delays lost in handoffs. One team, accountable from origin to destination.</p>
+        <a class="link" href="#about" data-go="about">About us</a>
+      </div>
+      <div class="stat gh"><b class="display">1,800+</b><span>Shipments per month</span></div>
+      <div class="stat gh"><b class="display">97.4%</b><span>On-time delivery rate</span></div>
+      <div class="stat gh"><b class="display">12+</b><span>Years in operation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCENE A : machines + services ============ -->
+<section class="scene sceneA" id="sceneA" data-scene="A" data-label="Our Services">
+  <div class="stage">
+    <div class="a-bg"></div>
+    <div class="a-ghost display" id="aGhost"><span>Our Services</span></div>
+    <div class="a-dark" id="aDark">
+      <div class="sv-in">
+        <div class="sv-track" id="svTrack">
+          <div class="sv-intro">
+            <h2 class="display gh sv-title" id="svTitle"><span>Everything your freight needs.</span><span class="dim">Under one group.</span></h2>
+            <p class="sv-para">From the first pickup to the last-mile drop, we handle customs clearance, line-haul and delivery through one network, one contact and total visibility.</p>
+          </div>
+          <article class="sv"><i data-ic="air"></i><h3 class="display gh">Air Freight</h3><p>Time-critical cargo on scheduled and charter capacity, with door-to-door handling and priority clearance.</p></article>
+          <article class="sv"><i data-ic="ocean"></i><h3 class="display gh">Ocean Freight</h3><p>FCL, LCL and project consolidations with weekly sailings across the main Asia-Pacific trade lanes.</p></article>
+          <article class="sv"><i data-ic="customs"></i><h3 class="display gh">Customs Brokerage</h3><p>Licensed brokers who classify, declare and clear your goods quickly and correctly the first time.</p></article>
+          <article class="sv"><i data-ic="warehouse"></i><h3 class="display gh">Warehousing and 3PL</h3><p>Secure storage, pick-and-pack and distribution from bonded and non-bonded facilities.</p></article>
+          <article class="sv"><i data-ic="project"></i><h3 class="display gh">Project Cargo</h3><p>Out-of-gauge and heavy-lift movements planned end to end by an experienced engineering desk.</p></article>
+          <div class="sv-pad"></div>
+        </div>
+        <a class="pill pill--mini" href="#services" data-go="services">Our services</a>
+      </div>
+    </div>
+    <div class="a-bot" id="aBot"></div>
+    <div class="a-cam" id="aCam">
+      <div class="a-stack" id="aStack">
+        <div class="box box--k" id="bxK"></div>
+        <div class="box box--r" id="bxR"></div>
+      </div>
+      <div class="a-stacker" id="aStacker"></div>
+      <div class="a-truck" id="aTruck"></div>
+      <div class="a-cont box box--g" id="aCont"><i class="f-end"></i><i class="f-side"></i><i class="spreader"></i></div>
+    </div>
+    <div class="a-topdown" id="aTopdown"></div>
+  </div>
+</section>
+
+<!-- ============ SCENE B : road → ocean → clouds ============ -->
+<section class="scene sceneB" id="sceneB" data-scene="B" data-label="Why Arclines">
+  <div class="stage">
+    <canvas id="ocean"></canvas>
+    <div class="b-world" id="bWorld">
+      <div class="b-ship" id="bShip"></div>
+      <div class="co co--1"><i data-ic="dot"></i><h3 class="display gh">One point<br>of contact</h3><p>A dedicated account manager who knows your freight, your deadlines and your business.</p></div>
+      <div class="co co--2"><i data-ic="eye"></i><h3 class="display gh">Full supply chain<br>visibility</h3><p>Live milestones from pickup to proof of delivery, shared with your whole team.</p></div>
+      <div class="co co--3"><i data-ic="shield"></i><h3 class="display gh">Compliance<br>you can trust</h3><p>Licensed brokers keep every shipment inside the rules of each market it crosses.</p></div>
+      <div class="co co--4"><i data-ic="coin"></i><h3 class="display gh">Competitive,<br>transparent pricing</h3><p>No hidden surcharges. Clear quotes that match the invoice you finally receive.</p></div>
+      <div class="co co--5"><i data-ic="fast"></i><h3 class="display gh">Fast issue<br>resolution</h3><p>When something unexpected happens, we pick up the phone and fix it before it grows.</p></div>
+    </div>
+    <h2 class="b-tag display gh" id="bTag">Logistics that works as hard as you do.</h2>
+    <div class="b-clouds" id="bClouds"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="b-panels" id="bPanels">
+      <div class="pn pn--tl" id="pnTL"></div>
+      <div class="pn pn--l" id="pnL">
+        <h2 class="display gh rel-title" id="relTitle" data-split>Reliability|at every|milestone</h2>
+        <p class="rel-para">With every service under one roof and one accountable team, your supply chain moves the way your business demands: predictably, transparently and without excuses.</p>
+      </div>
+      <div class="pn pn--r" id="pnR">
+        <div class="feat-list" id="featList">
+          <div class="feat gh"><i data-ic="pin"></i><h3 class="display">Real-time freight tracking</h3><p>Follow every container, pallet and parcel on one live dashboard, with alerts at each milestone.</p></div>
+          <div class="feat gh"><i data-ic="globe"></i><h3 class="display">Global network coverage</h3><p>Trusted partners and our own offices across the region, so your cargo is never out of reach.</p></div>
+          <div class="feat gh"><i data-ic="headset"></i><h3 class="display">24/7 customer support</h3><p>A real person, day or night, who knows your shipment and can act on it straight away.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="b-truck" id="bTruck"></div>
+  </div>
+</section>
+
+<!-- ============ TRUSTED ============ -->
+<section class="trusted" id="trusted" data-label="Industries" data-scene="T">
+  <div class="tr-plane" id="trPlaneWrap"><div class="tr-plane__in" id="trPlane"></div><div class="tr-cloud" id="trCloud"></div></div>
+  <div class="tr-in">
+    <h2 class="display gh tr-title"><span>Trusted</span><span>by businesses</span><span class="dim">across APAC</span></h2>
+    <div class="tr-list">
+      <article class="tm">
+        <div class="tm__who"><span class="av av--1"></span><b>Daniel Rowe</b><small>Operations Director<br>Example Industries</small></div>
+        <p class="gh">Sample testimonial. We needed a partner who would treat our freight like their own. Every shipment came with a named contact, clear updates and no surprises at the border. It is a rare thing in this industry and we have not looked elsewhere since.</p>
+      </article>
+      <article class="tm">
+        <div class="tm__who"><span class="av av--2"></span><b>Mei Lin Tan</b><small>Supply Chain Lead<br>Placeholder Foods</small></div>
+        <p class="gh">Sample testimonial. Our first large shipment into a difficult market was a real test. The team planned it carefully, kept us informed through every step and delivered on the date they promised. We have trusted them with every project since then.</p>
+      </article>
+      <article class="tm">
+        <div class="tm__who"><span class="av av--3"></span><b>Alex Hartigan</b><small>Founder<br>Demo Components</small></div>
+        <p class="gh">Sample testimonial. Rates were fair, customs paperwork was always right and when something slipped, they called us before we had to call them. For a growing business that kind of reliability is worth far more than the cheapest quote.</p>
+      </article>
+    </div>
+    <div class="logos" id="logos" aria-label="Partner carriers (placeholders)"></div>
+  </div>
+</section>
+
+<!-- ============ INSIGHTS ============ -->
+<section class="insights" id="insights" data-label="Insights">
+  <div class="ins-dome"></div>
+  <div class="ins-in">
+    <h2 class="display gh ins-title"><span class="dim">What's moving</span><span>in your industry</span></h2>
+    <ul class="ins-list" id="insList">
+      <li data-img="1"><button type="button" aria-expanded="false"><time>November 04, 2026</time><b>Sample: Ocean freight rates are moving higher, what it means for you</b><em>Market</em></button><div><p>Sample summary. This is placeholder copy for a concept project; a real article would open here with the full story, figures and next steps.</p></div></li>
+      <li data-img="2"><button type="button" aria-expanded="false"><time>October 27, 2026</time><b>Sample: Arclines shortlisted for regional logistics award</b><em>News</em></button><div><p>Sample summary. This is placeholder copy for a concept project; a real article would open here with the full story, figures and next steps.</p></div></li>
+      <li data-img="3"><button type="button" aria-expanded="false"><time>October 18, 2026</time><b>Sample: New direct service opens to South-East Asia</b><em>Network</em></button><div><p>Sample summary. This is placeholder copy for a concept project; a real article would open here with the full story, figures and next steps.</p></div></li>
+      <li data-img="1"><button type="button" aria-expanded="false"><time>October 09, 2026</time><b>Sample: Peak season planning, a short checklist</b><em>Guide</em></button><div><p>Sample summary. This is placeholder copy for a concept project; a real article would open here with the full story, figures and next steps.</p></div></li>
+      <li data-img="2"><button type="button" aria-expanded="false"><time>September 30, 2026</time><b>Sample: Customs accreditation achieved across all offices</b><em>News</em></button><div><p>Sample summary. This is placeholder copy for a concept project; a real article would open here with the full story, figures and next steps.</p></div></li>
+      <li data-img="3"><button type="button" aria-expanded="false"><time>September 19, 2026</time><b>Sample: Understanding trade lane changes this quarter</b><em>Market</em></button><div><p>Sample summary. This is placeholder copy for a concept project; a real article would open here with the full story, figures and next steps.</p></div></li>
+      <li data-img="1"><button type="button" aria-expanded="false"><time>September 02, 2026</time><b>Sample: How project cargo gets planned, step by step</b><em>Guide</em></button><div><p>Sample summary. This is placeholder copy for a concept project; a real article would open here with the full story, figures and next steps.</p></div></li>
+    </ul>
+    <aside class="ins-side">
+      <p>Market notes, network updates and practical guides from the people who move your freight every day.</p>
+      <div class="ins-thumb" id="insThumb"></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ FAQ + CTA ============ -->
+<section class="faq" id="faq" data-label="FAQ">
+  <div class="faq-in">
+    <div class="faq-head">
+      <h2 class="display gh">F.A.Q</h2>
+      <p>Straight answers to the questions we hear most. If yours is not here, our team is a call away.</p>
+    </div>
+    <ol class="faq-list" id="faqList">
+      <li><button><span>01</span>What services do you offer?<i></i></button><div><p>Air and ocean freight, road transport, customs brokerage, warehousing and 3PL, and project cargo, all run by one team so you only ever have one contact.</p></div></li>
+      <li><button><span>02</span>Which regions do you cover?<i></i></button><div><p>Sample answer. We operate across the Asia-Pacific with our own offices and vetted partners for the last mile.</p></div></li>
+      <li><button><span>03</span>How do I get a quote?<i></i></button><div><p>Sample answer. Send us your origin, destination and cargo details and we will come back with a clear, itemised quote the same business day.</p></div></li>
+      <li><button><span>04</span>Can I track my shipment?<i></i></button><div><p>Sample answer. Every shipment has live milestones on our tracking dashboard, plus proactive alerts by email.</p></div></li>
+      <li><button><span>05</span>Do you handle customs clearance?<i></i></button><div><p>Sample answer. Yes. Our licensed brokers prepare and lodge declarations and manage duties and permits for you.</p></div></li>
+      <li><button><span>06</span>What about dangerous or oversized goods?<i></i></button><div><p>Sample answer. We move dangerous goods and out-of-gauge cargo with specialist planning and the right accreditations.</p></div></li>
+      <li><button><span>07</span>How do you price your services?<i></i></button><div><p>Sample answer. Transparent, itemised pricing with no hidden surcharges, so the invoice matches the quote.</p></div></li>
+      <li><button><span>08</span>Who do I contact if something goes wrong?<i></i></button><div><p>Sample answer. Your account manager first, and our 24/7 support desk at any hour.</p></div></li>
+    </ol>
+  </div>
+  <div class="cta" id="cta">
+    <h2 class="display gh"><span class="dim">Ready to</span><span>move?</span></h2>
+    <a class="pill pill--white" href="#quote" data-go="quote">Get a quote</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot" id="contact" data-label="Contact">
+  <div class="quote" id="quote">
+    <div class="quote__head">
+      <h2 class="display gh">Get a<br>quote</h2>
+      <p>Tell us what you are moving and where it needs to go. We reply the same business day with a clear, itemised quote.</p>
+    </div>
+    <form class="quote__form" id="quoteForm" novalidate>
+      <label>Your name<input name="name" type="text" autocomplete="name" required></label>
+      <label>Work email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Origin<input name="from" type="text" placeholder="City or port" required></label>
+      <label>Destination<input name="to" type="text" placeholder="City or port" required></label>
+      <label class="wide">Cargo type
+        <select name="cargo" required>
+          <option value="">Select one</option>
+          <option>Air freight</option><option>Ocean freight (FCL / LCL)</option><option>Road transport</option>
+          <option>Customs brokerage only</option><option>Warehousing / 3PL</option><option>Project or oversized cargo</option>
+        </select>
+      </label>
+      <label class="wide">Details <span>(optional)</span><textarea name="msg" rows="3" placeholder="Weights, dates, special handling"></textarea></label>
+      <div class="wide quote__act">
+        <button class="pill pill--dark" type="submit">Request quote</button>
+        <p class="quote__msg" id="quoteMsg" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+  <div class="foot-grid">
+    <div class="foot-col foot-about"><small>Arclines Freight</small><p class="foot-brand"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18 12 4l9 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M7.5 18h9" stroke="currentColor" stroke-width="2.4"/></svg></p><p>Concept project. Fictional company,<br>sample content only.</p></div>
+    <div class="foot-col"><small>Social</small><div class="soc"><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">f</a></div></div>
+    <div class="foot-col"><small>Company</small><a href="#top">Home</a><a href="#about" data-go="about">About us</a><a href="#industries" data-go="industries">Industries</a></div>
+    <div class="foot-col"><small>Explore</small><a href="#services" data-go="services">Services</a><a href="#insights" data-go="insights">Insights</a><a href="#faq" data-go="careers">FAQ</a></div>
+    <div class="foot-col"><small>Support</small><a href="#quote" data-go="quote">Get a quote</a><a href="#industries" data-go="industries">Reviews</a><a href="#contact" data-go="contact">Contact us</a></div>
+  </div>
+  <div class="foot-main">
+    <div class="foot-img" aria-hidden="true">
+      <svg viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice">
+        <path d="M78 150 Q150 20 232 52" fill="none" stroke="#0a10ff" stroke-width="1.4" stroke-dasharray="4 5"/>
+        <circle cx="78" cy="150" r="9" fill="#0a10ff" opacity=".18"/><circle cx="78" cy="150" r="4" fill="#0a10ff"/>
+        <circle cx="232" cy="52" r="9" fill="#0a10ff" opacity=".18"/><circle cx="232" cy="52" r="4" fill="#0a10ff"/>
+        <text x="90" y="168" font-size="11" fill="#2c3040" font-weight="700" letter-spacing=".06em">MELBOURNE</text>
+        <text x="190" y="40" font-size="11" fill="#2c3040" font-weight="700" letter-spacing=".06em">SINGAPORE</text>
+      </svg>
+    </div>
+    <div class="foot-offices">
+      <div class="tabs" id="offTabs" role="group" aria-label="Offices"><button class="on" data-o="0" aria-pressed="true">Melbourne</button><button data-o="1" aria-pressed="false">Singapore</button></div>
+      <div class="office" id="office"></div>
+    </div>
+  </div>
+  <div class="foot-legal"><span>© 2026 Arclines Freight (fictional)</span><span class="ph" title="Placeholder (concept project)">Privacy</span><span class="ph" title="Placeholder (concept project)">Terms</span><span>Concept by Athens Digital Frame</span></div>
+  <div class="foot-word display" aria-hidden="true">ArclinesFreight</div>
+</footer>
+
+</main>
+
+<script src="js/art.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

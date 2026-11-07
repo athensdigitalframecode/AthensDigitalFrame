@@ -139,3 +139,8 @@ Below 1360px and on phones they stay in the parallax `.bg` layer as before.
 ## Olivane demo: телефон (07.11)
 - `/olivane/` в portrait: фото фонов показываются целиком (contain, чуть ниже центра) поверх размытой тёмной копии самого фото, а не обрезаются cover.
 - На телефоне добавлена кнопка-меню (бургер) с пунктами Homes / Process / Projects / About; закрывается по клику на пункт, вне меню и по Esc.
+
+## Portfolio: второй demo concept Arclines Freight (07.11)
+- Карточка 2 в Portfolio стала живой: «Arclines Freight · Demo concept · φανταστική εταιρεία» (scroll-сайт вымышленного логистического бренда), превью `arclines/thumb.webp`, ссылка `/arclines/` в новой вкладке. Карточка 3 остаётся серой «Σύντομα». Лид секции во множественном числе.
+- `arclines/` лежит в корне как отдельная статичная страница (не генерируется из `source/`), как `olivane/`. Контент-заглушка, форма не отправляет данные, не выдавать за реального клиента.
+- CSP: `/arclines/` получил то же исключение, что `/olivane/` (Google Fonts: Space Grotesk, Tomorrow); правило в `vercel.json` объединено `(olivane|arclines)`.

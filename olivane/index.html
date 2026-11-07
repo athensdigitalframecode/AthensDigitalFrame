@@ -472,6 +472,58 @@ body{background:var(--bg)}
   .navr .pill{font-size:12px;padding:10px 13px;white-space:nowrap}
 }
 </style>
+<style id="v5">
+/* ===== v5 : readability, bigger carousel, richer cards, tidier details ===== */
+.scrim{background:
+  linear-gradient(90deg,rgba(6,8,18,.72),rgba(6,8,18,.38) 30%,rgba(6,8,18,0) 56%),
+  radial-gradient(60% 50% at 18% 62%,rgba(6,8,18,.35),rgba(6,8,18,0) 70%),
+  linear-gradient(0deg,rgba(6,8,16,.6),rgba(6,8,16,0) 28%),
+  linear-gradient(180deg,rgba(6,8,16,.4),rgba(6,8,16,0) 18%)}
+.cap p{font-size:clamp(14px,1.18vw,17px);font-weight:500;line-height:1.55;max-width:390px;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+.cap h2{text-shadow:0 2px 28px rgba(0,0,0,.35)}
+.hud .line{overflow:visible}
+.hud .line .tk{position:absolute;top:-3px;width:1px;height:7px;background:rgba(255,255,255,.55);text-decoration:none}
+/* carousel: larger focal card, richer depth */
+.card{top:57%;width:clamp(250px,27vw,430px);margin-left:calc(clamp(250px,27vw,430px)/-2);margin-top:calc(clamp(250px,27vw,430px)*-.62);box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06),0 0 90px -30px rgba(255,122,89,.45)}
+.card h3{font-size:clamp(24px,2.3vw,36px)}
+.card p{font-size:clamp(11px,.9vw,13.5px)}
+.card img{transform:scale(1.04);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.card[aria-hidden=false] img{transform:scale(1.1)}
+/* about / stats: let the photo breathe */
+.sshade{background:linear-gradient(90deg,rgba(7,10,18,.5),rgba(7,10,18,.08) 62%),linear-gradient(0deg,rgba(7,10,18,.45),rgba(7,10,18,0) 38%)}
+.nums>div{padding:clamp(14px,1.6vw,22px) clamp(16px,1.8vw,26px);border-radius:16px;background:rgba(10,14,28,.34);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.nums b{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+/* listing cards */
+.home{background:linear-gradient(180deg,#131b32,#0e1425);transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .45s}
+.home:hover{transform:translateY(-8px);border-color:rgba(255,160,120,.55);box-shadow:0 30px 60px -24px rgba(255,111,97,.38),0 0 0 1px rgba(255,160,120,.18)}
+.home .ph:after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(0deg,rgba(14,20,37,.9),rgba(14,20,37,0));pointer-events:none}
+.home:hover .ph img{transform:scale(1.09)}
+.price{font-size:25px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.price small{-webkit-text-fill-color:var(--muted)}
+.enq{background:var(--grad);color:#240f0a;border-color:transparent;font-weight:600}
+.enq:hover{filter:brightness(1.1);transform:translateY(-1px);background:var(--grad);color:#240f0a}
+/* section hairlines */
+#listings:before,#cta:after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,160,120,.55),rgba(214,91,208,.45),rgba(255,255,255,0));pointer-events:none;z-index:2}
+#cta:after{z-index:3}
+/* section reveals */
+.rvx{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1)}
+.rvx.in{opacity:1;transform:none}
+/* closing caption: one tidy line instead of a floating block */
+.cright{top:clamp(92px,13vh,124px);right:var(--pad);display:flex;flex-wrap:wrap;gap:0 .5em;justify-content:flex-end;align-items:center;padding:7px 14px;border-radius:99px;background:rgba(10,14,28,.5);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:11px;line-height:1.3;text-shadow:none;max-width:calc(100vw - 2*var(--pad))}
+.cright strong{display:inline;color:var(--peach)}
+.cright span+span:before{content:"·";margin-right:.5em;opacity:.6}
+@media (max-width:760px){
+  .cap p{font-size:13.5px;max-width:310px}
+  .cright{display:none}
+  .cleft{top:clamp(138px,19vh,170px)}
+  .sleft h2{white-space:normal}
+  .card{top:54%;width:clamp(230px,64vw,300px);margin-left:calc(clamp(230px,64vw,300px)/-2);margin-top:calc(clamp(230px,64vw,300px)*-.62)}
+  .hint{bottom:58px}.hint-t{font-size:28px}
+  .nums>div{padding:12px 14px}
+  .hud .line .tk{display:none}
+}
+@media (prefers-reduced-motion:reduce){.rvx{opacity:1;transform:none;transition:none}.card img,.card[aria-hidden=false] img{transform:none;transition:none}}
+</style>
 </head>
 <body>
 <a class="skip" href="#listings">Skip to homes for sale</a>
@@ -595,7 +647,7 @@ body{background:var(--bg)}
     <h2 class="hd"><span>Start</span><span class="it">yours.</span></h2>
     <div class="btns"><button class="pill" type="button" data-open="visit">Book a site visit</button><button class="ghost" type="button" data-open="brochure">Request the brochure</button></div>
   </div>
-  <address class="cright"><strong>Concept project</strong>by Athens Digital Frame<br>Fictional company.</address>
+  <address class="cright"><strong>Concept project</strong><span>by Athens Digital Frame</span><span>Fictional company.</span></address>
   <div class="word" id="word" aria-hidden="true"><span>O</span><span>L</span><span>I</span><span>V</span><span>A</span><span>N</span><span>E</span></div>
 </section>
 </main>
@@ -673,8 +725,12 @@ function cover(cv,img,o={}){
     const bs=Math.max(dw/img._bl.width,dh/img._bl.height);c.globalAlpha=alpha;c.imageSmoothingQuality='high';
     c.drawImage(img._bl,(dw-img._bl.width*bs)/2,(dh-img._bl.height*bs)/2,img._bl.width*bs,img._bl.height*bs);
     c.fillStyle='rgba(6,8,16,.55)';c.fillRect(0,0,dw,dh);
-    const f=Math.min(dw/img.naturalWidth,dh/img.naturalHeight)*zoom,fw=img.naturalWidth*f,fh=img.naturalHeight*f;
-    c.drawImage(img,(dw-fw)/2,(dh-fh)/2+dh*.07,fw,fh);c.globalAlpha=1;return;
+    const bh=Math.round(dh*(o.rh||.46)),y0=Math.round(dh*.37),f=Math.max(dw/img.naturalWidth,bh/img.naturalHeight)*zoom,fw=img.naturalWidth*f,fh=img.naturalHeight*f;
+    const T=cover._t||(cover._t=document.createElement('canvas'));if(T.width!==dw||T.height!==bh){T.width=dw;T.height=bh}
+    const x=T.getContext('2d');x.globalCompositeOperation='source-over';x.clearRect(0,0,dw,bh);x.drawImage(img,(dw-fw)*fx,(bh-fh)*.5,fw,fh);
+    const g=x.createLinearGradient(0,0,0,bh);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(.16,'#000');g.addColorStop(.84,'#000');g.addColorStop(1,'rgba(0,0,0,0)');
+    x.globalCompositeOperation='destination-in';x.fillStyle=g;x.fillRect(0,0,dw,bh);x.globalCompositeOperation='source-over';
+    c.drawImage(T,0,y0);c.globalAlpha=1;return;
   }
   const s=Math.max(dw/img.naturalWidth,dh/img.naturalHeight)*zoom,w=img.naturalWidth*s,h=img.naturalHeight*s;
   c.globalAlpha=alpha;c.drawImage(img,(dw-w)*fx,(dh-h)*fy,w,h);c.globalAlpha=1;
@@ -698,6 +754,7 @@ const caps=[...document.querySelectorAll('.cap')],stageNames=['The plan','Founda
 const pct=$('pct'),stageEl=$('stage'),bar=$('bar'),hint=$('hint'),plan=$('plan');
 const planRects=[...plan.querySelectorAll('rect')];planRects.forEach(r=>{const l=2*(+r.getAttribute('width')+ +r.getAttribute('height'));r.style.strokeDasharray=l;r.style.strokeDashoffset=l;r._l=l});
 let capIdx=-1;
+(()=>{const ln=document.querySelector('.hud .line');if(!ln)return;SEQ.slice(1,-1).forEach(s=>{const k=document.createElement('u');k.className='tk';k.style.left=(s[1]*100)+'%';ln.appendChild(k)})})();
 function hudHero(p){
   const i=Math.min(4,Math.floor(p*5));
   if(i!==capIdx){capIdx=i;caps.forEach((c,j)=>c.classList.toggle('on',j===i));stageEl.textContent=t(stageNames[i])}
@@ -719,7 +776,7 @@ function layoutHome(){
 function renderHome(p){
   const pz=ss(.1,.74,p),s=reduce?1:Math.exp(Math.log(70)*Math.pow(pz,1.6));
   hmt.setAttribute('transform',`translate(${org.x} ${org.y}) scale(${s}) translate(${-org.x} ${-org.y})`);
-  hmo.style.opacity=reduce?1-ss(.25,.7,p):1-ss(.7,.8,p);
+  hmo.style.opacity=reduce?1-ss(.25,.7,p):1-ss(.7,.8,p);hmo.setAttribute('fill-opacity',reduce?1:(.92-.5*ss(.08,.62,p)).toFixed(3));
   const lab=1-ss(.1,.2,p),ent=ss(0,.07,p);
   builtEl.style.opacity=lab*ent;builtEl.style.filter=reduce?'none':`blur(${(1-ent)*8}px)`;
   yoursEl.style.opacity=lab*ent;
@@ -883,7 +940,7 @@ function paintStatic(){
   [homeImg,statC,ctaC].forEach(cv=>cv.getContext('2d').clearRect(0,0,cv.width,cv.height));
   const fx=portrait()?.25:.5;
   cover(homeImg,IM.finished,{fx});
-  cover(statC,IM.structure,{fx});const sc=statC.getContext('2d');sc.fillStyle='rgba(7,10,18,.38)';sc.fillRect(0,0,statC.width,statC.height);
+  cover(statC,IM.structure,{fx});const sc=statC.getContext('2d');sc.fillStyle='rgba(7,10,18,.2)';sc.fillRect(0,0,statC.width,statC.height);
   cover(ctaC,IM.dusk,{fx});
 }
 function layout(){
@@ -969,6 +1026,10 @@ b.addEventListener('click',e=>{e.stopPropagation();set(!n.classList.contains('op
 n.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>set(false)));
 document.addEventListener('click',e=>{if(!n.contains(e.target))set(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});})();
+
+;(()=>{const els=[...document.querySelectorAll('.lhead,.filters,.note,.cleft,.cright')];els.forEach(e=>e.classList.add('rvx'));
+if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){els.forEach(e=>e.classList.add('in'));return}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px'});els.forEach(e=>io.observe(e))})();
 </script>
 </body>
 </html>

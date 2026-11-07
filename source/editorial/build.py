@@ -34,7 +34,8 @@ HW = pairs('how.html')
 SITE_STEPS = [HW[7 + i * 3:10 + i * 3] for i in range(5)]
 SHOP_STEPS = [HW[24 + i * 3:27 + i * 3] for i in range(5)]
 
-LOGO = '<svg viewBox="0 0 28 28" aria-hidden="true" fill="none"><path d="M3 9V3h6M19 3h6v6M25 19v6h-6M9 25H3v-6" stroke="#56653A" stroke-width="2.2"/><path d="M8 21V12.5a6 6 0 0 1 12 0V21" stroke="currentColor" stroke-width="1.6"/><path d="M11.5 21v-8a2.5 2.5 0 0 1 5 0v8" stroke="currentColor" stroke-width="1.2" opacity=".55"/></svg>'
+LOGO = '<img class="mark" src="/assets/df-mark.png" width="145" height="121" alt="" decoding="async">'
+ARCH = re.sub(r' (id|class|width|height)="[^"]*"', '', open(os.path.join(LEG, 'frame.svg.txt'), encoding='utf8').read(), count=0).replace('<svg ', '<svg width="520" height="640" ', 1)
 ARROW = '<span class="ar" aria-hidden="true">→</span>'
 
 class Page:
@@ -54,7 +55,7 @@ class Page:
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-<meta name="theme-color" content="#F4EFE6">
+<meta name="theme-color" content="#0B0B0B">
 <link rel="canonical" href="{canon}">
 <link rel="alternate" hreflang="el" href="{SITE}{path_el}"><link rel="alternate" hreflang="en" href="{SITE}{path_en}"><link rel="alternate" hreflang="x-default" href="{SITE}{path_el}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Athens Digital Frame"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">
@@ -82,17 +83,17 @@ class Page:
 <a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span>Athens Digital Frame</span></a>
 <nav class="nav" aria-label="{t('Κύριο μενού','Main')}">{nav}</nav>
 <div class="right"><a class="lang" href="{other}" hreflang="{ol.lower()}" lang="{ol.lower()}" aria-label="{on}">{ol}</a>
-<a class="btn olive" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span></a>
+<a class="btn gold" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span></a>
 <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="{t('Άνοιγμα μενού','Open menu')}"><i></i><i></i><i></i></button></div>
 </div></header>
-<div class="sheet" id="sheet">{sheet}<a class="btn olive" href="{H('#contact')}">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a></div>
+<div class="sheet" id="sheet">{sheet}<a class="btn gold" href="{H('#contact')}">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a></div>
 <main id="main">
 '''
     def footer(s):
         t = s.t; H = s.home
         return f'''</main>
 <footer class="ft2"><div class="wrap"><div class="g">
-<div><a class="brand" href="{H()}" style="color:var(--cream)" aria-label="Athens Digital Frame">{LOGO}<span>Athens Digital Frame</span></a>
+<div><a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span>Athens Digital Frame</span></a>
 <p>{t('Ψηφιακό στούντιο στην Αθήνα. Ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','A digital studio in Athens. Websites and e-shops for businesses that want to stand out.')}</p></div>
 <div><h4>{t('Πλοήγηση','Navigate')}</h4><ul><li><a href="{H('#projects')}">Projects</a></li><li><a href="{H('#process')}">{t('Διαδικασία','Process')}</a></li><li><a href="{s.prices()}">{t('Τιμές','Pricing')}</a></li><li><a href="{H('#about')}">{t('Το στούντιο','About')}</a></li><li><a href="{H('#faq')}">FAQ</a></li></ul></div>
 <div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#services')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#services')}">E-shops</a></li><li><a href="{H('#services')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
@@ -118,7 +119,7 @@ class Page:
 <div class="f"><label for="lf-c" id="lf-c-l">{t('Τηλέφωνο','Phone number')}</label><input id="lf-c" name="c" type="tel" inputmode="tel" autocomplete="tel" required maxlength="80" aria-describedby="lf-c-e"><p class="err" id="lf-c-e" role="alert"></p></div>
 <div class="f"><label for="lf-d">{t('Περιγραφή project','Project description')} <span class="opt">({t('προαιρετικό','optional')})</span></label><textarea id="lf-d" name="d" maxlength="600"></textarea></div>
 <div class="status" role="status" aria-live="polite" hidden></div>
-<div class="btns"><button class="btn olive" type="submit">{t('Ζήτησε δωρεάν demo','Request a free demo')}</button><button class="btn ghost" type="button" id="lf-mail">{t('Αποστολή με email','Send by email')}</button></div>
+<div class="btns"><button class="btn gold" type="submit">{t('Ζήτησε δωρεάν demo','Request a free demo')}</button><button class="btn ghost" type="button" id="lf-mail">{t('Αποστολή με email','Send by email')}</button></div>
 <p class="small">{t('Δεν υπάρχει server: η φόρμα ανοίγει το WhatsApp ή το email σου με έτοιμο μήνυμα. Τίποτα δεν στέλνεται μέχρι να πατήσεις αποστολή εκεί.','There is no server: the form opens your WhatsApp or email with a ready message. Nothing is sent until you press send there.')}</p>
 </form>'''
 
@@ -143,7 +144,7 @@ class Page:
             return f'<div class="panel" id="{pid}" role="tabpanel" aria-labelledby="{pid}-t"{" hidden" if hidden else ""}><ol class="steps">{li}</ol><p class="note">{note}</p></div>'
         names = ['Discover', 'Concept', 'Design &amp; Build', 'Refine &amp; Test', 'Launch']
         ld = {"@context": "https://schema.org", "@graph": [
-            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v3.png",
+            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v3.png", "logo": SITE + "/assets/df-mark.png",
              "description": t('Ψηφιακό στούντιο στην Αθήνα: ιστοσελίδες και e-shops για επιχειρήσεις.', 'Digital studio in Athens: websites and e-shops for businesses.'),
              "email": MAIL, "telephone": TEL, "sameAs": [IG], "areaServed": "Athens, Greece", "address": {"@type": "PostalAddress", "addressLocality": "Athens", "addressCountry": "GR"},
              "knowsLanguage": ["el", "en"]},
@@ -153,11 +154,11 @@ class Page:
                      t('Ψηφιακό στούντιο στην Αθήνα. Σύγχρονες ιστοσελίδες από 300€ και e-shops, με δωρεάν demo πριν από οποιαδήποτε πληρωμή.', 'A digital studio in Athens. Modern websites from €300 and e-shops, with a free demo before any payment.'),
                      '/', '/en/', 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
         out += s.header()
-        out += f'''<section class="hero"><div class="wrap grid">
+        out += f'''<section class="hero dark"><div class="arch" aria-hidden="true">{ARCH}</div><div class="wrap grid">
 <div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
 <h1 class="h1">Websites designed to <em>move your business</em> forward.</h1>
 <p class="lead">{t('Σχεδιάζουμε και κατασκευάζουμε σύγχρονες ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','We design and build modern websites and e-shops for businesses that want to stand out.')}</p>
-<div class="btns"><a class="btn olive" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn ghost" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')}</a></div>
+<div class="btns"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn ghost" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')}</a></div>
 <div class="meta"><div><b>3–5</b>{t('ημέρες έως το live','days to go live')}</div><div><b>300€</b>{t('ιστοσελίδα, εφάπαξ','website, one-time')}</div><div><b>0€</b>{t('πριν δεις το demo','before you see the demo')}</div></div></div>
 <div class="stage" aria-label="{t('Προεπισκόπηση δύο concept projects','Preview of two concept projects')}"><span class="tag">{t('Concept projects · Αθήνα','Concept projects · Athens')}</span>
 {s.frame(s.browser('olivane-d.webp','olivane estate','Olivane Estate concept website on a desktop browser: a villa above the sea at sunset', eager=True))}
@@ -259,9 +260,9 @@ class Page:
                      '/prices.html', '/en/prices.html', 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
         out += s.header('prices')
         r = lambda a, b, c: f'<tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>'
-        out += f'''<section class="phero"><div class="wrap"><p class="eyebrow">{t('Τιμές','Pricing')}</p><h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw+14px,76px)">{t('Ξεκάθαρες τιμές, <em>τίποτα κρυφό.</em>','Clear prices, <em>nothing hidden.</em>')}</h1>
+        out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Τιμές','Pricing')}</p><h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw+14px,76px)">{t('Ξεκάθαρες τιμές, <em>τίποτα κρυφό.</em>','Clear prices, <em>nothing hidden.</em>')}</h1>
 <p class="lead">{t('Εφάπαξ, επαναλαμβανόμενα, υποχρεωτικά και προαιρετικά κόστη, γραμμένα ξεχωριστά. Οι τιμές δεν υπόκεινται σε ΦΠΑ.','One-time, recurring, mandatory and optional costs, written apart. Prices are not subject to VAT.')}</p></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap">
+<section class="sec"><div class="wrap">
 <div class="pgrid">
 <div class="pcard"><span class="eyebrow">{t('Δημοφιλές','Popular')}</span><h3 style="margin-top:12px">{t('Βασική ιστοσελίδα','Basic website')}</h3><p class="d">{t('Για επαγγελματίες, ιατρεία, δικηγορικά γραφεία, αρχιτέκτονες και τοπικές υπηρεσίες.','For professionals, clinics, law firms, architects and local services.')}</p>
 <div class="rows"><div class="row"><span class="t">{t('Κατασκευή βασικής ιστοσελίδας','Basic website development')}<span class="tag2 req">{t('Εφάπαξ','One-time')}</span></span><span class="a">300€</span></div>

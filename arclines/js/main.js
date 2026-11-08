@@ -25,6 +25,7 @@
   const root = document.documentElement;
   const params = new URLSearchParams(location.search);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const LAND = matchMedia('(max-height:520px) and (orientation:landscape) and (pointer:coarse)');   // phones held sideways use the mobile layout
   const noMotion = reduced || params.has('still');
 
   /* ---------- inject art ---------- */
@@ -47,9 +48,8 @@
     ['#aTruck', 'assets/truck.webp', 'contain'],
     ['#aTopdown', 'assets/truck-top.webp', 'contain'],
     ['#bTruck', 'assets/truck-top.webp', 'contain'],
-    ['#bShip', 'assets/ship-top.webp', 'contain'],
-    ['.stats__img', 'assets/stats-road.jpg', 'cover'],
-    ['.foot-img', 'assets/footer-warehouse.jpg', 'cover']
+    ['#bShip', 'assets/ship-top.webp', 'contain']
+    /* optional photo slots (add a file + entry to enable): ['.stats__img','assets/stats-road.jpg','cover'], ['.foot-img','assets/footer-warehouse.jpg','cover'] */
   ];
   /* reach stacker: 3 photo layers (body / cylinder / boom) so the boom can really lift */
   const STK = { W: 1060, H: 789, P: [148, 438], S: [895, 320], A: [342, 298], B: [535, 622], k: 41.5 / 789, L0: 74 };
@@ -76,38 +76,10 @@
     };
     im.src = src;   // 404 = silently keep vector art
   });
-  [1, 2, 3].forEach(i => {
-    const im = new Image();
-    im.onload = () => root.style.setProperty('--ins' + i, `url(assets/insight-${i}.jpg)`);
-    im.src = `assets/insight-${i}.jpg`;
-  });
+  /* insight thumbnails: add assets/insight-1..3.jpg and re-enable to use photos (vector gradients are used until then) */
 
-  /* "Trusted" backdrop: crisp cartographic contour lines (tileable noise, constant 1px line width via gradient normalisation) */
-  (() => {
-    const N = 1536, c = document.createElement('canvas'); c.width = c.height = N;
-    const cx = c.getContext('2d'), id = cx.createImageData(N, N);
-    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    const oct = [[3, .55], [6, .3], [12, .15]].map(([g, a]) => ({ g, a, v: Array.from({ length: g * g }, rnd) }));
-    const sm = t => t * t * (3 - 2 * t);
-    const field = new Float32Array(N * N);
-    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
-      let n = 0;
-      for (const o of oct) { const fx = x / N * o.g, fy = y / N * o.g, x0 = Math.floor(fx), y0 = Math.floor(fy), tx = sm(fx - x0), ty = sm(fy - y0), g = o.g,
-        at = (i, j) => o.v[(j % g) * g + (i % g)];
-        n += o.a * ((at(x0, y0) * (1 - tx) + at(x0 + 1, y0) * tx) * (1 - ty) + (at(x0, y0 + 1) * (1 - tx) + at(x0 + 1, y0 + 1) * tx) * ty); }
-      field[y * N + x] = n * 22;                                              // 1 unit = one contour interval
-    }
-    const f = (x, y) => field[((y + N) % N) * N + ((x + N) % N)];
-    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
-      const v = f(x, y), gx = (f(x + 1, y) - f(x - 1, y)) / 2, gy = (f(x, y + 1) - f(x, y - 1)) / 2, g = Math.hypot(gx, gy) + 1e-6;
-      const lvl = Math.round(v), major = lvl % 5 === 0, w = major ? 1.9 : 1.15;       // line width in px
-      const d = Math.abs(v - lvl) / g;                                                  // distance to the contour, in px
-      const a = Math.max(0, Math.min(1, (w / 2 + .5) - d)) * (major ? .5 : .26), i = (y * N + x) * 4;
-      id.data[i] = 70; id.data[i + 1] = 104; id.data[i + 2] = 196; id.data[i + 3] = Math.round(a * 255);
-    }
-    cx.putImageData(id, 0, 0);
-    root.style.setProperty('--contour', `url(${c.toDataURL('image/png')})`);
-  })();
+  /* "Trusted" backdrop: pre-rendered tileable contour map (was generated on the main thread at load) */
+  root.style.setProperty('--contour', 'url(' + new URL('assets/contour.webp', document.baseURI).href + ')');
 
   const snap = str => str.replace(/(-?\d*\.?\d+(?:e-?\d+)?)px/g, (m, n) => Math.round(+n) + 'px');   // whole-pixel translates keep text crisp
 
@@ -430,7 +402,7 @@
     const contH = T(p, [[.3, 17], [.5, 19]]);
     const rise = Math.pow(1 - seg(p, 0, .08), 3) * 45;     // vehicles are already rolling in as the scene pins
 
-    const mobA = W <= 820;
+    const mobA = (W <= 820 || LAND.matches);
     const zA = mobA ? 1.55 : 1.8;                       // opening camera is zoomed in (reel: boom + container fill the frame)
     const s = T(p, [[.3, zA], [.5, 1.05], [.7, .75]]) * (mobA ? T(p, [[.3, 1], [.5, 1.3], [.7, 1]]) : 1);
     const sxF = T(p, [[.3, mobA ? .5 : .74], [.5, .5], [.7, .30], [.88, .33]]);
@@ -496,7 +468,7 @@
   }
   function updB(c) {
     const B = sc.B, p = clamp((c - B.top) / (B.h - H)), u = U;
-    const mob = W <= 820;
+    const mob = (W <= 820 || LAND.matches);
 
     // panel shapes
     const exit = ease(seg(p, .53, .62));
@@ -570,7 +542,7 @@
   const st = { img: $('.stats__img'), title: $('#statsTitle'), right: $('#statsRight') };
   function updS(c) {
     const S = sc.S, p = clamp((c - S.top) / (S.h - H));
-    const mob = W <= 820;
+    const mob = (W <= 820 || LAND.matches);
     st.img.style.transform = snap(`translate3d(0,${lerp(H * .42, -H * .3, ease(seg(p, 0, .75)))}px,0)`);
     if (mob) {
       st.title.style.transform = snap(`translate3d(0,${lerp(H * .5, H * .07, ease(seg(p, 0, .2)))}px,0)`);
@@ -643,20 +615,32 @@
   const go = k => scrollTo({ top: anchors()[k], behavior: noMotion ? 'auto' : 'smooth' });
   document.addEventListener('click', e => {
     const a = e.target.closest('[data-go]');
-    if (a) { e.preventDefault(); document.body.classList.remove('menu-open'); go(a.dataset.go); return; }
+    if (a) { e.preventDefault(); setMenu(false); go(a.dataset.go); return; }
     const top = e.target.closest('a[href="#top"]');
     if (top) { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); }
   });
   $('#scInd').addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
-  $('#menuBtn').addEventListener('click', () => {
-    const o = document.body.classList.toggle('menu-open');
-    $('#menuBtn').setAttribute('aria-expanded', o);
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') document.body.classList.remove('menu-open'); });
+  const menuBtn = $('#menuBtn'), drawerEl = $('#drawer');
+  const setMenu = o => {
+    document.body.classList.toggle('menu-open', o);
+    menuBtn.setAttribute('aria-expanded', o);
+    menuBtn.setAttribute('aria-label', o ? 'Close menu' : 'Menu');
+    drawerEl.toggleAttribute('inert', !o);
+    if (o) { const f = drawerEl.querySelector('a'); f && f.focus({ preventScroll: true }); } else if (document.activeElement && drawerEl.contains(document.activeElement)) menuBtn.focus();
+  };
+  setMenu(false);
+  menuBtn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false); });
+  addEventListener('hashchange', () => setMenu(false));
 
   /* ---------- boot ---------- */
   let rt;
-  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(measure, 120); });
+  let lastW = innerWidth, lastH = innerHeight;
+  addEventListener('resize', () => {
+    const dw = innerWidth !== lastW, dh = Math.abs(innerHeight - lastH) > 140;   // small height changes = mobile URL bar, ignore
+    if (!dw && !dh) return;
+    lastW = innerWidth; lastH = innerHeight; clearTimeout(rt); rt = setTimeout(measure, 120);
+  });
   function boot() {
     measure();
     const jump = params.get('scene');

@@ -231,3 +231,10 @@ fieldset.f{border:0;padding:0;margin:0}
 .proj>*{min-width:0}.proj.rev .pv{padding:14px 10px 44px 40px}
 
 .pgrid>*,.proj>*,.contact>*{min-width:0}@media(max-width:520px){.tag2{white-space:normal}.row{grid-template-columns:1fr}.row .a{text-align:left;white-space:normal}}
+
+/* guideline pass: touch, wrapping, numerals, sheet scroll containment */
+a,button,summary,label,input,select,textarea{touch-action:manipulation}
+html{-webkit-tap-highlight-color:rgba(201,169,110,.25)}
+h1,h2,h3,.lead,.pull,.guar{text-wrap:balance}
+.row .a,.svc .price,.cmp td,.cmp th,.hero .meta b{font-variant-numeric:tabular-nums}
+.sheet{overscroll-behavior:contain}

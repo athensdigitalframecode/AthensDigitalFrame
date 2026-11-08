@@ -80,7 +80,7 @@ class Page:
         other = ('/prices.html' if cur == 'prices' else '/') if s.l == 'en' else ('/en/prices.html' if cur == 'prices' else '/en/')
         ol, on = ('EL', 'Ελληνικά') if s.l == 'en' else ('EN', 'English')
         return f'''<header class="hd"><div class="wrap in">
-<a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span>Athens Digital Frame</span></a>
+<a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <nav class="nav" aria-label="{t('Κύριο μενού','Main')}">{nav}</nav>
 <div class="right"><a class="lang" href="{other}" hreflang="{ol.lower()}" lang="{ol.lower()}" aria-label="{on}">{ol}</a>
 <a class="btn gold" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span></a>
@@ -93,7 +93,7 @@ class Page:
         t = s.t; H = s.home
         return f'''</main>
 <footer class="ft2"><div class="wrap"><div class="g">
-<div><a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span>Athens Digital Frame</span></a>
+<div><a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <p>{t('Ψηφιακό στούντιο στην Αθήνα. Ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','A digital studio in Athens. Websites and e-shops for businesses that want to stand out.')}</p></div>
 <div><h4>{t('Πλοήγηση','Navigate')}</h4><ul><li><a href="{H('#projects')}">Projects</a></li><li><a href="{H('#process')}">{t('Διαδικασία','Process')}</a></li><li><a href="{s.prices()}">{t('Τιμές','Pricing')}</a></li><li><a href="{H('#about')}">{t('Το στούντιο','About')}</a></li><li><a href="{H('#faq')}">FAQ</a></li></ul></div>
 <div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#services')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#services')}">E-shops</a></li><li><a href="{H('#services')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
@@ -116,7 +116,7 @@ class Page:
 <div class="f"><label for="lf-k">{t('Κατηγορία επιχείρησης','Business category')}</label><select id="lf-k" name="k"><option value="">{t('Επίλεξε…','Choose…')}</option>{opts}</select></div>
 <fieldset class="f"><legend>{t('Προτιμώμενος τρόπος επικοινωνίας','Preferred contact method')}</legend><div class="radios">
 <label><input type="radio" name="m" value="whatsapp" checked><span>WhatsApp</span></label><label><input type="radio" name="m" value="email"><span>Email</span></label><label><input type="radio" name="m" value="phone"><span>{t('Τηλεφωνική κλήση','Phone call')}</span></label></div></fieldset>
-<div class="f"><label for="lf-c" id="lf-c-l">{t('Τηλέφωνο','Phone number')}</label><input id="lf-c" name="c" type="tel" inputmode="tel" autocomplete="tel" required maxlength="80" aria-describedby="lf-c-e"><p class="err" id="lf-c-e" role="alert"></p></div>
+<div class="f"><label for="lf-c" id="lf-c-l">{t('Τηλέφωνο','Phone number')}</label><input id="lf-c" name="c" spellcheck="false" type="tel" inputmode="tel" autocomplete="tel" required maxlength="80" aria-describedby="lf-c-e"><p class="err" id="lf-c-e" role="alert"></p></div>
 <div class="f"><label for="lf-d">{t('Περιγραφή project','Project description')} <span class="opt">({t('προαιρετικό','optional')})</span></label><textarea id="lf-d" name="d" maxlength="600"></textarea></div>
 <div class="status" role="status" aria-live="polite" hidden></div>
 <div class="btns"><button class="btn gold" type="submit">{t('Ζήτησε δωρεάν demo','Request a free demo')}</button><button class="btn ghost" type="button" id="lf-mail">{t('Αποστολή με email','Send by email')}</button></div>

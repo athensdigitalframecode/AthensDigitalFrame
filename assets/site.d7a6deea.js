@@ -7,7 +7,7 @@ function menu(o){bt.setAttribute('aria-expanded',o);sh.classList.toggle('open',o
 if(bt){bt.addEventListener('click',function(){menu(bt.getAttribute('aria-expanded')!=='true')});
  sh.addEventListener('click',function(e){if(e.target.closest('a'))menu(false)});
  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&sh.classList.contains('open')){menu(false);bt.focus()}});
- matchMedia('(min-width:1040px)').addEventListener('change',function(e){if(e.matches)menu(false)})}
+ matchMedia('(min-width:1280px)').addEventListener('change',function(e){if(e.matches)menu(false)})}
 /* reveal */
 var rv=[].slice.call(d.querySelectorAll('.rv,.reveal-img'));
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});rv.forEach(function(n){io.observe(n)})}else rv.forEach(function(n){n.classList.add('in')});

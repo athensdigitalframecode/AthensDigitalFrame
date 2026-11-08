@@ -31,3 +31,13 @@ Fade/lift on reveal (`.rv`), image clip reveal, process line draws once. Everyth
 - The contact form has no backend: it hands a prepared message to WhatsApp or the mail app and says so.
 - Legal pages do not exist yet: footer shows clearly marked "coming soon" placeholders, not links.
 - Every page exists in Greek (root) and English (`/en/`), both generated; keep copy in sync via `t(el, en)`.
+
+## Atmosphere layer (added after the arc was removed)
+The gold arc behind the hero was removed: it was decoration with no information. Depth now comes from light and material, all in `site.css` under "atmosphere":
+- **One key light.** Dark surfaces get a warm gold light from above-right (`.dark::before`); the hero light sits behind the mockups, breathes (16s opacity), and drifts a few px with the pointer (desktop, motion allowed, transform only).
+- **Grain.** A fine SVG noise (data URI, `--grain-l` on dark, `--grain-d` on light, 3.5-6% opacity) removes the flat digital fill.
+- **Structure, not ornament.** Four hairline column rules in the hero follow the layout grid and fade out downward; hidden under 700px.
+- **Grounded objects.** The hero mockups stand on a thin gold floor line with a soft pool of light.
+- **Seams.** Hero ends with a gold hairline and inner shade; cream/paper sections get a faint top light instead of a flat fill.
+- **Small details.** Gold text selection, glass header after scroll with a gold reading-progress hairline, one light sweep on the gold button hover.
+All motion is compositor-only and disabled under `prefers-reduced-motion`.

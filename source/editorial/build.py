@@ -35,7 +35,6 @@ SITE_STEPS = [HW[7 + i * 3:10 + i * 3] for i in range(5)]
 SHOP_STEPS = [HW[24 + i * 3:27 + i * 3] for i in range(5)]
 
 LOGO = '<img class="mark" src="/assets/df-mark.png" width="145" height="121" alt="" decoding="async">'
-ARCH = re.sub(r' (id|class|width|height)="[^"]*"', '', open(os.path.join(LEG, 'frame.svg.txt'), encoding='utf8').read(), count=0).replace('<svg ', '<svg width="520" height="640" ', 1)
 ARROW = '<span class="ar" aria-hidden="true">→</span>'
 
 class Page:
@@ -79,7 +78,7 @@ class Page:
         sheet = ''.join(f'<a class="l" href="{href(k)}">{esc(n)}<span aria-hidden="true">→</span></a>' for k, n in items)
         other = ('/prices.html' if cur == 'prices' else '/') if s.l == 'en' else ('/en/prices.html' if cur == 'prices' else '/en/')
         ol, on = ('EL', 'Ελληνικά') if s.l == 'en' else ('EN', 'English')
-        return f'''<header class="hd"><div class="wrap in">
+        return f'''<header class="hd"><i class="pg" aria-hidden="true"></i><div class="wrap in">
 <a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <nav class="nav" aria-label="{t('Κύριο μενού','Main')}">{nav}</nav>
 <div class="right"><a class="lang" href="{other}" hreflang="{ol.lower()}" lang="{ol.lower()}" aria-label="{on}">{ol}</a>
@@ -154,7 +153,7 @@ class Page:
                      t('Ψηφιακό στούντιο στην Αθήνα. Σύγχρονες ιστοσελίδες από 300€ και e-shops, με δωρεάν demo πριν από οποιαδήποτε πληρωμή.', 'A digital studio in Athens. Modern websites from €300 and e-shops, with a free demo before any payment.'),
                      '/', '/en/', 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
         out += s.header()
-        out += f'''<section class="hero dark"><div class="arch" aria-hidden="true">{ARCH}</div><div class="wrap grid">
+        out += f'''<section class="hero dark"><div class="wrap grid">
 <div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
 <h1 class="h1">Websites designed to <em>move your business</em> forward.</h1>
 <p class="lead">{t('Σχεδιάζουμε και κατασκευάζουμε σύγχρονες ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','We design and build modern websites and e-shops for businesses that want to stand out.')}</p>

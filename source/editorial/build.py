@@ -35,7 +35,7 @@ SITE_STEPS = [HW[7 + i * 3:10 + i * 3] for i in range(5)]
 SHOP_STEPS = [HW[24 + i * 3:27 + i * 3] for i in range(5)]
 
 LOGO = '<img class="mark" src="/assets/df-mark.png" width="145" height="121" alt="" decoding="async">'
-ARCH = open(os.path.join(HERE, 'arch.svg'), encoding='utf8').read().strip()
+ARCH = re.sub(r' (id|class|width|height)="[^"]*"', '', open(os.path.join(LEG, 'frame.svg.txt'), encoding='utf8').read(), count=0).replace('<svg ', '<svg width="520" height="640" ', 1)
 ARROW = '<span class="ar" aria-hidden="true">→</span>'
 
 class Page:
@@ -154,13 +154,16 @@ class Page:
                      t('Ψηφιακό στούντιο στην Αθήνα. Σύγχρονες ιστοσελίδες από 300€ και e-shops, με δωρεάν demo πριν από οποιαδήποτε πληρωμή.', 'A digital studio in Athens. Modern websites from €300 and e-shops, with a free demo before any payment.'),
                      '/', '/en/', 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
         out += s.header()
-        out += f'''<section class="hero dark"><div class="wrap grid">
+        out += f'''<section class="hero dark"><div class="arch" aria-hidden="true">{ARCH}</div><div class="wrap grid">
 <div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
 <h1 class="h1">Websites designed to <em>move your business</em> forward.</h1>
 <p class="lead">{t('Σχεδιάζουμε και κατασκευάζουμε σύγχρονες ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','We design and build modern websites and e-shops for businesses that want to stand out.')}</p>
 <div class="btns"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn ghost" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')}</a></div>
 <div class="meta"><div><b>3–5</b>{t('ημέρες έως το live','days to go live')}</div><div><b>300€</b>{t('ιστοσελίδα, εφάπαξ','website, one-time')}</div><div><b>0€</b>{t('πριν δεις το demo','before you see the demo')}</div></div></div>
-<div class="archbox" aria-hidden="true">{ARCH}</div>
+<div class="stage" aria-label="{t('Προεπισκόπηση δύο concept projects','Preview of two concept projects')}"><span class="tag">{t('Concept projects · Αθήνα','Concept projects · Athens')}</span>
+{s.frame(s.browser('olivane-d.webp','olivane estate','Olivane Estate concept website on a desktop browser: a villa above the sea at sunset', eager=True))}
+<div class="b3">{s.frame(s.browser('arclines-d.webp','arclines freight','Arclines Freight concept website on a desktop browser: a dark globe with freight routes'))}</div>
+<div class="b2">{s.phone('olivane-m.webp','Olivane Estate concept website on a phone')}</div></div>
 </div></section>
 <section class="sec paper" id="studio" aria-labelledby="advh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">01 — {t('Το στούντιο','Studio')}</p><h2 class="h2" id="advh">{t('Σχεδιασμένο με προσοχή. Φτιαγμένο για την επιχείρησή σου.','Thoughtfully made. Built for your business.')}</h2></div></div>

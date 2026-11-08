@@ -238,4 +238,4 @@ html{-webkit-tap-highlight-color:rgba(201,169,110,.25)}
 h1,h2,h3,.lead,.pull,.guar{text-wrap:balance}
 .row .a,.svc .price,.cmp td,.cmp th,.hero .meta b{font-variant-numeric:tabular-nums}
 .sheet{overscroll-behavior:contain}
-.ft2 a[href*="instagram"]{display:inline-block;padding:10px 0}
+a[href*="instagram.com"]{display:inline-block;padding:10px 0}

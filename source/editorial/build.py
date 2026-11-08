@@ -54,7 +54,7 @@ class Page:
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-<meta name="theme-color" content="#0B0B0B">
+<meta name="theme-color" content="#09090A"><meta name="color-scheme" content="dark">
 <link rel="canonical" href="{canon}">
 <link rel="alternate" hreflang="el" href="{SITE}{path_el}"><link rel="alternate" hreflang="en" href="{SITE}{path_en}"><link rel="alternate" hreflang="x-default" href="{SITE}{path_el}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Athens Digital Frame"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">
@@ -82,7 +82,7 @@ class Page:
 <a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <nav class="nav" aria-label="{t('Κύριο μενού','Main')}">{nav}</nav>
 <div class="right"><a class="lang" href="{other}" hreflang="{ol.lower()}" lang="{ol.lower()}" aria-label="{on}">{ol}</a>
-<a class="btn gold" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span></a>
+<a class="btn gold" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span><span class="ar" aria-hidden="true">→</span></a>
 <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="{t('Άνοιγμα μενού','Open menu')}"><i></i><i></i><i></i></button></div>
 </div></header>
 <div class="sheet" id="sheet">{sheet}<a class="btn gold" href="{H('#contact')}">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a></div>
@@ -276,8 +276,8 @@ class Page:
 <p class="sum">{t('Πρώτο έτος: 200–300€ + 12 × 30–50€ = <b>560–900€</b>, πριν από τα προαιρετικά extras.','First year: €200–300 + 12 × €30–50 = <b>€560–900</b>, before optional extras.')}</p></div></div>
 <div class="legend" aria-label="{t('Υπόμνημα','Legend')}"><span><span class="tag2 req" style="margin:0">{t('Εφάπαξ / Υποχρεωτικό','One-time / Required')}</span> {t('κόστη που πληρώνεις σίγουρα','costs you always pay')}</span><span><span class="tag2 opt" style="margin:0">{t('Προαιρετικό','Optional')}</span> {t('μόνο αν το θέλεις','only if you want it')}</span></div></div></section>
 <section class="sec paper"><div class="wrap"><div class="pgrid">
-<div class="pcard" style="background:transparent"><span class="eyebrow">Custom</span><h3 style="margin-top:12px">{t('Πιο σύνθετη ιστοσελίδα','A more complex website')}</h3><p class="d">{t('Τιμή ανάλογα με την πολυπλοκότητα. Ξεκάθαρη προσφορά πριν ξεκινήσουμε.','Priced by complexity. A clear quote before we start.')}</p></div>
-<div class="pcard" style="background:transparent"><span class="eyebrow">Extras</span><h3 style="margin-top:12px">{t('Επιπλέον υπηρεσίες','Additional services')}</h3>
+<div class="pcard"><span class="eyebrow">Custom</span><h3 style="margin-top:12px">{t('Πιο σύνθετη ιστοσελίδα','A more complex website')}</h3><p class="d">{t('Τιμή ανάλογα με την πολυπλοκότητα. Ξεκάθαρη προσφορά πριν ξεκινήσουμε.','Priced by complexity. A clear quote before we start.')}</p></div>
+<div class="pcard"><span class="eyebrow">Extras</span><h3 style="margin-top:12px">{t('Επιπλέον υπηρεσίες','Additional services')}</h3>
 <div class="rows" style="margin-bottom:0"><div class="row"><span class="t">Skroutz / BestPrice XML feed<span class="tag2 opt">{t('Προαιρετικό','Optional')}</span></span><span class="a">150€</span></div><div class="row"><span class="t">BOX NOW voucher<span class="tag2 opt">{t('Προαιρετικό','Optional')}</span></span><span class="a">120€</span></div></div></div></div>
 <div class="pcard" style="background:transparent;margin-top:clamp(20px,3vw,40px)"><span class="eyebrow">{t('Συστάσεις','Referrals')}</span><h3 style="margin-top:12px">{t('Πρόγραμμα συστάσεων','Referral programme')}</h3><p class="d">{t('Συστήνεις μια επιχείρηση και κερδίζεις 50€ μετρητά ή 2 μήνες δωρεάν συντήρηση. Ο φίλος σου παίρνει 10% έκπτωση.','Refer a business and earn €50 cash or 2 months of free maintenance. Your friend gets 10% off.')}</p></div></div></section>
 <section class="sec" id="process"><div class="wrap"><div class="sechead"><div><p class="eyebrow">{t('Διαδικασία','Process')}</p><h2 class="h2">{t('Πώς δουλεύουμε','How we work')}</h2></div></div>

@@ -41,3 +41,14 @@ The gold arc behind the hero was removed: it was decoration with no information.
 - **Seams.** Hero ends with a gold hairline and inner shade; cream/paper sections get a faint top light instead of a flat fill.
 - **Small details.** Gold text selection, glass header after scroll with a gold reading-progress hairline, one light sweep on the gold button hover.
 All motion is compositor-only and disabled under `prefers-reduced-motion`.
+
+
+## Dark studio system (supersedes the cream/black alternation)
+The whole site is now dark. Cream is text only, never a surface.
+- **Surfaces:** layered graphite tokens `--s0` (deepest: hero, process, contact, footer) to `--s4`. Sections alternate `--s1`/`--s2`; each gets a faint top edge light, one warm gold radial and one cool graphite radial (alternating left/right), and fine grain. No flat fills.
+- **Geometry:** every section opens with a hairline ruler with five registration ticks (the frame motif, rectilinear, no arcs); the hero keeps four column rules. Frame outlines and crop marks stay on project previews, which are lit from behind.
+- **Text:** body `--cream`, secondary `--muted` (cream 68%), small accents `--gold` (7:1+ on all surfaces), italic headline word `--gold-lt`. Errors `--err` (#F29A8A).
+- **Controls:** all pill-shaped (`--pill`). Primary `.btn.gold`: lit gold gradient, inner highlight, arrow chip, one light sweep on hover. Default `.btn`: glass with hairline border, gold on hover. `.btn.ghost`: outline. Tabs, chips, radios, language switch and burger share the pill language.
+- **Navigation:** glass bar; centred capsule nav with scroll-spy (active link gets a gold tint and dot); mobile sheet with display links and a gold corner light.
+- **Forms/cards:** dark glass panels with an inset top highlight; inputs are dark wells with a gold focus ring.
+Tokens live in `:root`; the dark system block is at the end of `site.css`.

@@ -338,7 +338,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .cb-face[data-f="0"]>:not(.cb-plate){transition:opacity .5s var(--ease)}
 .cb-cube:not(.is-open) .cb-face[data-f="0"]>:not(.cb-plate){opacity:0}
 .cb-floor{position:absolute;left:8%;right:8%;bottom:calc(var(--cs)*.05);height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,.55) 20%,rgba(201,169,110,.55) 80%,transparent)}
-.cb-floor::before{content:"";position:absolute;left:18%;right:18%;top:calc(var(--cs)*-.09);height:calc(var(--cs)*.18);background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);filter:blur(6px)}
+.cb-floor::before{content:"";position:absolute;left:18%;right:18%;top:calc(var(--cs)*-.09);height:calc(var(--cs)*.18);background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);filter:blur(6px);transform:scaleX(calc(var(--shw,1.3) / 1.3))}
 .cb-gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .cb.is-gl .cb-cube{visibility:hidden}
 /* service index and the one description that follows the active face */

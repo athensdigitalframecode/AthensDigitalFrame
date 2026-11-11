@@ -37,6 +37,9 @@
   var plate = 1, gl3 = window.ADFCubeGL && !/nogl/.test(location.search) ? window.ADFCubeGL(stage, cube, faces, FACE, rot, function () { gl3 = null; stage.classList.remove('is-gl'); paint(); }) : null;
   if (gl3) stage.classList.add('is-gl');
   function paint() {
+    /* shadow width = the cube's on-screen width: |x| extent of the rotated unit axes (1 face-on, ~1.41 on an edge) */
+    var x = q[0], y = q[1], z = q[2], w = q[3];
+    stage.style.setProperty('--shw', (Math.abs(1-2*(y*y+z*z)) + Math.abs(2*(x*y-z*w)) + Math.abs(2*(x*z+y*w))).toFixed(3));
     if (gl3) { gl3.draw(q, plate); return; }
     cube.style.setProperty('--m', css(q));
     faces.forEach(function (f, i) { var n = rot(q, NORMAL[i]); f.style.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3)); });

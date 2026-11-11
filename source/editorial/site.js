@@ -67,8 +67,8 @@ if(hero&&matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(p
 (function(){var links=[].slice.call(d.querySelectorAll('.nav a[href*="#"]'));if(!links.length||!('IntersectionObserver' in window))return;
 var map={};links.forEach(function(a){var id=a.getAttribute('href').split('#')[1];var s=id&&d.getElementById(id);if(s&&a.pathname===location.pathname)map[id]=a});
 var ids=Object.keys(map);if(!ids.length)return;
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});map[e.target.id].setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
-ids.forEach(function(id){io.observe(d.getElementById(id))});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});if(map[e.target.id])map[e.target.id].setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
+[].forEach.call(d.querySelectorAll('section[id]'),function(x){io.observe(x)});   /* sections without a nav link (FAQ) clear the mark */
 addEventListener('scroll',function(){if((pageYOffset||0)<200)links.forEach(function(a){a.removeAttribute('aria-current')})},{passive:true})})();
 /* magnetic primary buttons: lean a few px toward a fine pointer (transform only, off under reduced motion) */
 if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.querySelectorAll('.btn.gold'),function(b){

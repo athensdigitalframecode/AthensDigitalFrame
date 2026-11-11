@@ -76,7 +76,7 @@
       ]
     },
     {
-      "source": "/assets/(site|cube|cube-gl).(.*)",
+      "source": "/assets/(site|cube|cube-gl|flag).(.*)",
       "headers": [
         {
           "key": "Cache-Control",

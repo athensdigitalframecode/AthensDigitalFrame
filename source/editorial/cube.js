@@ -34,13 +34,19 @@
 
   function nearest() { var best = 0, bz = -2; NORMAL.forEach(function (n, i) { var z = rot(q, n)[2]; if (z > bz) { bz = z; best = i; } }); return best; }
   /* WebGL when available (cube-gl.js, ?nogl turns it off); otherwise the CSS cube below is the renderer */
-  var plate = 1, gl3 = window.ADFCubeGL && !/nogl/.test(location.search) ? window.ADFCubeGL(stage, cube, faces, FACE, rot, function () { gl3 = null; stage.classList.remove('is-gl'); paint(); }) : null;
-  if (gl3) stage.classList.add('is-gl');
+  /* started when the browser is idle, so the first screen is not blocked; cube-gl.js adds .is-gl once its faces are painted */
+  var plate = 1, gl3 = null;
+  function startGL() {
+    if (!window.ADFCubeGL || /nogl/.test(location.search)) return;
+    gl3 = window.ADFCubeGL(stage, cube, faces, FACE, rot, function () { gl3 = null; stage.classList.remove('is-gl'); paint(); });
+    if (gl3) paint();
+  }
+  (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(startGL, { timeout: 2000 });
   function paint() {
     /* shadow width = the cube's on-screen width: |x| extent of the rotated unit axes (1 face-on, ~1.41 on an edge) */
     var x = q[0], y = q[1], z = q[2], w = q[3];
     stage.style.setProperty('--shw', (Math.abs(1-2*(y*y+z*z)) + Math.abs(2*(x*y-z*w)) + Math.abs(2*(x*z+y*w))).toFixed(3));
-    if (gl3) { gl3.draw(q, plate); return; }
+    if (gl3) { gl3.draw(q, plate); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
     cube.style.setProperty('--m', css(q));
     faces.forEach(function (f, i) { var n = rot(q, NORMAL[i]); f.style.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3)); });
   }

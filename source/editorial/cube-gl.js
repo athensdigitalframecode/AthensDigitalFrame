@@ -101,9 +101,12 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
   }
   function redraw() { if (lastQ) draw(lastQ, lastP); }
 
-  logo.onload = paint; logo.src = stage.getAttribute('data-logo');
-  paint();
-  if (document.fonts && document.fonts.load) Promise.all(['500 64px "Noto Serif Display"', '500 22px Manrope', '400 20px Marcellus'].map(function (f) { return document.fonts.load(f, 'AaΑα01'); })).then(paint, paint);
+  /* paint the atlas once, after the logo and the fonts are ready; until then the CSS cube stays visible */
+  var ready = function () { paint(); stage.classList.add('is-gl'); };
+  var logoReady = new Promise(function (r) { logo.onload = logo.onerror = r; });
+  logo.src = stage.getAttribute('data-logo');
+  var fontsReady = document.fonts && document.fonts.load ? Promise.all(['500 64px "Noto Serif Display"', '500 22px Manrope', '400 20px Marcellus'].map(function (f) { return document.fonts.load(f, 'AaΑα01'); })) : Promise.resolve();
+  Promise.all([logoReady, fontsReady.catch(function () {})]).then(ready);
   if (window.ResizeObserver) new ResizeObserver(redraw).observe(stage);
   cv.addEventListener('webglcontextlost', function (e) { e.preventDefault(); cv.remove(); onLost(); });
   return { draw: draw, retex: paint };

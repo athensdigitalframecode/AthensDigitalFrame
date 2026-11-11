@@ -22,7 +22,7 @@ def asset(name):
         if os.path.basename(old) != out: os.remove(old)
     open(os.path.join(ROOT, 'assets', out), 'wb').write(data)
     return '/assets/' + out
-CSS = asset('site.css'); JS = asset('site.js')
+CSS = asset('site.css'); JS = asset('site.js'); FLAG = asset('flag.js')
 CUBE = asset('cube-gl.js'), asset('cube.js')   # home page only; cube.js falls back to the CSS cube without WebGL
 
 # ---------- original FAQ / process copy ----------
@@ -126,7 +126,10 @@ class Page:
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/notoserifdisplay-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/notoserifdisplay-italic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/marcellus.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{CSS}">
+<script src="{FLAG}"></script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -144,7 +147,7 @@ class Page:
         return f'''<header class="hd"><i class="pg" aria-hidden="true"></i><div class="wrap in">
 <a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <nav class="nav" aria-label="{t('Κύριο μενού','Main')}">{nav}</nav>
-<div class="right"><a class="lang" href="{other}" hreflang="{ol.lower()}" lang="{ol.lower()}" aria-label="{on}">{ol}</a>
+<div class="right"><a class="lang" href="{other}" hreflang="{ol.lower()}" lang="{ol.lower()}" aria-label="{ol}, {on}">{ol}</a>
 <a class="btn gold" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span><span class="ar" aria-hidden="true">→</span></a>
 <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="{t('Άνοιγμα μενού','Open menu')}"><i></i><i></i><i></i></button></div>
 </div></header>

@@ -48,9 +48,10 @@ The whole site is now dark. Cream is text only, never a surface.
 - **Surfaces:** layered graphite tokens `--s0` (deepest: hero, process, contact, footer) to `--s4`. Sections alternate `--s1`/`--s2`; each gets a faint top edge light, one warm gold radial and one cool graphite radial (alternating left/right), and fine grain. No flat fills.
 - **Geometry:** every section opens with a hairline ruler with five registration ticks (the frame motif, rectilinear, no arcs); the hero keeps four column rules. Frame outlines and crop marks stay on project previews, which are lit from behind.
 - **Text:** body `--cream`, secondary `--muted` (cream 68%), small accents `--gold` (7:1+ on all surfaces), italic headline word `--gold-lt`. Errors `--err` (#F29A8A).
-- **Controls:** all pill-shaped (`--pill`). Primary `.btn.gold`: lit gold gradient, inner highlight, arrow chip, one light sweep on hover. Default `.btn`: glass with hairline border, gold on hover. `.btn.ghost`: outline. Tabs, chips, radios, language switch and burger share the pill language.
-- **Navigation:** glass bar; centred capsule nav with scroll-spy (active link gets a gold tint and dot); mobile sheet with display links and a gold corner light.
-- **Forms/cards:** dark glass panels with an inset top highlight; inputs are dark wells with a gold focus ring.
+- **Controls:** rectilinear, 2px radius, like the frame (`--pill` is now 2px; the name is kept so one token still drives buttons, tabs, chips, radios, language switch). Primary `.btn.gold`: solid gold, no gradient, square arrow chip, one light sweep on hover. Default `.btn`: translucent fill with hairline border, gold on hover. `.btn.ghost`: outline. No pills, no circles.
+- **Navigation:** glass bar (the only blur on the site); centred plain-text nav with scroll-spy (active link turns gold with a dot); mobile sheet with display links and a gold corner light.
+- **Forms/cards:** flat graphite (`--s2`) with a hairline border and 2px radius, no glass, no drop shadow; inputs are dark wells with a gold focus ring.
+- Changed 2026-11-11 on the owner's decision, following the master brief's "avoid" list (rounded cards, glassmorphism, gradients).
 Tokens live in `:root`; the dark system block is at the end of `site.css`.
 
 ## Hero cube (2026-11, brief section 4)

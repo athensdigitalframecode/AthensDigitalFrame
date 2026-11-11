@@ -74,5 +74,8 @@ addEventListener('scroll',function(){if((pageYOffset||0)<200)links.forEach(funct
 if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.querySelectorAll('.btn.gold'),function(b){
  b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.setProperty('--mx',(((e.clientX-r.left)/r.width-.5)*8).toFixed(1)+'px');b.style.setProperty('--my',(((e.clientY-r.top)/r.height-.5)*6).toFixed(1)+'px')});
  b.addEventListener('pointerleave',function(){b.style.removeProperty('--mx');b.style.removeProperty('--my')})});
+/* FAQ group filter (without JS every group shows) */
+var fb=[].slice.call(d.querySelectorAll('.fq-tabs button')),fc=[].slice.call(d.querySelectorAll('.fcat'));
+fb.forEach(function(b){b.addEventListener('click',function(){var c=b.getAttribute('data-cat');fb.forEach(function(x){x.setAttribute('aria-pressed',x===b)});fc.forEach(function(g){g.hidden=c!=='all'&&g.getAttribute('data-cat')!==c})})});
 var y=d.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
 })();

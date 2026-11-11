@@ -65,7 +65,7 @@ The hero's right column is the brand cube; the device mock-ups moved out of the 
 - Sizes are tied to `--cs` (viewport-height aware) so the hero still fits the first screen.
 
 ## Page order and heading scale (2026-11, brief 8.1)
-Home follows the client's journey: hero (cube) -> 01 Studio -> 02 Services -> 03 Projects -> 04 Process -> 05 Pricing -> 06 Why us -> 07 About -> 08 FAQ -> 09 Contact. The header nav uses the same order. Section backgrounds alternate `sec paper` / `sec`, with `sec dark` for Process and Contact.
+Home follows the client's journey: hero (cube) -> 01 Studio (short positioning) -> 02 Services (six capabilities) -> 03 Projects -> 04 Process -> 05 Pricing (the only place with prices: three packages compared row by row) -> 06 About (philosophy, the five points, base/languages) -> 07 FAQ (group filter) -> 08 Contact. The header nav uses the same order. Section backgrounds alternate `sec paper` / `sec`, with `sec dark` for Process and Contact.
 `.h2` is `clamp(26px, min(2.6vw + 16px, 6.4vh), 54px)`: editorial scale on wide screens, and the vh cap keeps it below the hero `h1`, which is itself capped by viewport height.
 
 ## Case studies (2026-11, brief section 6)

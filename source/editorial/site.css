@@ -420,3 +420,14 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(min-width:1000px){.plans{grid-template-columns:repeat(3,minmax(0,1fr))}
  .plan{grid-row:span 7;grid-template-rows:subgrid;gap:0}.plan .who{margin-top:10px}
  .plan dl{display:contents}.plan dl>div:first-child{margin-top:var(--s4);border-top:1px solid var(--line)}}
+/* studio (merged why + about): text, quote and facts left, numbered points right */
+.why .txt p{color:var(--muted);max-width:52ch;margin-top:var(--s4)}.why .facts{margin-top:var(--s6)}
+.pts{counter-reset:pt}.pts dt{counter-increment:pt;display:flex;gap:16px;align-items:baseline}
+.pts dt::before{content:counter(pt,decimal-leading-zero);font:500 14px/1 var(--display);color:var(--gold);letter-spacing:.06em}
+.pts dd{padding-left:calc(2ch + 16px)}
+/* FAQ group filter */
+.fq-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--s6)}
+.fq-tabs button{min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:2px;background:none;color:rgba(245,241,232,.78);font:600 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .3s,color .3s,background .3s}
+.fq-tabs button:hover{border-color:var(--gold);color:var(--cream)}
+.fq-tabs button[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.nojs .fq-tabs{display:none}

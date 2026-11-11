@@ -214,8 +214,9 @@ class Page:
                    (t('Hosting & συντήρηση', 'Hosting & maintenance'), [8, 9]), (t('Διαδικασία', 'Process'), [2, 6]), (t('Ιδιοκτησία & υποστήριξη', 'Ownership & support'), [7, 15])]
         pick = lambda p: p[1] if s.l == 'en' else p[0]
         faq = ''
-        for title, idx in faqcats:
-            faq += f'<div class="fcat rv"><h3>{esc(title)}</h3>' + ''.join(f'<details><summary>{esc(pick(QA[i][0]))}</summary><div class="ans"><p>{esc(pick(QA[i][1]))}</p></div></details>' for i in idx) + '</div>'
+        faq = f'<div class="fq-tabs" role="group" aria-label="{t("Φίλτρο ερωτήσεων", "Filter questions")}"><button type="button" aria-pressed="true" data-cat="all">{t("Όλες", "All")}</button>' + ''.join(f'<button type="button" aria-pressed="false" data-cat="{n}">{esc(title)}</button>' for n, (title, _) in enumerate(faqcats)) + '</div>'
+        for n, (title, idx) in enumerate(faqcats):
+            faq += f'<div class="fcat rv" data-cat="{n}"><h3>{esc(title)}</h3>' + ''.join(f'<details><summary>{esc(pick(QA[i][0]))}</summary><div class="ans"><p>{esc(pick(QA[i][1]))}</p></div></details>' for i in idx) + '</div>'
         def panel(pid, steps, hidden, note):
             li = ''.join(f'<li><span class="dot" aria-hidden="true">{i+1}</span><span class="day">{esc(pick(st[0]))}</span><h3>{names[i]}</h3><p>{esc(pick(st[2]))}</p></li>' for i, st in enumerate(steps))
             return f'<div class="panel" id="{pid}" role="tabpanel" aria-labelledby="{pid}-t"{" hidden" if hidden else ""}><ol class="steps">{li}</ol><p class="note">{note}</p></div>'
@@ -271,25 +272,23 @@ class Page:
 <p class="vat">{t('Οι τιμές δεν υπόκεινται σε ΦΠΑ. Πιο σύνθετα sites τιμολογούνται ανάλογα με την πολυπλοκότητα.','Prices are not subject to VAT. More complex sites are quoted by complexity.')}</p>
 <div class="btns" style="margin-top:32px"><a class="btn" href="{s.prices()}">{t('Δες όλες τις τιμές','See all pricing')} {ARROW}</a><a class="btn ghost" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')}</a></div>
 </div></section>
-<section class="sec paper" id="why" aria-labelledby="whyh"><div class="wrap why">
-<div class="rv"><p class="eyebrow">06 — {t('Γιατί εμείς','Why us')}</p><h2 class="h2" id="whyh">{t('Λιγότερος θόρυβος. Περισσότερη προσοχή.','Less noise. More attention.')}</h2><p class="pull">{t('Ένα site που ξέρεις ότι φτιάχτηκε για σένα.','A site you know was made for you.')}</p></div>
-<dl class="rv d1"><dt>{t('Φιλοσοφία','Philosophy')}</dt><dd>{t('Κάθε επιχείρηση χρειάζεται ένα site που εξηγεί καθαρά τι κάνει και κάνει εύκολο το επόμενο βήμα. Αυτό σχεδιάζουμε πρώτα, πριν από τα στολίδια.','Every business needs a site that explains clearly what it does and makes the next step easy. We design that first, before the decoration.')}</dd>
+<section class="sec paper" id="about" aria-labelledby="abh"><div class="wrap why">
+<div class="rv"><p class="eyebrow">06 — {t('Το στούντιο','About')}</p><h2 class="h2" id="abh">{t('Ένα μικρό στούντιο στην Αθήνα.','A small studio in Athens.')}</h2>
+<div class="txt"><p>{t('Η Athens Digital Frame φτιάχνει ιστοσελίδες και e-shops για τοπικές επιχειρήσεις. Δουλεύουμε σε μικρή κλίμακα, ώστε κάθε project να έχει την προσοχή που του αναλογεί και να μιλάς πάντα απευθείας με εμάς.','Athens Digital Frame builds websites and e-shops for local businesses. We work at a small scale so every project gets the attention it deserves and you always talk to us directly.')}</p>
+<p>{t('Δεν έχουμε ακόμα δημοσιευμένες δουλειές για πραγματικούς πελάτες, γι’ αυτό δείχνουμε concept projects που σημειώνονται καθαρά ως φανταστικά. Αν θες να δεις πώς θα φαινόταν το δικό σου, φτιάχνουμε δωρεάν demo.','We do not yet have published work for real clients, so we show concept projects that are clearly labelled as fictional. If you want to see how yours would look, we build a free demo.')}</p></div>
+<p class="pull">{t('Ένα site που ξέρεις ότι φτιάχτηκε για σένα.','A site you know was made for you.')}</p>
+<ul class="facts"><li><b>{t('Έδρα','Base')}</b><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></li><li><b>{t('Γλώσσες','Languages')}</b><span>{t('Ελληνικά και English','Greek and English')}</span></li><li><b>Instagram</b><span><a href="{IG}" target="_blank" rel="noopener">@athens.digitalframe</a></span></li></ul></div>
+<dl class="rv d1 pts"><dt>{t('Φιλοσοφία','Philosophy')}</dt><dd>{t('Κάθε επιχείρηση χρειάζεται ένα site που εξηγεί καθαρά τι κάνει και κάνει εύκολο το επόμενο βήμα. Αυτό σχεδιάζουμε πρώτα, πριν από τα στολίδια.','Every business needs a site that explains clearly what it does and makes the next step easy. We design that first, before the decoration.')}</dd>
 <dt>{t('Προσοχή στη λεπτομέρεια','Attention to detail')}</dt><dd>{t('Μελετάμε την επιχείρησή σου και την περιοχή σου, και ελέγχουμε την ταχύτητα σε κινητό πριν από το live.','We study your business and your area, and check mobile speed before launch.')}</dd>
 <dt>{t('Άμεση επικοινωνία','Direct communication')}</dt><dd>{t('Μιλάς απευθείας με εμάς, με DM, WhatsApp, τηλέφωνο ή email.','You talk directly to us, by DM, WhatsApp, phone or email.')}</dd>
 <dt>{t('Διαφανείς τιμές','Transparent pricing')}</dt><dd>{t('Οι τιμές είναι γραμμένες πάνω στο site, ξεχωριστά οι εφάπαξ και οι μηνιαίες, και το demo είναι δωρεάν.','Prices are written on the site, with one-time and recurring costs kept apart, and the demo is free.')}</dd>
 <dt>{t('Οργανωμένη διαδικασία','Organised process')}</dt><dd>{t('Πέντε σαφή βήματα, live σε 3–5 ημέρες.','Five clear steps, live in 3–5 days.')}</dd></dl>
 </div></section>
-<section class="sec" id="about" aria-labelledby="abh"><div class="wrap about">
-<div class="rv"><p class="eyebrow">07 — {t('Το στούντιο','About')}</p><h2 class="h2" id="abh">{t('Ένα μικρό στούντιο στην Αθήνα.','A small studio in Athens.')}</h2></div>
-<div class="txt rv d1"><p>{t('Η Athens Digital Frame φτιάχνει ιστοσελίδες και e-shops για τοπικές επιχειρήσεις. Δουλεύουμε σε μικρή κλίμακα, ώστε κάθε project να έχει την προσοχή που του αναλογεί και να μιλάς πάντα απευθείας με εμάς.','Athens Digital Frame builds websites and e-shops for local businesses. We work at a small scale so every project gets the attention it deserves and you always talk to us directly.')}</p>
-<p>{t('Δεν έχουμε ακόμα δημοσιευμένες δουλειές για πραγματικούς πελάτες, γι’ αυτό δείχνουμε concept projects που σημειώνονται καθαρά ως φανταστικά. Αν θες να δεις πώς θα φαινόταν το δικό σου, φτιάχνουμε δωρεάν demo.','We do not yet have published work for real clients, so we show concept projects that are clearly labelled as fictional. If you want to see how yours would look, we build a free demo.')}</p>
-<ul class="facts" style="margin-top:32px"><li><b>{t('Έδρα','Base')}</b><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></li><li><b>{t('Γλώσσες','Languages')}</b><span>{t('Ελληνικά και English','Greek and English')}</span></li><li><b>Instagram</b><span><a href="{IG}" target="_blank" rel="noopener">@athens.digitalframe</a></span></li></ul></div>
-</div></section>
-<section class="sec paper" id="faq" aria-labelledby="fqh"><div class="wrap faq">
-<div class="side rv"><p class="eyebrow">08 — FAQ</p><h2 class="h2" id="fqh">{t('Πριν μας στείλεις μήνυμα.','Before you message us.')}</h2></div><div>{faq}</div>
+<section class="sec" id="faq" aria-labelledby="fqh"><div class="wrap faq">
+<div class="side rv"><p class="eyebrow">07 — FAQ</p><h2 class="h2" id="fqh">{t('Πριν μας στείλεις μήνυμα.','Before you message us.')}</h2></div><div>{faq}</div>
 </div></section>
 <section class="sec dark" id="contact" aria-labelledby="cth"><div class="wrap contact">
-<div class="rv"><p class="eyebrow">09 — {t('Επικοινωνία','Contact')}</p><h2 class="h2" id="cth">{t('Δες πώς θα φαινόταν το δικό σου site.','See how your own site would look.')}</h2><p class="lead" style="margin-top:20px">{t('Το δωρεάν demo έρχεται πριν από οποιαδήποτε πληρωμή. Δεν σου αρέσει; Δεν πληρώνεις τίποτα.','The free demo comes before any payment. Do not like it? You pay nothing.')}</p>
+<div class="rv"><p class="eyebrow">08 — {t('Επικοινωνία','Contact')}</p><h2 class="h2" id="cth">{t('Δες πώς θα φαινόταν το δικό σου site.','See how your own site would look.')}</h2><p class="lead" style="margin-top:20px">{t('Το δωρεάν demo έρχεται πριν από οποιαδήποτε πληρωμή. Δεν σου αρέσει; Δεν πληρώνεις τίποτα.','The free demo comes before any payment. Do not like it? You pay nothing.')}</p>
 <div class="ways"><a href="{DM}" target="_blank" rel="noopener"><span>Instagram DM</span><span>@athens.digitalframe</span></a><a href="https://wa.me/{WA}" target="_blank" rel="noopener"><span>WhatsApp</span><span>+30 698 186 2732</span></a><a href="tel:{TEL}"><span>{t('Τηλέφωνο','Phone')}</span><span>+30 698 186 2732</span></a><a href="mailto:{MAIL}"><span>Email</span><span>{MAIL}</span></a></div></div>
 <div class="rv d1">{s.form()}</div>
 </div></section>

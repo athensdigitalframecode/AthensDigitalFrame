@@ -23,7 +23,7 @@ Every visual decision needs a purpose. No generic SaaS look: no gradient hero, n
 Buttons `.btn` (translucent, hairline, gold on hover), `.gold` (primary CTA, solid gold, the only gold-filled button), `.ghost` (outline); all 2px radius. Tags `.tag2` (`req` filled = mandatory, `opt` dashed = optional). Rows `.row` for prices. Details/summary FAQ. Tabs with arrow-key support for the process. Index lists `.caps` (services, case components) instead of cards.
 
 ## Motion
-Fade/lift on reveal (`.rv`), image clip reveal, process line draws once, hero entrance (one staggered rise on load), magnetic primary button (a few px toward a fine pointer), the cube (see below). Everything off under `prefers-reduced-motion`. No parallax, no scroll hijack, no custom cursor.
+Fade/lift on reveal (`.rv`), image clip reveal, process line and steps follow the scroll (brief 5.4), hero entrance (one staggered rise on load), magnetic primary button (a few px toward a fine pointer), the cube (see below). Everything off under `prefers-reduced-motion`. No parallax, no scroll hijack, no custom cursor.
 
 ## Content rules
 - Prices (do not change without the owner): website 300 EUR (up to 3 pages), hosting+domain 50 EUR/year (required), maintenance 20 EUR/month (optional), e-shop setup 200-300 EUR, subscription 30-50 EUR/month with 12-month minimum, first-year e-shop 560-900 EUR, Skroutz 150, BOX NOW 120, referral 50 EUR or 2 months free (friend 10% off). No VAT.

@@ -15,9 +15,11 @@ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es
 var tabs=[].slice.call(d.querySelectorAll('[role=tab]')),panels=[].slice.call(d.querySelectorAll('.panel'));
 function pick(t){tabs.forEach(function(x){x.setAttribute('aria-selected',x===t)});panels.forEach(function(p){p.hidden=p.id!==t.getAttribute('aria-controls')});anim()}
 tabs.forEach(function(t,i){t.addEventListener('click',function(){pick(t)});t.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;if(n===null)return;n=(n+tabs.length)%tabs.length;tabs[n].focus();pick(tabs[n]);e.preventDefault()})});
-function anim(){var p=panels.filter(function(x){return !x.hidden})[0];if(!p)return;var s=p.querySelector('.steps');if(!s)return;s.classList.remove('go');var lis=[].slice.call(s.children);lis.forEach(function(l){l.classList.remove('on')});
- var run=function(){void s.offsetWidth;s.classList.add('go');lis.forEach(function(l,i){setTimeout(function(){l.classList.add('on')},300+i*480)})};
- if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){if(es[0].isIntersecting){o.disconnect();run()}},{threshold:.35});o.observe(s)}else run()}
+/* steps follow the scroll: the line fills and each step lights as the reader moves through the section (all lit under reduced motion) */
+var still=matchMedia('(prefers-reduced-motion:reduce)').matches,sq=false;
+function anim(){sq=false;var p=panels.filter(function(x){return !x.hidden})[0],s=p&&p.querySelector('.steps');if(!s)return;var r=s.getBoundingClientRect(),v=innerHeight,k=still?1:Math.max(0,Math.min(1,(v*.85-r.top)/(v*.5)));
+ s.style.setProperty('--p',k.toFixed(3));[].forEach.call(s.children,function(l,n,a){l.classList.toggle('on',k>=n/(a.length-1)-.001)})}
+addEventListener('scroll',function(){if(!sq){sq=true;requestAnimationFrame(anim)}},{passive:true});
 anim();
 /* contact form: honest hand-off to WhatsApp / email (no backend) */
 var f=d.getElementById('leadform');

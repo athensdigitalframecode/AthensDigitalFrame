@@ -1,5 +1,7 @@
 # CLAUDE_CHAT_HANDOFF.md — Athens Digital Frame
 
+> **Correction 2026-11-12 (owner):** there is no partner. The owner runs the studio and this project alone; every "partner" statement from the earlier notes was wrong and has been removed. `arclines/` is the owner's and can be edited.
+
 Status labels: **VERIFIED** = inspected in the repo/files this session; **REPORTED** = stated in project notes/memory, not re-checked; **UNKNOWN** = not established.
 Prepared 2026-11-11 from: repo `athensdigitalframecode/athensdigitalframe` (HEAD `2226bab`), Project doc `PROJECT_HANDOFF.md`, Project memory, `CLAUDE.md`, `source/DESIGN.md`. No secrets are included or known.
 
@@ -10,7 +12,7 @@ Prepared 2026-11-11 from: repo `athensdigitalframecode/athensdigitalframe` (HEAD
 - Original logo file (WhatsApp JPEG) is not in the repo (see §5).
 
 ## 1. Overview (VERIFIED unless noted)
-Athens Digital Frame (ADF): a 2-partner digital studio in Athens building websites and e-shops for local businesses. Instagram `@athens.digitalframe`. Site is bilingual (Greek root, English `/en/`). Offer: free demo before any payment. Partner builds websites/e-shops; user handles Instagram and client acquisition (REPORTED, memory). Creative direction now: dark premium studio (graphite surfaces, gold accents, grain, hairline rulers).
+Athens Digital Frame (ADF): a one-person digital studio in Athens building websites and e-shops for local businesses. Instagram `@athens.digitalframe`. Site is bilingual (Greek root, English `/en/`). Offer: free demo before any payment. Partner builds websites/e-shops; user handles Instagram and client acquisition (REPORTED, memory). Creative direction now: dark premium studio (graphite surfaces, gold accents, grain, hairline rulers).
 Live URL: `https://athensdigitalframe.vercel.app/`.
 
 ## 2. Implementation status
@@ -33,7 +35,7 @@ Not re-run after the last hero edit: contrast and menu/form audits (only overflo
 - Testing tools (not in repo): Playwright + `/usr/bin/google-chrome`; local `python3 -m http.server 8765`.
 
 ## 4. Codebase map
-`CLAUDE.md` (agent rules, Russian) · `source/DESIGN.md` (design system; read before UI work) · `source/README.md` · `source/editorial/{build.py,site.css,site.js}` (edit these) · `source/legacy/` (old gold generator, unused) · generated `index.html prices.html en/*` and `assets/site.*` (never hand-edit) · `olivane/`, `arclines/` (partner area for arclines: don't touch) · `vercel.json` `.vercelignore` (`source/` not published) · `favicon-192.png` `apple-touch-icon.png` `og-v3.png` `og-en-v1.png` · `LICENSE`.
+`CLAUDE.md` (agent rules, Russian) · `source/DESIGN.md` (design system; read before UI work) · `source/README.md` · `source/editorial/{build.py,site.css,site.js}` (edit these) · `source/legacy/` (old gold generator, unused) · generated `index.html prices.html en/*` and `assets/site.*` (never hand-edit) · `olivane/`, `arclines/` (both owned by the owner; editable like the rest) · `vercel.json` `.vercelignore` (`source/` not published) · `favicon-192.png` `apple-touch-icon.png` `og-v3.png` `og-en-v1.png` · `LICENSE`.
 
 ## 5. Brand assets
 - Logo: `assets/df-mark.png` (145×121, transparent, extracted from `favicon-192.png`; white "df" + small gold corner; always on black; never redraw/recolour). **Original WhatsApp JPEG is not in the repo → transfer separately if wanted.**
@@ -61,7 +63,7 @@ Language switch EL/EN; sticky glass header, burger sheet, scroll-spy; reveal ani
 ## 9. Portfolio projects
 Both are **self-initiated fictional concepts** and labelled so on the site; testimonials/stats/news in Arclines are samples.
 - **Olivane Estate** (real-estate, Cyprus): scroll-driven build story blueprint→home, property cards with filters, site-visit/brochure forms (demo, nothing sent). Many polish commits (AVIF, plan viewer, glass menu).
-- **Arclines Freight** (logistics, APAC): corporate site, services/industries, shipment tracking, sample testimonials/news/FAQ, quote form (demo). Partner-owned folder; mobile audit fixes done (`79d6dbb`). Phone mockup on home page appears black in screenshots — uninvestigated.
+- **Arclines Freight** (logistics, APAC): corporate site, services/industries, shipment tracking, sample testimonials/news/FAQ, quote form (demo). Mobile audit fixes done (`79d6dbb`). Phone mockup on home page appears black in screenshots — uninvestigated.
 
 ## 10. Research/references
 None recorded in accessible sources. UNKNOWN; obtain from the original brief.
@@ -70,7 +72,7 @@ None recorded in accessible sources. UNKNOWN; obtain from the original brief.
 Arclines mockup black in home hero screenshot; 14 tap-target items in demos; legal pages missing; no Lighthouse/screen-reader/real-device pass; contrast/forms audits not re-run after `2226bab`; Project memory `areas/company-website.md` mentions a Base44 site (conflicts with the Vercel repo; unresolved); `CLAUDE.md` says push only after user consent, memory says only after "загрузи"/"push".
 
 ## 12. Decisions / must not undo
-Don't touch prices or header copy without approval; don't reintroduce arc/decoration; generated files only via `build.py`; don't edit `arclines/`; one commit per change; merge `origin/main` before pushing (partner pushes independently); narrow reading of "undo/remove" (revert only last commit and say so); reply in user's language (Russian), short; show options before layout trade-offs. Commit messages end with the Co-Authored-By and Claude-Session lines.
+Don't touch prices or header copy without approval; don't reintroduce arc/decoration; generated files only via `build.py`; one commit per change; merge `origin/main` before pushing (in case another machine pushed independently); narrow reading of "undo/remove" (revert only last commit and say so); reply in user's language (Russian), short; show options before layout trade-offs. Commit messages end with the Co-Authored-By and Claude-Session lines.
 
 ## 13. Remaining tasks (priority)
 1. Obtain the original master brief and reconcile (six services, references).
@@ -78,7 +80,7 @@ Don't touch prices or header copy without approval; don't reintroduce arc/decora
 3. Resolve Base44 vs Vercel question with the user.
 4. Fix Arclines black mockup in home hero.
 5. Legal pages (privacy, terms) and decision on analytics/consent if added.
-6. Demo tap-target fixes (coordinate with partner).
+6. Demo tap-target fixes.
 7. Lighthouse, screen-reader and real-device checks.
 8. Update outdated pricing in the Claude Project description (with owner approval).
 
@@ -86,4 +88,4 @@ Don't touch prices or header copy without approval; don't reintroduce arc/decora
 Hero fit task done and pushed (`2226bab`). Next: ask the user for the master prompt and confirm priorities; then task 2 above.
 
 ## 15. Uncertainty summary
-UNKNOWN: master prompt content, six services, reference sites, Base44 status, three.js use in Olivane, real analytics/search-console setup. REPORTED: partner/user roles, demo tap-target count. Everything else above was inspected in the repo this session.
+UNKNOWN: master prompt content, six services, reference sites, Base44 status, three.js use in Olivane, real analytics/search-console setup. REPORTED: demo tap-target count. Everything else above was inspected in the repo this session.

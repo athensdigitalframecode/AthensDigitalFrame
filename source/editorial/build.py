@@ -156,7 +156,7 @@ class Page:
 <p>{t('Ψηφιακό στούντιο στην Αθήνα. Ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','A digital studio in Athens. Websites and e-shops for businesses that want to stand out.')}</p></div>
 <div><h4>{t('Πλοήγηση','Navigate')}</h4><ul><li><a href="{H('#projects')}">Projects</a></li><li><a href="{H('#process')}">{t('Διαδικασία','Process')}</a></li><li><a href="{s.prices()}">{t('Τιμές','Pricing')}</a></li><li><a href="{H('#about')}">{t('Το στούντιο','About')}</a></li><li><a href="{H('#faq')}">FAQ</a></li></ul></div>
 <div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#services')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#services')}">E-shops</a></li><li><a href="{H('#services')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
-<h4 style="margin-top:28px">{t('Νομικά','Legal')}</h4><ul><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Πολιτική απορρήτου (σύντομα)','Privacy policy (coming soon)')}</span></li><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Όροι χρήσης (σύντομα)','Terms (coming soon)')}</span></li></ul></div>
+<h4 style="margin-top:28px">{t('Νομικά','Legal')}</h4><ul><li><a href="{s.pre}/privacy.html">{t('Πολιτική απορρήτου','Privacy policy')}</a></li><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Όροι χρήσης (σύντομα)','Terms (coming soon)')}</span></li></ul></div>
 <div><h4>{t('Επικοινωνία','Contact')}</h4><ul><li><a href="{IG}" rel="noopener" target="_blank">Instagram @athens.digitalframe</a></li><li><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp +30 698 186 2732</a></li><li><a href="tel:{TEL}">{t('Τηλέφωνο','Phone')} +30 698 186 2732</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
 </div><div class="base"><span>© <span id="yr">2026</span> Athens Digital Frame · {t('Οι τιμές δεν υπόκεινται σε ΦΠΑ.','Prices are not subject to VAT.')}</span><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></div></div></footer>
 <script src="{JS}" defer></script>{scripts}
@@ -368,6 +368,33 @@ class Page:
         out += s.footer()
         return out
 
+    def build_privacy(s):
+        """Every statement here describes what the site actually does; change the code first, then this text."""
+        t = s.t; url = '/privacy.html'
+        VA = 'https://vercel.com/docs/analytics/privacy-policy'
+        parts = [
+            (t('Ποιοι είμαστε', 'Who we are'), t(f'Η Athens Digital Frame είναι ένα μικρό ψηφιακό στούντιο στην Αθήνα. Για οτιδήποτε αφορά τα δεδομένα σου, γράψε μας στο <a href="mailto:{MAIL}">{MAIL}</a>.', f'Athens Digital Frame is a small digital studio in Athens, Greece. For anything about your data, write to <a href="mailto:{MAIL}">{MAIL}</a>.')),
+            (t('Η φόρμα επικοινωνίας', 'The contact form'), t('Η φόρμα δεν στέλνει τίποτα σε εμάς ή σε κάποιον server. Όταν πατάς το κουμπί, ανοίγει το WhatsApp ή η εφαρμογή email σου με έτοιμο μήνυμα. Το λαμβάνουμε μόνο αν πατήσεις αποστολή εκεί. Από εκείνο το σημείο, το μήνυμα το διαχειρίζεται το WhatsApp ή ο πάροχος email σου με τους δικούς του όρους.', 'The form does not send anything to us or to a server. When you press the button, it opens WhatsApp or your email app with a prepared message. We receive it only if you press send there. From that point the message is handled by WhatsApp or your email provider under their own terms.')),
+            (t('Τα μηνύματα που μας στέλνεις', 'Messages you send us'), t('Αν επικοινωνήσεις μαζί μας με Instagram, WhatsApp, τηλέφωνο ή email, χρησιμοποιούμε όσα μας γράφεις μόνο για να σου απαντήσουμε και να ετοιμάσουμε το demo ή το project σου. Δεν τα πουλάμε και δεν τα δίνουμε σε τρίτους για διαφήμιση.', 'If you contact us by Instagram, WhatsApp, phone or email, we use what you tell us only to reply and to prepare your demo or project. We do not sell it or pass it to anyone for advertising.')),
+            (t('Στατιστικά επισκεψιμότητας', 'Visitor statistics'), t(f'Χρησιμοποιούμε το Vercel Web Analytics για να βλέπουμε πόσοι επισκέπτονται το site και ποιες σελίδες ανοίγουν. Σύμφωνα με τη Vercel, δεν χρησιμοποιεί cookies, τα δεδομένα είναι ανώνυμα και δεν συνδέονται με συγκεκριμένο άτομο ή διεύθυνση IP, και η συνεδρία ενός επισκέπτη διαγράφεται μετά από 24 ώρες. <a href="{VA}" target="_blank" rel="noopener">Η πολιτική της Vercel</a>.', f'We use Vercel Web Analytics to see how many people visit and which pages they open. According to Vercel, it uses no cookies, the data is anonymous and not tied to an individual or an IP address, and a visitor session is discarded after 24 hours. <a href="{VA}" target="_blank" rel="noopener">Vercel\'s policy</a>.')),
+            (t('Φιλοξενία', 'Hosting'), t('Το site φιλοξενείται στη Vercel. Όπως κάθε πάροχος φιλοξενίας, επεξεργάζεται τεχνικά δεδομένα του αιτήματος, όπως τη διεύθυνση IP σου, για να σου παραδώσει τις σελίδες.', 'The site is hosted by Vercel. Like any web host, it processes technical request data such as your IP address in order to deliver the pages.')),
+            ('Cookies', t('Το site δεν τοποθετεί cookies, γι’ αυτό δεν υπάρχει banner για cookies.', 'This site does not set cookies, which is why there is no cookie banner.')),
+            (t('Τα concept demos', 'The concept demos'), t('Τα δύο concept sites (Olivane Estate, Arclines Freight) φορτώνουν τις γραμματοσειρές τους από το Google Fonts, οπότε ο browser σου συνδέεται με την Google όταν τα ανοίγεις. Οι φόρμες τους είναι επιδείξεις και δεν στέλνουν τίποτα.', 'The two concept sites (Olivane Estate, Arclines Freight) load their fonts from Google Fonts, so your browser connects to Google when you open them. Their forms are demonstrations and send nothing.')),
+            (t('Τα δικαιώματά σου', 'Your rights'), t('Με βάση τον GDPR μπορείς να ρωτήσεις ποια δεδομένα σου έχουμε και να ζητήσεις να τα διορθώσουμε ή να τα διαγράψουμε. Γράψε μας στο παραπάνω email. Μπορείς επίσης να απευθυνθείς στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (<a href="https://www.dpa.gr" target="_blank" rel="noopener">dpa.gr</a>).', 'Under the GDPR you can ask what data we hold about you and ask us to correct or delete it. Write to the email above. You can also complain to the Hellenic Data Protection Authority (<a href="https://www.dpa.gr" target="_blank" rel="noopener">dpa.gr</a>).')),
+        ]
+        title = t('Πολιτική απορρήτου', 'Privacy policy')
+        ld = {"@context": "https://schema.org", "@type": "WebPage", "name": f'{title} | Athens Digital Frame', "url": SITE + s.pre + url, "inLanguage": s.l, "isPartOf": {"@id": SITE + "/#org"}}
+        out = s.head(f'{title} | Athens Digital Frame', t('Τι δεδομένα επεξεργάζεται το site της Athens Digital Frame: χωρίς cookies, χωρίς λογαριασμούς, η φόρμα δεν αποθηκεύει τίποτα.', 'What data the Athens Digital Frame site processes: no cookies, no accounts, and the form stores nothing.'), url, '/en' + url, 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
+        out += s.header(path=url)
+        out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Νομικά', 'Legal')}</p>
+<h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{title}</h1>
+<p class="lead" style="max-width:46ch">{t('Με λίγα λόγια: το site δεν τοποθετεί cookies, δεν έχει λογαριασμούς και δεν αποθηκεύει όσα γράφεις.', 'In short: this site sets no cookies, has no accounts and does not store what you type.')}</p></div></section>
+<section class="sec"><div class="wrap about"><div><p class="eyebrow">{t('Τελευταία ενημέρωση', 'Last updated')}</p><p class="h2" style="font-size:var(--fs-2)">{t('11 Νοεμβρίου 2026', '11 November 2026')}</p></div>
+<div class="txt legal">{''.join(f'<h2>{h}</h2><p>{x}</p>' for h, x in parts)}</div></div></section>
+'''
+        out += s.footer()
+        return out
+
     def build_prices(s):
         t = s.t
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": t('Τιμές | Athens Digital Frame', 'Pricing | Athens Digital Frame'), "url": SITE + s.prices(), "inLanguage": s.l,
@@ -422,3 +449,4 @@ if __name__ == '__main__':
         p = Page(lang); pre = 'en/' if lang == 'en' else ''
         w(pre + 'index.html', p.build_home()); w(pre + 'prices.html', p.build_prices())
         for k in CASES: w(pre + f'work/{k}.html', p.build_case(k))
+        w(pre + 'privacy.html', p.build_privacy())

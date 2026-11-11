@@ -404,3 +404,6 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .stages figure{margin:0;position:relative}.stages img{display:block;width:100%;height:auto;border:1px solid var(--line)}
 .stages figcaption{position:absolute;left:12px;top:10px;font:500 14px/1 var(--display);color:var(--gold);letter-spacing:.06em}
 @media(min-width:760px){.stages{grid-template-columns:repeat(3,1fr)}}
+/* legal text (privacy.html) */
+.legal h2{font:500 var(--fs-2)/1.2 var(--display);margin:var(--s6) 0 var(--s3)}.legal h2:first-child{margin-top:0}
+.legal a{color:var(--gold-lt)}

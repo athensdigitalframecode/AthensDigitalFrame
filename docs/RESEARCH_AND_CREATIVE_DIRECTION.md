@@ -129,3 +129,16 @@ Constraints verified in the repo: static site, no bundler, no dependencies, CSP 
 - One of three automated hover runs showed services out of order and could not be reproduced (the automation's own mouse was probably over the cube). Needs a check with a real mouse.
 - Not checked: touch devices, Safari/Firefox, reduced-motion, low-end phones, context loss in practice.
 - Limits: reflections are of a procedural studio, not of the page; the floor shadow is still CSS and does not follow the rotation.
+
+## Award status of the references (checked 2026-11-12)
+Web search of Awwwards listings, the Awwwards annual-awards pages and Codrops. "Not found" means the search did not confirm it, not that it is false.
+| Studio | Confirmed | Source |
+|---|---|---|
+| Lusion | Site of the Year and Developer Site of the Year 2023 (Lusion v3); Site of the Month May 2019; several Sites of the Day | awwwards.com/annual-awards-2023/site-of-the-year, awwwards.com/lusion |
+| Exo Ape | Site of the Day 23 May 2022, Site of the Month May 2022 | awwwards.com/sites/exo-ape |
+| Obys | Studio of the Year 2023 | awwwards.com/annual-awards-2023/studio-of-the-year |
+| Locomotive | Agency of the Year in several years (Awwwards annual pages list 2017–2021) | awwwards.com/annual-awards-2021/agency-of-the-year |
+| Immersive Garden | Studio of the Year 2020 and 2024 | awwwards.com/annual-awards-2024/studio-of-the-year |
+| Dogstudio | Site of the Year Users' Choice (KIKK Festival 2016; Dragone 2014); Webby winner (ZOOX) | Awwwards annuals, webbyawards.com |
+| Unseen Studio | Site of the Day 24 Mar 2026 ("2025 Wrapped") | Awwwards listing |
+| basement.studio | Not found in this search | — |

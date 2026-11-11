@@ -267,16 +267,7 @@ class Page:
 <section class="sec paper" id="projects" aria-labelledby="projh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Δύο concept projects, σχεδιασμένα από εμάς.','Two concept projects, designed by us.')}</h2></div>
 <p class="lead">{t('Φανταστικές εταιρείες χωρίς πραγματικό πελάτη. Τα φτιάξαμε για να δείξουμε πώς δουλεύουμε.','Fictional companies with no real client. We made them to show how we work.')}</p></div>
-<article class="proj"><div class="pv rv">{s.frame('<a class="lnk" href="/olivane/" target="_blank" rel="noopener" aria-label="Olivane Estate">'+s.browser('olivane-d.webp','athensdigitalframe.vercel.app/olivane','Olivane Estate concept website: a villa above the sea at sunset')+'</a>')}<div class="phone">{''}<img src="/assets/olivane-m.webp" width="390" height="844" alt="Olivane Estate on a phone" loading="lazy" decoding="async"></div></div>
-<div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Real estate · Κύπρος','Real estate · Cyprus')}</p><h3>Olivane Estate</h3>
-<p>{t('Ιστοσελίδα για μια φανταστική κατασκευαστική εταιρεία: το σπίτι χτίζεται μπροστά στα μάτια σου καθώς κυλάς τη σελίδα.','A website for a fictional property developer: the home builds itself in front of you as you scroll.')}</p>
-<ul class="ft"><li>{t('Ιστορία κατασκευής με κύλιση, από το σχέδιο στο έτοιμο σπίτι','Scroll-driven construction story, from blueprint to finished home')}</li><li>{t('Κάρτες ακινήτων με φίλτρα τύπου, περιοχής, υπνοδωματίων και τιμής','Property cards with type, area, bedroom and price filters')}</li><li>{t('Φόρμες για επίσκεψη και φυλλάδιο (δοκιμαστικές, δεν στέλνουν τίποτα)','Site-visit and brochure forms (demo only, nothing is sent)')}</li></ul>
-<div class="btns"><a class="btn" href="/olivane/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a><a class="btn ghost" href="{s.case('olivane')}">{t('Διάβασε το case study','Read the case study')}</a></div></div></article>
-<article class="proj rev"><div class="pv rv">{s.frame('<a class="lnk" href="/arclines/" target="_blank" rel="noopener" aria-label="Arclines Freight">'+s.browser('arclines-d.webp','athensdigitalframe.vercel.app/arclines','Arclines Freight concept website: a dark globe with freight routes')+'</a>')}<div class="phone"><img src="/assets/arclines-m.webp" width="390" height="844" alt="Arclines Freight on a phone" loading="lazy" decoding="async"></div></div>
-<div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Logistics · Asia-Pacific','Logistics · Asia-Pacific')}</p><h3>Arclines Freight</h3>
-<p>{t('Εταιρική ιστοσελίδα για μια φανταστική εταιρεία logistics. Τα στατιστικά, οι μαρτυρίες και τα νέα είναι δείγματα και δεν αντιστοιχούν σε πραγματικούς πελάτες.','A corporate website for a fictional logistics company. The statistics, testimonials and news are samples and do not correspond to real customers.')}</p>
-<ul class="ft"><li>{t('Υπηρεσίες, κλάδοι και παρακολούθηση αποστολών σε εταιρικό ύφος','Services, industries and shipment tracking in a corporate style')}</li><li>{t('Δείγματα μαρτυριών, νέων και συχνών ερωτήσεων','Sample testimonials, news and FAQ')}</li><li>{t('Φόρμα προσφοράς (δοκιμαστική)','Quote form (demo)')}</li></ul>
-<div class="btns"><a class="btn" href="/arclines/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a><a class="btn ghost" href="{s.case('arclines')}">{t('Διάβασε το case study','Read the case study')}</a></div></div></article>
+{''.join(s.work(i, k) for i, k in enumerate(CASES))}
 <p class="more rv">{t('Περισσότερα demo concepts έρχονται σύντομα.','More demo concepts are coming soon.')}</p>
 </div></section>
 <section class="sec dark" id="process" aria-labelledby="proch"><div class="wrap">
@@ -329,6 +320,16 @@ class Page:
         return out
 
     # ----- PRICES -----
+    def work(s, i, key):
+        """One project in Selected Work: a large framed preview that opens the case study, then one meta row."""
+        t = s.t; c = CASES[key]; case = s.case(key)
+        pv = s.frame(f'<a class="lnk" href="{case}" aria-label="{c["name"]}: {t("case study", "case study")}">' + s.browser(key + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt'])) + '</a>')
+        return f'''<article class="work">
+<div class="pv rv">{pv}{s.phone(key + '-m.webp', c['name'] + ' ' + t('σε κινητό', 'on a phone'))}</div>
+<div class="work-meta rv d1"><span class="n">{i + 1:02d}</span><div class="work-t"><h3>{c['name']}</h3><p class="k">{esc(t(*c['sector']))}</p></div>
+<p class="work-d"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία', 'Self-initiated concept · fictional company')}</span>{esc(t(*c['lead']))}</p>
+<div class="btns"><a class="btn" href="{case}">{t('Διάβασε το case study', 'Read the case study')} {ARROW}</a><a class="btn ghost" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} ↗</a></div></div>
+</article>'''
     def case(s, key): return f'{s.pre}/work/{key}.html'
     def build_case(s, key):
         t = s.t; c = CASES[key]; p = lambda x: esc(t(*x)); o = CASES[c['other']]

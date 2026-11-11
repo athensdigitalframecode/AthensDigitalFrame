@@ -52,3 +52,13 @@ The whole site is now dark. Cream is text only, never a surface.
 - **Navigation:** glass bar; centred capsule nav with scroll-spy (active link gets a gold tint and dot); mobile sheet with display links and a gold corner light.
 - **Forms/cards:** dark glass panels with an inset top highlight; inputs are dark wells with a gold focus ring.
 Tokens live in `:root`; the dark system block is at the end of `site.css`.
+
+## Hero cube (2026-11, brief section 4)
+The hero's right column is the brand cube; the device mock-ups moved out of the hero (the projects section still shows them).
+- **What it is:** six faces = six services (Discover, Design, Develop, E-commerce, Visibility, Support; Greek titles on the Greek site). Data and copy live in `SERVICES` in `build.py`; `Page.cube()` emits the markup.
+- **Logo:** `assets/df-logo-1024.jpg` (owner's original, unmodified) on a black plate on the front face. At rest the plate is up; on interaction it recedes and DISCOVER shows. Six faces, never a seventh.
+- **Look:** graphite faces, gold bevelled edges, crop marks in every corner, one warm key light from above right (same light as the hero). No glow, no particles.
+- **Behaviour (`editorial/cube.js`):** rest (logo) -> hover tour through all six with a pause on each -> back to rest; drag (mouse/touch, inertia, snaps to the nearest face) or a click on the list pins a service until "Back to the logo" or Esc. One animation at a time. Touch drag is horizontal only so the page still scrolls.
+- **Rendering:** `editorial/cube-gl.js` (raw WebGL, no library) when available; otherwise the CSS 3D cube in `site.css` (`.cb-*`). The WebGL faces are painted from the DOM faces, so there is one source of text. `?nogl` forces CSS, `?selftest` checks the face targets.
+- **Accessibility:** the 3D object is `aria-hidden`; the list of six buttons and the description (`aria-live`) are the real content. Without JS the cube is hidden and all six descriptions are listed. Reduced motion: no tour, no tweens.
+- Sizes are tied to `--cs` (viewport-height aware) so the hero still fits the first screen.

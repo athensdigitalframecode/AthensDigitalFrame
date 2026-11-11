@@ -74,11 +74,6 @@ body.lock{overflow:hidden}
 .hero .lead{margin-bottom:var(--s6);color:rgba(245,241,232,.82)}
 .hero .meta{margin-top:var(--s7);display:flex;gap:clamp(20px,4vw,48px);flex-wrap:wrap;padding-top:var(--s5);border-top:1px solid var(--line-gold)}
 .hero .meta div{font:600 12px/1.5 var(--body);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.72)}.hero .meta b{display:block;font:500 28px/1.1 var(--display);letter-spacing:0;text-transform:none;color:var(--cream);margin-bottom:4px}
-.stage{position:relative;padding:20px 54px 84px 0}
-.stage .b2{position:absolute;right:0;bottom:0;width:34%;z-index:3}
-.stage .b3{position:absolute;left:-6%;bottom:-2%;width:42%;z-index:3}
-.stage .tag{position:absolute;left:0;top:-4px;z-index:4;background:var(--s0);padding:2px 10px 2px 0;font:600 11px/1.6 var(--body);letter-spacing:.14em;text-transform:uppercase;color:rgba(245,241,232,.75)}
-@media(max-width:560px){.stage{padding-right:34px;padding-bottom:56px}.stage .b3{display:none}.stage .b2{width:38%}}
 /* advantages */
 .adv{display:grid;border-top:1px solid var(--rule)}
 .adv li{padding:var(--s5) 0 var(--s6);border-bottom:1px solid var(--line);display:grid;gap:10px}
@@ -234,8 +229,6 @@ a[href*="instagram.com"]{display:inline-block;padding:10px 0}
 /* seam: the dark hero settles onto the page instead of stopping dead */
 .hero{border-bottom:1px solid var(--line-gold);box-shadow:inset 0 -90px 90px -70px rgba(0,0,0,.9)}
 /* grounded objects: the mockups stand on a lit floor */
-.stage::after{content:"";position:absolute;left:2%;right:6%;bottom:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,.55),transparent);z-index:0}
-.stage::before{content:"";position:absolute;left:-4%;right:0;bottom:-6px;height:90px;background:radial-gradient(closest-side,rgba(201,169,110,.20),transparent);z-index:0;pointer-events:none}
 /* light surfaces: top light and paper grain */
 .sec>.wrap{position:relative;z-index:1}
 /* header: glass on scroll, gold reading-progress hairline */
@@ -273,7 +266,6 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 /* hero extras */
 .hero .meta,.ft2 .base,.panel .note,.ways,.ways a{border-color:var(--line)}
 .hero .meta b{color:var(--cream)}
-.stage .tag{background:transparent;padding:0}
 /* project previews: lit from behind */
 .pv::before{content:"";position:absolute;inset:-14% -10%;z-index:0;pointer-events:none;background:radial-gradient(closest-side,rgba(201,169,110,.13),transparent 78%)}
 .pv>*{position:relative;z-index:1}.pv .phone{position:absolute}
@@ -342,6 +334,54 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
  .hero .meta{margin-top:clamp(12px,2.6vh,36px);padding-top:clamp(10px,1.8vh,22px)}
  .hero .meta b{font-size:clamp(20px,3vh,28px)}
  .hero .btn{min-height:clamp(40px,5.6vh,50px)}
- .stage{max-width:min(100%,calc((100vh - 150px)*1.42));margin-inline:auto;padding-top:clamp(6px,1.6vh,20px);padding-bottom:clamp(28px,6vh,84px)}
 }
 @media(min-width:700px) and (max-width:999px){.hero .grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}.hero .meta{gap:16px}}
+
+/* ---------- hero cube: six services on six faces. CSS 3D here; cube-gl.js swaps in WebGL when available ---------- */
+.cb-wrap{--cs:clamp(170px,50vw,240px);position:relative;min-width:0}
+@media(min-width:700px){.cb-wrap{--cs:clamp(170px,min(23vw,32vh),320px)}}
+.nojs .cb,.nojs .cb-hint{display:none}
+.cb{position:relative;height:calc(var(--cs)*1.6);display:grid;place-items:center;perspective:calc(var(--cs)*4.2);touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.cb.is-drag{cursor:grabbing}
+/* translateZ(-half) keeps the front face on the screen plane so its text renders 1:1 */
+.cb-cube{position:relative;width:var(--cs);height:var(--cs);transform-style:preserve-3d;transform:translateZ(calc(var(--cs)*-.5)) var(--m,rotateX(-14deg) rotateY(-24deg));will-change:transform}
+.cb-face{position:absolute;inset:0;--h:calc(var(--cs)*.5);--lit:.6;transform-style:preserve-3d;backface-visibility:hidden;background:linear-gradient(145deg,#2a2a2d,#18181a 70%);border:1px solid var(--line-gold);display:grid;grid-template:auto 1fr auto/1fr auto;padding:calc(var(--cs)*.085);color:var(--cream)}
+.cb-face[data-f="0"]{transform:translateZ(var(--h))}
+.cb-face[data-f="1"]{transform:rotateY(90deg) translateZ(var(--h))}
+.cb-face[data-f="2"]{transform:rotateY(180deg) translateZ(var(--h))}
+.cb-face[data-f="3"]{transform:rotateY(-90deg) translateZ(var(--h))}
+.cb-face[data-f="4"]{transform:rotateX(90deg) translateZ(var(--h))}
+.cb-face[data-f="5"]{transform:rotateX(-90deg) translateZ(var(--h))}
+/* crop marks: the frame motif in the four corners of every face */
+.cb-face::before{content:"";position:absolute;inset:calc(var(--cs)*.04);pointer-events:none;--c:var(--gold);--l:calc(var(--cs)*.045);background:linear-gradient(var(--c),var(--c)) 0 0/var(--l) 1px,linear-gradient(var(--c),var(--c)) 0 0/1px var(--l),linear-gradient(var(--c),var(--c)) 100% 0/var(--l) 1px,linear-gradient(var(--c),var(--c)) 100% 0/1px var(--l),linear-gradient(var(--c),var(--c)) 0 100%/var(--l) 1px,linear-gradient(var(--c),var(--c)) 0 100%/1px var(--l),linear-gradient(var(--c),var(--c)) 100% 100%/var(--l) 1px,linear-gradient(var(--c),var(--c)) 100% 100%/1px var(--l);background-repeat:no-repeat;opacity:.8}
+/* one key light: --lit (0..1) is set per face from its angle to the light */
+.cb-face::after{content:"";position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(135deg,rgba(255,244,220,calc(var(--lit)*.16)),transparent 55%),rgba(0,0,0,calc(.66 - var(--lit)*.66))}
+.cb-face>*{position:relative;z-index:1;opacity:calc(.3 + var(--lit)*.9)}
+.cb-n{font-size:calc(var(--cs)*.042);letter-spacing:.14em;color:var(--gold)}
+.cb-b{grid-area:1/2;font-family:var(--brand,Marcellus,serif);font-size:calc(var(--cs)*.038);letter-spacing:.2em;color:var(--muted)}
+.cb-g{grid-area:2/1/3/3;place-self:center;width:38%;fill:none;stroke:var(--cream);stroke-width:1.2}
+.cb-g .au{stroke:var(--gold)}.cb-g .fill{fill:var(--gold);stroke:var(--gold)}
+.cb-t{grid-area:3/1/4/3;font:500 calc(var(--cs)*.125)/1 var(--display);white-space:nowrap}
+/* the logo plate: the official mark on its own black, raised off the front face; DISCOVER appears as it recedes */
+.cb-face>.cb-plate{position:absolute;inset:11%;opacity:1;background:#0e0e10 url(/assets/df-logo-1024.jpg) 50% 50%/182% no-repeat;border:1px solid var(--line-gold);transform:translateZ(calc(var(--cs)*.035));backface-visibility:hidden;transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.cb-plate::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,calc(.16 - var(--lit)*.16))}
+.cb-cube.is-open .cb-face>.cb-plate{opacity:0;transform:translateZ(0) scale(.94)}
+.cb-face[data-f="0"]>:not(.cb-plate){transition:opacity .5s var(--ease)}
+.cb-cube:not(.is-open) .cb-face[data-f="0"]>:not(.cb-plate){opacity:0}
+.cb-floor{position:absolute;left:8%;right:8%;bottom:calc(var(--cs)*.05);height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,.55) 20%,rgba(201,169,110,.55) 80%,transparent)}
+.cb-floor::before{content:"";position:absolute;left:18%;right:18%;top:calc(var(--cs)*-.09);height:calc(var(--cs)*.18);background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);filter:blur(6px)}
+.cb-gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cb.is-gl .cb-cube{visibility:hidden}
+/* service index and the one description that follows the active face */
+.cb-list{list-style:none;margin:0;padding:var(--s3) 0 0;display:flex;flex-wrap:wrap;gap:0 var(--s5);border-top:1px solid var(--line)}
+.cb-list button{background:none;border:0;min-height:44px;padding:10px 0;cursor:pointer;font:600 12px/1.5 var(--body);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.72);border-bottom:1px solid transparent;transition:color .3s var(--ease),border-color .3s var(--ease)}
+.cb-list i{font-style:normal;color:var(--gold);margin-right:8px}
+.cb-list button:hover,.cb-list .is-on button{color:var(--cream)}
+.cb-list .is-on button{border-bottom-color:var(--gold)}
+.cb-descs{display:grid;margin-top:var(--s3);min-height:4.8em}
+.cb-descs p{margin:0 0 var(--s2);color:var(--muted);font-size:var(--fs-0);max-width:56ch}
+.cb-descs b{color:var(--cream);font-weight:600}
+.js .cb-descs p{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s .35s}
+.js .cb-descs .is-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.cb-reset{position:absolute;right:0;top:0;z-index:2;background:none;border:0;border-bottom:1px solid var(--line-gold);padding:6px 0 2px;cursor:pointer;font:600 11px/1.6 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+@media(prefers-reduced-motion:reduce){.cb-face>.cb-plate,.cb-face[data-f="0"]>:not(.cb-plate),.js .cb-descs p,.cb-list button{transition:none}}

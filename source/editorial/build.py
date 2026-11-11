@@ -23,6 +23,7 @@ def asset(name):
     open(os.path.join(ROOT, 'assets', out), 'wb').write(data)
     return '/assets/' + out
 CSS = asset('site.css'); JS = asset('site.js')
+CUBE = asset('cube-gl.js'), asset('cube.js')   # home page only; cube.js falls back to the CSS cube without WebGL
 
 # ---------- original FAQ / process copy ----------
 def pairs(f):
@@ -36,6 +37,23 @@ SHOP_STEPS = [HW[24 + i * 3:27 + i * 3] for i in range(5)]
 
 LOGO = '<img class="mark" src="/assets/df-mark.png" width="145" height="121" alt="" decoding="async">'
 ARROW = '<span class="ar" aria-hidden="true">→</span>'
+
+# ---------- six services = the six cube faces (wording from the master brief, section 4.5) ----------
+# (title el, title en, text el, text en, face drawing: frame parts only, no arcs except the Discover lens)
+SERVICES = [
+    ('Ανακάλυψη', 'Discover', 'Γνωρίζουμε την επιχείρησή σου, το κοινό και τους στόχους σου, για να εντοπίσουμε ευκαιρίες και να ορίσουμε τη σωστή ψηφιακή κατεύθυνση.', 'We get to know your business, audience, and goals to uncover opportunities and define the right digital direction.',
+     '<path d="M10 26V10h16M74 10h16v16M90 74v16H74M26 90H10V74"/><path d="M35 50a15 15 0 1 0 30 0a15 15 0 1 0-30 0"/><path d="M50 28v12M50 60v12M28 50h12M60 50h12"/>'),
+    ('Σχεδιασμός', 'Design', 'Δημιουργούμε ξεχωριστές οπτικές ταυτότητες και προσεγμένα περιβάλλοντα χρήσης, συνδυάζοντας δημιουργικότητα, ευχρηστία και προσοχή στη λεπτομέρεια.', 'We create distinctive visual identities and thoughtful user interfaces, combining creativity, usability, and attention to detail.',
+     '<path d="M10 14h80v72H10zM10 14h49v72M59 44h31M59 44v42M71 44v18h19"/>'),
+    ('Ανάπτυξη', 'Develop', 'Μετατρέπουμε τις ιδέες σε responsive ιστοσελίδες υψηλής απόδοσης, με σύγχρονες τεχνολογίες και προσεκτικά σχεδιασμένη λειτουργικότητα.', 'We turn ideas into responsive, high-performance websites built with modern technologies and carefully considered functionality.',
+     '<path d="M10 18h46M22 34h58M22 50h34M34 66h46M22 82h28"/><path class="au" d="M10 34v48"/>'),
+    ('E-commerce', 'E-commerce', 'Χτίζουμε e-shops στα μέτρα σου, που κάνουν την αγορά απλή, βελτιώνουν τη διαδρομή του πελάτη και στηρίζουν την ανάπτυξη της επιχείρησης.', 'We build tailored online shopping experiences that make purchasing simple, improve customer journeys, and support business growth.',
+     '<path d="M12 12h34v34H12zM54 12h34v34H54zM12 54h34v34H12z"/><path class="fill" d="M54 54h34v34H54z"/>'),
+    ('Προβολή', 'Visibility', 'Ενισχύουμε την online παρουσία σου με βάσεις SEO, βελτιστοποίηση για τις μηχανές αναζήτησης και στρατηγικές που βοηθούν την επιχείρησή σου να βρίσκεται.', 'We strengthen your online presence through SEO foundations, search optimisation, and strategies that help your business get discovered.',
+     '<path d="M10 90h80M18 90V70M34 90V58M50 90V44M66 90V28M82 90V12"/><path class="au" d="M10 12h10M10 28h6M10 44h10M10 58h6M10 70h10"/>'),
+    ('Υποστήριξη', 'Support', 'Παρέχουμε συνεχή συντήρηση, τεχνική βοήθεια, βελτιώσεις και καθοδήγηση, ώστε η ψηφιακή σου παρουσία να λειτουργεί ομαλά.', 'We provide ongoing maintenance, technical assistance, improvements, and guidance to keep your digital presence working smoothly.',
+     '<path d="M62 14H14v72h72V38"/><path class="au" d="M36 50l12 12 38-44"/>'),
+]
 
 class Page:
     def __init__(s, lang): s.l = lang
@@ -88,7 +106,7 @@ class Page:
 <div class="sheet" id="sheet">{sheet}<a class="btn gold" href="{H('#contact')}">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a></div>
 <main id="main">
 '''
-    def footer(s):
+    def footer(s, scripts=''):
         t = s.t; H = s.home
         return f'''</main>
 <footer class="ft2"><div class="wrap"><div class="g">
@@ -99,7 +117,7 @@ class Page:
 <h4 style="margin-top:28px">{t('Νομικά','Legal')}</h4><ul><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Πολιτική απορρήτου (σύντομα)','Privacy policy (coming soon)')}</span></li><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Όροι χρήσης (σύντομα)','Terms (coming soon)')}</span></li></ul></div>
 <div><h4>{t('Επικοινωνία','Contact')}</h4><ul><li><a href="{IG}" rel="noopener" target="_blank">Instagram @athens.digitalframe</a></li><li><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp +30 698 186 2732</a></li><li><a href="tel:{TEL}">{t('Τηλέφωνο','Phone')} +30 698 186 2732</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
 </div><div class="base"><span>© <span id="yr">2026</span> Athens Digital Frame · {t('Οι τιμές δεν υπόκεινται σε ΦΠΑ.','Prices are not subject to VAT.')}</span><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></div></div></footer>
-<script src="{JS}" defer></script>
+<script src="{JS}" defer></script>{scripts}
 <script defer src="/_vercel/insights/script.js"></script>
 </body></html>
 '''
@@ -130,6 +148,21 @@ class Page:
         return f'<div class="phone"><img src="/assets/{img}" width="390" height="844" alt="{esc(alt)}" {"" if eager else "loading=lazy"} decoding="async"></div>'
 
     # ----- HOME -----
+    def cube(s):
+        """Hero cube. The list and the texts are the accessible content; the 3D object repeats them and is hidden from assistive tech."""
+        t = s.t; faces = lst = descs = ''
+        for i, (tel, ten, xel, xen, g) in enumerate(SERVICES):
+            n = f'{i + 1:02d}'; name = esc(t(tel, ten))
+            faces += f'<div class="cb-face" data-f="{i}"><span class="cb-n">{n}</span><svg class="cb-g" viewBox="0 0 100 100">{g}</svg><span class="cb-t">{name}</span><span class="cb-b">ADF</span>{"<div class=cb-plate></div>" if i == 0 else ""}</div>'
+            lst += f'<li><button type="button" aria-pressed="false"><i>{n}</i>{name}</button></li>'
+            descs += f'<p><b>{name}.</b> {esc(t(xel, xen))}</p>'
+        return f'''<div class="cb-wrap">
+<div class="cb" id="cube-stage" data-logo="/assets/df-logo-1024.jpg" aria-hidden="true"><div class="cb-cube" id="cube">{faces}</div><div class="cb-floor"></div></div>
+<button type="button" class="cb-reset" id="cube-reset" hidden>{t('Πίσω στο λογότυπο','Back to the logo')}</button>
+<ol class="cb-list" id="cube-svc" aria-label="{t('Υπηρεσίες','Services')}">{lst}</ol>
+<div class="cb-descs" id="cube-descs" aria-live="polite"><p class="cb-hint is-on">{t('Γύρισε τον κύβο ή διάλεξε υπηρεσία.','Turn the cube or pick a service.')}</p>{descs}</div>
+</div>'''
+
     def build_home(s):
         t = s.t
         faqcats = [(t('Ιστοσελίδες', 'Websites'), [1, 3, 4]), ('E-commerce', [10, 11, 12, 13]), (t('Τιμές', 'Pricing'), [0, 5, 14]),
@@ -159,10 +192,7 @@ class Page:
 <p class="lead">{t('Σχεδιάζουμε και κατασκευάζουμε σύγχρονες ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','We design and build modern websites and e-shops for businesses that want to stand out.')}</p>
 <div class="btns"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn ghost" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')}</a></div>
 <div class="meta"><div><b>3–5</b>{t('ημέρες έως το live','days to go live')}</div><div><b>300€</b>{t('ιστοσελίδα, εφάπαξ','website, one-time')}</div><div><b>0€</b>{t('πριν δεις το demo','before you see the demo')}</div></div></div>
-<div class="stage" aria-label="{t('Προεπισκόπηση δύο concept projects','Preview of two concept projects')}"><span class="tag">{t('Concept projects · Αθήνα','Concept projects · Athens')}</span>
-{s.frame(s.browser('olivane-d.webp','olivane estate','Olivane Estate concept website on a desktop browser: a villa above the sea at sunset', eager=True))}
-<div class="b3">{s.frame(s.browser('arclines-d.webp','arclines freight','Arclines Freight concept website on a desktop browser: a dark globe with freight routes'))}</div>
-<div class="b2">{s.phone('olivane-m.webp','Olivane Estate concept website on a phone')}</div></div>
+{s.cube()}
 </div></section>
 <section class="sec paper" id="studio" aria-labelledby="advh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">01 — {t('Το στούντιο','Studio')}</p><h2 class="h2" id="advh">{t('Σχεδιασμένο με προσοχή. Φτιαγμένο για την επιχείρησή σου.','Thoughtfully made. Built for your business.')}</h2></div></div>
@@ -246,7 +276,7 @@ class Page:
 <div class="rv d1">{s.form()}</div>
 </div></section>
 '''
-        out += s.footer()
+        out += s.footer(''.join(f'\n<script src="{u}" defer></script>' for u in CUBE))
         return out
 
     # ----- PRICES -----
@@ -298,7 +328,7 @@ class Page:
         return out
 
 def w(path, txt):
-    p = os.path.join(ROOT, path); os.makedirs(os.path.dirname(p), exist_ok=True); open(p, 'w', encoding='utf8').write(txt); print('wrote', path, len(txt))
+    p = os.path.join(ROOT, path); os.makedirs(os.path.dirname(p), exist_ok=True); open(p, 'w', encoding='utf8', newline='\n').write(txt); print('wrote', path, len(txt))
 if __name__ == '__main__':
     for lang in ('el', 'en'):
         p = Page(lang); pre = 'en/' if lang == 'en' else ''

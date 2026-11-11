@@ -631,6 +631,16 @@ body{background:var(--bg)}
   .card{top:59%;width:clamp(250px,78vw,350px);margin-left:calc(clamp(250px,78vw,350px)/-2);margin-top:calc(clamp(250px,78vw,350px)*-.62)}
 }
 </style>
+<style>/* touch targets: at least 44px on touch screens (WCAG 2.5.5); layout on desktop is unchanged */
+@media (pointer:coarse){
+ .burger,.fav{min-width:44px;min-height:44px}
+ .chip,.pill,.ghost,.enq,.vw,.planbtn,#fArea,#fBeds,#fSort{min-height:44px}
+ .home h3 .vw{display:inline-flex;align-items:center;min-height:44px}   /* all:unset above clears the generic rule */
+ input[type=range]{height:44px}
+ .brand{display:inline-flex;align-items:center;min-height:44px}
+ footer a{display:inline-block;padding:12px 0}
+ .adf-credit{display:inline-block;padding:16px 4px}
+}</style>
 </head>
 <body>
 <a class="skip" href="#listings">Skip to homes for sale</a>
@@ -652,7 +662,7 @@ body{background:var(--bg)}
   <button class="burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navlinks"><i></i><i></i><i></i></button>
 </header>
 
-<p class="concept"><b>Concept project</b> by <a href="/" style="pointer-events:auto;color:inherit;text-decoration:underline;text-underline-offset:2px">Athens Digital Frame</a></p>
+<p class="concept"><b>Concept project</b> by <a class="adf-credit" href="/" style="pointer-events:auto;color:inherit;text-decoration:underline;text-underline-offset:2px">Athens Digital Frame</a></p>
 <nav class="dots" id="dots" aria-label="Page sections"></nav>
 
 <main>

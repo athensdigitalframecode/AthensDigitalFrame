@@ -218,7 +218,9 @@ class Page:
 <p class="more rv">{t('Περισσότερα demo concepts έρχονται σύντομα.','More demo concepts are coming soon.')}</p>
 </div></section>
 <section class="sec paper" id="services" aria-labelledby="svch"><div class="wrap">
-<div class="sechead rv"><div><p class="eyebrow">03 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Τρεις τρόποι να βγεις online.','Three ways to get online.')}</h2></div></div>
+<div class="sechead rv"><div><p class="eyebrow">03 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Έξι πλευρές ενός στούντιο.','Six sides of one studio.')}</h2></div></div>
+<ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p><button type="button" class="caps-go" data-face="{i}">{t("Δες τη στον κύβο", "Show it on the cube")} {ARROW}</button></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
+<h3 class="caps-sub rv">{t('Τρεις τρόποι να βγεις online.','Three ways to get online.')}</h3>
 <div class="svc">
 <article class="rv"><span class="n">01</span><div><h3>{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</h3><p style="margin-top:12px">{t('Για επαγγελματίες, ιατρεία, δικηγορικά γραφεία, αρχιτέκτονες και τοπικές υπηρεσίες.','For professionals, clinics, law firms, architects and local services.')}</p></div>
 <ul class="ft"><li>{t('Έως 3 σελίδες','Up to 3 pages')}</li><li>{t('Σχεδιασμός πρώτα για κινητό','Mobile-first design')}</li><li>{t('Φόρμα επικοινωνίας και Google Maps','Contact form and Google Maps')}</li><li>{t('Βασικό local SEO','Local SEO basics')}</li></ul>

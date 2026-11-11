@@ -114,6 +114,9 @@
   /* ---- the list is the accessible control: real buttons, keyboard included ---- */
   items.forEach(function (li, i) { li.firstElementChild.addEventListener('click', function () { pin(i); }); });
   reset.addEventListener('click', rest);
+  /* Capabilities section: pin the face, then bring the cube into view */
+  [].forEach.call(d.querySelectorAll('[data-face]'), function (b) { b.addEventListener('click', function () {
+    pin(+b.getAttribute('data-face')); stage.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' }); }); });
   d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mode === 'pinned') rest(); });
 
   paint();

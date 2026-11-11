@@ -385,3 +385,15 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .js .cb-descs .is-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
 .cb-reset{position:absolute;right:0;top:0;z-index:2;background:none;border:0;border-bottom:1px solid var(--line-gold);padding:6px 0 2px;cursor:pointer;font:600 11px/1.6 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 @media(prefers-reduced-motion:reduce){.cb-face>.cb-plate,.cb-face[data-f="0"]>:not(.cb-plate),.js .cb-descs p,.cb-list button{transition:none}}
+/* capabilities: the six cube faces as an index, not cards; each row can turn the hero cube to its face */
+.caps{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.caps li{display:grid;gap:10px;align-content:start;padding:var(--s5) 0 var(--s6);border-bottom:1px solid var(--line)}
+.caps .n{font:500 14px/1 var(--display);color:var(--gold);letter-spacing:.06em}
+.caps h3{font-size:var(--fs-2)}
+.caps p{color:var(--muted);font-size:var(--fs-0);max-width:40ch}
+.caps-go{justify-self:start;min-height:44px;background:none;border:0;padding:0;cursor:pointer;font:600 12px/1.5 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.caps-go:hover{color:var(--gold-lt)}
+.nojs .caps-go{display:none}
+@media(min-width:760px){.caps{grid-template-columns:repeat(2,1fr);column-gap:48px}}
+@media(min-width:1100px){.caps{grid-template-columns:repeat(3,1fr)}.caps li{padding-inline:28px;border-right:1px solid var(--line)}.caps li:nth-child(3n+1){padding-left:0}.caps li:nth-child(3n){border-right:0}}
+.caps-sub{font:500 var(--fs-2)/1.2 var(--display);margin:clamp(56px,7vw,96px) 0 var(--s6)}

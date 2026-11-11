@@ -8,6 +8,9 @@ if(bt){bt.addEventListener('click',function(){menu(bt.getAttribute('aria-expande
  sh.addEventListener('click',function(e){if(e.target.closest('a'))menu(false)});
  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&sh.classList.contains('open')){menu(false);bt.focus()}});
  var mq=matchMedia('(min-width:1280px)'),wide=function(e){if(e.matches)menu(false)};mq.addEventListener?mq.addEventListener('change',wide):mq.addListener(wide)}
+/* section headings rise word by word as they come into view (plain-text headings only; the label keeps them whole for screen readers) */
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.querySelectorAll('.rv .h2'),function(h){if(h.childElementCount)return;var s=h.textContent.trim();h.setAttribute('aria-label',s);
+ h.innerHTML=s.split(/\s+/).map(function(w,i){return '<span class="w" aria-hidden="true" style="--i:'+i+'">'+w.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span>'}).join(' ')});
 /* reveal */
 var rv=[].slice.call(d.querySelectorAll('.rv,.reveal-img'));
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});rv.forEach(function(n){io.observe(n)})}else rv.forEach(function(n){n.classList.add('in')});

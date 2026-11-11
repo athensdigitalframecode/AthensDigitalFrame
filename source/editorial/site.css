@@ -396,3 +396,11 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(min-width:760px){.caps{grid-template-columns:repeat(2,1fr);column-gap:48px}}
 @media(min-width:1100px){.caps{grid-template-columns:repeat(3,1fr)}.caps li{padding-inline:28px;border-right:1px solid var(--line)}.caps li:nth-child(3n+1){padding-left:0}.caps li:nth-child(3n){border-right:0}}
 .caps-sub{font:500 var(--fs-2)/1.2 var(--display);margin:clamp(56px,7vw,96px) 0 var(--s6)}
+/* case studies (work/*.html): reuse .phero, .about, .facts, .caps, .pv; only these three parts are new */
+.cs-pv{max-width:1040px;margin-inline:auto}
+.sw{list-style:none;margin:var(--s6) 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s4) var(--s5);font:600 12px/1.6 var(--body);letter-spacing:.1em;color:var(--muted)}
+.sw li{display:flex;align-items:center;gap:10px}.sw i{width:36px;height:36px;border:1px solid var(--line-gold);border-radius:2px}
+.stages{display:grid;gap:var(--s4);margin-top:clamp(40px,6vw,72px)}
+.stages figure{margin:0;position:relative}.stages img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.stages figcaption{position:absolute;left:12px;top:10px;font:500 14px/1 var(--display);color:var(--gold);letter-spacing:.06em}
+@media(min-width:760px){.stages{grid-template-columns:repeat(3,1fr)}}

@@ -55,6 +55,48 @@ SERVICES = [
      '<path d="M62 14H14v72h72V38"/><path class="au" d="M36 50l12 12 38-44"/>'),
 ]
 
+# ---------- case studies: both are self-initiated concepts for fictional companies; every fact below is checked against the demo's code ----------
+# texts are (el, en). To add a real client project later: add an entry, set concept=False and the chip and disclosure change.
+CASES = {
+    'olivane': dict(
+        name='Olivane Estate', live='/olivane/', og='olivane/og.jpg', other='arclines',
+        sector=('Real estate · Κύπρος', 'Real estate · Cyprus'),
+        alt=('Η concept ιστοσελίδα Olivane Estate: μια βίλα πάνω από τη θάλασσα στο ηλιοβασίλεμα', 'Olivane Estate concept website: a villa above the sea at sunset'),
+        lead=('Ιστοσελίδα για μια φανταστική κατασκευαστική εταιρεία: το σπίτι χτίζεται μπροστά στα μάτια σου καθώς κυλάς τη σελίδα.', 'A website for a fictional property developer: the home builds itself in front of you as you scroll.'),
+        brief=[('Η Olivane Estate είναι μια εταιρεία που επινοήσαμε: κατασκευάζει κατοικίες στη Λεμεσό της Κύπρου. Δεν υπάρχει πελάτης· το brief το θέσαμε μόνοι μας.', 'Olivane Estate is a company we made up: a developer building homes in Limassol, Cyprus. There is no client; we set the brief ourselves.'),
+               ('Το ερώτημα ήταν πώς δείχνεις ένα σπίτι που ακόμα χτίζεται. Η απάντηση έγινε η ίδια η σελίδα: καθώς κυλάς, το σπίτι περνά από το σχέδιο στον σκελετό και στο έτοιμο σπίτι το σούρουπο.', 'The question was how to show a home that is still being built. The answer became the page itself: as you scroll, the house goes from blueprint to structure to the finished home at dusk.')],
+        direction=[('Σκοτεινό, κινηματογραφικό και ήσυχο. Ένα νυχτερινό μπλε φόντο αφήνει τη ζεστή βραδινή φωτογραφία να κρατά τη σελίδα.', 'Dark, cinematic and quiet. A night-blue background lets the warm evening photography carry the page.'),
+                   ('Οι τίτλοι είναι σε serif με έντονη αντίθεση και τα κείμενα σε στενό sans. Τα χρώματα έμφασης είναι ροδακινί, κοραλί και τιρκουάζ.', 'Headlines are set in a high-contrast serif and text in a tight sans. The accent colours are peach, coral and teal.')],
+        palette=['#070a12', '#ffbd80', '#ff6f61', '#5ee6d0'],
+        fonts=[('Instrument Serif', ('τίτλοι', 'headlines')), ('Inter Tight', ('κείμενα και interface', 'text and interface'))],
+        stages=[('blueprint', ('Το σχέδιο του σπιτιού', 'The blueprint of the house')), ('bare', ('Ο σκελετός του σπιτιού', 'The structure of the house')), ('dusk', ('Το έτοιμο σπίτι το σούρουπο', 'The finished home at dusk'))],
+        parts=[(('Ιστορία κατασκευής με κύλιση', 'Scroll-to-build story'), ('Τρία στάδια σε μία κύλιση: σχέδιο, σκελετός, έτοιμο σπίτι.', 'Three stages in one scroll: blueprint, structure, finished home.')),
+               (('Κάρτες ακινήτων', 'Property listings'), ('Έξι ακίνητα-δείγματα σε κάρτες, με φίλτρα τύπου, περιοχής, υπνοδωματίων και τιμής.', 'Six sample properties as cards, with filters for type, area, bedrooms and price.')),
+               (('Φόρμες επίσκεψης και φυλλαδίου', 'Site-visit and brochure forms'), ('Δοκιμαστικές φόρμες: δείχνουν τη ροή, δεν στέλνουν τίποτα.', 'Demo forms: they show the flow and send nothing.'))],
+        responsive=('Οι εικόνες σερβίρονται σε AVIF με εναλλακτικό WebP και σε ξεχωριστά μεγέθη για κινητό.', 'Images are served as AVIF with a WebP fallback, in separate sizes for phones.'),
+        motion=('Η ιστορία κατασκευής οδηγείται από τη θέση της κύλισης. Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, η σελίδα το σέβεται.', 'The build story is driven by scroll position. If you have asked your device for reduced motion, the page respects it.'),
+        sample=('Η εταιρεία, η ιστορία της, τα νούμερα και τα ακίνητα είναι επινοημένα. Οι φόρμες δεν στέλνουν τίποτα.', 'The company, its history, its figures and its listings are invented. The forms send nothing.')),
+    'arclines': dict(
+        name='Arclines Freight', live='/arclines/', og='arclines/og.jpg', other='olivane',
+        sector=('Logistics · Asia-Pacific', 'Logistics · Asia-Pacific'),
+        alt=('Η concept ιστοσελίδα Arclines Freight: μια σκοτεινή υδρόγειος με διαδρομές φορτίων', 'Arclines Freight concept website: a dark globe with freight routes'),
+        lead=('Εταιρική ιστοσελίδα για μια φανταστική εταιρεία logistics. Τα στατιστικά, οι μαρτυρίες και τα νέα είναι δείγματα και δεν αντιστοιχούν σε πραγματικούς πελάτες.', 'A corporate website for a fictional logistics company. The statistics, testimonials and news are samples and do not correspond to real customers.'),
+        brief=[('Η Arclines Freight είναι ένα επινοημένο brand logistics στην περιοχή Ασίας-Ειρηνικού: αεροπορικές και θαλάσσιες μεταφορές, εκτελωνισμός, αποθήκευση και project cargo. Δεν υπάρχει πελάτης.', 'Arclines Freight is a made-up Asia-Pacific logistics brand: air and ocean freight, customs brokerage, warehousing and project cargo. There is no client.'),
+               ('Θέσαμε στον εαυτό μας ένα εταιρικό brief: πολλή πληροφορία, διαφορετικά κοινά και ένα brand που πρέπει να δείχνει αξιόπιστο πριν δείξει έξυπνο.', 'We set ourselves a corporate brief: a lot of information, several audiences, and a brand that has to look dependable before it looks clever.')],
+        direction=[('Σχεδόν μαύρο και ένα μόνο ηλεκτρικό μπλε, με παγωμένους και χάρτινους τόνους στις φωτεινές ενότητες.', 'Near-black and a single electric blue, with ice and paper tones for the light sections.'),
+                   ('Τεχνική γραμματοσειρά για τους τίτλους, γεωμετρικό sans για την ανάγνωση. Η υδρόγειος με τις διαδρομές σχεδιάζεται με κώδικα πάνω σε canvas· δεν είναι βίντεο.', 'A technical display face for headlines, a geometric sans for reading. The globe with its routes is drawn in code on a canvas; it is not a video.')],
+        palette=['#06070b', '#1a1de6', '#bfe3ff', '#e9edf6'],
+        fonts=[('Tomorrow', ('τίτλοι', 'headlines')), ('Space Grotesk', ('κείμενα', 'text'))],
+        stages=[],
+        parts=[(('Πέντε υπηρεσίες', 'Five services'), ('Air Freight, Ocean Freight, Customs Brokerage, Warehousing and 3PL, Project Cargo.', 'Air Freight, Ocean Freight, Customs Brokerage, Warehousing and 3PL, Project Cargo.')),
+               (('Σκηνές με κύλιση', 'Scroll-driven scenes'), ('Ένα πλοίο, ένα φορτηγό και ένα μηχάνημα στοιβασίας κινούνται καθώς κυλάς.', 'A ship, a truck and a container stacker move as you scroll.')),
+               (('Στοιχεία εμπιστοσύνης, ως δείγματα', 'Proof points, as samples'), ('Στατιστικά, μαρτυρίες, νέα και συχνές ερωτήσεις: όλα δείγματα, για να φανεί η δομή.', 'Statistics, testimonials, news and FAQ: all samples, there to show the structure.')),
+               (('Φόρμα προσφοράς', 'Quote form'), ('Δοκιμαστική: δείχνει τη ροή, δεν στέλνει τίποτα.', 'Demo only: it shows the flow and sends nothing.'))],
+        responsive=('Στο κινητό η πλοήγηση γίνεται συρόμενο μενού και η διάταξη ελέγχθηκε σε κάθετο και οριζόντιο προσανατολισμό.', 'On phones the navigation becomes a drawer, and the layout was checked in portrait and landscape.'),
+        motion=('Οι σκηνές οδηγούνται από τη θέση της κύλισης. Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, η σελίδα το σέβεται.', 'The scenes are driven by scroll position. If you have asked your device for reduced motion, the page respects it.'),
+        sample=('Η εταιρεία, τα στατιστικά, οι μαρτυρίες, τα ονόματα πελατών και τα νέα είναι δείγματα χωρίς αντίκρισμα.', 'The company, statistics, testimonials, client names and news are placeholders.')),
+}
+
 class Page:
     def __init__(s, lang): s.l = lang
     def t(s, el, en): return en if s.l == 'en' else el
@@ -87,14 +129,14 @@ class Page:
 <body>
 <a class="skip" href="#main">{t('Μετάβαση στο περιεχόμενο','Skip to content')}</a>
 '''
-    def header(s, cur=''):
+    def header(s, cur='', path=''):   # path: this page's Greek path, when it is not home or prices
         t = s.t; H = s.home
         items = [('services', t('Υπηρεσίες', 'Services')), ('projects', t('Projects', 'Projects')), ('process', t('Διαδικασία', 'Process')),
                  ('pricing', t('Τιμές', 'Pricing')), ('about', t('Το στούντιο', 'About')), ('contact', t('Επικοινωνία', 'Contact'))]
         def href(k): return s.prices() if k == 'pricing' else H('#' + k)
         nav = ''.join(f'<a href="{href(k)}"{" aria-current=page" if k=="pricing" and cur=="prices" else ""}>{esc(n)}</a>' for k, n in items)
         sheet = ''.join(f'<a class="l" href="{href(k)}">{esc(n)}<span aria-hidden="true">→</span></a>' for k, n in items)
-        other = ('/prices.html' if cur == 'prices' else '/') if s.l == 'en' else ('/en/prices.html' if cur == 'prices' else '/en/')
+        path = path or ('/prices.html' if cur == 'prices' else '/'); other = path if s.l == 'en' else '/en' + path
         ol, on = ('EL', 'Ελληνικά') if s.l == 'en' else ('EN', 'English')
         return f'''<header class="hd"><i class="pg" aria-hidden="true"></i><div class="wrap in">
 <a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
@@ -224,12 +266,12 @@ class Page:
 <div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Real estate · Κύπρος','Real estate · Cyprus')}</p><h3>Olivane Estate</h3>
 <p>{t('Ιστοσελίδα για μια φανταστική κατασκευαστική εταιρεία: το σπίτι χτίζεται μπροστά στα μάτια σου καθώς κυλάς τη σελίδα.','A website for a fictional property developer: the home builds itself in front of you as you scroll.')}</p>
 <ul class="ft"><li>{t('Ιστορία κατασκευής με κύλιση, από το σχέδιο στο έτοιμο σπίτι','Scroll-driven construction story, from blueprint to finished home')}</li><li>{t('Κάρτες ακινήτων με φίλτρα τύπου, περιοχής, υπνοδωματίων και τιμής','Property cards with type, area, bedroom and price filters')}</li><li>{t('Φόρμες για επίσκεψη και φυλλάδιο (δοκιμαστικές, δεν στέλνουν τίποτα)','Site-visit and brochure forms (demo only, nothing is sent)')}</li></ul>
-<a class="btn" href="/olivane/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a></div></article>
+<div class="btns"><a class="btn" href="/olivane/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a><a class="btn ghost" href="{s.case('olivane')}">{t('Διάβασε το case study','Read the case study')}</a></div></div></article>
 <article class="proj rev"><div class="pv rv">{s.frame('<a class="lnk" href="/arclines/" target="_blank" rel="noopener" aria-label="Arclines Freight">'+s.browser('arclines-d.webp','athensdigitalframe.vercel.app/arclines','Arclines Freight concept website: a dark globe with freight routes')+'</a>')}<div class="phone"><img src="/assets/arclines-m.webp" width="390" height="844" alt="Arclines Freight on a phone" loading="lazy" decoding="async"></div></div>
 <div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Logistics · Asia-Pacific','Logistics · Asia-Pacific')}</p><h3>Arclines Freight</h3>
 <p>{t('Εταιρική ιστοσελίδα για μια φανταστική εταιρεία logistics. Τα στατιστικά, οι μαρτυρίες και τα νέα είναι δείγματα και δεν αντιστοιχούν σε πραγματικούς πελάτες.','A corporate website for a fictional logistics company. The statistics, testimonials and news are samples and do not correspond to real customers.')}</p>
 <ul class="ft"><li>{t('Υπηρεσίες, κλάδοι και παρακολούθηση αποστολών σε εταιρικό ύφος','Services, industries and shipment tracking in a corporate style')}</li><li>{t('Δείγματα μαρτυριών, νέων και συχνών ερωτήσεων','Sample testimonials, news and FAQ')}</li><li>{t('Φόρμα προσφοράς (δοκιμαστική)','Quote form (demo)')}</li></ul>
-<a class="btn" href="/arclines/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a></div></article>
+<div class="btns"><a class="btn" href="/arclines/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a><a class="btn ghost" href="{s.case('arclines')}">{t('Διάβασε το case study','Read the case study')}</a></div></div></article>
 <p class="more rv">{t('Περισσότερα demo concepts έρχονται σύντομα.','More demo concepts are coming soon.')}</p>
 </div></section>
 <section class="sec dark" id="process" aria-labelledby="proch"><div class="wrap">
@@ -282,6 +324,50 @@ class Page:
         return out
 
     # ----- PRICES -----
+    def case(s, key): return f'{s.pre}/work/{key}.html'
+    def build_case(s, key):
+        t = s.t; c = CASES[key]; p = lambda x: esc(t(*x)); o = CASES[c['other']]
+        img = key  # assets/<key>-d.webp and -m.webp
+        url = f'/work/{key}.html'
+        ld = {"@context": "https://schema.org", "@type": "CreativeWork", "name": c['name'], "url": SITE + s.case(key), "inLanguage": s.l,
+              "description": t(*c['lead']), "creator": {"@id": SITE + "/#org"}}
+        out = s.head(f"{c['name']} | {t('Concept project', 'Concept project')} | Athens Digital Frame", t(*c['lead']), url, '/en' + url, c['og'], ld)
+        out += s.header(path=url)
+        chip = f'<span class="chip">{t("Self-initiated concept · φανταστική εταιρεία", "Self-initiated concept · fictional company")}</span>'
+        stages = ''.join(f'<figure><picture><source srcset="/olivane/img/{n}-m.avif" type="image/avif"><img src="/olivane/img/{n}-m.webp" width="1170" height="653" alt="{p(a)}" loading="lazy" decoding="async"></picture><figcaption>{i + 1:02d}</figcaption></figure>' for i, (n, a) in enumerate(c['stages']))
+        out += f'''<section class="phero dark"><div class="wrap">{chip}<p class="eyebrow">{p(c['sector'])}</p>
+<h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{c['name']}</h1>
+<p class="lead" style="max-width:46ch">{p(c['lead'])}</p>
+<div class="btns" style="margin-top:32px"><a class="btn gold" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} {ARROW}</a><a class="btn ghost" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')}</a></div></div></section>
+<section class="sec paper"><div class="wrap"><div class="pv cs-pv rv">{s.frame(s.browser(img + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt']), eager=True))}<div class="phone"><img src="/assets/{img}-m.webp" width="390" height="844" alt="{c['name']} {t('σε κινητό', 'on a phone')}" loading="lazy" decoding="async"></div></div></div></section>
+<section class="sec" aria-labelledby="cs1"><div class="wrap about">
+<div class="rv"><p class="eyebrow">01 — Brief</p><h2 class="h2" id="cs1">{t('Το brief που θέσαμε.', 'The brief we set.')}</h2></div>
+<div class="txt rv d1">{''.join(f'<p>{p(x)}</p>' for x in c['brief'])}
+<ul class="facts" style="margin-top:32px"><li><b>{t('Είδος', 'Type')}</b><span>{t('Concept project με δική μας πρωτοβουλία', 'Self-initiated concept project')}</span></li><li><b>{t('Πελάτης', 'Client')}</b><span>{t('Κανένας· φανταστική εταιρεία', 'None; fictional company')}</span></li><li><b>{t('Αντικείμενο', 'Scope')}</b><span>{t('Σχεδιασμός και κατασκευή', 'Design and build')}</span></li><li><b>Live</b><span><a href="{c['live']}" target="_blank" rel="noopener">athensdigitalframe.vercel.app{c['live'].rstrip('/')}</a></span></li></ul></div>
+</div></section>
+<section class="sec paper" aria-labelledby="cs2"><div class="wrap"><div class="about">
+<div class="rv"><p class="eyebrow">02 — {t('Κατεύθυνση', 'Direction')}</p><h2 class="h2" id="cs2">{t('Σχεδιαστική κατεύθυνση.', 'Design direction.')}</h2></div>
+<div class="txt rv d1">{''.join(f'<p>{p(x)}</p>' for x in c['direction'])}
+<ul class="sw" aria-label="{t('Χρώματα', 'Colours')}">{''.join(f'<li><i style="background:{h}"></i>{h.upper()}</li>' for h in c['palette'])}</ul>
+<ul class="facts">{''.join(f'<li><b>{esc(n)}</b><span>{p(r)}</span></li>' for n, r in c['fonts'])}</ul></div></div>
+{f'<div class="stages rv">{stages}</div>' if stages else ''}</div></section>
+<section class="sec" aria-labelledby="cs3"><div class="wrap">
+<div class="sechead rv"><div><p class="eyebrow">03 — {t('Στοιχεία', 'Components')}</p><h2 class="h2" id="cs3">{t('Τι περιέχει.', 'What it contains.')}</h2></div></div>
+<ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{p(h)}</h3><p>{p(x)}</p></li>' for i, (h, x) in enumerate(c['parts']))}</ol>
+</div></section>
+<section class="sec paper" aria-labelledby="cs4"><div class="wrap about">
+<div class="rv"><p class="eyebrow">04 — {t('Συμπεριφορά', 'Behaviour')}</p><h2 class="h2" id="cs4">{t('Κινητό και κίνηση.', 'Phone and motion.')}</h2></div>
+<div class="txt rv d1"><ul class="facts"><li><b>Responsive</b><span>{p(c['responsive'])}</span></li><li><b>{t('Κίνηση', 'Motion')}</b><span>{p(c['motion'])}</span></li><li><b>{t('Δείγματα', 'Samples')}</b><span>{p(c['sample'])}</span></li></ul></div>
+</div></section>
+<section class="sec dark" aria-labelledby="cs5"><div class="wrap about">
+<div class="rv"><p class="eyebrow">05 — {t('Επόμενο βήμα', 'Next step')}</p><h2 class="h2" id="cs5">{t('Δες πώς θα φαινόταν το δικό σου site.', 'See how your own site would look.')}</h2></div>
+<div class="txt rv d1"><p>{t('Το δωρεάν demo έρχεται πριν από οποιαδήποτε πληρωμή. Δεν σου αρέσει; Δεν πληρώνεις τίποτα.', 'The free demo comes before any payment. Do not like it? You pay nothing.')}</p>
+<div class="btns" style="margin-top:24px"><a class="btn gold" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn ghost" href="{s.case(c['other'])}">{t('Επόμενο concept', 'Next concept')}: {o['name']}</a></div></div>
+</div></section>
+'''
+        out += s.footer()
+        return out
+
     def build_prices(s):
         t = s.t
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": t('Τιμές | Athens Digital Frame', 'Pricing | Athens Digital Frame'), "url": SITE + s.prices(), "inLanguage": s.l,
@@ -335,3 +421,4 @@ if __name__ == '__main__':
     for lang in ('el', 'en'):
         p = Page(lang); pre = 'en/' if lang == 'en' else ''
         w(pre + 'index.html', p.build_home()); w(pre + 'prices.html', p.build_prices())
+        for k in CASES: w(pre + f'work/{k}.html', p.build_case(k))

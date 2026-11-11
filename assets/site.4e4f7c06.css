@@ -332,3 +332,16 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .hd .wrap.in{max-width:calc(1400px + var(--pad)*2)}
 .nav a{padding:0 13px;letter-spacing:.07em}
 @media(min-width:1280px) and (max-width:1320px){.nav a{padding:0 12px}}
+
+/* hero fits the first screen on desktop/tablet: sizes follow the viewport height */
+@media(min-width:700px){
+ .hero{padding:clamp(14px,3vh,48px) 0 clamp(16px,3.2vh,48px)}
+ .hero .grid{gap:clamp(24px,3.5vw,64px)}
+ .hero .h1{font-size:clamp(30px,min(4.4vw + 10px,7vh),84px);max-width:16ch;margin:clamp(8px,1.8vh,20px) 0}
+ .hero .lead{font-size:clamp(15px,min(.9vw + 12px,2.5vh),22px);margin-bottom:clamp(12px,2.4vh,28px)}
+ .hero .meta{margin-top:clamp(12px,2.6vh,36px);padding-top:clamp(10px,1.8vh,22px)}
+ .hero .meta b{font-size:clamp(20px,3vh,28px)}
+ .hero .btn{min-height:clamp(40px,5.6vh,50px)}
+ .stage{max-width:min(100%,calc((100vh - 150px)*1.42));margin-inline:auto;padding-top:clamp(6px,1.6vh,20px);padding-bottom:clamp(28px,6vh,84px)}
+}
+@media(min-width:700px) and (max-width:999px){.hero .grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}.hero .meta{gap:16px}}

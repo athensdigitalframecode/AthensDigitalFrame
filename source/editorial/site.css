@@ -339,7 +339,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 /* ---------- hero cube: six services on six faces. CSS 3D here; cube-gl.js swaps in WebGL when available ---------- */
 .cb-wrap{--cs:clamp(170px,50vw,240px);position:relative;min-width:0}
 @media(min-width:700px){.cb-wrap{--cs:clamp(170px,min(23vw,32vh),320px)}}
-.nojs .cb,.nojs .cb-hint{display:none}
+.nojs .cb,.nojs .cb-hint,.nojs .cb-list{display:none}
 .cb{position:relative;height:calc(var(--cs)*1.6);display:grid;place-items:center;perspective:calc(var(--cs)*4.2);touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
 .cb.is-drag{cursor:grabbing}
 /* translateZ(-half) keeps the front face on the screen plane so its text renders 1:1 */

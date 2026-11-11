@@ -158,7 +158,7 @@ class Page:
 <div><a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <p>{t('Ψηφιακό στούντιο στην Αθήνα. Ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','A digital studio in Athens. Websites and e-shops for businesses that want to stand out.')}</p></div>
 <div><h4>{t('Πλοήγηση','Navigate')}</h4><ul><li><a href="{H('#projects')}">Projects</a></li><li><a href="{H('#process')}">{t('Διαδικασία','Process')}</a></li><li><a href="{s.prices()}">{t('Τιμές','Pricing')}</a></li><li><a href="{H('#about')}">{t('Το στούντιο','About')}</a></li><li><a href="{H('#faq')}">FAQ</a></li></ul></div>
-<div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#services')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#services')}">E-shops</a></li><li><a href="{H('#services')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
+<div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#pricing')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#pricing')}">E-shops</a></li><li><a href="{H('#pricing')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
 <h4 style="margin-top:28px">{t('Νομικά','Legal')}</h4><ul><li><a href="{s.pre}/privacy.html">{t('Πολιτική απορρήτου','Privacy policy')}</a></li><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Όροι χρήσης (σύντομα)','Terms (coming soon)')}</span></li></ul></div>
 <div><h4>{t('Επικοινωνία','Contact')}</h4><ul><li><a href="{IG}" rel="noopener" target="_blank">Instagram @athens.digitalframe</a></li><li><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp +30 698 186 2732</a></li><li><a href="tel:{TEL}">{t('Τηλέφωνο','Phone')} +30 698 186 2732</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
 </div><div class="base"><span>© <span id="yr">2026</span> Athens Digital Frame · {t('Οι τιμές δεν υπόκεινται σε ΦΠΑ.','Prices are not subject to VAT.')}</span><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></div></div></footer>
@@ -252,18 +252,7 @@ class Page:
 <section class="sec" id="services" aria-labelledby="svch"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">02 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Έξι πλευρές ενός στούντιο.','Six sides of one studio.')}</h2></div></div>
 <ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p><button type="button" class="caps-go" data-face="{i}">{t("Δες τη στον κύβο", "Show it on the cube")} {ARROW}</button></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
-<h3 class="caps-sub rv">{t('Τρεις τρόποι να βγεις online.','Three ways to get online.')}</h3>
-<div class="svc">
-<article class="rv"><span class="n">01</span><div><h3>{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</h3><p style="margin-top:12px">{t('Για επαγγελματίες, ιατρεία, δικηγορικά γραφεία, αρχιτέκτονες και τοπικές υπηρεσίες.','For professionals, clinics, law firms, architects and local services.')}</p></div>
-<ul class="ft"><li>{t('Έως 3 σελίδες','Up to 3 pages')}</li><li>{t('Σχεδιασμός πρώτα για κινητό','Mobile-first design')}</li><li>{t('Φόρμα επικοινωνίας και Google Maps','Contact form and Google Maps')}</li><li>{t('Βασικό local SEO','Local SEO basics')}</li></ul>
-<div><p class="price">{t('300€ εφάπαξ','€300 one-time')}</p><p style="margin-top:8px;font-size:var(--fs-0)">{t('+ 50€/έτος hosting & domain. Συντήρηση προαιρετικά, 20€/μήνα.','+ €50/year hosting & domain. Maintenance optional, €20/month.')}</p></div></article>
-<article class="rv"><span class="n">02</span><div><h3>E-commerce</h3><p style="margin-top:12px">{t('Για καταστήματα και δημιουργούς που θέλουν να πουλήσουν online χωρίς μεγάλο αρχικό κόστος.','For shops and creators who want to sell online without a large upfront cost.')}</p></div>
-<ul class="ft"><li>{t('Πληρωμές με Viva Wallet ή Stripe','Payments with Viva Wallet or Stripe')}</li><li>{t('Αντικαταβολή και σταθερό κόστος αποστολής','Cash on delivery and flat-rate shipping')}</li><li>{t('Έως 5 προϊόντα-δείγμα στην εγκατάσταση','Up to 5 sample products at setup')}</li><li>{t('Προαιρετικά: Skroutz/BestPrice 150€, BOX NOW 120€','Optional: Skroutz/BestPrice €150, BOX NOW €120')}</li></ul>
-<div><p class="price">{t('200–300€ εγκατάσταση','€200–300 setup')}</p><p style="margin-top:8px;font-size:var(--fs-0)">{t('+ 30–50€/μήνα, ελάχιστη διάρκεια 12 μήνες.','+ €30–50/month, 12-month minimum.')}</p></div></article>
-<article class="rv"><span class="n">03</span><div><h3>{t('Custom λύσεις','Custom website solutions')}</h3><p style="margin-top:12px">{t('Πιο σύνθετες ιστοσελίδες, πέρα από τις 3 σελίδες του βασικού πακέτου.','More complex websites, beyond the 3 pages of the basic package.')}</p></div>
-<ul class="ft"><li>{t('Τιμή ανάλογα με την πολυπλοκότητα','Priced by complexity')}</li><li>{t('Ξεκάθαρη προσφορά πριν ξεκινήσουμε','A clear quote before we start')}</li></ul>
-<div><p class="price">{t('Με προσφορά','Quoted')}</p><p style="margin-top:8px;font-size:var(--fs-0)">{t('Στείλε μας τι χρειάζεσαι και απαντάμε με τιμή.','Tell us what you need and we reply with a price.')}</p></div></article>
-</div></div></section>
+</div></section>
 <section class="sec paper" id="projects" aria-labelledby="projh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Δύο concept projects, σχεδιασμένα από εμάς.','Two concept projects, designed by us.')}</h2></div>
 <p class="lead">{t('Φανταστικές εταιρείες χωρίς πραγματικό πελάτη. Τα φτιάξαμε για να δείξουμε πώς δουλεύουμε.','Fictional companies with no real client. We made them to show how we work.')}</p></div>
@@ -278,18 +267,7 @@ class Page:
 </div></section>
 <section class="sec" id="pricing" aria-labelledby="prh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">05 — {t('Τιμές','Pricing')}</p><h2 class="h2" id="prh">{t('Ξεκάθαρες τιμές. Τίποτα κρυφό.','Clear prices. Nothing hidden.')}</h2></div><p class="lead">{t('Εφάπαξ, επαναλαμβανόμενα, υποχρεωτικά και προαιρετικά κόστη, ξεχωριστά.','One-time, recurring, mandatory and optional costs, kept apart.')}</p></div>
-<div class="pgrid">
-<div class="pcard rv"><h3>{t('Ιστοσελίδα επιχείρησης','Business website')}</h3><p class="d">{t('Έως 3 σελίδες.','Up to 3 pages.')}</p>
-<div class="rows"><div class="row"><span class="t">{t('Κατασκευή','Development')}<span class="tag2 req">{t('Εφάπαξ','One-time')}</span></span><span class="a">300€</span></div>
-<div class="row"><span class="t">Hosting &amp; domain<span class="tag2 req">{t('Υποχρεωτικό','Required')}</span></span><span class="a">50€ / {t('έτος','year')}</span></div>
-<div class="row"><span class="t">{t('Συντήρηση','Maintenance')}<span class="tag2 opt">{t('Προαιρετικό','Optional')}</span></span><span class="a">20€ / {t('μήνα','month')}</span><span class="s">{t('Ενημερώσεις, backups, ασφάλεια και μικρές αλλαγές σε κείμενα και φωτογραφίες.','Updates, backups, security and small changes to text and photos.')}</span></div></div>
-<p class="sum">{t('Πρώτο έτος: <b>350€</b> (300€ + 50€), πριν από την προαιρετική συντήρηση.','First year: <b>€350</b> (€300 + €50), before optional maintenance.')}</p></div>
-<div class="pcard rv d1"><h3>E-commerce</h3><p class="d">{t('Με συμβόλαιο 12 μηνών.','On a 12-month contract.')}</p>
-<div class="rows"><div class="row"><span class="t">{t('Εγκατάσταση','Setup')}<span class="tag2 req">{t('Εφάπαξ','One-time')}</span></span><span class="a">200–300€</span></div>
-<div class="row"><span class="t">{t('Μηνιαία συνδρομή','Monthly subscription')}<span class="tag2 req">{t('Υποχρεωτικό · 12 μήνες','Required · 12 months')}</span></span><span class="a">30–50€ / {t('μήνα','month')}</span><span class="s">{t('Cloud hosting, εβδομαδιαίες ενημερώσεις, καθημερινά backups, βιβλιοθήκη βίντεο.','Cloud hosting, weekly updates, daily backups, video library.')}</span></div>
-<div class="row"><span class="t">Skroutz / BestPrice<span class="tag2 opt">{t('Προαιρετικό','Optional')}</span></span><span class="a">150€</span></div>
-<div class="row"><span class="t">BOX NOW<span class="tag2 opt">{t('Προαιρετικό','Optional')}</span></span><span class="a">120€</span></div></div>
-<p class="sum">{t('Πρώτο έτος: <b>560–900€</b> (200–300€ + 12 × 30–50€), πριν από τα προαιρετικά.','First year: <b>€560–900</b> (€200–300 + 12 × €30–50), before optional extras.')}</p></div></div>
+{s.plans()}
 <p class="vat">{t('Οι τιμές δεν υπόκεινται σε ΦΠΑ. Πιο σύνθετα sites τιμολογούνται ανάλογα με την πολυπλοκότητα.','Prices are not subject to VAT. More complex sites are quoted by complexity.')}</p>
 <div class="btns" style="margin-top:32px"><a class="btn" href="{s.prices()}">{t('Δες όλες τις τιμές','See all pricing')} {ARROW}</a><a class="btn ghost" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')}</a></div>
 </div></section>
@@ -320,6 +298,35 @@ class Page:
         return out
 
     # ----- PRICES -----
+    def plans(s):
+        """Home pricing: the three packages side by side with the same rows, so they compare line by line.
+        Every figure and note is copied from the previous services and pricing blocks; change prices only with the owner."""
+        t = s.t
+        req = lambda x: f'<span class="tag2 req">{x}</span>'
+        ft = lambda *xs: '<ul class="ft">' + ''.join(f'<li>{x}</li>' for x in xs) + '</ul>'
+        rows = [t('Εφάπαξ', 'One-time'), t('Επαναλαμβανόμενο', 'Recurring'), t('Περιλαμβάνει', 'Included'), t('Προαιρετικά', 'Optional'), t('Πρώτο έτος', 'First year')]
+        P = [
+            (t('Ιστοσελίδα επιχείρησης', 'Business website'), t('Για επαγγελματίες, ιατρεία, δικηγορικά γραφεία, αρχιτέκτονες και τοπικές υπηρεσίες.', 'For professionals, clinics, law firms, architects and local services.'),
+             [f'<b>300€</b> {t("κατασκευή", "development")}',
+              f'<b>50€ / {t("έτος", "year")}</b> hosting &amp; domain {req(t("Υποχρεωτικό", "Required"))}',
+              ft(t('Έως 3 σελίδες', 'Up to 3 pages'), t('Σχεδιασμός πρώτα για κινητό', 'Mobile-first design'), t('Φόρμα επικοινωνίας και Google Maps', 'Contact form and Google Maps'), t('Βασικό local SEO', 'Local SEO basics')),
+              f'<b>20€ / {t("μήνα", "month")}</b> {t("συντήρηση", "maintenance")}<span class="s">{t("Ενημερώσεις, backups, ασφάλεια και μικρές αλλαγές σε κείμενα και φωτογραφίες.", "Updates, backups, security and small changes to text and photos.")}</span>',
+              f'<b class="big">350€</b><span class="s">{t("300€ + 50€, πριν από την προαιρετική συντήρηση.", "€300 + €50, before optional maintenance.")}</span>']),
+            ('E-commerce', t('Για καταστήματα και δημιουργούς που θέλουν να πουλήσουν online χωρίς μεγάλο αρχικό κόστος.', 'For shops and creators who want to sell online without a large upfront cost.'),
+             [f'<b>200–300€</b> {t("εγκατάσταση", "setup")}',
+              f'<b>30–50€ / {t("μήνα", "month")}</b> {t("συνδρομή", "subscription")} {req(t("Υποχρεωτικό · 12 μήνες", "Required · 12 months"))}<span class="s">{t("Cloud hosting, εβδομαδιαίες ενημερώσεις, καθημερινά backups, βιβλιοθήκη βίντεο.", "Cloud hosting, weekly updates, daily backups, video library.")}</span>',
+              ft(t('Πληρωμές με Viva Wallet ή Stripe', 'Payments with Viva Wallet or Stripe'), t('Αντικαταβολή και σταθερό κόστος αποστολής', 'Cash on delivery and flat-rate shipping'), t('Έως 5 προϊόντα-δείγμα στην εγκατάσταση', 'Up to 5 sample products at setup')),
+              '<b>150€</b> Skroutz / BestPrice<br><b>120€</b> BOX NOW',
+              f'<b class="big">560–900€</b><span class="s">{t("200–300€ + 12 × 30–50€, πριν από τα προαιρετικά.", "€200–300 + 12 × €30–50, before optional extras.")}</span>']),
+            (t('Custom λύσεις', 'Custom website solutions'), t('Πιο σύνθετες ιστοσελίδες, πέρα από τις 3 σελίδες του βασικού πακέτου.', 'More complex websites, beyond the 3 pages of the basic package.'),
+             [f'<b>{t("Με προσφορά", "Quoted")}</b>', '—',
+              ft(t('Τιμή ανάλογα με την πολυπλοκότητα', 'Priced by complexity'), t('Ξεκάθαρη προσφορά πριν ξεκινήσουμε', 'A clear quote before we start')),
+              '—',
+              f'<b class="big">{t("Με προσφορά", "Quoted")}</b><span class="s">{t("Στείλε μας τι χρειάζεσαι και απαντάμε με τιμή.", "Tell us what you need and we reply with a price.")}</span>']),
+        ]
+        cols = ''.join(f'<article class="plan rv{" d" + str(i) if i else ""}"><h3>{n}</h3><p class="who">{w}</p><dl>' + ''.join(f'<div><dt>{r}</dt><dd>{v}</dd></div>' for r, v in zip(rows, vals)) + '</dl></article>' for i, (n, w, vals) in enumerate(P))
+        out = f'<div class="plans">{cols}</div>'
+        return re.sub(r'(\d[\d–]*)€', r'€\1', out) if s.l == 'en' else out   # English writes €300, Greek 300€
     def work(s, i, key):
         """One project in Selected Work: a large framed preview that opens the case study, then one meta row."""
         t = s.t; c = CASES[key]; case = s.case(key)

@@ -218,15 +218,17 @@ class Page:
             return f'<div class="panel" id="{pid}" role="tabpanel" aria-labelledby="{pid}-t"{" hidden" if hidden else ""}><ol class="steps">{li}</ol><p class="note">{note}</p></div>'
         names = ['Discover', 'Concept', 'Design &amp; Build', 'Refine &amp; Test', 'Launch']
         ld = {"@context": "https://schema.org", "@graph": [
-            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v3.png", "logo": SITE + "/assets/df-mark.png",
+            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v4.png", "logo": SITE + "/assets/df-mark.png",
              "description": t('Ψηφιακό στούντιο στην Αθήνα: ιστοσελίδες και e-shops για επιχειρήσεις.', 'Digital studio in Athens: websites and e-shops for businesses.'),
              "email": MAIL, "telephone": TEL, "sameAs": [IG], "areaServed": "Athens, Greece", "address": {"@type": "PostalAddress", "addressLocality": "Athens", "addressCountry": "GR"},
-             "knowsLanguage": ["el", "en"]},
+             "knowsLanguage": ["el", "en"],
+             "hasOfferCatalog": {"@type": "OfferCatalog", "name": t('Υπηρεσίες', 'Services'), "itemListElement": [
+                 {"@type": "Offer", "itemOffered": {"@type": "Service", "name": t(a, b), "description": t(c, d)}} for a, b, c, d, _ in SERVICES]}},
             {"@type": "WebSite", "name": "Athens Digital Frame", "url": SITE + "/", "inLanguage": s.l},
             {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": pick(QA[i][0]), "acceptedAnswer": {"@type": "Answer", "text": pick(QA[i][1])}} for _, idx in faqcats for i in idx]}]}
         out = s.head(t('Athens Digital Frame | Ιστοσελίδες & e-shops στην Αθήνα', 'Athens Digital Frame | Websites & e-shops in Athens'),
                      t('Ψηφιακό στούντιο στην Αθήνα. Σύγχρονες ιστοσελίδες από 300€ και e-shops, με δωρεάν demo πριν από οποιαδήποτε πληρωμή.', 'A digital studio in Athens. Modern websites from €300 and e-shops, with a free demo before any payment.'),
-                     '/', '/en/', 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
+                     '/', '/en/', 'og-v4.png' if s.l == 'el' else 'og-en-v2.png', ld)
         out += s.header()
         out += f'''<section class="hero dark"><div class="wrap grid">
 <div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
@@ -384,7 +386,7 @@ class Page:
         ]
         title = t('Πολιτική απορρήτου', 'Privacy policy')
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": f'{title} | Athens Digital Frame', "url": SITE + s.pre + url, "inLanguage": s.l, "isPartOf": {"@id": SITE + "/#org"}}
-        out = s.head(f'{title} | Athens Digital Frame', t('Τι δεδομένα επεξεργάζεται το site της Athens Digital Frame: χωρίς cookies, χωρίς λογαριασμούς, η φόρμα δεν αποθηκεύει τίποτα.', 'What data the Athens Digital Frame site processes: no cookies, no accounts, and the form stores nothing.'), url, '/en' + url, 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
+        out = s.head(f'{title} | Athens Digital Frame', t('Τι δεδομένα επεξεργάζεται το site της Athens Digital Frame: χωρίς cookies, χωρίς λογαριασμούς, η φόρμα δεν αποθηκεύει τίποτα.', 'What data the Athens Digital Frame site processes: no cookies, no accounts, and the form stores nothing.'), url, '/en' + url, 'og-v4.png' if s.l == 'el' else 'og-en-v2.png', ld)
         out += s.header(path=url)
         out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Νομικά', 'Legal')}</p>
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{title}</h1>
@@ -401,7 +403,7 @@ class Page:
               "isPartOf": {"@id": SITE + "/#org"}}
         out = s.head(t('Τιμές ιστοσελίδων & e-shop | Athens Digital Frame', 'Website & e-shop pricing | Athens Digital Frame'),
                      t('Ιστοσελίδα 300€ για έως 3 σελίδες, hosting & domain 50€/έτος. E-shop με εγκατάσταση 200–300€ και συνδρομή 30–50€/μήνα. Χωρίς ΦΠΑ.', 'Website €300 for up to 3 pages, hosting & domain €50/year. E-shop with €200–300 setup and €30–50/month subscription. No VAT.'),
-                     '/prices.html', '/en/prices.html', 'og-v3.png' if s.l == 'el' else 'og-en-v1.png', ld)
+                     '/prices.html', '/en/prices.html', 'og-v4.png' if s.l == 'el' else 'og-en-v2.png', ld)
         out += s.header('prices')
         r = lambda a, b, c: f'<tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>'
         out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Τιμές','Pricing')}</p><h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw+14px,76px)">{t('Ξεκάθαρες τιμές, <em>τίποτα κρυφό.</em>','Clear prices, <em>nothing hidden.</em>')}</h1>

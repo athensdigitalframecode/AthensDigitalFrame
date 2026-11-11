@@ -32,6 +32,9 @@ def pairs(f):
 QA = pairs('faq.html')[2:-1]                      # 16 (question, answer) pairs as (el,en)
 QA = [(QA[i], QA[i + 1]) for i in range(0, len(QA), 2)]
 HW = pairs('how.html')
+# the copy is cut out of the old HTML by position: stop the build if that HTML changed shape
+assert len(QA) == 16, len(QA)
+assert [x[1] for x in HW[7:22:3]] == [x[1] for x in HW[24:39:3]] == ['Day 1', 'Day 1–2', 'Day 2–4', 'Day 4', 'Day 5'], (HW[7:22:3], HW[24:39:3])
 SITE_STEPS = [HW[7 + i * 3:10 + i * 3] for i in range(5)]
 SHOP_STEPS = [HW[24 + i * 3:27 + i * 3] for i in range(5)]
 
@@ -170,13 +173,13 @@ class Page:
         opts = ''.join(f'<option value="{esc(en if s.l=="en" else el)}">{esc(en if s.l=="en" else el)}</option>' for el, en in cats)
         return f'''<form class="lf" id="leadform" novalidate aria-labelledby="formh">
 <h3 id="formh" style="font-size:var(--fs-2)">{t('Πες μας για την επιχείρησή σου','Tell us about your business')}</h3>
-<div class="two"><div class="f"><label for="lf-n">{t('Ονοματεπώνυμο','Full name')}</label><input id="lf-n" name="n" autocomplete="name" required maxlength="60" aria-describedby="lf-n-e"><p class="err" id="lf-n-e" role="alert"></p></div>
-<div class="f"><label for="lf-b">{t('Όνομα επιχείρησης','Business name')}</label><input id="lf-b" name="b" autocomplete="organization" required maxlength="80" aria-describedby="lf-b-e"><p class="err" id="lf-b-e" role="alert"></p></div></div>
-<div class="f"><label for="lf-k">{t('Κατηγορία επιχείρησης','Business category')}</label><select id="lf-k" name="k"><option value="">{t('Επίλεξε…','Choose…')}</option>{opts}</select></div>
+<div class="two"><div class="f"><label for="lf-n">{t('Ονοματεπώνυμο','Full name')}</label><input id="lf-n" autocomplete="name" required maxlength="60" aria-describedby="lf-n-e"><p class="err" id="lf-n-e" role="alert"></p></div>
+<div class="f"><label for="lf-b">{t('Όνομα επιχείρησης','Business name')}</label><input id="lf-b" autocomplete="organization" required maxlength="80" aria-describedby="lf-b-e"><p class="err" id="lf-b-e" role="alert"></p></div></div>
+<div class="f"><label for="lf-k">{t('Κατηγορία επιχείρησης','Business category')}</label><select id="lf-k"><option value="">{t('Επίλεξε…','Choose…')}</option>{opts}</select></div>
 <fieldset class="f"><legend>{t('Προτιμώμενος τρόπος επικοινωνίας','Preferred contact method')}</legend><div class="radios">
 <label><input type="radio" name="m" value="whatsapp" checked><span>WhatsApp</span></label><label><input type="radio" name="m" value="email"><span>Email</span></label><label><input type="radio" name="m" value="phone"><span>{t('Τηλεφωνική κλήση','Phone call')}</span></label></div></fieldset>
-<div class="f"><label for="lf-c" id="lf-c-l">{t('Τηλέφωνο','Phone number')}</label><input id="lf-c" name="c" spellcheck="false" type="tel" inputmode="tel" autocomplete="tel" required maxlength="80" aria-describedby="lf-c-e"><p class="err" id="lf-c-e" role="alert"></p></div>
-<div class="f"><label for="lf-d">{t('Περιγραφή project','Project description')} <span class="opt">({t('προαιρετικό','optional')})</span></label><textarea id="lf-d" name="d" maxlength="600"></textarea></div>
+<div class="f"><label for="lf-c" id="lf-c-l">{t('Τηλέφωνο','Phone number')}</label><input id="lf-c" spellcheck="false" type="tel" inputmode="tel" autocomplete="tel" required maxlength="80" aria-describedby="lf-c-e"><p class="err" id="lf-c-e" role="alert"></p></div>
+<div class="f"><label for="lf-d">{t('Περιγραφή project','Project description')} <span class="opt">({t('προαιρετικό','optional')})</span></label><textarea id="lf-d" maxlength="600"></textarea></div>
 <div class="status" role="status" aria-live="polite" hidden></div>
 <div class="btns"><button class="btn gold" type="submit">{t('Ζήτησε δωρεάν demo','Request a free demo')}</button><button class="btn ghost" type="button" id="lf-mail">{t('Αποστολή με email','Send by email')}</button></div>
 <p class="small">{t('Δεν υπάρχει server: η φόρμα ανοίγει το WhatsApp ή το email σου με έτοιμο μήνυμα. Τίποτα δεν στέλνεται μέχρι να πατήσεις αποστολή εκεί.','There is no server: the form opens your WhatsApp or email with a ready message. Nothing is sent until you press send there.')}</p>
@@ -218,7 +221,7 @@ class Page:
             return f'<div class="panel" id="{pid}" role="tabpanel" aria-labelledby="{pid}-t"{" hidden" if hidden else ""}><ol class="steps">{li}</ol><p class="note">{note}</p></div>'
         names = ['Discover', 'Concept', 'Design &amp; Build', 'Refine &amp; Test', 'Launch']
         ld = {"@context": "https://schema.org", "@graph": [
-            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v4.png", "logo": SITE + "/assets/df-mark.png",
+            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v4.jpg", "logo": SITE + "/assets/df-mark.png",
              "description": t('Ψηφιακό στούντιο στην Αθήνα: ιστοσελίδες και e-shops για επιχειρήσεις.', 'Digital studio in Athens: websites and e-shops for businesses.'),
              "email": MAIL, "telephone": TEL, "sameAs": [IG], "areaServed": "Athens, Greece", "address": {"@type": "PostalAddress", "addressLocality": "Athens", "addressCountry": "GR"},
              "knowsLanguage": ["el", "en"],
@@ -228,7 +231,7 @@ class Page:
             {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": pick(QA[i][0]), "acceptedAnswer": {"@type": "Answer", "text": pick(QA[i][1])}} for _, idx in faqcats for i in idx]}]}
         out = s.head(t('Athens Digital Frame | Ιστοσελίδες & e-shops στην Αθήνα', 'Athens Digital Frame | Websites & e-shops in Athens'),
                      t('Ψηφιακό στούντιο στην Αθήνα. Σύγχρονες ιστοσελίδες από 300€ και e-shops, με δωρεάν demo πριν από οποιαδήποτε πληρωμή.', 'A digital studio in Athens. Modern websites from €300 and e-shops, with a free demo before any payment.'),
-                     '/', '/en/', 'og-v4.png' if s.l == 'el' else 'og-en-v2.png', ld)
+                     '/', '/en/', 'og-v4.jpg' if s.l == 'el' else 'og-en-v2.jpg', ld)
         out += s.header()
         out += f'''<section class="hero dark"><div class="wrap grid">
 <div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
@@ -386,7 +389,7 @@ class Page:
         ]
         title = t('Πολιτική απορρήτου', 'Privacy policy')
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": f'{title} | Athens Digital Frame', "url": SITE + s.pre + url, "inLanguage": s.l, "isPartOf": {"@id": SITE + "/#org"}}
-        out = s.head(f'{title} | Athens Digital Frame', t('Τι δεδομένα επεξεργάζεται το site της Athens Digital Frame: χωρίς cookies, χωρίς λογαριασμούς, η φόρμα δεν αποθηκεύει τίποτα.', 'What data the Athens Digital Frame site processes: no cookies, no accounts, and the form stores nothing.'), url, '/en' + url, 'og-v4.png' if s.l == 'el' else 'og-en-v2.png', ld)
+        out = s.head(f'{title} | Athens Digital Frame', t('Τι δεδομένα επεξεργάζεται το site της Athens Digital Frame: χωρίς cookies, χωρίς λογαριασμούς, η φόρμα δεν αποθηκεύει τίποτα.', 'What data the Athens Digital Frame site processes: no cookies, no accounts, and the form stores nothing.'), url, '/en' + url, 'og-v4.jpg' if s.l == 'el' else 'og-en-v2.jpg', ld)
         out += s.header(path=url)
         out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Νομικά', 'Legal')}</p>
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{title}</h1>
@@ -403,7 +406,7 @@ class Page:
               "isPartOf": {"@id": SITE + "/#org"}}
         out = s.head(t('Τιμές ιστοσελίδων & e-shop | Athens Digital Frame', 'Website & e-shop pricing | Athens Digital Frame'),
                      t('Ιστοσελίδα 300€ για έως 3 σελίδες, hosting & domain 50€/έτος. E-shop με εγκατάσταση 200–300€ και συνδρομή 30–50€/μήνα. Χωρίς ΦΠΑ.', 'Website €300 for up to 3 pages, hosting & domain €50/year. E-shop with €200–300 setup and €30–50/month subscription. No VAT.'),
-                     '/prices.html', '/en/prices.html', 'og-v4.png' if s.l == 'el' else 'og-en-v2.png', ld)
+                     '/prices.html', '/en/prices.html', 'og-v4.jpg' if s.l == 'el' else 'og-en-v2.jpg', ld)
         out += s.header('prices')
         r = lambda a, b, c: f'<tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>'
         out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Τιμές','Pricing')}</p><h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw+14px,76px)">{t('Ξεκάθαρες τιμές, <em>τίποτα κρυφό.</em>','Clear prices, <em>nothing hidden.</em>')}</h1>
@@ -452,3 +455,8 @@ if __name__ == '__main__':
         w(pre + 'index.html', p.build_home()); w(pre + 'prices.html', p.build_prices())
         for k in CASES: w(pre + f'work/{k}.html', p.build_case(k))
         w(pre + 'privacy.html', p.build_privacy())
+    # sitemap from the same list of pages, so a new page cannot be forgotten
+    pages = ['/', '/prices.html', '/privacy.html'] + [f'/work/{k}.html' for k in CASES]
+    alt = lambda u: f'\n    <xhtml:link rel="alternate" hreflang="el" href="{SITE}{u}"/>\n    <xhtml:link rel="alternate" hreflang="en" href="{SITE}/en{u}"/>'
+    w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+      + ''.join(f'  <url><loc>{SITE}{l}{u}</loc>{alt(u)}</url>\n' for u in pages for l in ('', '/en')) + '</urlset>\n')

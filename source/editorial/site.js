@@ -7,7 +7,7 @@ function menu(o){bt.setAttribute('aria-expanded',o);sh.classList.toggle('open',o
 if(bt){bt.addEventListener('click',function(){menu(bt.getAttribute('aria-expanded')!=='true')});
  sh.addEventListener('click',function(e){if(e.target.closest('a'))menu(false)});
  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&sh.classList.contains('open')){menu(false);bt.focus()}});
- matchMedia('(min-width:1280px)').addEventListener('change',function(e){if(e.matches)menu(false)})}
+ var mq=matchMedia('(min-width:1280px)'),wide=function(e){if(e.matches)menu(false)};mq.addEventListener?mq.addEventListener('change',wide):mq.addListener(wide)}
 /* reveal */
 var rv=[].slice.call(d.querySelectorAll('.rv,.reveal-img'));
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});rv.forEach(function(n){io.observe(n)})}else rv.forEach(function(n){n.classList.add('in')});
@@ -70,7 +70,7 @@ ids.forEach(function(id){io.observe(d.getElementById(id))});
 addEventListener('scroll',function(){if((pageYOffset||0)<200)links.forEach(function(a){a.removeAttribute('aria-current')})},{passive:true})})();
 /* magnetic primary buttons: lean a few px toward a fine pointer (transform only, off under reduced motion) */
 if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.querySelectorAll('.btn.gold'),function(b){
- b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(((e.clientX-r.left)/r.width-.5)*8).toFixed(1)+'px,'+(((e.clientY-r.top)/r.height-.5)*6).toFixed(1)+'px)'});
- b.addEventListener('pointerleave',function(){b.style.transform=''})});
+ b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.setProperty('--mx',(((e.clientX-r.left)/r.width-.5)*8).toFixed(1)+'px');b.style.setProperty('--my',(((e.clientY-r.top)/r.height-.5)*6).toFixed(1)+'px')});
+ b.addEventListener('pointerleave',function(){b.style.removeProperty('--mx');b.style.removeProperty('--my')})});
 var y=d.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
 })();

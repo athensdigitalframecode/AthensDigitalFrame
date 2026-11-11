@@ -63,3 +63,7 @@ The hero's right column is the brand cube; the device mock-ups moved out of the 
 - **Rendering:** `editorial/cube-gl.js` (raw WebGL, no library) when available; otherwise the CSS 3D cube in `site.css` (`.cb-*`). The WebGL faces are painted from the DOM faces, so there is one source of text. `?nogl` forces CSS, `?selftest` checks the face targets.
 - **Accessibility:** the 3D object is `aria-hidden`; the list of six buttons and the description (`aria-live`) are the real content. Without JS the cube is hidden and all six descriptions are listed. Reduced motion: no tour, no tweens.
 - Sizes are tied to `--cs` (viewport-height aware) so the hero still fits the first screen.
+
+## Page order and heading scale (2026-11, brief 8.1)
+Home follows the client's journey: hero (cube) -> 01 Studio -> 02 Services -> 03 Projects -> 04 Process -> 05 Pricing -> 06 Why us -> 07 About -> 08 FAQ -> 09 Contact. The header nav uses the same order. Section backgrounds alternate `sec paper` / `sec`, with `sec dark` for Process and Contact.
+`.h2` is `clamp(26px, min(2.6vw + 16px, 6.4vh), 54px)`: editorial scale on wide screens, and the vh cap keeps it below the hero `h1`, which is itself capped by viewport height.

@@ -89,7 +89,7 @@ class Page:
 '''
     def header(s, cur=''):
         t = s.t; H = s.home
-        items = [('projects', t('Projects', 'Projects')), ('services', t('Υπηρεσίες', 'Services')), ('process', t('Διαδικασία', 'Process')),
+        items = [('services', t('Υπηρεσίες', 'Services')), ('projects', t('Projects', 'Projects')), ('process', t('Διαδικασία', 'Process')),
                  ('pricing', t('Τιμές', 'Pricing')), ('about', t('Το στούντιο', 'About')), ('contact', t('Επικοινωνία', 'Contact'))]
         def href(k): return s.prices() if k == 'pricing' else H('#' + k)
         nav = ''.join(f'<a href="{href(k)}"{" aria-current=page" if k=="pricing" and cur=="prices" else ""}>{esc(n)}</a>' for k, n in items)
@@ -202,23 +202,8 @@ class Page:
 <li class="rv d2"><span class="n">03</span><h3>{t('Προσωπική συνεργασία','Personal collaboration')}</h3><p>{t('Μικρό στούντιο στην Αθήνα: μιλάς απευθείας με όσους φτιάχνουν το site σου, χωρίς ενδιάμεσους.','A small Athens studio: you talk directly to the people building your site, with no middlemen.')}</p></li>
 <li class="rv d3"><span class="n">04</span><h3>{t('Διαφανείς τιμές','Transparent pricing')}</h3><p>{t('Ξεκάθαρες τιμές, χωρίς κρυφά κόστη, και δωρεάν demo πριν από οποιαδήποτε πληρωμή.','Clear prices, no hidden costs, and a free demo before any payment.')}</p></li></ul>
 </div></section>
-<section class="sec" id="projects" aria-labelledby="projh"><div class="wrap">
-<div class="sechead rv"><div><p class="eyebrow">02 — Projects</p><h2 class="h2" id="projh">{t('Δύο concept projects, σχεδιασμένα από εμάς.','Two concept projects, designed by us.')}</h2></div>
-<p class="lead">{t('Φανταστικές εταιρείες χωρίς πραγματικό πελάτη. Τα φτιάξαμε για να δείξουμε πώς δουλεύουμε.','Fictional companies with no real client. We made them to show how we work.')}</p></div>
-<article class="proj"><div class="pv rv">{s.frame('<a class="lnk" href="/olivane/" target="_blank" rel="noopener" aria-label="Olivane Estate">'+s.browser('olivane-d.webp','athensdigitalframe.vercel.app/olivane','Olivane Estate concept website: a villa above the sea at sunset')+'</a>')}<div class="phone">{''}<img src="/assets/olivane-m.webp" width="390" height="844" alt="Olivane Estate on a phone" loading="lazy" decoding="async"></div></div>
-<div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Real estate · Κύπρος','Real estate · Cyprus')}</p><h3>Olivane Estate</h3>
-<p>{t('Ιστοσελίδα για μια φανταστική κατασκευαστική εταιρεία: το σπίτι χτίζεται μπροστά στα μάτια σου καθώς κυλάς τη σελίδα.','A website for a fictional property developer: the home builds itself in front of you as you scroll.')}</p>
-<ul class="ft"><li>{t('Ιστορία κατασκευής με κύλιση, από το σχέδιο στο έτοιμο σπίτι','Scroll-driven construction story, from blueprint to finished home')}</li><li>{t('Κάρτες ακινήτων με φίλτρα τύπου, περιοχής, υπνοδωματίων και τιμής','Property cards with type, area, bedroom and price filters')}</li><li>{t('Φόρμες για επίσκεψη και φυλλάδιο (δοκιμαστικές, δεν στέλνουν τίποτα)','Site-visit and brochure forms (demo only, nothing is sent)')}</li></ul>
-<a class="btn" href="/olivane/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a></div></article>
-<article class="proj rev"><div class="pv rv">{s.frame('<a class="lnk" href="/arclines/" target="_blank" rel="noopener" aria-label="Arclines Freight">'+s.browser('arclines-d.webp','athensdigitalframe.vercel.app/arclines','Arclines Freight concept website: a dark globe with freight routes')+'</a>')}<div class="phone"><img src="/assets/arclines-m.webp" width="390" height="844" alt="Arclines Freight on a phone" loading="lazy" decoding="async"></div></div>
-<div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Logistics · Asia-Pacific','Logistics · Asia-Pacific')}</p><h3>Arclines Freight</h3>
-<p>{t('Εταιρική ιστοσελίδα για μια φανταστική εταιρεία logistics. Τα στατιστικά, οι μαρτυρίες και τα νέα είναι δείγματα και δεν αντιστοιχούν σε πραγματικούς πελάτες.','A corporate website for a fictional logistics company. The statistics, testimonials and news are samples and do not correspond to real customers.')}</p>
-<ul class="ft"><li>{t('Υπηρεσίες, κλάδοι και παρακολούθηση αποστολών σε εταιρικό ύφος','Services, industries and shipment tracking in a corporate style')}</li><li>{t('Δείγματα μαρτυριών, νέων και συχνών ερωτήσεων','Sample testimonials, news and FAQ')}</li><li>{t('Φόρμα προσφοράς (δοκιμαστική)','Quote form (demo)')}</li></ul>
-<a class="btn" href="/arclines/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a></div></article>
-<p class="more rv">{t('Περισσότερα demo concepts έρχονται σύντομα.','More demo concepts are coming soon.')}</p>
-</div></section>
-<section class="sec paper" id="services" aria-labelledby="svch"><div class="wrap">
-<div class="sechead rv"><div><p class="eyebrow">03 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Έξι πλευρές ενός στούντιο.','Six sides of one studio.')}</h2></div></div>
+<section class="sec" id="services" aria-labelledby="svch"><div class="wrap">
+<div class="sechead rv"><div><p class="eyebrow">02 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Έξι πλευρές ενός στούντιο.','Six sides of one studio.')}</h2></div></div>
 <ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p><button type="button" class="caps-go" data-face="{i}">{t("Δες τη στον κύβο", "Show it on the cube")} {ARROW}</button></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
 <h3 class="caps-sub rv">{t('Τρεις τρόποι να βγεις online.','Three ways to get online.')}</h3>
 <div class="svc">
@@ -232,22 +217,29 @@ class Page:
 <ul class="ft"><li>{t('Τιμή ανάλογα με την πολυπλοκότητα','Priced by complexity')}</li><li>{t('Ξεκάθαρη προσφορά πριν ξεκινήσουμε','A clear quote before we start')}</li></ul>
 <div><p class="price">{t('Με προσφορά','Quoted')}</p><p style="margin-top:8px;font-size:var(--fs-0)">{t('Στείλε μας τι χρειάζεσαι και απαντάμε με τιμή.','Tell us what you need and we reply with a price.')}</p></div></article>
 </div></div></section>
-<section class="sec" id="why" aria-labelledby="whyh"><div class="wrap why">
-<div class="rv"><p class="eyebrow">04 — {t('Γιατί εμείς','Why us')}</p><h2 class="h2" id="whyh">{t('Λιγότερος θόρυβος. Περισσότερη προσοχή.','Less noise. More attention.')}</h2><p class="pull">{t('Ένα site που ξέρεις ότι φτιάχτηκε για σένα.','A site you know was made for you.')}</p></div>
-<dl class="rv d1"><dt>{t('Φιλοσοφία','Philosophy')}</dt><dd>{t('Κάθε επιχείρηση χρειάζεται ένα site που εξηγεί καθαρά τι κάνει και κάνει εύκολο το επόμενο βήμα. Αυτό σχεδιάζουμε πρώτα, πριν από τα στολίδια.','Every business needs a site that explains clearly what it does and makes the next step easy. We design that first, before the decoration.')}</dd>
-<dt>{t('Προσοχή στη λεπτομέρεια','Attention to detail')}</dt><dd>{t('Μελετάμε την επιχείρησή σου και την περιοχή σου, και ελέγχουμε την ταχύτητα σε κινητό πριν από το live.','We study your business and your area, and check mobile speed before launch.')}</dd>
-<dt>{t('Άμεση επικοινωνία','Direct communication')}</dt><dd>{t('Μιλάς απευθείας με εμάς, με DM, WhatsApp, τηλέφωνο ή email.','You talk directly to us, by DM, WhatsApp, phone or email.')}</dd>
-<dt>{t('Διαφανείς τιμές','Transparent pricing')}</dt><dd>{t('Οι τιμές είναι γραμμένες πάνω στο site, ξεχωριστά οι εφάπαξ και οι μηνιαίες, και το demo είναι δωρεάν.','Prices are written on the site, with one-time and recurring costs kept apart, and the demo is free.')}</dd>
-<dt>{t('Οργανωμένη διαδικασία','Organised process')}</dt><dd>{t('Πέντε σαφή βήματα, live σε 3–5 ημέρες.','Five clear steps, live in 3–5 days.')}</dd></dl>
+<section class="sec paper" id="projects" aria-labelledby="projh"><div class="wrap">
+<div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Δύο concept projects, σχεδιασμένα από εμάς.','Two concept projects, designed by us.')}</h2></div>
+<p class="lead">{t('Φανταστικές εταιρείες χωρίς πραγματικό πελάτη. Τα φτιάξαμε για να δείξουμε πώς δουλεύουμε.','Fictional companies with no real client. We made them to show how we work.')}</p></div>
+<article class="proj"><div class="pv rv">{s.frame('<a class="lnk" href="/olivane/" target="_blank" rel="noopener" aria-label="Olivane Estate">'+s.browser('olivane-d.webp','athensdigitalframe.vercel.app/olivane','Olivane Estate concept website: a villa above the sea at sunset')+'</a>')}<div class="phone">{''}<img src="/assets/olivane-m.webp" width="390" height="844" alt="Olivane Estate on a phone" loading="lazy" decoding="async"></div></div>
+<div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Real estate · Κύπρος','Real estate · Cyprus')}</p><h3>Olivane Estate</h3>
+<p>{t('Ιστοσελίδα για μια φανταστική κατασκευαστική εταιρεία: το σπίτι χτίζεται μπροστά στα μάτια σου καθώς κυλάς τη σελίδα.','A website for a fictional property developer: the home builds itself in front of you as you scroll.')}</p>
+<ul class="ft"><li>{t('Ιστορία κατασκευής με κύλιση, από το σχέδιο στο έτοιμο σπίτι','Scroll-driven construction story, from blueprint to finished home')}</li><li>{t('Κάρτες ακινήτων με φίλτρα τύπου, περιοχής, υπνοδωματίων και τιμής','Property cards with type, area, bedroom and price filters')}</li><li>{t('Φόρμες για επίσκεψη και φυλλάδιο (δοκιμαστικές, δεν στέλνουν τίποτα)','Site-visit and brochure forms (demo only, nothing is sent)')}</li></ul>
+<a class="btn" href="/olivane/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a></div></article>
+<article class="proj rev"><div class="pv rv">{s.frame('<a class="lnk" href="/arclines/" target="_blank" rel="noopener" aria-label="Arclines Freight">'+s.browser('arclines-d.webp','athensdigitalframe.vercel.app/arclines','Arclines Freight concept website: a dark globe with freight routes')+'</a>')}<div class="phone"><img src="/assets/arclines-m.webp" width="390" height="844" alt="Arclines Freight on a phone" loading="lazy" decoding="async"></div></div>
+<div class="pt rv d1"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία','Self-initiated concept · fictional company')}</span><p class="k">{t('Logistics · Asia-Pacific','Logistics · Asia-Pacific')}</p><h3>Arclines Freight</h3>
+<p>{t('Εταιρική ιστοσελίδα για μια φανταστική εταιρεία logistics. Τα στατιστικά, οι μαρτυρίες και τα νέα είναι δείγματα και δεν αντιστοιχούν σε πραγματικούς πελάτες.','A corporate website for a fictional logistics company. The statistics, testimonials and news are samples and do not correspond to real customers.')}</p>
+<ul class="ft"><li>{t('Υπηρεσίες, κλάδοι και παρακολούθηση αποστολών σε εταιρικό ύφος','Services, industries and shipment tracking in a corporate style')}</li><li>{t('Δείγματα μαρτυριών, νέων και συχνών ερωτήσεων','Sample testimonials, news and FAQ')}</li><li>{t('Φόρμα προσφοράς (δοκιμαστική)','Quote form (demo)')}</li></ul>
+<a class="btn" href="/arclines/" target="_blank" rel="noopener">{t('Δες το live','View live')} {ARROW}</a></div></article>
+<p class="more rv">{t('Περισσότερα demo concepts έρχονται σύντομα.','More demo concepts are coming soon.')}</p>
 </div></section>
 <section class="sec dark" id="process" aria-labelledby="proch"><div class="wrap">
-<div class="sechead rv"><div><p class="eyebrow">05 — {t('Διαδικασία','Process')}</p><h2 class="h2" id="proch">{t('Από το brief ως το live, σε πέντε βήματα.','From brief to live, in five steps.')}</h2></div><p class="lead">{t('Δύο δρόμοι, ίδια απλά βήματα. Το demo έρχεται πριν από οποιαδήποτε πληρωμή.','Two paths, the same simple steps. The demo comes before any payment.')}</p></div>
+<div class="sechead rv"><div><p class="eyebrow">04 — {t('Διαδικασία','Process')}</p><h2 class="h2" id="proch">{t('Από το brief ως το live, σε πέντε βήματα.','From brief to live, in five steps.')}</h2></div><p class="lead">{t('Δύο δρόμοι, ίδια απλά βήματα. Το demo έρχεται πριν από οποιαδήποτε πληρωμή.','Two paths, the same simple steps. The demo comes before any payment.')}</p></div>
 <div class="tabs" role="tablist" aria-label="{t('Ιστοσελίδα ή e-shop','Website or e-shop')}"><button role="tab" id="p-site-t" aria-selected="true" aria-controls="p-site" type="button">{t('Ιστοσελίδα','Website')}</button><button role="tab" id="p-shop-t" aria-selected="false" aria-controls="p-shop" type="button">E-shop</button></div>
 {panel('p-site', SITE_STEPS, False, t('Ιστοσελίδα: live σε 3–5 ημέρες. Συνδέουμε domain και hosting και σου δείχνουμε με σύντομα βίντεο πώς το διαχειρίζεσαι. Η συντήρηση είναι προαιρετική.','Website: live in 3–5 days. We connect domain and hosting and show you how to manage it in short videos. Maintenance is optional.'))}
 {panel('p-shop', SHOP_STEPS, True, t('E-shop: live σε 3–5 ημέρες, με δοκιμαστική παραγγελία πριν ανοίξει. Μετά την παράδοση προσθέτεις μόνος σου προϊόντα με τα βίντεο οδηγιών.','E-shop: live in 3–5 days, with a test order before it opens. After handover you add products yourself using the video tutorials.'))}
 </div></section>
 <section class="sec" id="pricing" aria-labelledby="prh"><div class="wrap">
-<div class="sechead rv"><div><p class="eyebrow">06 — {t('Τιμές','Pricing')}</p><h2 class="h2" id="prh">{t('Ξεκάθαρες τιμές. Τίποτα κρυφό.','Clear prices. Nothing hidden.')}</h2></div><p class="lead">{t('Εφάπαξ, επαναλαμβανόμενα, υποχρεωτικά και προαιρετικά κόστη, ξεχωριστά.','One-time, recurring, mandatory and optional costs, kept apart.')}</p></div>
+<div class="sechead rv"><div><p class="eyebrow">05 — {t('Τιμές','Pricing')}</p><h2 class="h2" id="prh">{t('Ξεκάθαρες τιμές. Τίποτα κρυφό.','Clear prices. Nothing hidden.')}</h2></div><p class="lead">{t('Εφάπαξ, επαναλαμβανόμενα, υποχρεωτικά και προαιρετικά κόστη, ξεχωριστά.','One-time, recurring, mandatory and optional costs, kept apart.')}</p></div>
 <div class="pgrid">
 <div class="pcard rv"><h3>{t('Ιστοσελίδα επιχείρησης','Business website')}</h3><p class="d">{t('Έως 3 σελίδες.','Up to 3 pages.')}</p>
 <div class="rows"><div class="row"><span class="t">{t('Κατασκευή','Development')}<span class="tag2 req">{t('Εφάπαξ','One-time')}</span></span><span class="a">300€</span></div>
@@ -263,13 +255,21 @@ class Page:
 <p class="vat">{t('Οι τιμές δεν υπόκεινται σε ΦΠΑ. Πιο σύνθετα sites τιμολογούνται ανάλογα με την πολυπλοκότητα.','Prices are not subject to VAT. More complex sites are quoted by complexity.')}</p>
 <div class="btns" style="margin-top:32px"><a class="btn" href="{s.prices()}">{t('Δες όλες τις τιμές','See all pricing')} {ARROW}</a><a class="btn ghost" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')}</a></div>
 </div></section>
-<section class="sec paper" id="about" aria-labelledby="abh"><div class="wrap about">
+<section class="sec paper" id="why" aria-labelledby="whyh"><div class="wrap why">
+<div class="rv"><p class="eyebrow">06 — {t('Γιατί εμείς','Why us')}</p><h2 class="h2" id="whyh">{t('Λιγότερος θόρυβος. Περισσότερη προσοχή.','Less noise. More attention.')}</h2><p class="pull">{t('Ένα site που ξέρεις ότι φτιάχτηκε για σένα.','A site you know was made for you.')}</p></div>
+<dl class="rv d1"><dt>{t('Φιλοσοφία','Philosophy')}</dt><dd>{t('Κάθε επιχείρηση χρειάζεται ένα site που εξηγεί καθαρά τι κάνει και κάνει εύκολο το επόμενο βήμα. Αυτό σχεδιάζουμε πρώτα, πριν από τα στολίδια.','Every business needs a site that explains clearly what it does and makes the next step easy. We design that first, before the decoration.')}</dd>
+<dt>{t('Προσοχή στη λεπτομέρεια','Attention to detail')}</dt><dd>{t('Μελετάμε την επιχείρησή σου και την περιοχή σου, και ελέγχουμε την ταχύτητα σε κινητό πριν από το live.','We study your business and your area, and check mobile speed before launch.')}</dd>
+<dt>{t('Άμεση επικοινωνία','Direct communication')}</dt><dd>{t('Μιλάς απευθείας με εμάς, με DM, WhatsApp, τηλέφωνο ή email.','You talk directly to us, by DM, WhatsApp, phone or email.')}</dd>
+<dt>{t('Διαφανείς τιμές','Transparent pricing')}</dt><dd>{t('Οι τιμές είναι γραμμένες πάνω στο site, ξεχωριστά οι εφάπαξ και οι μηνιαίες, και το demo είναι δωρεάν.','Prices are written on the site, with one-time and recurring costs kept apart, and the demo is free.')}</dd>
+<dt>{t('Οργανωμένη διαδικασία','Organised process')}</dt><dd>{t('Πέντε σαφή βήματα, live σε 3–5 ημέρες.','Five clear steps, live in 3–5 days.')}</dd></dl>
+</div></section>
+<section class="sec" id="about" aria-labelledby="abh"><div class="wrap about">
 <div class="rv"><p class="eyebrow">07 — {t('Το στούντιο','About')}</p><h2 class="h2" id="abh">{t('Ένα μικρό στούντιο στην Αθήνα.','A small studio in Athens.')}</h2></div>
 <div class="txt rv d1"><p>{t('Η Athens Digital Frame φτιάχνει ιστοσελίδες και e-shops για τοπικές επιχειρήσεις. Δουλεύουμε σε μικρή κλίμακα, ώστε κάθε project να έχει την προσοχή που του αναλογεί και να μιλάς πάντα απευθείας με εμάς.','Athens Digital Frame builds websites and e-shops for local businesses. We work at a small scale so every project gets the attention it deserves and you always talk to us directly.')}</p>
 <p>{t('Δεν έχουμε ακόμα δημοσιευμένες δουλειές για πραγματικούς πελάτες, γι’ αυτό δείχνουμε concept projects που σημειώνονται καθαρά ως φανταστικά. Αν θες να δεις πώς θα φαινόταν το δικό σου, φτιάχνουμε δωρεάν demo.','We do not yet have published work for real clients, so we show concept projects that are clearly labelled as fictional. If you want to see how yours would look, we build a free demo.')}</p>
 <ul class="facts" style="margin-top:32px"><li><b>{t('Έδρα','Base')}</b><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></li><li><b>{t('Γλώσσες','Languages')}</b><span>{t('Ελληνικά και English','Greek and English')}</span></li><li><b>Instagram</b><span><a href="{IG}" target="_blank" rel="noopener">@athens.digitalframe</a></span></li></ul></div>
 </div></section>
-<section class="sec" id="faq" aria-labelledby="fqh"><div class="wrap faq">
+<section class="sec paper" id="faq" aria-labelledby="fqh"><div class="wrap faq">
 <div class="side rv"><p class="eyebrow">08 — FAQ</p><h2 class="h2" id="fqh">{t('Πριν μας στείλεις μήνυμα.','Before you message us.')}</h2></div><div>{faq}</div>
 </div></section>
 <section class="sec dark" id="contact" aria-labelledby="cth"><div class="wrap contact">

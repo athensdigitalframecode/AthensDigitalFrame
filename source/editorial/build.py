@@ -287,11 +287,11 @@ class Page:
 <section class="sec" id="faq" aria-labelledby="fqh"><div class="wrap faq">
 <div class="side rv"><p class="eyebrow">07 — FAQ</p><h2 class="h2" id="fqh">{t('Πριν μας στείλεις μήνυμα.','Before you message us.')}</h2></div><div>{faq}</div>
 </div></section>
-<section class="sec dark" id="contact" aria-labelledby="cth"><div class="wrap contact">
+<section class="sec dark" id="contact" aria-labelledby="cth"><div class="wrap"><div class="fr closing">{LOGO}<div class="contact">
 <div class="rv"><p class="eyebrow">08 — {t('Επικοινωνία','Contact')}</p><h2 class="h2" id="cth">{t('Δες πώς θα φαινόταν το δικό σου site.','See how your own site would look.')}</h2><p class="lead" style="margin-top:20px">{t('Το δωρεάν demo έρχεται πριν από οποιαδήποτε πληρωμή. Δεν σου αρέσει; Δεν πληρώνεις τίποτα.','The free demo comes before any payment. Do not like it? You pay nothing.')}</p>
 <div class="ways"><a href="{DM}" target="_blank" rel="noopener"><span>Instagram DM</span><span>@athens.digitalframe</span></a><a href="https://wa.me/{WA}" target="_blank" rel="noopener"><span>WhatsApp</span><span>+30 698 186 2732</span></a><a href="tel:{TEL}"><span>{t('Τηλέφωνο','Phone')}</span><span>+30 698 186 2732</span></a><a href="mailto:{MAIL}"><span>Email</span><span>{MAIL}</span></a></div></div>
 <div class="rv d1">{s.form()}</div>
-</div></section>
+</div><i class="mk a"></i><i class="mk b"></i><i class="mk c"></i><i class="mk d"></i></div></div></section>
 '''
         out += s.footer(''.join(f'\n<script src="{u}" defer></script>' for u in CUBE))
         return out

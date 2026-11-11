@@ -417,3 +417,11 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .fq-tabs button:hover{border-color:var(--gold);color:var(--cream)}
 .fq-tabs button[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
 .nojs .fq-tabs{display:none}
+/* contact closing: the whole block inside one gold frame with crop marks and the df mark (brief 5.8) */
+.closing{padding:clamp(28px,5vw,72px) clamp(20px,4.5vw,64px)}
+.closing::before{inset:0}
+.closing .mk{width:28px;height:28px}
+.closing .mk.a{left:-1px;top:-1px}.closing .mk.b{right:-1px;top:-1px}.closing .mk.c{left:-1px;bottom:-1px}.closing .mk.d{right:-1px;bottom:-1px}
+.closing>.mark{display:block;width:56px;height:auto;margin-bottom:var(--s6)}
+.closing>.contact{position:relative;z-index:1}
+@media(max-width:560px){.closing{margin-inline:calc(var(--pad) * -.5)}}

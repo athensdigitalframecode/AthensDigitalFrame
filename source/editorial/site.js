@@ -68,5 +68,9 @@ var ids=Object.keys(map);if(!ids.length)return;
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});map[e.target.id].setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
 ids.forEach(function(id){io.observe(d.getElementById(id))});
 addEventListener('scroll',function(){if((pageYOffset||0)<200)links.forEach(function(a){a.removeAttribute('aria-current')})},{passive:true})})();
+/* magnetic primary buttons: lean a few px toward a fine pointer (transform only, off under reduced motion) */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.querySelectorAll('.btn.gold'),function(b){
+ b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(((e.clientX-r.left)/r.width-.5)*8).toFixed(1)+'px,'+(((e.clientY-r.top)/r.height-.5)*6).toFixed(1)+'px)'});
+ b.addEventListener('pointerleave',function(){b.style.transform=''})});
 var y=d.getElementById('yr');if(y)y.textContent=new Date().getFullYear();
 })();

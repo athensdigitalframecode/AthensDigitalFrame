@@ -1,17 +1,17 @@
 # Athens Digital Frame: DESIGN.md (editorial system, 2026-11)
 
-Warm, editorial, restrained, in the original black / cream / gold brand. (Earlier dark-only rules: `legacy/DESIGN-dark-gold.md`.)
-Every visual decision needs a purpose. No generic SaaS look: no gradient hero, no glass, no icon cards, no floating decoration.
+Dark, editorial, restrained, in the original black / cream / gold brand. **The sections "Dark studio system", "Hero cube", "Page order", "Case studies" below are current; where older lines disagree, they win.** (Earlier dark-only rules: `legacy/DESIGN-dark-gold.md`.)
+Every visual decision needs a purpose. No generic SaaS look: no gradient hero, no pills, no glass panels (header blur only), no icon cards, no floating decoration.
 
 ## Brand sources (checked, not approximated)
 - Logo: the white "df" ligature with a small gold corner, on black (`favicon-192.png` / `apple-touch-icon.png`, and the 120x100 PNG embedded in the old home page). The original WhatsApp JPEG is not in the repo, so `assets/df-mark.png` (145x121, transparent) was extracted from the 192px icon with its own colours (white `#F4F4F6`, gold wedge). It is always shown on black: header, footer and mobile menu are black, so only this one variation is needed. Never redraw or recolour it.
 - Colours from the original DESIGN.md and the logo: black `#0B0B0B`, cream `#F5F1E8`, gold `#C9A96E` (light `#D9BE86`, soft `#E6CF9F`). Wordmark font Marcellus.
-- The gold Parthenon arch (`legacy/frame.svg.txt`) is inlined statically behind the hero devices.
+- The gold Parthenon arch (`legacy/frame.svg.txt`) was removed from the hero (decoration with no information). Do not reintroduce it.
 
 ## Tokens (all in `editorial/site.css` :root)
 - Brand: `--black`, `--cream`, `--gold`, `--gold-lt`, `--gold-soft`. Derived: `--gold-deep #7A5F22` (gold for small text on cream, 5.3:1 on cream, 4.8:1 on paper), `--paper #ECE4D3`, `--muted #5C584D`, hairlines `--line` and `--line-gold`. Error `#9B2D20`. Do not add colours.
-- Rhythm: black header, black hero, cream sections, `--paper` bands, black process and contact, black footer.
-- Gold is selective: primary CTA (gradient button, black text), eyebrow rules and small labels, numerals, crop marks, price notes, hover states. Headings stay black or cream; only the one italic emphasis word goes gold (`--gold-lt` on black, `--gold-deep` on cream).
+- Rhythm: all surfaces are graphite (`--s0..--s4`); cream is text only. Sections alternate `sec paper` / `sec`, `sec dark` for process and contact.
+- Gold is selective: primary CTA (solid gold, black text), eyebrow rules and small labels, numerals, crop marks, cube edges, price notes, hover states. Headings stay cream; only the one italic emphasis word goes gold (`--gold-lt`).
 - Type: headlines Noto Serif Display 500 (italic 400 for emphasis), body Manrope 400-700, wordmark Marcellus. All self-hosted in `/fonts`. Scale `--fs-0..4` (clamp).
 - Spacing 4/8/12/16/24/32/48/72/112, container 1200px + `--pad`, radius 2px, hairline borders.
 - Breakpoints: 560, 760, 900, 1000, 1040 (desktop nav).
@@ -20,10 +20,10 @@ Every visual decision needs a purpose. No generic SaaS look: no gradient hero, n
 `.fr` = offset gold outline + four gold crop-mark corners around images and device mockups. Use it for project previews, not for text cards.
 
 ## Components
-Buttons `.btn` (black, gold on hover), `.gold` (primary CTA, the only gold-filled button), `.ghost`; on `.dark` the default turns cream. Tags `.tag2` (`req` filled = mandatory, `opt` dashed = optional). Rows `.row` for prices. Details/summary FAQ. Tabs with arrow-key support for the process.
+Buttons `.btn` (translucent, hairline, gold on hover), `.gold` (primary CTA, solid gold, the only gold-filled button), `.ghost` (outline); all 2px radius. Tags `.tag2` (`req` filled = mandatory, `opt` dashed = optional). Rows `.row` for prices. Details/summary FAQ. Tabs with arrow-key support for the process. Index lists `.caps` (services, case components) instead of cards.
 
 ## Motion
-Fade/lift on reveal (`.rv`), image clip reveal, process line draws once. Everything off under `prefers-reduced-motion`. No parallax, no scroll hijack.
+Fade/lift on reveal (`.rv`), image clip reveal, process line draws once, hero entrance (one staggered rise on load), magnetic primary button (a few px toward a fine pointer), the cube (see below). Everything off under `prefers-reduced-motion`. No parallax, no scroll hijack, no custom cursor.
 
 ## Content rules
 - Prices (do not change without the owner): website 300 EUR (up to 3 pages), hosting+domain 50 EUR/year (required), maintenance 20 EUR/month (optional), e-shop setup 200-300 EUR, subscription 30-50 EUR/month with 12-month minimum, first-year e-shop 560-900 EUR, Skroutz 150, BOX NOW 120, referral 50 EUR or 2 months free (friend 10% off). No VAT.

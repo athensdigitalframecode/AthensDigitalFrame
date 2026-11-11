@@ -407,3 +407,9 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 /* legal text (privacy.html) */
 .legal h2{font:500 var(--fs-2)/1.2 var(--display);margin:var(--s6) 0 var(--s3)}.legal h2:first-child{margin-top:0}
 .legal a{color:var(--gold-lt)}
+/* motion: hero entrance (one staggered rise on load) and the magnetic primary button */
+@keyframes heroin{from{opacity:0;transform:translateY(14px)}}
+.js .hero .grid>div:first-child>*,.js .hero .cb-wrap{animation:heroin .8s var(--ease) both}
+.js .hero .h1{animation-delay:.06s}.js .hero .lead{animation-delay:.14s}.js .hero .btns{animation-delay:.22s}.js .hero .meta{animation-delay:.3s}.js .hero .cb-wrap{animation-delay:.18s}
+.btn.gold{transition:background .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease)}
+@media(prefers-reduced-motion:reduce){.js .hero .grid>div:first-child>*,.js .hero .cb-wrap{animation:none}}

@@ -278,7 +278,7 @@ class Page:
 <ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p><button type="button" class="caps-go" data-face="{i}">{t("Δες τη στον κύβο", "Show it on the cube")} {ARROW}</button></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
 </div></section>
 <section class="sec paper" id="projects" aria-labelledby="projh"><div class="wrap">
-<div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Δύο concept projects, σχεδιασμένα από εμάς.','Two concept projects, designed by us.')}</h2></div>
+<div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Projects, σχεδιασμένα από εμάς.','Projects, designed by us.')}</h2></div>
 <p class="lead">{t('Φανταστικές εταιρείες χωρίς πραγματικό πελάτη. Τα φτιάξαμε για να δείξουμε πώς δουλεύουμε.','Fictional companies with no real client. We made them to show how we work.')}</p></div>
 {''.join(s.work(i, k) for i, k in enumerate(CASES))}
 <p class="more rv">{t('Περισσότερα demo concepts έρχονται σύντομα.','More demo concepts are coming soon.')}</p>

@@ -8,18 +8,25 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
   cv.className = 'cb-gl';
   stage.insertBefore(cv, stage.firstChild);
 
-  var VS = 'attribute vec3 aP,aN,aT,aB;attribute vec2 aUV;attribute float aTile;uniform mat3 uR;uniform vec3 uK;uniform float uPz,uAsm,uPop;' +
+  var VS = 'attribute vec3 aP,aN,aT,aB;attribute vec2 aUV;attribute float aTile;uniform mat3 uR;uniform vec3 uK;uniform float uPz,uF,uSpin,uPop;' +
     'varying vec3 vP,vN,vT,vB;varying vec2 vUV;varying float vTile;' +
-    'void main(){vec3 p=aP,c=aN*.5;if(aTile>5.5){p=c+(p-c)*uPop;p.z+=uPz;}p=c+(p-c)*mix(.3,1.,uAsm)+aN*(1.-uAsm)*1.2;vec3 w=uR*p;vP=w;vN=uR*aN;vT=uR*aT;vB=uR*aB;vUV=aUV;vTile=aTile;' +
+    'void main(){vec3 p=aP,c=aN*.5;if(aTile>5.5){p=c+(p-c)*uPop;p.z+=uPz;}' +
+    'vec3 d=p-c;float k=(1.-uF)*uSpin,du=dot(d,aT),dv=dot(d,aB);d+=aT*(du*cos(k)-dv*sin(k)-du)+aB*(du*sin(k)+dv*cos(k)-dv);' +
+    'p=c+d*mix(.82,1.,uF)+aN*(1.-uF)*1.1;vec3 w=uR*p;vP=w;vN=uR*aN;vT=uR*aT;vB=uR*aB;vUV=aUV;vTile=aTile;' +
     'float zc=uK.z-w.z,n=uK.z-1.6,f=uK.z+1.6;gl_Position=vec4(w.x*uK.x,-w.y*uK.y,((f+n)*zc-2.*f*n)/(f-n),zc);}';
   /* space: x right, y DOWN, z to the viewer (same as CSS), so the light and targets are shared with the CSS cube */
-  var FS = 'precision highp float;uniform sampler2D uTex;uniform float uPlate,uCover,uT,uAsm;uniform vec3 uEye;' +
+  var FS = 'precision highp float;uniform sampler2D uTex;uniform float uPlate,uCover,uT,uA,uLit,uLab,uMode,uDraw,uFrame,uGl;uniform vec3 uEye;' +
     'varying vec3 vP,vN,vT,vB;varying vec2 vUV;varying float vTile;' +
     'vec3 env(vec3 r){float up=-r.y;vec3 c=mix(vec3(.015),vec3(.09,.09,.10),smoothstep(-.3,1.,up));' +
     'c+=vec3(1.,.93,.80)*smoothstep(.80,.97,dot(r,normalize(vec3(.45,-.6,.66))))*1.5;' +          /* warm softbox, above right */
     'c+=vec3(.35,.40,.50)*smoothstep(.75,.98,dot(r,normalize(vec3(-.8,-.2,.1))))*.45;return c;}' + /* cool rim, left */
     'vec3 tile(float t,vec2 uv){return texture2D(uTex,(vec2(mod(t,4.),floor(t/4.))+uv)*vec2(.25,.5)).rgb;}' +
-    'void main(){float t=floor(vTile+.5);bool plate=t>5.5;vec2 uv=clamp(vUV,.003,.997);vec3 alb=tile(t,uv);' +
+    'void main(){' +
+    'if(uMode>.5){float hx=smoothstep(.013,0.,min(vUV.x,1.-vUV.x))*smoothstep(uDraw,uDraw-.06,abs(vUV.y-.5)*2.);' +
+    'float hy=smoothstep(.013,0.,min(vUV.y,1.-vUV.y))*smoothstep(uDraw,uDraw-.06,abs(vUV.x-.5)*2.);float h=max(hx,hy);' +
+    'float g=uGl>0.?exp(-pow((dot(vP,vec3(.62,-.55,.25))-mix(1.,-1.,uGl))/.13,2.)):0.;' +
+    'vec3 col=vec3(.79,.66,.43)*uFrame*.9+vec3(1.,.93,.8)*g*1.6;gl_FragColor=vec4(col*h,h*min(1.,uFrame+g));return;}' +
+    'float t=floor(vTile+.5);bool plate=t>5.5;vec2 uv=clamp(vUV,.003,.997);vec3 alb=t<5.5?mix(tile(7.,uv),tile(t,uv),uLab):tile(t,uv);' +
     'if(t<.5)alb=mix(alb,tile(7.,uv),uCover);' +                                                   /* DISCOVER hides under the plate */
     'float b=plate?.014:.02;float eu=smoothstep(1.-b,1.,vUV.x)-smoothstep(b,0.,vUV.x),ev=smoothstep(1.-b,1.,vUV.y)-smoothstep(b,0.,vUV.y);' +
     'vec3 n=normalize(vN+vT*eu*.85+vB*ev*.85);float e=max(abs(eu),abs(ev));' +                     /* bevel: bend the normal at the edges */
@@ -35,8 +42,8 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     'float ph=fract((uT+.8*sin(uT*.21))/5.2);float pos=mix(-.6,2.1,smoothstep(0.,.42,ph));' +
     'float sw=exp(-pow((uv.x*.8+uv.y*.6-pos)/.085,2.));float pu=.05*sin(uT*1.3)+.03*sin(uT*.71+1.7);' +
     'c+=vec3(1.,.93,.8)*sw*L*.6+vec3(.79,.66,.43)*H*(.3+.12*sin(uT*.9))+alb*L*pu;}' +
-    'c+=vec3(.95,.8,.5)*e*(1.-uAsm)*1.6;' +                                                       /* edges glow while the cube assembles */
-    'float a=plate?uPlate:smoothstep(0.,.4,uAsm);gl_FragColor=vec4(c*a,a);}';
+    'if(!plate)c*=mix(.1,1.,uLit);' +                                                               /* a face is in shadow until it lands */
+    'float a=plate?uPlate:uA;gl_FragColor=vec4(c*a,a);}';
   function sh(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
   var pr = gl.createProgram();
@@ -58,7 +65,7 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(ix), gl.STATIC_DRAW);
   [['aP', 3, 0], ['aN', 3, 3], ['aT', 3, 6], ['aB', 3, 9], ['aUV', 2, 12], ['aTile', 1, 14]].forEach(function (a) {
     var l = gl.getAttribLocation(pr, a[0]); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, a[1], gl.FLOAT, false, 60, a[2] * 4); });
-  var U = {}; ['uR', 'uK', 'uPz', 'uPlate', 'uCover', 'uEye', 'uTex', 'uT', 'uAsm', 'uPop'].forEach(function (n) { U[n] = gl.getUniformLocation(pr, n); });
+  var U = {}; ['uR', 'uK', 'uPz', 'uPlate', 'uCover', 'uEye', 'uTex', 'uT', 'uF', 'uSpin', 'uPop', 'uA', 'uLit', 'uLab', 'uMode', 'uDraw', 'uFrame', 'uGl'].forEach(function (n) { U[n] = gl.getUniformLocation(pr, n); });
   gl.enable(gl.DEPTH_TEST); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.uniform3f(U.uEye, 0, 0, 4.7); gl.uniform1i(U.uTex, 0);
 
   /* atlas: 4x2 tiles of 512 px. 0-5 service faces, 6 logo plate, 7 blank face */
@@ -72,9 +79,11 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
       c.fillRect(x + k[0], y + k[1], l * k[2], 2 * k[3]); c.fillRect(x + k[0], y + k[1], 2 * k[2], l * k[3]); });
     c.globalAlpha = 1;
   }
+  var full = false;
   function paint() {
     faces.forEach(function (f, i) {
       var x = (i % 4) * S, y = (i >> 2) * S, p = S * .085; blank(x, y);
+      if (!full) return;
       c.textBaseline = 'alphabetic'; c.textAlign = 'left';
       if ('letterSpacing' in c) c.letterSpacing = '3px';
       c.fillStyle = GOLD; c.font = '500 22px Manrope,sans-serif'; c.fillText(f.querySelector('.cb-n').textContent, x + p, y + p + 20);
@@ -96,8 +105,9 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     redraw();
   }
 
-  var lastQ = null, lastO = null;
-  /* o: plate (rest state 0..1), pa (plate alpha in the intro), asm (assembly 0..1), pop (plate scale), lt (logo light time, s) */
+  var lastQ = null, lastO = null, NZ = FACE.map(function (f) { return rot(f, [0, 0, 1]); });
+  /* o: plate (rest state 0..1), pa (plate alpha), pop (plate scale), lt (logo light time, s); during the intro also
+     f/ft/lit (per face: eased flight, linear time, light 0..1), lab (labels), draw/frame/gl (blueprint edges and glint) */
   function draw(q, o) {
     lastQ = q; lastO = o; var plate = o.plate;
     var dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.round(stage.clientWidth * dpr), H = Math.round(stage.clientHeight * dpr);
@@ -107,14 +117,33 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     gl.uniformMatrix3fv(U.uR, false, [1-2*(y*y+z*z), 2*(x*y+z*w), 2*(x*z-y*w), 2*(x*y-z*w), 1-2*(x*x+z*z), 2*(y*z+x*w), 2*(x*z+y*w), 2*(y*z-x*w), 1-2*(x*x+y*y)]);
     gl.uniform3f(U.uK, 8.4 * s / W, 8.4 * s / H, 4.7);                                              /* same perspective as the CSS cube: 4.2 x size */
     gl.uniform1f(U.uPlate, plate * o.pa); gl.uniform1f(U.uCover, plate); gl.uniform1f(U.uPz, .004 + .034 * plate); gl.uniform1f(U.uT, o.lt);
-    gl.uniform1f(U.uAsm, o.asm); gl.uniform1f(U.uPop, o.pop);
-    gl.disable(gl.BLEND); gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0);
+    gl.uniform1f(U.uPop, o.pop); gl.uniform1f(U.uMode, 0); gl.uniform1f(U.uSpin, .45);
+    if (!o.f) {
+      gl.uniform1f(U.uF, 1); gl.uniform1f(U.uA, 1); gl.uniform1f(U.uLit, 1); gl.uniform1f(U.uLab, 1);
+      gl.disable(gl.BLEND); gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0);
+    } else {                                                        /* intro: half-clear faces, drawn back to front */
+      gl.enable(gl.BLEND); gl.uniform1f(U.uLab, o.lab);
+      [0, 1, 2, 3, 4, 5].sort(function (a, b) { return rot(q, NZ[a])[2] - rot(q, NZ[b])[2]; }).forEach(function (i) {
+        var t = o.ft[i]; if (t <= 0) return;
+        gl.uniform1f(U.uF, o.f[i]); gl.uniform1f(U.uLit, o.lit[i]);
+        gl.uniform1f(U.uA, Math.min(1, t / .25) * (.5 + .5 * Math.max(0, Math.min(1, (t - .55) / .35))));
+        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, i * 12);
+      });
+      gl.uniform1f(U.uF, 1);
+      if (o.frame > 0 || o.gl > 0) {                                  /* the frame is added on top, hidden behind landed faces */
+        gl.uniform1f(U.uMode, 1); gl.uniform1f(U.uDraw, o.draw); gl.uniform1f(U.uFrame, o.frame); gl.uniform1f(U.uGl, o.gl);
+        gl.depthMask(false); gl.depthFunc(gl.LEQUAL); gl.blendFunc(gl.ONE, gl.ONE);
+        gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0);
+        gl.depthMask(true); gl.depthFunc(gl.LESS); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.uniform1f(U.uMode, 0);
+      }
+    }
     if (plate * o.pa > .01) { gl.enable(gl.BLEND); gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 72); }
   }
   function redraw() { if (lastQ) draw(lastQ, lastO); }
 
-  /* paint the atlas once, after the logo and the fonts are ready; until then the CSS cube stays visible */
-  var ready = function () { paint(); stage.classList.add('is-gl'); };
+  /* blank faces now, so the intro can start on the first frames; labels and the logo are painted when they are ready */
+  paint(); stage.classList.add('is-gl');
+  var ready = function () { full = true; paint(); };
   var logoReady = new Promise(function (r) { logo.onload = logo.onerror = r; });
   logo.src = stage.getAttribute('data-logo');
   var fontsReady = document.fonts && document.fonts.load ? Promise.all(['500 64px "Noto Serif Display"', '500 22px Manrope', '400 20px Marcellus'].map(function (f) { return document.fonts.load(f, 'AaΑα01'); })) : Promise.resolve();

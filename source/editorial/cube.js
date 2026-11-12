@@ -35,35 +35,73 @@
   /* WebGL when available (cube-gl.js, ?nogl turns it off); otherwise the CSS cube below is the renderer */
   /* started when the browser is idle, so the first screen is not blocked; cube-gl.js adds .is-gl once its faces are painted */
   var plate = 1, gl3 = null;
-  /* page-open intro: the faces fly together while the cube spins into place (MORPH ms), then the logo plate pops (POP ms).
-     It starts as soon as WebGL is ready, or with the CSS cube after 1.4 s; under reduced motion everything is simply there. */
-  var MORPH = 1100, POP = 750, introAt = 0, asm = still ? 1 : 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = 0;
-  function easeInOut(t) { return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  /* page-open intro, one timeline (ms from its start):
+       0-500      the twelve gold edges draw in place, from the middle of each edge outwards (blueprint)
+       300-1600   the faces fly in along their normals, back faces first, 90 ms apart; each brakes hard at the end
+                  (expo ease-out, like cubic-bezier(.16,1,.3,1)) and the key light comes up on it as it lands
+       LOCK 1600  the labels fade in, a glint runs along the edges, a soft light pool fades in under the cube,
+                  the headline rises line by line (root .hero-go), then the logo plate pops (POP ms) and holds 5 s.
+     It plays once, waits while the tab is hidden, and is simply there under reduced motion. Weak phones skip the glint,
+     the pool and the idle drift. */
+  var EDGE = 500, FLY0 = 300, STAG = 90, FLY = 850, LOCK = FLY0 + 5 * STAG + FLY, POP = 750;
+  var introAt = 0, introDone = still, hidAt = 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = 0, I = null;
+  var lite = matchMedia('(pointer:coarse)').matches && ((navigator.deviceMemory || 8) <= 4 || (navigator.hardwareConcurrency || 8) <= 4);
+  var RANK = NORMAL.map(function (n, i) { return i; }).sort(function (a, b) { return rot(TILT, NORMAL[a])[2] - rot(TILT, NORMAL[b])[2]; })
+    .reduce(function (r, f, k) { r[f] = k; return r; }, []);     /* landing order: farthest face first, the logo face last */
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function expo(x) { return x >= 1 ? 1 : 1 - Math.pow(2, -10 * x); }
   function easeBack(t) { var c = 1.6; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); }   /* small overshoot */
   function introTick(now) {
-    if (!introAt || still) return false;
-    var t = now - introAt;
-    asm = easeInOut(Math.min(1, t / MORPH));
-    var u = Math.max(0, Math.min(1, (t - MORPH) / POP));
-    pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45); lt = Math.max(0, (t - MORPH) / 1000);
-    if (t >= MORPH + POP) stage.classList.add('is-ready');
-    return t < MORPH + POP;
+    if (!introAt || introDone) return false;
+    var t = now - introAt, f = [], ft = [], lit = [];
+    for (var i = 0; i < 6; i++) { var x = clamp((t - FLY0 - RANK[i] * STAG) / FLY); ft[i] = x; f[i] = expo(x); lit[i] = clamp((x - .5) / .45); }
+    var g = lite ? 0 : (t - LOCK) / 700;
+    I = { f: f, ft: ft, lit: lit, lab: clamp((t - LOCK) / 500), draw: 1 - Math.pow(1 - clamp(t / EDGE), 3),
+          frame: t < LOCK ? 1 : clamp(1 - (t - LOCK) / 600), gl: g > 0 && g < 1 ? g : 0 };
+    var u = clamp((t - LOCK - 150) / POP);
+    pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45); lt = Math.max(0, (t - LOCK - 150) / 1000);
+    if (t >= LOCK && !stage.classList.contains('is-lock')) { stage.classList.add('is-lock'); root.classList.add('hero-go'); }
+    if (t >= LOCK + 150 + POP) { introDone = true; I = null; stage.classList.add('is-ready'); }
+    return !introDone;
   }
   function startIntro() {
     if (introAt) return;
+    if (d.hidden) { hidAt = -1; return; }                        /* opened in a background tab: play it when the tab is shown */
     introAt = performance.now(); stage.classList.add('is-in');
-    holdUntil = introAt + MORPH + POP + 5000;                         /* the logo stays 5 s after it appears, then the cycle starts */
-    if (still) { stage.classList.add('is-ready'); paint(); return; }
+    holdUntil = introAt + LOCK + 150 + 5000;                    /* the logo stays 5 s after it appears, then the cycle starts */
+    if (still) { stage.classList.add('is-ready', 'is-lock'); root.classList.add('hero-go'); paint(); return; }
+    introTick(introAt); paint();
     if (!raf) { last = introAt; raf = requestAnimationFrame(frame); }
   }
-  function opts() { return { plate: plate, pa: pa, asm: asm, pop: pop, lt: still ? 0 : lt }; }
-  function spun() { var k = 1 - asm; return k > 0 ? mul(axis(0,1,0, -150*k), mul(axis(1,0,0, 25*k), q)) : q; }
+  d.addEventListener('visibilitychange', function () {         /* the timeline waits while the tab is hidden */
+    var now = performance.now();
+    if (d.hidden) { if (introAt && !introDone) hidAt = now; }
+    else if (hidAt === -1) { hidAt = 0; startIntro(); }
+    else if (hidAt) { introAt += now - hidAt; holdUntil += now - hidAt; hidAt = 0; }
+  });
+  /* after the intro, at rest only: a very slow drift and a few degrees towards the mouse (WebGL, not on weak phones) */
+  var ptr = [0, 0], ptrS = [0, 0], drifts = !still && !lite;
+  function spun() {
+    if (!drifts || !introDone || !gl3 || plate < .01) return q;
+    var s = performance.now() / 1000, k = plate * plate;
+    ptrS[0] += (ptr[0] - ptrS[0]) * .06; ptrS[1] += (ptr[1] - ptrS[1]) * .06;
+    return mul(mul(axis(0,1,0, k * (2.2 * Math.sin(s * .33) + 4 * ptrS[0])), axis(1,0,0, k * (1.4 * Math.sin(s * .27 + 1) - 3 * ptrS[1]))), q);
+  }
+  stage.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse' || down) return;
+    var r = stage.getBoundingClientRect(); ptr = [(e.clientX - r.left) / r.width * 2 - 1, (e.clientY - r.top) / r.height * 2 - 1];
+  });
+  stage.addEventListener('pointerleave', function () { ptr = [0, 0]; });
+  function opts() {
+    var o = { plate: plate, pa: pa, pop: pop, lt: still ? 0 : lt };
+    if (I) for (var k in I) o[k] = I[k];
+    return o;
+  }
   function startGL() {
     if (!window.ADFCubeGL || /nogl/.test(location.search)) return;
     gl3 = window.ADFCubeGL(stage, cube, faces, FACE, rot, function () { gl3 = null; stage.classList.remove('is-gl'); paint(); });
-    if (gl3) paint();
   }
-  (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(startGL, { timeout: 2000 });
+  if (lite) stage.classList.add('is-lite');
   function paint() {
     /* shadow width = the cube's on-screen width: |x| extent of the rotated unit axes (1 face-on, ~1.41 on an edge) */
     var x = q[0], y = q[1], z = q[2], w = q[3];
@@ -72,16 +110,20 @@
     var r = spun();
     if (gl3) { gl3.draw(r, opts()); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
     cube.style.setProperty('--m', css(r));
-    cube.style.setProperty('--ex', ((1 - asm) * .6).toFixed(3)); cube.style.setProperty('--fs', (.3 + .7 * asm).toFixed(3));
-    cube.style.setProperty('--fa', Math.min(1, asm / .4).toFixed(3)); cube.style.setProperty('--pop', pop.toFixed(3)); cube.style.setProperty('--pa', pa.toFixed(3));
-    faces.forEach(function (f, i) { var n = rot(r, NORMAL[i]); f.style.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3)); });
+    cube.style.setProperty('--pop', pop.toFixed(3)); cube.style.setProperty('--pa', pa.toFixed(3));
+    faces.forEach(function (f, i) {                              /* CSS cube: same fly-in and light, without the drawn edges */
+      var n = rot(r, NORMAL[i]), e = I ? I.f[i] : 1, t = I ? I.ft[i] : 1, s = f.style;
+      s.setProperty('--ex', ((1 - e) * .55).toFixed(3)); s.setProperty('--fs', (.82 + .18 * e).toFixed(3)); s.setProperty('--fr', ((1 - e) * 26).toFixed(2) + 'deg');
+      s.setProperty('--fa', (Math.min(1, t / .25) * (.5 + .5 * clamp((t - .55) / .35))).toFixed(3));
+      s.setProperty('--lit', ((I ? .1 + .9 * I.lit[i] : 1) * Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2])).toFixed(3));
+    });
   }
   /* the logo's light keeps moving while the plate is visible: redraw at ~30 fps, only on screen, never under reduced motion */
   var aliveRaf = 0, aliveLast = 0;
   function alive(now) {
     aliveRaf = 0;
     if (!gl3 || still || !inView || d.hidden || plate <= .01) return;
-    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; if (introAt) lt = (now - introAt - MORPH) / 1000; gl3.draw(spun(), opts()); }
+    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; if (introAt) lt = (now - introAt - LOCK - 150) / 1000; gl3.draw(spun(), opts()); }
     aliveRaf = requestAnimationFrame(alive);
   }
   function wake() { if (!aliveRaf && !still) aliveRaf = requestAnimationFrame(alive); }
@@ -180,11 +222,8 @@
   d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mode === 'pinned') rest(); });
 
   paint();
-  if (still) startIntro();
-  else {
-    if ('MutationObserver' in window) new MutationObserver(function () { if (stage.classList.contains('is-gl')) startIntro(); }).observe(stage, { attributes: true, attributeFilter: ['class'] });
-    setTimeout(startIntro, 1400);                                /* no WebGL, or WebGL slow to load: play it on the CSS cube */
-  }
+  /* right after the first paint: WebGL (or the CSS cube without it) and the intro start together */
+  requestAnimationFrame(function () { setTimeout(function () { startGL(); startIntro(); }, 0); });
   autoLater(0);
 
   /* ---- self-check: open with ?selftest. Every target must bring its own face to the front, upright. ---- */

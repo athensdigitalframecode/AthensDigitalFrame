@@ -58,10 +58,13 @@
   /* image or a labelled slot until the real photo is added */
   function pic(img, { cls = 'ph', alt = '', eager = false, sizes = '' } = {}) {
     if (img && img.src) {
-      return `<img class="${cls}" src="${esc(img.src)}" alt="${esc(alt || img.alt || '')}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"${sizes ? ` sizes="${sizes}"` : ''}>`;
+      return `<img class="${cls}${img.cover ? ' pimg--cover' : ''}"${img.bg ? ` style="background-color:${esc(img.bg)}"` : ''} src="${esc(img.src)}" alt="${esc(alt || img.alt || '')}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"${sizes ? ` sizes="${sizes}"` : ''}>`;
     }
     return `<div class="slot" role="img" aria-label="${esc(alt || img?.alt || img?.label || 'Image')}"><span aria-hidden="true">${esc(img?.label || 'Photo')}</span></div>`;
   }
+
+  /* images for the chosen colour (images without a colour are shared) */
+  const imgsFor = (p, color) => { const l = p.images.filter((i) => !i.color || i.color === color); return l.length ? l : p.images; };
 
   /* ---------- stock ---------- */
   const available = (p, color, size) => !p.soldOut.includes(`${color}/${size}`);
@@ -197,7 +200,7 @@
       </div>
     </div>
     <div class="d site-footer__wordmark" aria-hidden="true">ENUMA ELISH</div>
-    <p class="site-footer__concept">Concept project by <a href="${ADF}" target="_blank" rel="noopener">Athens Digital Frame</a>. ENUMA ELISH is a fictional brand: products, prices, stock and policies are samples, and the visuals are illustrations drawn for this concept. The bag works, but checkout and forms are demo-only and send nothing.</p>
+    <p class="site-footer__concept">Concept project by <a href="${ADF}" target="_blank" rel="noopener">Athens Digital Frame</a>. ENUMA ELISH is a fictional brand: products, prices, stock and policies are samples; product images are AI-generated mock-ups and the scenes are illustrations drawn for this concept. The bag works, but checkout and forms are demo-only and send nothing.</p>
     <div class="site-footer__bottom"><span>© 2026 ENUMA ELISH (FICTIONAL)</span><span class="jp">東京 / ΑΘΗΝΑ</span><span>MADE AFTER 2 AM</span></div>
   </div>
 </footer>
@@ -239,7 +242,7 @@
       const p = byHandle(it.handle);
       if (!p) return '';
       return `<li class="line">
-        <a class="line__img" href="${url.product(p)}" tabindex="-1" aria-hidden="true">${pic(p.images[0], { alt: '' })}</a>
+        <a class="line__img" href="${url.product(p)}" tabindex="-1" aria-hidden="true">${pic(imgsFor(p, it.color)[0], { cls: 'pimg', alt: '' })}</a>
         <div class="line__info">
           <div class="line__top"><a href="${url.product(p)}" class="d line__name">${esc(p.name)}</a><span class="line__price">${money(p.price * it.qty)}</span></div>
           <span class="line__meta">${esc(T(up(it.color)))} / ${esc(it.size)}</span>
@@ -283,10 +286,9 @@
     const color = p.colors.find((c) => p.sizes.some((s) => available(p, c, s))) || p.colors[0];
     const out = !anyAvailable(p);
     const sw = p.colors.length > 1 ? p.colors.map((c) => `<button type="button" class="sw" data-card-color="${esc(c)}" aria-pressed="${c === color}" aria-label="${esc(T(c))}"><span style="--sw:${D.colors[c]}"></span></button>`).join('') : `<span class="sw" aria-hidden="true"><span style="--sw:${D.colors[color]}"></span></span>`;
-    return `<article class="card ${cls}" data-card="${esc(p.handle)}" data-color="${esc(color)}" data-collections="${p.collections.join(' ')}">
+    return `<article class="card ${cls}" data-card="${esc(p.handle)}" data-color="${esc(color)}" data-sizes="${sizes}" data-collections="${p.collections.join(' ')}">
       <a href="${url.product(p)}" class="media zoom" aria-label="${esc(p.name)}">
-        ${pic(p.images[0], { cls: 'media__main ph', alt: `${p.name}, ${T(color)}`, sizes })}
-        ${p.images[1] && p.images[1].src ? pic(p.images[1], { cls: 'look ph', alt: '' }) : ''}
+        ${cardImgs(p, color, sizes)}
         <span class="tag tag--tl">${esc(p.code)}</span>
         <span class="jp tag tag--v">${esc(p.jp)}</span>
         ${out ? '<span class="tag tag--bl tag--red">SOLD OUT</span>' : badge ? `<span class="tag tag--bl tag--red">${esc(badge)}</span>` : ''}
@@ -303,6 +305,10 @@
       </div>
       <p class="card__err" role="alert" data-card-err hidden></p>` : ''}
     </article>`;
+  }
+  function cardImgs(p, color, sizes) {
+    const l = imgsFor(p, color);
+    return `<span data-card-imgs>${pic(l[0], { cls: 'media__main pimg', alt: `${p.name}, ${T(color)}`, sizes })}${l[1] && l[1].src ? pic(l[1], { cls: 'look pimg', alt: '' }) : ''}</span>`;
   }
   function syncCard(cardEl) {
     const p = byHandle(cardEl.dataset.card);
@@ -327,7 +333,7 @@
     if (!grid) return;
     const items = D.products.filter((p) => p.collections.includes('new')).concat(D.products.filter((p) => !p.collections.includes('new')));
     grid.innerHTML = items.slice(0, 5).map((p, i) => card(p, {
-      cls: 'c' + i, badge: i === 0 ? 'LOOK 01' : '',
+      cls: 'c' + i, badge: i === 0 ? 'LIMITED' : '',
       sizes: i === 0 ? '(min-width: 901px) 58vw, 100vw' : '(min-width: 901px) 40vw, (min-width: 561px) 50vw, 100vw'
     })).join('');
     const chips = $('[data-filters]');
@@ -414,26 +420,28 @@
     const guide = D.guides[p.guide];
     let color = p.colors.find((c) => p.sizes.some((s) => available(p, c, s))) || p.colors[0];
     let size = null;
-    const imgs = p.images;
+    let imgs = imgsFor(p, color);
     const cat = D.collections.find((c) => p.collections.includes(c.id) && c.id !== 'new') || D.collections[0];
 
-    root.innerHTML = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="shop.html">SHOP</a><span aria-hidden="true">/</span><a href="${url.shop(cat.id)}">${esc(up(ctitle(cat)))}</a><span aria-hidden="true">/</span><span class="t-white" aria-current="page">${esc(up(p.name))}</span></nav>
-<div class="pdp">
-  <div class="pdp-g">
+    function galleryHTML() {
+      return `
     <div class="gal hide-m">
-      <div class="gal__thumbs">${imgs.map((im, i) => `<button type="button" class="thumb" data-thumb="${i}" aria-label="${T('Show image {n}', { n: i + 1 })}" aria-pressed="${i === 0}">${pic(im, { alt: '' })}</button>`).join('')}</div>
+      <div class="gal__thumbs">${imgs.map((im, i) => `<button type="button" class="thumb" data-thumb="${i}" aria-label="${T('Show image {n}', { n: i + 1 })}" aria-pressed="${i === 0}">${pic(im, { cls: 'pimg', alt: '' })}</button>`).join('')}</div>
       <div class="gal__main">
-        ${imgs.map((im, i) => `<div class="slide${i === 0 ? ' is-on' : ''}" data-slide="${i}" ${i ? 'aria-hidden="true"' : ''}>${pic(im, { alt: T('{x}, image {n}', { x: p.name, n: i + 1 }), eager: i === 0 })}</div>`).join('')}
+        ${imgs.map((im, i) => `<div class="slide${i === 0 ? ' is-on' : ''}" data-slide="${i}" ${i ? 'aria-hidden="true"' : ''}>${pic(im, { cls: 'pimg', alt: T('{x}, image {n}', { x: p.name, n: i + 1 }), eager: i === 0 })}</div>`).join('')}
         <span class="gal__label" data-gal-label>1 / ${imgs.length}</span>
         ${imgs.length > 1 ? `<div class="gal__nav"><button type="button" class="ib ib--dark" data-prev aria-label="Previous image">${icon('left', 18)}</button><button type="button" class="ib ib--dark" data-next aria-label="Next image">${icon('right', 18)}</button></div>` : ''}
       </div>
     </div>
     <div class="gal-m show-m">
-      <div class="swipe" tabindex="0" aria-label="Product images, swipe to browse">${imgs.map((im, i) => `<div class="swipe__item">${pic(im, { alt: T('{x}, image {n}', { x: p.name, n: i + 1 }), eager: i === 0 })}<span class="swipe__n">${i + 1} / ${imgs.length}</span></div>`).join('')}</div>
+      <div class="swipe" tabindex="0" aria-label="Product images, swipe to browse">${imgs.map((im, i) => `<div class="swipe__item">${pic(im, { cls: 'pimg', alt: T('{x}, image {n}', { x: p.name, n: i + 1 }), eager: i === 0 })}<span class="swipe__n">${i + 1} / ${imgs.length}</span></div>`).join('')}</div>
       ${imgs.length > 1 ? '<span class="swipe__hint">SWIPE →</span>' : ''}
-    </div>
-  </div>
+    </div>`;
+    }
+    root.innerHTML = `
+<nav class="crumbs" aria-label="Breadcrumb"><a href="shop.html">SHOP</a><span aria-hidden="true">/</span><a href="${url.shop(cat.id)}">${esc(up(ctitle(cat)))}</a><span aria-hidden="true">/</span><span class="t-white" aria-current="page">${esc(up(p.name))}</span></nav>
+<div class="pdp">
+  <div class="pdp-g" data-gallery>${galleryHTML()}</div>
   <div class="pdp-i"><div class="pdp-sticky">
     <div class="pdp-i__head">
       <span class="eyebrow">${esc(p.code)} · DROP 01 «NO SIGNAL»</span>
@@ -511,7 +519,11 @@
       try { Cart.add(p.handle, color, size); } catch (e) { err.textContent = e.message; err.hidden = false; }
     }
     form.addEventListener('change', (e) => {
-      if (e.target.name === 'color') { color = e.target.value; if (size && !available(p, color, size)) { /* keep choice, show sold out */ } }
+      if (e.target.name === 'color') {
+        color = e.target.value;
+        const next = imgsFor(p, color);
+        if (next !== imgs && next[0] !== imgs[0]) { imgs = next; gi = 0; gallery.innerHTML = galleryHTML(); }
+      }
       if (e.target.name === 'size') { size = e.target.value; err.hidden = true; err.textContent = T('PICK A SIZE FIRST.'); }
       update();
     });
@@ -520,18 +532,21 @@
     const gBtn = $('[data-guide-toggle]', root);
     gBtn.addEventListener('click', () => { const g = $('#guide'); g.hidden = !g.hidden; gBtn.setAttribute('aria-expanded', String(!g.hidden)); });
 
-    const slides = $$('[data-slide]', root), thumbs = $$('[data-thumb]', root);
+    const gallery = $('[data-gallery]', root);
     let gi = 0;
     const show = (i) => {
+      const slides = $$('[data-slide]', gallery), thumbs = $$('[data-thumb]', gallery);
       gi = (i + slides.length) % slides.length;
       slides.forEach((s, n) => { s.classList.toggle('is-on', n === gi); if (n === gi) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true'); });
       thumbs.forEach((t, n) => t.setAttribute('aria-pressed', String(n === gi)));
       $('[data-gal-label]', root).textContent = `${gi + 1} / ${slides.length}`;
     };
-    thumbs.forEach((t) => t.addEventListener('click', () => show(Number(t.dataset.thumb))));
-    const prev = $('[data-prev]', root), next = $('[data-next]', root);
-    if (prev) prev.addEventListener('click', () => show(gi - 1));
-    if (next) next.addEventListener('click', () => show(gi + 1));
+    gallery.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-thumb]');
+      if (t) show(Number(t.dataset.thumb));
+      else if (e.target.closest('[data-prev]')) show(gi - 1);
+      else if (e.target.closest('[data-next]')) show(gi + 1);
+    });
     update();
 
     const rel = $('[data-related]');
@@ -607,6 +622,7 @@
       c.dataset.color = sw.dataset.cardColor;
       $$('[data-card-color]', c).forEach((b) => b.setAttribute('aria-pressed', String(b === sw)));
       $('[data-card-color-name]', c).textContent = T(up(sw.dataset.cardColor));
+      $('[data-card-imgs]', c).outerHTML = cardImgs(byHandle(c.dataset.card), c.dataset.color, c.dataset.sizes);
       syncCard(c);
       return;
     }

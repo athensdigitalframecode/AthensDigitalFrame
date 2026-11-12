@@ -715,3 +715,7 @@ h1, h2, h3, h4 { font-weight: 900; overflow-wrap: break-word; }
   .hero__tagline { font-size: min(30px, 4.4svh); }
 }
 @media (max-width: 560px) { .hero__meta span:not(:first-child) { display: none; } }
+
+/* product photos: whole garment visible, never grayscale; letterbox matches the photo's own background */
+.media .pimg, .slide .pimg, .swipe__item .pimg, .thumb .pimg, .line__img .pimg { object-fit: contain; }
+.media .pimg--cover, .slide .pimg--cover, .swipe__item .pimg--cover, .thumb .pimg--cover, .line__img .pimg--cover { object-fit: cover; }

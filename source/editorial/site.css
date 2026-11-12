@@ -1,7 +1,9 @@
 /* Athens Digital Frame: editorial design system. Tokens first,components after. */
+@font-face{font-family:'Sora';font-style:normal;font-weight:100 800;font-display:swap;src:url(/fonts/sora-latin.woff2) format('woff2')}
 @font-face{font-family:'NSD Fallback';src:local('Georgia');size-adjust:108.1%}
 @font-face{font-family:'NSD Fallback';font-style:italic;src:local('Georgia Italic'),local('Georgia-Italic');size-adjust:103.7%}
 @font-face{font-family:'Marcellus Fallback';src:local('Georgia');size-adjust:94.6%}
+@font-face{font-family:'Sora Fallback';src:local('Arial Bold'),local('Arial-BoldMT');size-adjust:103.2%}
 @font-face{font-family:'Manrope Fallback';src:local('Arial');size-adjust:104.9%}
 @font-face{font-family:'Manrope';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/manrope.woff2) format('woff2')}
 @font-face{font-family:'Noto Serif Display';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/notoserifdisplay-500.woff2) format('woff2')}
@@ -31,7 +33,7 @@ section{position:relative}.sec{padding:clamp(72px,10vw,136px) 0}
 .btns{display:flex;flex-wrap:wrap;gap:12px}
 /* header: brand black,white df mark,gold CTA */
 
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:400 15px/1 var(--mark);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:600 14px/1 var(--brandface);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
 .brand .mark{height:32px;width:auto;flex:none}
 .hd .right{display:flex;align-items:center;gap:12px}
 .burger{width:44px;height:44px;border:1px solid rgba(245,241,232,.3);background:none;border-radius:var(--r);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;color:var(--cream)}
@@ -171,7 +173,7 @@ fieldset.f{border:0;padding:0;margin:0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}.js .rv,.js .reveal-img{opacity:1;transform:none;clip-path:none}.steps::after{transform:scaleX(1)!important}}
 @media print{.hd,.sheet{display:none}}
 
-@media(max-width:560px){.brand{font-size:12.5px;letter-spacing:.1em;gap:9px}.brand .mark{height:28px}.hd .cta-short{display:none}.hd .btn.gold{display:none}.hd .right{gap:8px}}
+@media(max-width:560px){.brand{font-size:11.5px;letter-spacing:.09em;gap:9px}.brand .mark{height:28px}.hd .cta-short{display:none}.hd .btn.gold{display:none}.hd .right{gap:8px}}
 
 .contact>*{min-width:0}@media(max-width:520px){.tag2{white-space:normal}}
 
@@ -186,7 +188,7 @@ a[href*="instagram.com"]{display:inline-block;padding:10px 0}
 /* ===== atmosphere: one key light,material grain,structural rules,grounded objects ===== */
 :root{/* Brand tokens (from the df logo, the icons and the original DESIGN.md) */
   --black:#0B0B0B;--cream:#F5F1E8;--gold:#C9A96E;--gold-lt:#D9BE86;--gold-soft:#E6CF9F;--gold-deep:#C9A96E;/* derived neutrals */
-  --s0:#09090A;--s1:#0F0F10;--s2:#151516;--s3:#1C1C1E;--s4:#252527;--bg:var(--s1);--paper:var(--s2);--ink:#0B0B0B;--fg:var(--cream);--muted:rgba(245,241,232,.68);--line:rgba(245,241,232,.1);--rule:rgba(245,241,232,.2);--line-gold:rgba(201,169,110,.34);--err:#F29A8A;--pill:2px;--btn-gold:linear-gradient(180deg,#D9BE86,#C9A96E);--display:'Noto Serif Display','NSD Fallback',Georgia,'Times New Roman',serif;--body:'Manrope','Manrope Fallback',system-ui,-apple-system,'Segoe UI',sans-serif;--mark:'Marcellus','Marcellus Fallback',Georgia,serif;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:72px;--s9:112px;--wrap:1200px;--pad:clamp(20px,5vw,56px);--r:6px;--ease:cubic-bezier(.22,.61,.36,1);--fs-0:clamp(14px,.9vw + 11px,15.5px);--fs-1:clamp(16px,.5vw + 14.5px,18px);--fs-2:clamp(19px,1vw + 16px,24px);--fs-3:clamp(26px,2.4vw + 16px,42px);--fs-4:clamp(38px,5.2vw + 14px,88px);color-scheme:dark;--grain-l:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  --s0:#09090A;--s1:#0F0F10;--s2:#151516;--s3:#1C1C1E;--s4:#252527;--bg:var(--s1);--paper:var(--s2);--ink:#0B0B0B;--fg:var(--cream);--muted:rgba(245,241,232,.68);--line:rgba(245,241,232,.1);--rule:rgba(245,241,232,.2);--line-gold:rgba(201,169,110,.34);--err:#F29A8A;--pill:2px;--btn-gold:linear-gradient(180deg,#D9BE86,#C9A96E);--display:'Noto Serif Display','NSD Fallback',Georgia,'Times New Roman',serif;--body:'Manrope','Manrope Fallback',system-ui,-apple-system,'Segoe UI',sans-serif;--mark:'Marcellus','Marcellus Fallback',Georgia,serif;--brandface:'Sora','Sora Fallback',system-ui,sans-serif;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:72px;--s9:112px;--wrap:1200px;--pad:clamp(20px,5vw,56px);--r:6px;--ease:cubic-bezier(.22,.61,.36,1);--fs-0:clamp(14px,.9vw + 11px,15.5px);--fs-1:clamp(16px,.5vw + 14.5px,18px);--fs-2:clamp(19px,1vw + 16px,24px);--fs-3:clamp(26px,2.4vw + 16px,42px);--fs-4:clamp(38px,5.2vw + 14px,88px);color-scheme:dark;--grain-l:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 ::selection{background:var(--gold);color:var(--black)}
 /* hero: the light sits behind the work,drifts with the pointer,breathes slowly */
 .hero::before{inset:-10%;background:radial-gradient(42% 56% at 73% 44%,rgba(224,196,138,.24),rgba(201,169,110,.08) 48%,transparent 72%),radial-gradient(40% 50% at 8% 108%,rgba(201,169,110,.09),transparent 70%);transform:translate3d(var(--lx,0px),var(--ly,0px),0);transition:transform 1.4s var(--ease);animation:lightbreath 16s ease-in-out infinite}
@@ -374,7 +376,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @keyframes heroslide{from{transform:translateY(14px)}}
 .hero .h1,.hero .lead{animation-name:heroslide!important}
 .hero .grid>div:first-child>*,.hero .cb-wrap{animation:heroin .8s var(--ease) both}
-.hero .h1{animation-delay:.06s}.hero .lead{animation-delay:.14s}.hero .btns{animation-delay:.22s}.hero .meta{animation-delay:.3s}.hero .cb-wrap{animation-delay:.18s}
+.hero .h1{animation-delay:.12s}.hero .lead{animation-delay:.24s}.hero .btns{animation-delay:.36s}.hero .meta{animation-delay:.48s}
 .btn.gold{translate:var(--mx,0) var(--my,0);transition:background .35s var(--ease),border-color .35s var(--ease),translate .35s var(--ease)}
 @media(prefers-reduced-motion:reduce){.hero .grid>div:first-child>*,.hero .cb-wrap{animation:none}}
 /* selected work: one large framed preview per project,then a single meta row (brief 5.2) */
@@ -423,3 +425,27 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 /* heading word reveal (site.js wraps words in .w) */
 .js .rv .h2 .w{display:inline-block;opacity:0;transform:translateY(.35em);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i) * 45ms)}
 .js .rv.in .h2 .w{opacity:1;transform:none}
+/* nav hover: a small lift, a soft gold wash and a hairline that draws from the centre. Transform only, so the header never reflows;
+   pointer devices only (touch gets the plain tap state), keyboard focus gets the same treatment */
+.nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);transform:scaleX(0);transition:transform .5s var(--ease);pointer-events:none}
+@media(hover:hover) and (pointer:fine){
+ .nav a{transition:color .35s var(--ease),background-color .4s var(--ease),box-shadow .5s var(--ease),transform .5s var(--ease)}
+ .nav a:hover{color:var(--cream);background-color:rgba(201,169,110,.07);box-shadow:0 8px 22px -14px rgba(201,169,110,.55);transform:translateY(-1px) scale(1.02)}
+ .nav a:hover::after{transform:scaleX(1)}
+}
+.nav a:focus-visible{background-color:rgba(201,169,110,.07)}.nav a:focus-visible::after{transform:scaleX(1)}
+.nav a:active{background-color:rgba(201,169,110,.12)}
+@media(prefers-reduced-motion:reduce){.nav a:hover{transform:none}}
+/* page-load entrance: header fades in, hero copy rises in order, then the cube settles into place (opacity on the header only:
+   a transform there would break the fixed mobile sheet inside it) */
+@keyframes hdin{from{opacity:0}}
+@keyframes cubein{from{opacity:0;transform:translateY(22px) scale(.96)}}
+.hd{animation:hdin .7s var(--ease) both}
+.hero .cb-wrap{animation:cubein 1.1s cubic-bezier(.16,1,.3,1) .6s both!important}
+@media(prefers-reduced-motion:reduce){.hd,.hero .cb-wrap{animation:none!important}}
+/* living logo, CSS cube (no WebGL): the same warm reflection crossing the mark, masked by the logo itself so only the mark lights up */
+.cb-plate::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(255,238,205,.55) 50%,transparent 58%) 0 0/300% 100% no-repeat;
+ -webkit-mask:url(/assets/df-logo-1024.jpg) 50% 50%/182% no-repeat;mask:url(/assets/df-logo-1024.jpg) 50% 50%/182% no-repeat;mask-mode:luminance;
+ animation:logosweep 5.2s cubic-bezier(.45,0,.2,1) 1.6s infinite}
+@keyframes logosweep{0%{background-position:120% 0}42%,100%{background-position:-20% 0}}
+@media(prefers-reduced-motion:reduce){.cb-plate::before{animation:none;opacity:0}}

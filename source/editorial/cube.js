@@ -28,7 +28,6 @@
   var TILT = mul(axis(1,0,0,-14), axis(0,1,0,-24));           /* never dead flat: two more faces always show */
   var TARGET = FACE.map(function (f) { return mul(TILT, [-f[0], -f[1], -f[2], f[3]]); });
   var LIGHT = (function (v) { var l = Math.hypot(v[0], v[1], v[2]); return [v[0]/l, v[1]/l, v[2]/l]; })([.45, -.6, .66]); /* above right, towards viewer */
-  var TOUR = [0, 1, 4, 2, 5, 3];                               /* Y turn, then X/Z, so the route is never one axis */
 
   var q = TILT, mode = 'rest', active = -1, raf = 0, timer = 0, tween = null, vel = [0, 0], last = 0;
 
@@ -46,10 +45,20 @@
     /* shadow width = the cube's on-screen width: |x| extent of the rotated unit axes (1 face-on, ~1.41 on an edge) */
     var x = q[0], y = q[1], z = q[2], w = q[3];
     stage.style.setProperty('--shw', (Math.abs(1-2*(y*y+z*z)) + Math.abs(2*(x*y-z*w)) + Math.abs(2*(x*z+y*w))).toFixed(3));
+    if (gl3 && plate > .01) wake();
     if (gl3) { gl3.draw(q, plate); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
     cube.style.setProperty('--m', css(q));
     faces.forEach(function (f, i) { var n = rot(q, NORMAL[i]); f.style.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3)); });
   }
+  /* the logo's light keeps moving while the plate is visible: redraw at ~30 fps, only on screen, never under reduced motion */
+  var aliveRaf = 0, aliveLast = 0;
+  function alive(now) {
+    aliveRaf = 0;
+    if (!gl3 || still || !inView || d.hidden || plate <= .01) return;
+    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; gl3.draw(q, plate); }
+    aliveRaf = requestAnimationFrame(alive);
+  }
+  function wake() { if (!aliveRaf && !still) aliveRaf = requestAnimationFrame(alive); }
   function show(i) {                                            /* sync the list with the face in front */
     if (i === active) return; active = i;
     descs.forEach(function (p, k) { p.classList.toggle('is-on', k === i + 1); });
@@ -71,7 +80,7 @@
     } else if (mode === 'coast') {
       q = norm(mul(axis(0,1,0, vel[0]*dt), mul(axis(1,0,0, vel[1]*dt), q)));
       var k = Math.exp(-dt / 320); vel[0] *= k; vel[1] *= k; show(nearest());
-      if (Math.hypot(vel[0], vel[1]) < .02) { pin(nearest()); return; }
+      if (Math.hypot(vel[0], vel[1]) < .02) { pin(nearest()); if (!hovering) resume(3000); return; }   /* a touch flick has no later 'leave' */
     }
     paint();
     if (tween || mode === 'coast' || moving) raf = requestAnimationFrame(frame);
@@ -84,17 +93,33 @@
     last = tween.t0; raf = requestAnimationFrame(frame);
   }
 
-  function pin(i) { setMode('pinned'); show(i); setMode('pinned'); go(TARGET[i]); }
-  function rest() { stop(); setMode('rest'); show(-1); go(TILT); }
-  function tour(step) {
-    if (mode !== 'tour') return;
-    var i = TOUR[step % TOUR.length]; show(i);
-    go(TARGET[i], function () { timer = setTimeout(function () { tour(step + 1); }, 1500); });   /* pause on each face */
-  }
+  /* user actions announce the new description; the automatic cycle stays silent for screen readers */
+  var descBox = d.getElementById('cube-descs'), autoTimer = 0, hovering = false, focused = false, inView = true, listPin = false;
+  function speak(on) { if (descBox) descBox.setAttribute('aria-live', on ? 'polite' : 'off'); }
+  function pin(i, fromList) { clearTimeout(autoTimer); listPin = !!fromList; speak(true); setMode('pinned'); show(i); setMode('pinned'); go(TARGET[i]); }
+  function rest() { stop(); clearTimeout(autoTimer); listPin = false; setMode('rest'); show(-1); go(TILT); autoLater(3000); }
 
-  /* ---- hover: come alive, then return to the logo unless something is pinned ---- */
-  stage.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse' && mode === 'rest' && !still) { stop(); setMode('tour'); tour(0); } });
-  stage.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse' && mode === 'tour') rest(); });
+  /* ---- automatic cycle: 01 -> 06 every 3 s, then back to 01. Paused while the cube is hovered or focused, dragged,
+     off screen or in a background tab, and while a service picked from the list is shown; off under reduced motion ---- */
+  var fineHover = matchMedia('(hover:hover)').matches;   /* the cube can slide in under a still mouse without an 'enter' event */
+  function canAuto() { return !still && !hovering && !(fineHover && stage.matches(':hover')) && !focused && !down && inView && !d.hidden && !listPin && mode !== 'drag' && mode !== 'coast'; }
+  function autoLater(ms) { clearTimeout(autoTimer); if (!still) autoTimer = setTimeout(autoStep, ms); }
+  function autoStep() {
+    if (!canAuto()) return;                                     /* resumed by the event that ends the pause */
+    var next = mode === 'rest' ? 0 : (active + 1) % 6;
+    speak(false); setMode('tour'); show(next); go(TARGET[next]);
+    autoLater(3000);
+  }
+  function resume(ms) { if (canAuto() && (mode === 'tour' || mode === 'pinned' || mode === 'rest')) { if (mode === 'pinned') setMode('tour'); autoLater(ms); } }
+
+  /* ---- hover pauses on the face in front; leaving resumes ---- */
+  stage.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hovering = true; clearTimeout(autoTimer); } });
+  stage.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hovering = false; resume(1500); });
+  var wrap = stage.parentNode;                                  /* keyboard users pause it by focusing the service buttons */
+  wrap.addEventListener('focusin', function () { focused = true; clearTimeout(autoTimer); });
+  wrap.addEventListener('focusout', function (e) { if (!wrap.contains(e.relatedTarget)) { focused = false; resume(1500); } });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[0].isIntersecting; if (inView) { resume(1500); wake(); } else clearTimeout(autoTimer); }).observe(stage);
+  d.addEventListener('visibilitychange', function () { if (d.hidden) clearTimeout(autoTimer); else { resume(1500); wake(); } });
 
   /* ---- drag (mouse and touch) with inertia; a plain click or tap steps to the next face ---- */
   var px = 0, py = 0, pt = 0, moved = 0, down = false;
@@ -106,7 +131,7 @@
     if (!down) return;
     var dx = e.clientX - px, dy = e.clientY - py, dt = Math.max(1, e.timeStamp - pt); px = e.clientX; py = e.clientY; pt = e.timeStamp;
     moved += Math.abs(dx) + Math.abs(dy); if (moved < 6) return;
-    if (mode !== 'drag') { stop(); setMode('drag'); stage.classList.add('is-drag'); }
+    if (mode !== 'drag') { stop(); clearTimeout(autoTimer); listPin = false; speak(true); setMode('drag'); stage.classList.add('is-drag'); }
     var s = 220 / stage.clientWidth;                             /* degrees per pixel, same feel at every size */
     q = norm(mul(axis(0,1,0, dx*s), mul(axis(1,0,0, -dy*s), q)));
     vel = [vel[0]*.6 + dx*s/dt*.4, vel[1]*.6 - dy*s/dt*.4]; show(nearest()); paint();
@@ -121,14 +146,15 @@
   ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (t) { stage.addEventListener(t, up); });
 
   /* ---- the list is the accessible control: real buttons, keyboard included ---- */
-  items.forEach(function (li, i) { li.firstElementChild.addEventListener('click', function () { pin(i); }); });
+  items.forEach(function (li, i) { li.firstElementChild.addEventListener('click', function () { pin(i, true); }); });
   reset.addEventListener('click', rest);
   /* Capabilities section: pin the face, then bring the cube into view */
   [].forEach.call(d.querySelectorAll('[data-face]'), function (b) { b.addEventListener('click', function () {
-    pin(+b.getAttribute('data-face')); stage.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' }); }); });
+    pin(+b.getAttribute('data-face'), true); stage.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' }); }); });
   d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mode === 'pinned') rest(); });
 
   paint();
+  autoLater(2800);                                              /* after the entrance: the logo holds, then the cycle starts */
 
   /* ---- self-check: open with ?selftest. Every target must bring its own face to the front, upright. ---- */
   if (/selftest/.test(location.search)) {

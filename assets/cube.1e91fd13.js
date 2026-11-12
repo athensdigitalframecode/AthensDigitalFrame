@@ -103,7 +103,8 @@
      off screen or in a background tab, and while a service picked from the list is shown; off under reduced motion ---- */
   var fineHover = matchMedia('(hover:hover)').matches;   /* the cube can slide in under a still mouse without an 'enter' event */
   function canAuto() { return !still && !hovering && !(fineHover && stage.matches(':hover')) && !focused && !down && inView && !d.hidden && !listPin && mode !== 'drag' && mode !== 'coast'; }
-  function autoLater(ms) { clearTimeout(autoTimer); if (!still) autoTimer = setTimeout(autoStep, ms); }
+  var holdUntil = 5000;                                         /* performance.now() counts from page open: the logo holds until 5 s, whatever resumes the cycle first */
+  function autoLater(ms) { clearTimeout(autoTimer); if (!still) autoTimer = setTimeout(autoStep, Math.max(ms, holdUntil - performance.now())); }
   function autoStep() {
     if (!canAuto()) return;                                     /* resumed by the event that ends the pause */
     var next = mode === 'rest' ? 0 : (active + 1) % 6;
@@ -154,7 +155,7 @@
   d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mode === 'pinned') rest(); });
 
   paint();
-  autoLater(2800);                                              /* after the entrance: the logo holds, then the cycle starts */
+  autoLater(0);
 
   /* ---- self-check: open with ?selftest. Every target must bring its own face to the front, upright. ---- */
   if (/selftest/.test(location.search)) {

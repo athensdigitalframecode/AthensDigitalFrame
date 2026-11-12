@@ -27,7 +27,7 @@ Fade/lift on reveal (`.rv`), image clip reveal, process line and steps follow th
 
 ## Content rules
 - Prices (do not change without the owner): website 300 EUR (up to 3 pages), hosting+domain 50 EUR/year (required), maintenance 20 EUR/month (optional), e-shop setup 200-300 EUR, subscription 30-50 EUR/month with 12-month minimum, first-year e-shop 560-900 EUR, Skroutz 150, BOX NOW 120, referral 50 EUR or 2 months free (friend 10% off). No VAT.
-- Never invent clients, reviews, results, founders or history. Olivane and Arclines are labelled self-initiated fictional concepts.
+- Never invent clients, reviews, results, founders or history. Olivane, Arclines and Enuma Elish are labelled self-initiated fictional concepts. Enuma Elish (`/enuma-elish/`) is a static demo of a custom Shopify theme, generated outside this repo; its cart uses localStorage, which the privacy page states.
 - The contact form has no backend: it hands a prepared message to WhatsApp or the mail app and says so.
 - Legal: `privacy.html` (EL/EN, `Page.build_privacy()`) describes what the site actually does (no cookies, form stores nothing, Vercel Web Analytics, Google Fonts on the two demos). If the code changes any of that, change the text in the same commit. Terms do not exist yet: the footer shows a marked "coming soon" placeholder, not a link.
 - Every page exists in Greek (root) and English (`/en/`), both generated; keep copy in sync via `t(el, en)`.

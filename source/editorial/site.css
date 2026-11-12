@@ -114,10 +114,10 @@ body.lock{overflow:hidden}
 
 .vat{margin-top:var(--s4);font-size:var(--fs-0);color:var(--muted)}
 /* about */
-.about{display:grid;gap:clamp(32px,6vw,80px)}
+.about{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(32px,6vw,80px)}
 @media(min-width:900px){.about{grid-template-columns:1fr 1fr;align-items:start}}
 .about .txt p+p{margin-top:var(--s4)}.about .txt p{color:var(--muted);max-width:52ch}
-.facts{border-top:1px solid var(--rule)}.facts li{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:140px 1fr;gap:16px;font-size:var(--fs-0)}
+.facts{border-top:1px solid var(--rule)}.facts li{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;font-size:var(--fs-0)}.facts span{overflow-wrap:anywhere}
 .facts b{font:600 12px/1.6 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
 /* faq */
 .faq{display:grid;gap:clamp(32px,5vw,64px)}

@@ -85,12 +85,12 @@
 
   /* top-down truck route, sampled evenly by arc length (rebuilt only on resize) */
   let _tp = null;
-  function truckPath(W, H, mob) {
-    const key = W + 'x' + H + mob;
+  function truckPath(W, H, mob, lane) {                     // lane: centre of the gap between the two panels (px), so the truck drives down its middle
+    const key = W + 'x' + H + mob + 'x' + Math.round(lane || 0);
     if (_tp && _tp.key === key) return _tp;
     const pts = [], push = (x, y) => pts.push([x, y]);
     const x0 = W * (mob ? .4 : .3), y0 = H * (mob ? .52 : .42);
-    const x1 = W * (mob ? .6 : .51), y1 = H * (mob ? .5 : .40);
+    const R0 = W * .055, x1 = mob ? W * .6 : (lane ? lane - R0 : W * .51), y1 = H * (mob ? .5 : .40);
     for (let i = 0; i <= 60; i++) {                          // cubic with horizontal tangents at both ends
       const t = i / 60, h = t * t * (3 - 2 * t), m = (x1 - x0) * .55;
       const bx = (1 - t) ** 3 * x0 + 3 * (1 - t) ** 2 * t * (x0 + m) + 3 * (1 - t) * t * t * (x1 - m) + t ** 3 * x1;
@@ -98,7 +98,7 @@
     }
     if (mob) { for (let i = 1; i <= 40; i++) push(x1 + (W * 1.3 - x1) * i / 40, y1); }
     else {
-      const R = W * .055;
+      const R = R0;
       for (let i = 1; i <= 50; i++) { const th = i / 50 * Math.PI / 2; push(x1 + R * Math.sin(th), y1 + R * (1 - Math.cos(th))); }
       const xe = x1 + R, ye = y1 + R;
       for (let i = 1; i <= 80; i++) push(xe, ye + (H * 1.2 - ye) * i / 80);
@@ -112,7 +112,7 @@
       x.push(lerp(pts[j][0], pts[j + 1][0], f)); y.push(lerp(pts[j][1], pts[j + 1][1], f));
       a.push(Math.atan2(pts[j + 1][1] - pts[j][1], pts[j + 1][0] - pts[j][0]) * 180 / Math.PI);
     }
-    return (_tp = { key, n, x, y, a });
+    return (_tp = { key, n, x, y, a, ds: cum[cum.length - 1] / (n - 1) });
   }
 
   /* ---------- word splitting (colour reveal) ---------- */
@@ -496,12 +496,20 @@
     // truck (top-down)
     // path = Catmull-Rom spline (% of viewport); heading follows the tangent, so the turn is a real arc
     // path: leaves the scene-A hand-off point heading right, eases onto a straight lane, then one clockwise arc into the gap between the panels
-    const tp = truckPath(W, H, mob);
+    let lane = 0;
+    if (!mob) { const so = b.truck.offsetParent, lr = b.L.getBoundingClientRect(), rr = b.R.getBoundingClientRect(); lane = (lr.right + rr.left) / 2 - (so ? so.getBoundingClientRect().left : 0); }
+    const tp = truckPath(W, H, mob, lane);
     const tk = clamp(p / (mob ? .12 : .42)), sp = tk * .85 + ease(tk) * .15;                  // near-constant speed, soft start
-    const q = sp * (tp.n - 1), qi = Math.min(tp.n - 2, Math.floor(q)), qf = q - qi;
-    const tcx = lerp(tp.x[qi], tp.x[qi + 1], qf), tcy = lerp(tp.y[qi], tp.y[qi + 1], qf);
-    const a0 = tp.a[qi], a1 = tp.a[qi + 1], trot = a0 + (a1 - a0) * qf;
     const tsc = lerp(2.6, mob ? 1.25 : .95, ease(clamp(p / .14)));
+    // both axles ride on the route: front and rear points half a truck length ahead/behind; the body points from rear to front,
+    // so on the bend the trailer cuts inside the curve instead of the whole truck sliding sideways around its middle
+    const at = qq => { const last = tp.n - 1;
+      if (qq <= 0) { const r = tp.a[0] * Math.PI / 180; return [tp.x[0] + Math.cos(r) * qq * tp.ds, tp.y[0] + Math.sin(r) * qq * tp.ds]; }
+      if (qq >= last) { const r = tp.a[last - 1] * Math.PI / 180, e = (qq - last) * tp.ds; return [tp.x[last] + Math.cos(r) * e, tp.y[last] + Math.sin(r) * e]; }
+      const i = Math.floor(qq), f = qq - i; return [lerp(tp.x[i], tp.x[i + 1], f), lerp(tp.y[i], tp.y[i + 1], f)]; };
+    const q = sp * (tp.n - 1), half = 44.2 * u * (tsc / 2.6) * .8 / tp.ds;                  // axle-to-axle is ~80% of the body
+    const Fp = at(q + half), Bp = at(q - half);
+    const tcx = (Fp[0] + Bp[0]) / 2, tcy = (Fp[1] + Bp[1]) / 2, trot = Math.atan2(Fp[1] - Bp[1], Fp[0] - Bp[0]) * 180 / Math.PI;
     b.truck.style.transform = `translate3d(${tcx - 44.2 * u}px,${tcy - 9.75 * u}px,0) rotate(${trot}deg) scale(${tsc / 2.6})`;
     b.truck.style.opacity = mob ? 1 - seg(p, .2, .24) : 1 - seg(p, .52, .6);
 

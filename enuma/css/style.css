@@ -693,3 +693,25 @@ h1, h2, h3, h4 { font-weight: 900; overflow-wrap: break-word; }
 .lang { height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .16em; text-decoration: none; border: 1px solid var(--line-3); margin-right: 6px; }
 .lang:hover { border-color: var(--c-white); color: var(--c-white); }
 .notice__box h2 { font-family: 'Big Shoulders Display', 'Fira Sans Extra Condensed', Impact, sans-serif; }
+
+/* hero fits the first screen: the title scales with the viewport height too
+   (chrome above it = concept bar + ticker + header, about 140px) */
+@media (min-width: 901px) {
+  .hero { min-height: calc(100svh - 140px); }
+  .hero__ph { min-height: 0; }
+  .hero__img { height: 100%; object-position: 50% 40%; }
+  .hero__tx { gap: clamp(14px, 3vh, 40px); padding-top: clamp(18px, 3vh, 36px); padding-bottom: clamp(22px, 4vh, 48px); }
+  .hero__title { font-size: clamp(84px, min(19.5vw, calc((100svh - 600px) * .62)), 300px); }
+  .hero__jp { margin-top: clamp(8px, 1.6vh, 20px); }
+  .hero__bottom { gap: clamp(12px, 2vh, 22px); }
+  .hero__tagline { font-size: clamp(26px, min(3.1vw, 4.2vh), 46px); }
+}
+@media (max-width: 900px) {
+  .hero, .hero__ph { min-height: calc(100svh - 120px); }
+  .hero__title { font-size: min(31vw, 14svh); }
+  .hero__tx { gap: clamp(14px, 3svh, 28px); padding-top: 20px; padding-bottom: 24px; }
+  .hero__jp { margin-top: 12px; }
+  .hero__bottom { gap: clamp(12px, 2.2svh, 24px); }
+  .hero__tagline { font-size: min(30px, 4.4svh); }
+}
+@media (max-width: 560px) { .hero__meta span:not(:first-child) { display: none; } }

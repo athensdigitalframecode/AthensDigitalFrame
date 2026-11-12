@@ -49,7 +49,8 @@
   function introTick(now) {
     if (!introAt || introDone) return false;
     var t = now - introAt, H = stage.clientHeight, w = sweep(t / SCAN) * (H + 16) - 8;
-    I = { wire: w, solid: sweep((t - LAG) / SCAN) * (H + 16) - 8, frame: t < LOCK ? 1 : clamp(1 - (t - LOCK) / 500) };
+    I = { wire: w, solid: sweep((t - LAG) / SCAN) * (H + 16) - 8, frame: t < LOCK ? 1 : clamp(1 - (t - LOCK) / 500),
+          set: Math.pow(1 - clamp((t - LOCK) / 350), 3) };       /* built 3% small and 3 deg off, it settles into place at the lock */
     scan.style.transform = 'translateY(' + w.toFixed(1) + 'px)'; scan.style.opacity = clamp(Math.min(t / 120, (SCAN + 200 - t) / 250)).toFixed(3);
     var u = clamp((t - LOCK - 150) / POP);
     pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45); lt = Math.max(0, (t - LOCK - 150) / 1000);
@@ -77,6 +78,7 @@
      second highlight follows the cursor across the faces (WebGL, not on weak phones) */
   var ptr = [0, 0], ptrS = [0, 0], pOn = 0, pOnS = 0, drifts = !still && !lite;
   function spun() {
+    if (I) return mul(axis(0,1,0, -3 * I.set), q);
     if (!drifts || !introDone || !gl3) return q;
     var s = performance.now() / 1000, k = plate * plate;
     ptrS[0] += (ptr[0] - ptrS[0]) * .08; ptrS[1] += (ptr[1] - ptrS[1]) * .08; pOnS += (pOn - pOnS) * .08;

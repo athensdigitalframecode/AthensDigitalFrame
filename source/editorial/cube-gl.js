@@ -118,7 +118,7 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     var dpr = Math.min(2, window.devicePixelRatio || 1), W = Math.round(stage.clientWidth * dpr), H = Math.round(stage.clientHeight * dpr);
     if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
     gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    var x = q[0], y = q[1], z = q[2], w = q[3], s = cubeEl.offsetWidth * dpr;
+    var x = q[0], y = q[1], z = q[2], w = q[3], s = cubeEl.offsetWidth * dpr * (1 - .03 * (o.set || 0));
     gl.uniformMatrix3fv(U.uR, false, [1-2*(y*y+z*z), 2*(x*y+z*w), 2*(x*z-y*w), 2*(x*y-z*w), 1-2*(x*x+z*z), 2*(y*z+x*w), 2*(x*z+y*w), 2*(y*z-x*w), 1-2*(x*x+y*y)]);
     gl.uniform3f(U.uK, 8.4 * s / W, 8.4 * s / H, 4.7);                                              /* same perspective as the CSS cube: 4.2 x size */
     gl.uniform1f(U.uPlate, plate * o.pa); gl.uniform1f(U.uCover, plate); gl.uniform1f(U.uPz, .004 + .034 * plate); gl.uniform1f(U.uT, o.lt);

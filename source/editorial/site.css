@@ -449,7 +449,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .cb:not(.is-ready) .cb-face>.cb-plate{transition:none}
 .hero .cb-list,.hero .cb-descs{animation:heroin .8s var(--ease) .9s both}
 /* the light pool under the cube fades in when the faces lock (not on weak phones); the headline rises line by line then */
-.cb-floor::after{content:"";position:absolute;left:4%;right:4%;top:calc(var(--cs)*-.2);height:calc(var(--cs)*.4);background:radial-gradient(closest-side,rgba(201,169,110,.2),rgba(201,169,110,.06) 55%,transparent);opacity:0;transition:opacity 1.4s var(--ease)}
+.cb-floor::after{content:"";position:absolute;left:4%;right:4%;top:calc(var(--cs)*-.2);height:calc(var(--cs)*.4);background:radial-gradient(closest-side,rgba(201,169,110,.34),rgba(201,169,110,.1) 55%,transparent);opacity:0;transition:opacity 1.4s var(--ease)}
 .cb.is-lock .cb-floor::after{opacity:1}.cb.is-lite .cb-floor::after{display:none}
 .hero .h1.hl{animation:none!important}
 .hl .ln{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .1em .14em .02em;margin:0 -.1em -.14em -.02em}

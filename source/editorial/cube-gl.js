@@ -42,7 +42,7 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     'float ph=fract((uT+.8*sin(uT*.21))/5.2);float pos=mix(-.6,2.1,smoothstep(0.,.42,ph));' +
     'float sw=exp(-pow((uv.x*.8+uv.y*.6-pos)/.085,2.));float pu=.05*sin(uT*1.3)+.03*sin(uT*.71+1.7);' +
     'c+=vec3(1.,.93,.8)*sw*L*.6+vec3(.79,.66,.43)*H*(.3+.12*sin(uT*.9))+alb*L*pu;}' +
-    'if(!plate)c*=mix(.1,1.,uLit);' +                                                               /* a face is in shadow until it lands */
+    'if(!plate)c=c*mix(.1,1.,min(uLit,1.))+vec3(1.,.93,.8)*max(uLit-1.,0.)*(.04+dif*.35);' +    /* in shadow until it lands, then a short flash of key light */
     'float a=plate?uPlate:uA;gl_FragColor=vec4(c*a,a);}';
   function sh(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }

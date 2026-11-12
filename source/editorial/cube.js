@@ -54,7 +54,9 @@
   function introTick(now) {
     if (!introAt || introDone) return false;
     var t = now - introAt, f = [], ft = [], lit = [];
-    for (var i = 0; i < 6; i++) { var x = clamp((t - FLY0 - RANK[i] * STAG) / FLY); ft[i] = x; f[i] = expo(x); lit[i] = clamp((x - .5) / .45); }
+    for (var i = 0; i < 6; i++) { var x = clamp((t - FLY0 - RANK[i] * STAG) / FLY); ft[i] = x; f[i] = expo(x);
+      var a = t - FLY0 - RANK[i] * STAG - .95 * FLY;                /* ms since the face's light reached full */
+      lit[i] = clamp((x - .5) / .45) + (a <= 0 ? 0 : .9 * (a < 60 ? a / 60 : Math.exp(-(a - 60) / 260))); }
     var g = lite ? 0 : (t - LOCK) / 700;
     I = { f: f, ft: ft, lit: lit, lab: clamp((t - LOCK) / 500), draw: 1 - Math.pow(1 - clamp(t / EDGE), 3),
           frame: t < LOCK ? 1 : clamp(1 - (t - LOCK) / 600), gl: g > 0 && g < 1 ? g : 0 };
@@ -67,6 +69,7 @@
   function startIntro() {
     if (introAt) return;
     if (d.hidden) { hidAt = -1; return; }                        /* opened in a background tab: play it when the tab is shown */
+    if (!seen) { waitView = true; return; }                      /* below the fold (phones): play it when the cube scrolls in */
     introAt = performance.now(); stage.classList.add('is-in');
     holdUntil = introAt + LOCK + 150 + 5000;                    /* the logo stays 5 s after it appears, then the cycle starts */
     if (still) { stage.classList.add('is-ready', 'is-lock'); root.classList.add('hero-go'); paint(); return; }
@@ -115,7 +118,7 @@
       var n = rot(r, NORMAL[i]), e = I ? I.f[i] : 1, t = I ? I.ft[i] : 1, s = f.style;
       s.setProperty('--ex', ((1 - e) * .55).toFixed(3)); s.setProperty('--fs', (.82 + .18 * e).toFixed(3)); s.setProperty('--fr', ((1 - e) * 26).toFixed(2) + 'deg');
       s.setProperty('--fa', (Math.min(1, t / .25) * (.5 + .5 * clamp((t - .55) / .35))).toFixed(3));
-      s.setProperty('--lit', ((I ? .1 + .9 * I.lit[i] : 1) * Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2])).toFixed(3));
+      s.setProperty('--lit', ((I ? .1 + .9 * Math.min(1, I.lit[i]) : 1) * Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2])).toFixed(3));
     });
   }
   /* the logo's light keeps moving while the plate is visible: redraw at ~30 fps, only on screen, never under reduced motion */
@@ -164,6 +167,7 @@
 
   /* user actions announce the new description; the automatic cycle stays silent for screen readers */
   var descBox = d.getElementById('cube-descs'), autoTimer = 0, hovering = false, focused = false, inView = true, listPin = false;
+  var r0 = stage.getBoundingClientRect(), seen = (Math.min(r0.bottom, innerHeight) - Math.max(r0.top, 0)) / r0.height >= .4, waitView = false;
   function speak(on) { if (descBox) descBox.setAttribute('aria-live', on ? 'polite' : 'off'); }
   function pin(i, fromList) { clearTimeout(autoTimer); listPin = !!fromList; speak(true); setMode('pinned'); show(i); setMode('pinned'); go(TARGET[i]); }
   function rest() { stop(); clearTimeout(autoTimer); listPin = false; setMode('rest'); show(-1); go(TILT); autoLater(3000); }
@@ -189,7 +193,9 @@
   var wrap = stage.parentNode;                                  /* keyboard users pause it by focusing the service buttons */
   wrap.addEventListener('focusin', function () { focused = true; clearTimeout(autoTimer); });
   wrap.addEventListener('focusout', function (e) { if (!wrap.contains(e.relatedTarget)) { focused = false; resume(1500); } });
-  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[0].isIntersecting; if (inView) { resume(1500); wake(); } else clearTimeout(autoTimer); }).observe(stage);
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[0].isIntersecting; if (inView) { resume(1500); wake(); } else clearTimeout(autoTimer);
+    if (es[0].intersectionRatio >= .4) { seen = true; if (waitView) { waitView = false; startIntro(); } } }, { threshold: [0, .4] }).observe(stage);
+  else seen = true;
   d.addEventListener('visibilitychange', function () { if (d.hidden) clearTimeout(autoTimer); else { resume(1500); wake(); } });
 
   /* ---- drag (mouse and touch) with inertia; a plain click or tap steps to the next face ---- */

@@ -18,7 +18,9 @@ var hh=d.querySelector('.hero .h1');if(hh&&!matchMedia('(prefers-reduced-motion:
   c.textContent.split(/(\s+)/).forEach(function(w){if(!w)return;if(/^\s+$/.test(w)){f.appendChild(d.createTextNode(w));return}var o=d.createElement('span'),i=d.createElement('span');o.className='ln';i.textContent=w;o.appendChild(i);f.appendChild(o)});
   n.replaceChild(f,c)})})(hh);
  var top=null,ln=-1;[].forEach.call(hh.querySelectorAll('.ln'),function(w){var y=w.getBoundingClientRect().top;if(top===null||Math.abs(y-top)>4){top=y;ln++}w.style.setProperty('--i',ln)});
- hh.classList.add('hl');setTimeout(function(){d.documentElement.classList.add('hero-go')},3200)}
+ hh.classList.add('hl');var cs=d.getElementById('cube-stage'),cr=cs&&cs.getBoundingClientRect();
+ /* the cube is below the fold (phones): nothing to wait for, the headline rises right away */
+ setTimeout(function(){d.documentElement.classList.add('hero-go')},cr&&(Math.min(cr.bottom,innerHeight)-Math.max(cr.top,0))/cr.height>=.4?3200:150)}
 /* reveal */
 var rv=[].slice.call(d.querySelectorAll('.rv,.reveal-img'));
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});rv.forEach(function(n){io.observe(n)})}else rv.forEach(function(n){n.classList.add('in')});

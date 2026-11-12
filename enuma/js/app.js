@@ -197,7 +197,7 @@
       </div>
     </div>
     <div class="d site-footer__wordmark" aria-hidden="true">ENUMA ELISH</div>
-    <p class="site-footer__concept">Concept project by <a href="${ADF}" target="_blank" rel="noopener">Athens Digital Frame</a>. ENUMA ELISH is a fictional brand: products, prices, stock and policies are samples. The bag works, but checkout and forms are demo-only and send nothing.</p>
+    <p class="site-footer__concept">Concept project by <a href="${ADF}" target="_blank" rel="noopener">Athens Digital Frame</a>. ENUMA ELISH is a fictional brand: products, prices, stock and policies are samples, and the visuals are illustrations drawn for this concept. The bag works, but checkout and forms are demo-only and send nothing.</p>
     <div class="site-footer__bottom"><span>© 2026 ENUMA ELISH (FICTIONAL)</span><span class="jp">東京 / ΑΘΗΝΑ</span><span>MADE AFTER 2 AM</span></div>
   </div>
 </footer>

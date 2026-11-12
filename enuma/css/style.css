@@ -686,7 +686,8 @@ h1, h2, h3, h4 { font-weight: 900; overflow-wrap: break-word; }
 
 .hero__title .rv > span { white-space: nowrap; }
 .d { font-stretch: condensed; }
-.hero { grid-template-columns: minmax(0, 1fr); overflow: hidden; }
+.hero { overflow: hidden; }
+@media (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr); } }
 
 /* language switch */
 .lang { height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .16em; text-decoration: none; border: 1px solid var(--line-3); margin-right: 6px; }

@@ -50,7 +50,7 @@ window.EE_DATA = {
       model: 'Model is 183 cm and wears size M.',
       fabric: ['480 GSM brushed-back fleece, 100% cotton', 'Garment-dyed and enzyme washed', 'Double-layer hood, heavy rib cuffs and hem'],
       care: 'Cold wash inside out. Do not tumble dry. Iron on the reverse of the print.',
-      images: [{ src: null, label: 'Hoodie · front' }, { src: null, label: 'Hoodie · on model' }, { src: null, label: 'Hoodie · back print' }]
+      images: [{ src: 'img/p1-a.webp', label: 'Hoodie · front' }, { src: 'img/p1-b.webp', label: 'Hoodie · on model' }, { src: 'img/p1-c.webp', label: 'Hoodie · back print' }]
     },
     {
       handle: 'no-signal-tee',
@@ -69,7 +69,7 @@ window.EE_DATA = {
       model: 'Model is 178 cm and wears size L.',
       fabric: ['240 GSM combed cotton jersey', 'Water-based screen print', 'Taped neck, double-needle hems'],
       care: 'Cold wash inside out. Line dry.',
-      images: [{ src: null, label: 'Tee · front' }, { src: null, label: 'Tee · back print' }]
+      images: [{ src: 'img/p2-a.webp', label: 'Tee · front' }, { src: 'img/p2-b.webp', label: 'Tee · back print' }]
     },
     {
       handle: 'exarchia-wall-tee',
@@ -88,7 +88,7 @@ window.EE_DATA = {
       model: 'Model is 175 cm and wears size M.',
       fabric: ['240 GSM combed cotton jersey', 'Discharge print, soft to the touch', 'Taped neck, double-needle hems'],
       care: 'Cold wash inside out. Line dry.',
-      images: [{ src: null, label: 'Tee · front' }, { src: null, label: 'Tee · detail' }]
+      images: [{ src: 'img/p3-a.webp', label: 'Tee · front' }, { src: 'img/p3-b.webp', label: 'Tee · detail' }]
     },
     {
       handle: 'last-train-cargo-pant',
@@ -107,7 +107,7 @@ window.EE_DATA = {
       model: 'Model is 183 cm and wears size M.',
       fabric: ['Brushed cotton twill, 320 GSM', 'Six pockets, YKK zip fly', 'Drawcord hem'],
       care: 'Cold wash inside out. Do not tumble dry.',
-      images: [{ src: null, label: 'Cargo · front' }, { src: null, label: 'Cargo · on model' }]
+      images: [{ src: 'img/p4-a.webp', label: 'Cargo · front' }, { src: 'img/p4-b.webp', label: 'Cargo · on model' }]
     },
     {
       handle: 'shibuya-static-crewneck',
@@ -126,7 +126,7 @@ window.EE_DATA = {
       model: 'Model is 180 cm and wears size L.',
       fabric: ['420 GSM loopback cotton', 'Garment-dyed', 'Rib collar, cuffs and hem'],
       care: 'Cold wash inside out. Do not tumble dry.',
-      images: [{ src: null, label: 'Crewneck · front' }, { src: null, label: 'Crewneck · on model' }]
+      images: [{ src: 'img/p5-a.webp', label: 'Crewneck · front' }, { src: 'img/p5-b.webp', label: 'Crewneck · on model' }]
     },
     {
       handle: 'monastiraki-track-pant',
@@ -145,15 +145,15 @@ window.EE_DATA = {
       model: 'Model is 178 cm and wears size M.',
       fabric: ['Brushed poly-cotton tricot', 'Side stripe tape', 'Zipped ankles and pockets'],
       care: 'Cold wash. Line dry.',
-      images: [{ src: null, label: 'Track pant · front' }, { src: null, label: 'Track pant · on model' }]
+      images: [{ src: 'img/p6-a.webp', label: 'Track pant · front' }, { src: 'img/p6-b.webp', label: 'Track pant · on model' }]
     }
   ],
   media: {
-    hero: { src: null, label: 'Hero · lifestyle', alt: 'A figure in the Tokyo After Dark Hoodie on a backstreet stairway at night', altEl: 'Μια φιγούρα με το Tokyo After Dark Hoodie σε σκάλες στενού τη νύχτα' },
-    tokyo: { src: null, label: 'Tokyo street', alt: 'A Tokyo backstreet at night', altEl: 'Ένα στενό στο Τόκιο τη νύχτα' },
-    athens: { src: null, label: 'Athens street', alt: 'Painted walls in Exarchia, Athens', altEl: 'Ζωγραφισμένοι τοίχοι στα Εξάρχεια, Αθήνα' },
-    campaign1: { src: null, label: 'Campaign 01', alt: 'Campaign photo on backstreet stairs', altEl: 'Φωτογραφία campaign σε σκάλες στενού' },
-    campaign2: { src: null, label: 'Campaign 02', alt: 'Campaign photo in Exarchia, Athens', altEl: 'Φωτογραφία campaign στα Εξάρχεια, Αθήνα' },
-    campaign3: { src: null, label: 'Campaign 03', alt: 'Campaign photo in Shibuya after the last train', altEl: 'Φωτογραφία campaign στη Shibuya μετά το τελευταίο τρένο' }
+    hero: { src: 'img/hero.webp', label: 'Hero · lifestyle', alt: 'A figure in the Tokyo After Dark Hoodie on a backstreet stairway at night', altEl: 'Μια φιγούρα με το Tokyo After Dark Hoodie σε σκάλες στενού τη νύχτα' },
+    tokyo: { src: 'img/tokyo.webp', label: 'Tokyo street', alt: 'A Tokyo backstreet at night', altEl: 'Ένα στενό στο Τόκιο τη νύχτα' },
+    athens: { src: 'img/athens.webp', label: 'Athens street', alt: 'Painted walls in Exarchia, Athens', altEl: 'Ζωγραφισμένοι τοίχοι στα Εξάρχεια, Αθήνα' },
+    campaign1: { src: 'img/campaign-1.webp', label: 'Campaign 01', alt: 'Campaign photo on backstreet stairs', altEl: 'Φωτογραφία campaign σε σκάλες στενού' },
+    campaign2: { src: 'img/campaign-2.webp', label: 'Campaign 02', alt: 'Campaign photo in Exarchia, Athens', altEl: 'Φωτογραφία campaign στα Εξάρχεια, Αθήνα' },
+    campaign3: { src: 'img/campaign-3.webp', label: 'Campaign 03', alt: 'Campaign photo in Shibuya after the last train', altEl: 'Φωτογραφία campaign στη Shibuya μετά το τελευταίο τρένο' }
   }
 };

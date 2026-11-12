@@ -26,7 +26,7 @@ window.EE_EL = {
   'NEW ARRIVALS': 'ΝΕΕΣ ΑΦΙΞΕΙΣ', 'HOODIES': 'HOODIES', 'T-SHIRTS': 'T-SHIRTS', 'BOTTOMS': 'ΠΑΝΤΕΛΟΝΙΑ',
   'HELP': 'ΒΟΗΘΕΙΑ', 'SHIPPING': 'ΑΠΟΣΤΟΛΗ', 'RETURNS': 'ΕΠΙΣΤΡΟΦΕΣ', 'SIZE GUIDE': 'ΟΔΗΓΟΣ ΜΕΓΕΘΩΝ', 'PRIVACY': 'ΑΠΟΡΡΗΤΟ',
   'Concept project by': 'Concept έργο της',
-  '. ENUMA ELISH is a fictional brand: products, prices, stock and policies are samples. The bag works, but checkout and forms are demo-only and send nothing.': '. Το ENUMA ELISH είναι φανταστικό brand: τα προϊόντα, οι τιμές, το απόθεμα και οι πολιτικές είναι δείγματα. Το καλάθι λειτουργεί, αλλά το checkout και οι φόρμες είναι δοκιμαστικά και δεν στέλνουν τίποτα.',
+  '. ENUMA ELISH is a fictional brand: products, prices, stock and policies are samples, and the visuals are illustrations drawn for this concept. The bag works, but checkout and forms are demo-only and send nothing.': '. Το ENUMA ELISH είναι φανταστικό brand: τα προϊόντα, οι τιμές, το απόθεμα και οι πολιτικές είναι δείγματα, και τα visuals είναι εικονογραφήσεις φτιαγμένες για αυτό το concept. Το καλάθι λειτουργεί, αλλά το checkout και οι φόρμες είναι δοκιμαστικά και δεν στέλνουν τίποτα.',
   '© 2026 ENUMA ELISH (FICTIONAL)': '© 2026 ENUMA ELISH (ΦΑΝΤΑΣΤΙΚΟ)',
   'INSTAGRAM — TIKTOK': 'INSTAGRAM — TIKTOK',
 

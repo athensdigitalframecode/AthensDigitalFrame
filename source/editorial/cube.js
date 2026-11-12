@@ -40,7 +40,7 @@
      a soft light pool fades in under the cube, the headline rises line by line (root .hero-go), then the logo plate
      pops (POP ms) and holds 5 s. It plays once, waits while the tab is hidden, and is simply there under reduced motion. */
   var SCAN = 1100, LAG = 380, LOCK = SCAN + LAG, POP = 750;
-  var introAt = 0, introDone = still, hidAt = 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = 0, I = null;
+  var introAt = 0, introDone = still, doneAt = 0, hidAt = 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = 0, I = null;
   var lite = matchMedia('(pointer:coarse)').matches && ((navigator.deviceMemory || 8) <= 4 || (navigator.hardwareConcurrency || 8) <= 4);
   var scan = d.createElement('i'); scan.className = 'cb-scan'; stage.appendChild(scan);
   function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
@@ -55,7 +55,7 @@
     var u = clamp((t - LOCK - 150) / POP);
     pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45); lt = Math.max(0, (t - LOCK - 150) / 1000);
     if (t >= LOCK && !stage.classList.contains('is-lock')) { stage.classList.add('is-lock'); root.classList.add('hero-go'); }
-    if (t >= LOCK + 150 + POP) { introDone = true; I = null; stage.classList.add('is-ready'); scan.remove(); }
+    if (t >= LOCK + 150 + POP) { introDone = true; doneAt = now; I = null; stage.classList.add('is-ready'); scan.remove(); }
     return !introDone;
   }
   function startIntro() {
@@ -80,7 +80,7 @@
   function spun() {
     if (I) return mul(axis(0,1,0, -3 * I.set), q);
     if (!drifts || !introDone || !gl3) return q;
-    var s = performance.now() / 1000, k = plate * plate;
+    var s = (performance.now() - doneAt) / 1000, u = clamp(s / 3), k = plate * plate * u * u * (3 - 2 * u);   /* drift starts at zero and eases in, so nothing jumps when the intro hands over */
     ptrS[0] += (ptr[0] - ptrS[0]) * .08; ptrS[1] += (ptr[1] - ptrS[1]) * .08; pOnS += (pOn - pOnS) * .08;
     return mul(mul(axis(0,1,0, k * 2.2 * Math.sin(s * .33) + 4 * ptrS[0]), axis(1,0,0, k * 1.4 * Math.sin(s * .27 + 1) - 3 * ptrS[1])), q);
   }

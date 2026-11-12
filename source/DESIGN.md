@@ -9,7 +9,7 @@ Every visual decision needs a purpose. No generic SaaS look: no gradient hero, n
 - The gold Parthenon arch (formerly `legacy/frame.svg.txt`, now only in git history) was removed from the hero (decoration with no information). Do not reintroduce it.
 
 ## Tokens (all in `editorial/site.css` :root)
-- Brand name in the header/footer lockup: Sora 600, 14px, letter-spacing .14em, uppercase (self-hosted, `fonts/sora-latin.woff2`, OFL). Brand: `--black`, `--cream`, `--gold`, `--gold-lt`, `--gold-soft`. Derived: `--gold-deep #7A5F22` (gold for small text on cream, 5.3:1 on cream, 4.8:1 on paper), `--paper #ECE4D3`, `--muted #5C584D`, hairlines `--line` and `--line-gold`. Error `#9B2D20`. Do not add colours.
+- Brand name in the header/footer lockup: Marcellus 400, 15px, letter-spacing .18em, uppercase (Sora was tried on 2026-11-12 and reverted at the owner's request). Brand: `--black`, `--cream`, `--gold`, `--gold-lt`, `--gold-soft`. Derived: `--gold-deep #7A5F22` (gold for small text on cream, 5.3:1 on cream, 4.8:1 on paper), `--paper #ECE4D3`, `--muted #5C584D`, hairlines `--line` and `--line-gold`. Error `#9B2D20`. Do not add colours.
 - Rhythm: all surfaces are graphite (`--s0..--s4`); cream is text only. Sections alternate `sec paper` / `sec`, `sec dark` for process and contact.
 - Gold is selective: primary CTA (solid gold, black text), eyebrow rules and small labels, numerals, crop marks, cube edges, price notes, hover states. Headings stay cream; only the one italic emphasis word goes gold (`--gold-lt`).
 - Type: headlines Noto Serif Display 500 (italic 400 for emphasis), body Manrope 400-700, wordmark Marcellus. All self-hosted in `/fonts`. Scale `--fs-0..4` (clamp).

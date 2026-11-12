@@ -127,7 +127,7 @@ class Page:
 <link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/notoserifdisplay-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/notoserifdisplay-italic-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/marcellus.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{CSS}">
 <script src="{FLAG}"></script>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>

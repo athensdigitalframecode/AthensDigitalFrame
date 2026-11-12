@@ -245,7 +245,7 @@ class Page:
             return f'<div class="panel" id="{pid}" role="tabpanel" aria-labelledby="{pid}-t"{" hidden" if hidden else ""}><ol class="steps">{li}</ol><p class="note">{note}</p></div>'
         names = ['Discover', 'Concept', 'Design &amp; Build', 'Refine &amp; Test', 'Launch']
         ld = {"@context": "https://schema.org", "@graph": [
-            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v4.jpg", "logo": SITE + "/assets/df-mark.png",
+            {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v5.jpg", "logo": SITE + "/assets/df-mark.png",
              "description": t('Ψηφιακό στούντιο στην Αθήνα: ιστοσελίδες και e-shops για επιχειρήσεις.', 'Digital studio in Athens: websites and e-shops for businesses.'),
              "email": MAIL, "telephone": TEL, "sameAs": [IG], "areaServed": "Athens, Greece", "address": {"@type": "PostalAddress", "addressLocality": "Athens", "addressCountry": "GR"},
              "knowsLanguage": ["el", "en"],
@@ -255,7 +255,7 @@ class Page:
             {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": pick(QA[i][0]), "acceptedAnswer": {"@type": "Answer", "text": pick(QA[i][1])}} for _, idx in faqcats for i in idx]}]}
         out = s.head(t('Athens Digital Frame | Ιστοσελίδες & e-shops στην Αθήνα', 'Athens Digital Frame | Websites & e-shops in Athens'),
                      t('Ψηφιακό στούντιο στην Αθήνα. Σύγχρονες ιστοσελίδες από 300€ και e-shops, με δωρεάν demo πριν από οποιαδήποτε πληρωμή.', 'A digital studio in Athens. Modern websites from €300 and e-shops, with a free demo before any payment.'),
-                     '/', '/en/', 'og-v4.jpg' if s.l == 'el' else 'og-en-v2.jpg', ld)
+                     '/', '/en/', 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
         out += s.header()
         out += f'''<section class="hero dark"><div class="wrap grid">
 <div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
@@ -275,7 +275,7 @@ class Page:
 </div></section>
 <section class="sec" id="services" aria-labelledby="svch"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">02 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Έξι πλευρές ενός στούντιο.','Six sides of one studio.')}</h2></div></div>
-<ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p><button type="button" class="caps-go" data-face="{i}">{t("Δες τη στον κύβο", "Show it on the cube")} {ARROW}</button></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
+<ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
 </div></section>
 <section class="sec paper" id="projects" aria-labelledby="projh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Projects, σχεδιασμένα από εμάς.','Projects, designed by us.')}</h2></div>
@@ -419,7 +419,7 @@ class Page:
         ]
         title = t('Πολιτική απορρήτου', 'Privacy policy')
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": f'{title} | Athens Digital Frame', "url": SITE + s.pre + url, "inLanguage": s.l, "isPartOf": {"@id": SITE + "/#org"}}
-        out = s.head(f'{title} | Athens Digital Frame', t('Τι δεδομένα επεξεργάζεται το site της Athens Digital Frame: χωρίς cookies, χωρίς λογαριασμούς, η φόρμα δεν αποθηκεύει τίποτα.', 'What data the Athens Digital Frame site processes: no cookies, no accounts, and the form stores nothing.'), url, '/en' + url, 'og-v4.jpg' if s.l == 'el' else 'og-en-v2.jpg', ld)
+        out = s.head(f'{title} | Athens Digital Frame', t('Τι δεδομένα επεξεργάζεται το site της Athens Digital Frame: χωρίς cookies, χωρίς λογαριασμούς, η φόρμα δεν αποθηκεύει τίποτα.', 'What data the Athens Digital Frame site processes: no cookies, no accounts, and the form stores nothing.'), url, '/en' + url, 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
         out += s.header(path=url)
         out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Νομικά', 'Legal')}</p>
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{title}</h1>
@@ -436,7 +436,7 @@ class Page:
               "isPartOf": {"@id": SITE + "/#org"}}
         out = s.head(t('Τιμές ιστοσελίδων & e-shop | Athens Digital Frame', 'Website & e-shop pricing | Athens Digital Frame'),
                      t('Ιστοσελίδα 300€ για έως 3 σελίδες, hosting & domain 50€/έτος. E-shop με εγκατάσταση 200–300€ και συνδρομή 30–50€/μήνα. Χωρίς ΦΠΑ.', 'Website €300 for up to 3 pages, hosting & domain €50/year. E-shop with €200–300 setup and €30–50/month subscription. No VAT.'),
-                     '/prices.html', '/en/prices.html', 'og-v4.jpg' if s.l == 'el' else 'og-en-v2.jpg', ld)
+                     '/prices.html', '/en/prices.html', 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
         out += s.header('prices')
         out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Τιμές','Pricing')}</p><h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw+14px,76px)">{t('Ξεκάθαρες τιμές, <em>τίποτα κρυφό.</em>','Clear prices, <em>nothing hidden.</em>')}</h1>
 <p class="lead">{t('Εφάπαξ, επαναλαμβανόμενα, υποχρεωτικά και προαιρετικά κόστη, γραμμένα ξεχωριστά. Οι τιμές δεν υπόκεινται σε ΦΠΑ.','One-time, recurring, mandatory and optional costs, written apart. Prices are not subject to VAT.')}</p></div></section>

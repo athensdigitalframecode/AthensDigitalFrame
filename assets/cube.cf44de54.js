@@ -35,6 +35,29 @@
   /* WebGL when available (cube-gl.js, ?nogl turns it off); otherwise the CSS cube below is the renderer */
   /* started when the browser is idle, so the first screen is not blocked; cube-gl.js adds .is-gl once its faces are painted */
   var plate = 1, gl3 = null;
+  /* page-open intro: the faces fly together while the cube spins into place (MORPH ms), then the logo plate pops (POP ms).
+     It starts as soon as WebGL is ready, or with the CSS cube after 1.4 s; under reduced motion everything is simply there. */
+  var MORPH = 1100, POP = 750, introAt = 0, asm = still ? 1 : 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = 0;
+  function easeInOut(t) { return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  function easeBack(t) { var c = 1.6; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); }   /* small overshoot */
+  function introTick(now) {
+    if (!introAt || still) return false;
+    var t = now - introAt;
+    asm = easeInOut(Math.min(1, t / MORPH));
+    var u = Math.max(0, Math.min(1, (t - MORPH) / POP));
+    pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45); lt = Math.max(0, (t - MORPH) / 1000);
+    if (t >= MORPH + POP) stage.classList.add('is-ready');
+    return t < MORPH + POP;
+  }
+  function startIntro() {
+    if (introAt) return;
+    introAt = performance.now(); stage.classList.add('is-in');
+    holdUntil = introAt + MORPH + POP + 5000;                         /* the logo stays 5 s after it appears, then the cycle starts */
+    if (still) { stage.classList.add('is-ready'); paint(); return; }
+    if (!raf) { last = introAt; raf = requestAnimationFrame(frame); }
+  }
+  function opts() { return { plate: plate, pa: pa, asm: asm, pop: pop, lt: still ? 0 : lt }; }
+  function spun() { var k = 1 - asm; return k > 0 ? mul(axis(0,1,0, -150*k), mul(axis(1,0,0, 25*k), q)) : q; }
   function startGL() {
     if (!window.ADFCubeGL || /nogl/.test(location.search)) return;
     gl3 = window.ADFCubeGL(stage, cube, faces, FACE, rot, function () { gl3 = null; stage.classList.remove('is-gl'); paint(); });
@@ -46,16 +69,19 @@
     var x = q[0], y = q[1], z = q[2], w = q[3];
     stage.style.setProperty('--shw', (Math.abs(1-2*(y*y+z*z)) + Math.abs(2*(x*y-z*w)) + Math.abs(2*(x*z+y*w))).toFixed(3));
     if (gl3 && plate > .01) wake();
-    if (gl3) { gl3.draw(q, plate); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
-    cube.style.setProperty('--m', css(q));
-    faces.forEach(function (f, i) { var n = rot(q, NORMAL[i]); f.style.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3)); });
+    var r = spun();
+    if (gl3) { gl3.draw(r, opts()); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
+    cube.style.setProperty('--m', css(r));
+    cube.style.setProperty('--ex', ((1 - asm) * .6).toFixed(3)); cube.style.setProperty('--fs', (.3 + .7 * asm).toFixed(3));
+    cube.style.setProperty('--fa', Math.min(1, asm / .4).toFixed(3)); cube.style.setProperty('--pop', pop.toFixed(3)); cube.style.setProperty('--pa', pa.toFixed(3));
+    faces.forEach(function (f, i) { var n = rot(r, NORMAL[i]); f.style.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3)); });
   }
   /* the logo's light keeps moving while the plate is visible: redraw at ~30 fps, only on screen, never under reduced motion */
   var aliveRaf = 0, aliveLast = 0;
   function alive(now) {
     aliveRaf = 0;
     if (!gl3 || still || !inView || d.hidden || plate <= .01) return;
-    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; gl3.draw(q, plate); }
+    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; if (introAt) lt = (now - introAt - MORPH) / 1000; gl3.draw(spun(), opts()); }
     aliveRaf = requestAnimationFrame(alive);
   }
   function wake() { if (!aliveRaf && !still) aliveRaf = requestAnimationFrame(alive); }
@@ -73,6 +99,7 @@
     var real = Math.min(400, now - last), dt = Math.min(40, real); last = now; raf = 0;
     var goal = mode === 'rest' ? 1 : 0, moving = gl3 && Math.abs(goal - plate) > .004;
     plate = moving ? plate + (goal - plate) * (1 - Math.exp(-real / 150)) : (gl3 ? goal : plate);
+    var intro = introTick(now);
     if (tween) {
       var t = Math.min(1, (now - tween.t0) / tween.ms), e = t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;   /* ease in and out */
       q = slerp(tween.from, tween.to, e);
@@ -83,7 +110,7 @@
       if (Math.hypot(vel[0], vel[1]) < .02) { pin(nearest()); if (!hovering) resume(3000); return; }   /* a touch flick has no later 'leave' */
     }
     paint();
-    if (tween || mode === 'coast' || moving) raf = requestAnimationFrame(frame);
+    if (tween || mode === 'coast' || moving || intro) raf = requestAnimationFrame(frame);
   }
   function go(to, done) {
     stop();
@@ -102,10 +129,11 @@
   /* ---- automatic cycle: 01 -> 06 every 3 s, then back to 01. Paused while the cube is hovered or focused, dragged,
      off screen or in a background tab, and while a service picked from the list is shown; off under reduced motion ---- */
   var fineHover = matchMedia('(hover:hover)').matches;   /* the cube can slide in under a still mouse without an 'enter' event */
-  function canAuto() { return !still && !hovering && !(fineHover && stage.matches(':hover')) && !focused && !down && inView && !d.hidden && !listPin && mode !== 'drag' && mode !== 'coast'; }
+  function canAuto() { return !still && introAt && !hovering && !(fineHover && stage.matches(':hover')) && !focused && !down && inView && !d.hidden && !listPin && mode !== 'drag' && mode !== 'coast'; }
   var holdUntil = 5000;                                         /* performance.now() counts from page open: the logo holds until 5 s, whatever resumes the cycle first */
   function autoLater(ms) { clearTimeout(autoTimer); if (!still) autoTimer = setTimeout(autoStep, Math.max(ms, holdUntil - performance.now())); }
   function autoStep() {
+    if (performance.now() < holdUntil - 20) { autoLater(0); return; }   /* the hold may have grown since this timer was set */
     if (!canAuto()) return;                                     /* resumed by the event that ends the pause */
     var next = mode === 'rest' ? 0 : (active + 1) % 6;
     speak(false); setMode('tour'); show(next); go(TARGET[next]);
@@ -149,12 +177,14 @@
   /* ---- the list is the accessible control: real buttons, keyboard included ---- */
   items.forEach(function (li, i) { li.firstElementChild.addEventListener('click', function () { pin(i, true); }); });
   reset.addEventListener('click', rest);
-  /* Capabilities section: pin the face, then bring the cube into view */
-  [].forEach.call(d.querySelectorAll('[data-face]'), function (b) { b.addEventListener('click', function () {
-    pin(+b.getAttribute('data-face'), true); stage.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' }); }); });
   d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mode === 'pinned') rest(); });
 
   paint();
+  if (still) startIntro();
+  else {
+    if ('MutationObserver' in window) new MutationObserver(function () { if (stage.classList.contains('is-gl')) startIntro(); }).observe(stage, { attributes: true, attributeFilter: ['class'] });
+    setTimeout(startIntro, 1400);                                /* no WebGL, or WebGL slow to load: play it on the CSS cube */
+  }
   autoLater(0);
 
   /* ---- self-check: open with ?selftest. Every target must bring its own face to the front, upright. ---- */

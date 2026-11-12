@@ -10,7 +10,36 @@
   const byHandle = (h) => D.products.find((p) => p.handle === h);
   const url = { product: (p) => `product.html?p=${encodeURIComponent(p.handle)}`, shop: (c) => `shop.html${c ? '?c=' + c : ''}` };
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const ADF = 'https://athensdigitalframe.vercel.app/en/';
+  const LANG = (() => {
+    const q = new URLSearchParams(location.search).get('lang');
+    try {
+      if (q === 'el' || q === 'en') { localStorage.setItem('enuma-lang', q); return q; }
+      return localStorage.getItem('enuma-lang') === 'el' ? 'el' : 'en';
+    } catch (_) { return q === 'el' ? 'el' : 'en'; }
+  })();
+  const EL = window.EE_EL || {};
+  /* T: translate a known string, then fill {placeholders} */
+  const T = (s, v) => { let o = (LANG === 'el' && EL[s]) || s; if (v) o = o.replace(/\{(\w+)\}/g, (_, k) => v[k]); return o; };
+  const L = (p, f) => (LANG === 'el' && p.el && p.el[f]) || p[f];
+  const ctitle = (c) => (LANG === 'el' && c.el) || c.title;
+  const ADF = LANG === 'el' ? 'https://athensdigitalframe.vercel.app/' : 'https://athensdigitalframe.vercel.app/en/';
+  document.documentElement.lang = LANG;
+
+  /* static text in the HTML and in rendered templates is translated by exact match */
+  function translate(root) {
+    if (LANG !== 'el') return;
+    const fix = (str) => { const t = str.trim(); return t && EL[t] ? str.replace(t, EL[t]) : null; };
+    if (root.nodeType === 3) { const r = fix(root.nodeValue); if (r !== null) root.nodeValue = r; return; }
+    if (root.nodeType !== 1) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let n; const nodes = [];
+    while ((n = w.nextNode())) nodes.push(n);
+    nodes.forEach((t) => { const r = fix(t.nodeValue); if (r !== null) t.nodeValue = r; });
+    [root, ...root.querySelectorAll('[aria-label],[placeholder],[alt]')].forEach((e) => ['aria-label', 'placeholder', 'alt'].forEach((a) => {
+      const v = e.getAttribute && e.getAttribute(a);
+      if (v && EL[v.trim()]) e.setAttribute(a, EL[v.trim()]);
+    }));
+  }
 
   const icon = (name, size = 20) => {
     const p = {
@@ -47,7 +76,7 @@
     total() { return this.items.reduce((n, i) => { const p = byHandle(i.handle); return n + (p ? p.price * i.qty : 0); }, 0); },
     add(handle, color, size) {
       const p = byHandle(handle);
-      if (!p || !available(p, color, size)) throw new Error('That size just sold out. Pick another.');
+      if (!p || !available(p, color, size)) throw new Error(T('That size just sold out. Pick another.'));
       const line = this.items.find((i) => i.handle === handle && i.color === color && i.size === size);
       if (line) line.qty = Math.min(line.qty + 1, 10); else this.items.push({ handle, color, size, qty: 1 });
       this.save(); renderCart(); openCart();
@@ -92,6 +121,10 @@
 
   /* ---------- shared chrome ---------- */
   const tickerItems = ['DROP 01 «NO SIGNAL» — NOW LIVE', '<span class="jp">東京 → ΑΘΗΝΑ</span>', 'FREE EU SHIPPING OVER €120', '<span class="jp">圏外 / 規則なし</span>', 'NOT MADE TO FIT IN', '14-DAY RETURNS'];
+  function langHref() {
+    const q = new URLSearchParams(location.search); q.set('lang', LANG === 'el' ? 'en' : 'el');
+    return '?' + q.toString() + location.hash;
+  }
   function chromeTop() {
     const group = tickerItems.map((t) => `<span>${t}</span>`).join('');
     return `
@@ -110,6 +143,7 @@
       <li><a href="info.html#contact">CONTACT</a></li>
     </ul>
     <div class="site-header__icons">
+      <a class="lang" href="${esc(langHref())}" data-lang="${LANG === 'el' ? 'en' : 'el'}" hreflang="${LANG === 'el' ? 'en' : 'el'}" aria-label="${LANG === 'el' ? 'Switch to English' : 'Αλλαγή στα ελληνικά'}">${LANG === 'el' ? 'EN' : 'EL'}</a>
       <button type="button" class="ib" data-search-open aria-label="Search">${icon('search')}</button>
       <button type="button" class="ib bag-btn" data-cart-open aria-label="Open bag, 0 items">${icon('bag', 21)}<span class="bag-btn__count" data-cart-count>0</span></button>
       <button type="button" class="ib show-m" data-menu-open aria-label="Open menu" aria-expanded="false">${icon('menu', 22)}</button>
@@ -188,13 +222,13 @@
   function renderCart() {
     const n = Cart.count();
     $$('[data-cart-count]').forEach((el) => (el.textContent = n));
-    $$('[data-cart-open]').forEach((el) => el.setAttribute('aria-label', `Open bag, ${n} item${n === 1 ? '' : 's'}`));
+    $$('[data-cart-open]').forEach((el) => el.setAttribute('aria-label', T(n === 1 ? 'Open bag, {n} item' : 'Open bag, {n} items', { n })));
     const panel = $('[data-drawer]');
     if (!panel) return;
     const total = Cart.total();
     const left = Math.max(0, D.freeShipping - total);
     const pct = Math.min(100, (total / D.freeShipping) * 100);
-    const head = `<div class="drawer__head"><h2 class="d drawer__title" id="CartTitle">YOUR BAG (${n}) <span class="jp">バッグ</span></h2>
+    const head = `<div class="drawer__head"><h2 class="d drawer__title" id="CartTitle">${T('YOUR BAG ({n})', { n })} <span class="jp">バッグ</span></h2>
       <button class="ib" type="button" data-cart-close aria-label="Close bag">${icon('close', 22)}</button></div>`;
     if (!Cart.items.length) {
       panel.innerHTML = head + `<div class="drawer__body"><div class="drawer__empty"><p class="d">YOUR BAG IS EMPTY.<br><span class="t-red">THE STREETS ARE WAITING.</span></p>
@@ -208,12 +242,12 @@
         <a class="line__img" href="${url.product(p)}" tabindex="-1" aria-hidden="true">${pic(p.images[0], { alt: '' })}</a>
         <div class="line__info">
           <div class="line__top"><a href="${url.product(p)}" class="d line__name">${esc(p.name)}</a><span class="line__price">${money(p.price * it.qty)}</span></div>
-          <span class="line__meta">${esc(up(it.color))} / ${esc(it.size)}</span>
+          <span class="line__meta">${esc(T(up(it.color)))} / ${esc(it.size)}</span>
           <div class="line__actions">
             <div class="qty">
-              <button class="ib" type="button" data-qty="${i}" data-to="${it.qty - 1}" aria-label="Decrease quantity of ${esc(p.name)}">${icon('minus', 14)}</button>
+              <button class="ib" type="button" data-qty="${i}" data-to="${it.qty - 1}" aria-label="${T('Decrease quantity of {x}', { x: esc(p.name) })}">${icon('minus', 14)}</button>
               <span class="qty__n" aria-live="polite">${it.qty}</span>
-              <button class="ib" type="button" data-qty="${i}" data-to="${it.qty + 1}" aria-label="Increase quantity of ${esc(p.name)}" ${it.qty >= 10 ? 'disabled' : ''}>${icon('plus', 14)}</button>
+              <button class="ib" type="button" data-qty="${i}" data-to="${it.qty + 1}" aria-label="${T('Increase quantity of {x}', { x: esc(p.name) })}" ${it.qty >= 10 ? 'disabled' : ''}>${icon('plus', 14)}</button>
             </div>
             <button class="link-btn" type="button" data-qty="${i}" data-to="0">REMOVE</button>
           </div>
@@ -221,14 +255,14 @@
     }).join('');
     panel.innerHTML = head + `
       <div class="ship-meter" role="status">
-        <span>${left > 0 ? `You're <b>${money(left)}</b> away from free EU shipping.` : '<b>Free EU shipping unlocked.</b>'}</span>
+        <span>${left > 0 ? T('You’re {x} away from free EU shipping.', { x: `<b>${money(left)}</b>` }) : `<b>${T('Free EU shipping unlocked.')}</b>`}</span>
         <div class="ship-meter__bar" aria-hidden="true"><i style="width:${pct}%"></i></div>
       </div>
       <div class="drawer__body"><ul class="drawer__lines" role="list">${lines}</ul></div>
       <div class="drawer__foot">
         <div class="drawer__row"><span>SUBTOTAL</span><span>${money(total)}</span></div>
         <span class="drawer__note">Taxes included. Shipping calculated at checkout. 14-day returns.</span>
-        <button type="button" class="btn btn-red btn-xl" data-checkout>CHECKOUT — ${money(total)}</button>
+        <button type="button" class="btn btn-red btn-xl" data-checkout>${T('CHECKOUT — {x}', { x: money(total) })}</button>
         <span class="drawer__demo">Demo store: checkout places no order.</span>
         <button type="button" class="link-btn link-btn--center" data-cart-close>CONTINUE SHOPPING</button>
       </div>`;
@@ -248,10 +282,10 @@
   function card(p, { cls = 'cu', badge = '', sizes = '', quick = true } = {}) {
     const color = p.colors.find((c) => p.sizes.some((s) => available(p, c, s))) || p.colors[0];
     const out = !anyAvailable(p);
-    const sw = p.colors.length > 1 ? p.colors.map((c) => `<button type="button" class="sw" data-card-color="${esc(c)}" aria-pressed="${c === color}" aria-label="${esc(c)}"><span style="--sw:${D.colors[c]}"></span></button>`).join('') : `<span class="sw" aria-hidden="true"><span style="--sw:${D.colors[color]}"></span></span>`;
+    const sw = p.colors.length > 1 ? p.colors.map((c) => `<button type="button" class="sw" data-card-color="${esc(c)}" aria-pressed="${c === color}" aria-label="${esc(T(c))}"><span style="--sw:${D.colors[c]}"></span></button>`).join('') : `<span class="sw" aria-hidden="true"><span style="--sw:${D.colors[color]}"></span></span>`;
     return `<article class="card ${cls}" data-card="${esc(p.handle)}" data-color="${esc(color)}" data-collections="${p.collections.join(' ')}">
       <a href="${url.product(p)}" class="media zoom" aria-label="${esc(p.name)}">
-        ${pic(p.images[0], { cls: 'media__main ph', alt: `${p.name}, ${color}`, sizes })}
+        ${pic(p.images[0], { cls: 'media__main ph', alt: `${p.name}, ${T(color)}`, sizes })}
         ${p.images[1] && p.images[1].src ? pic(p.images[1], { cls: 'look ph', alt: '' }) : ''}
         <span class="tag tag--tl">${esc(p.code)}</span>
         <span class="jp tag tag--v">${esc(p.jp)}</span>
@@ -259,7 +293,7 @@
       </a>
       <div class="card__row"><a href="${url.product(p)}" class="d card__name">${esc(p.name)}</a><span class="card__price">${money(p.price)}</span></div>
       ${quick ? `<div class="card__row card__row--c">
-        <div class="swatches" role="group" aria-label="Colour">${sw}<span class="card__color" data-card-color-name>${esc(up(color))}</span></div>
+        <div class="swatches" role="group" aria-label="Colour">${sw}<span class="card__color" data-card-color-name>${esc(T(up(color)))}</span></div>
         ${out ? '' : `<button type="button" class="qa" data-qa-open aria-expanded="false">+ QUICK ADD</button>`}
       </div>
       <div class="qa-panel ovl" data-qa-panel hidden>
@@ -276,7 +310,7 @@
     $$('[data-qa-size]', cardEl).forEach((b) => {
       const ok = available(p, color, b.dataset.qaSize);
       b.disabled = !ok;
-      b.setAttribute('aria-label', `Add size ${b.dataset.qaSize} in ${color} to bag${ok ? '' : ', sold out'}`);
+      b.setAttribute('aria-label', T('Add size {s} in {c} to bag', { s: b.dataset.qaSize, c: T(color) }) + (ok ? '' : T(', sold out')));
     });
   }
 
@@ -319,11 +353,11 @@
     const rows = $('[data-cols]');
     rows.innerHTML = D.collections.map((c, i) => {
       const n = D.products.filter((p) => p.collections.includes(c.id)).length;
-      const count = c.soon || `${String(n).padStart(2, '0')} PIECE${n === 1 ? '' : 'S'}`;
+      const count = c.soon || T(n === 1 ? '{n} PIECE' : '{n} PIECES', { n: String(n).padStart(2, '0') });
       const inner = `<span class="muted">${String(i + 1).padStart(2, '0')}</span>
-        <span class="row__t"><span class="d">${esc(up(c.title))}</span><span class="jp muted">${esc(c.jp)}</span></span>
+        <span class="row__t"><span class="d">${esc(up(ctitle(c)))}</span><span class="jp muted">${esc(c.jp)}</span></span>
         <span class="muted row__count">${count}</span>`;
-      return c.soon ? `<div class="row row--soon" aria-label="${esc(c.title)}, coming with Drop 02">${inner}</div>` : `<a href="${url.shop(c.id)}" class="row">${inner}</a>`;
+      return c.soon ? `<div class="row row--soon" aria-label="${esc(T('{x}, coming with Drop 02', { x: ctitle(c) }))}">${inner}</div>` : `<a href="${url.shop(c.id)}" class="row">${inner}</a>`;
     }).join('');
   }
 
@@ -334,18 +368,19 @@
     let current = params.get('c') || 'all';
     let sort = params.get('sort') || 'featured';
     const chips = $('[data-shop-filters]');
-    const opts = [{ id: 'all', title: 'All' }].concat(D.collections.filter((c) => !c.soon));
+    const opts = [{ id: 'all', title: 'All', el: 'Όλα' }].concat(D.collections.filter((c) => !c.soon));
     if (!opts.some((o) => o.id === current)) current = 'all';
-    chips.innerHTML = opts.map((o) => `<button type="button" class="chip" data-c="${o.id}" aria-pressed="${o.id === current}">${esc(up(o.title))}</button>`).join('');
+    chips.innerHTML = opts.map((o) => `<button type="button" class="chip" data-c="${o.id}" aria-pressed="${o.id === current}">${esc(up(ctitle(o)))}</button>`).join('');
     const sel = $('[data-sort]');
     sel.value = sort;
     function draw() {
       const meta = D.collections.find((c) => c.id === current);
       const list = sortList(current === 'all' ? D.products : D.products.filter((p) => p.collections.includes(current)), sort);
-      $('[data-shop-title]').textContent = up(meta ? meta.title : 'All products');
-      $('[data-shop-crumb]').textContent = up(meta ? meta.title : 'All products');
-      $('[data-shop-count]').textContent = `${list.length} PIECE${list.length === 1 ? '' : 'S'}`;
-      document.title = `${meta ? meta.title : 'Shop all'} | ENUMA ELISH (concept)`;
+      const title = meta ? ctitle(meta) : T('All products');
+      $('[data-shop-title]').textContent = up(title);
+      $('[data-shop-crumb]').textContent = up(title);
+      $('[data-shop-count]').textContent = T(list.length === 1 ? '{n} PIECE' : '{n} PIECES', { n: list.length });
+      document.title = T('{x} | ENUMA ELISH (concept)', { x: meta ? ctitle(meta) : T('Shop all') });
       grid.innerHTML = list.map((p) => card(p, { sizes: '(min-width: 901px) 31vw, (min-width: 561px) 50vw, 100vw' })).join('');
       const q = new URLSearchParams();
       if (current !== 'all') q.set('c', current);
@@ -371,11 +406,11 @@
     if (!p) {
       root.innerHTML = `<div class="notfound"><p class="eyebrow">404 · <span class="jp">圏外</span></p><h1 class="d">NO SIGNAL.</h1>
         <p class="muted-2">That piece doesn't exist, or it's from a drop that's gone.</p><a class="btn btn-red btn-lg" href="shop.html">SHOP DROP 01</a></div>`;
-      document.title = 'Not found | ENUMA ELISH (concept)';
+      document.title = T('{x} | ENUMA ELISH (concept)', { x: T('Not found') });
       return;
     }
     document.title = `${p.name} | ENUMA ELISH (concept)`;
-    $('meta[name="description"]').setAttribute('content', `${p.name}: ${p.desc}`);
+    $('meta[name="description"]').setAttribute('content', `${p.name}: ${L(p, 'desc')}`);
     const guide = D.guides[p.guide];
     let color = p.colors.find((c) => p.sizes.some((s) => available(p, c, s))) || p.colors[0];
     let size = null;
@@ -383,19 +418,19 @@
     const cat = D.collections.find((c) => p.collections.includes(c.id) && c.id !== 'new') || D.collections[0];
 
     root.innerHTML = `
-<nav class="crumbs" aria-label="Breadcrumb"><a href="shop.html">SHOP</a><span aria-hidden="true">/</span><a href="${url.shop(cat.id)}">${esc(up(cat.title))}</a><span aria-hidden="true">/</span><span class="t-white" aria-current="page">${esc(up(p.name))}</span></nav>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="shop.html">SHOP</a><span aria-hidden="true">/</span><a href="${url.shop(cat.id)}">${esc(up(ctitle(cat)))}</a><span aria-hidden="true">/</span><span class="t-white" aria-current="page">${esc(up(p.name))}</span></nav>
 <div class="pdp">
   <div class="pdp-g">
     <div class="gal hide-m">
-      <div class="gal__thumbs">${imgs.map((im, i) => `<button type="button" class="thumb" data-thumb="${i}" aria-label="Show image ${i + 1}" aria-pressed="${i === 0}">${pic(im, { alt: '' })}</button>`).join('')}</div>
+      <div class="gal__thumbs">${imgs.map((im, i) => `<button type="button" class="thumb" data-thumb="${i}" aria-label="${T('Show image {n}', { n: i + 1 })}" aria-pressed="${i === 0}">${pic(im, { alt: '' })}</button>`).join('')}</div>
       <div class="gal__main">
-        ${imgs.map((im, i) => `<div class="slide${i === 0 ? ' is-on' : ''}" data-slide="${i}" ${i ? 'aria-hidden="true"' : ''}>${pic(im, { alt: `${p.name}, image ${i + 1}`, eager: i === 0 })}</div>`).join('')}
+        ${imgs.map((im, i) => `<div class="slide${i === 0 ? ' is-on' : ''}" data-slide="${i}" ${i ? 'aria-hidden="true"' : ''}>${pic(im, { alt: T('{x}, image {n}', { x: p.name, n: i + 1 }), eager: i === 0 })}</div>`).join('')}
         <span class="gal__label" data-gal-label>1 / ${imgs.length}</span>
         ${imgs.length > 1 ? `<div class="gal__nav"><button type="button" class="ib ib--dark" data-prev aria-label="Previous image">${icon('left', 18)}</button><button type="button" class="ib ib--dark" data-next aria-label="Next image">${icon('right', 18)}</button></div>` : ''}
       </div>
     </div>
     <div class="gal-m show-m">
-      <div class="swipe" tabindex="0" aria-label="Product images, swipe to browse">${imgs.map((im, i) => `<div class="swipe__item">${pic(im, { alt: `${p.name}, image ${i + 1}`, eager: i === 0 })}<span class="swipe__n">${i + 1} / ${imgs.length}</span></div>`).join('')}</div>
+      <div class="swipe" tabindex="0" aria-label="Product images, swipe to browse">${imgs.map((im, i) => `<div class="swipe__item">${pic(im, { alt: T('{x}, image {n}', { x: p.name, n: i + 1 }), eager: i === 0 })}<span class="swipe__n">${i + 1} / ${imgs.length}</span></div>`).join('')}</div>
       ${imgs.length > 1 ? '<span class="swipe__hint">SWIPE →</span>' : ''}
     </div>
   </div>
@@ -408,16 +443,16 @@
     </div>
     <form class="pdp-form" data-pdp-form novalidate>
       <fieldset class="opt opt--line">
-        <legend class="eyebrow">COLOUR — <span class="t-white" data-color-label>${esc(up(color))}</span></legend>
-        <div class="opt__swatches">${p.colors.map((c) => `<label class="sq"><input type="radio" class="visually-hidden" name="color" value="${esc(c)}" ${c === color ? 'checked' : ''}><span class="sq__fill" style="--sw:${D.colors[c]}"></span><span class="visually-hidden">${esc(c)}</span></label>`).join('')}</div>
+        <legend class="eyebrow">COLOUR — <span class="t-white" data-color-label>${esc(T(up(color)))}</span></legend>
+        <div class="opt__swatches">${p.colors.map((c) => `<label class="sq"><input type="radio" class="visually-hidden" name="color" value="${esc(c)}" ${c === color ? 'checked' : ''}><span class="sq__fill" style="--sw:${D.colors[c]}"></span><span class="visually-hidden">${esc(T(c))}</span></label>`).join('')}</div>
       </fieldset>
       <fieldset class="opt" id="sizes">
         <div class="opt__top"><legend class="eyebrow">SIZE — <span class="t-white" data-size-label>SELECT</span></legend>
           <button type="button" class="link-btn" data-guide-toggle aria-expanded="false" aria-controls="guide">SIZE GUIDE</button></div>
         <div class="opt__sizes" data-size-grid>${p.sizes.map((s) => `<label class="szb"><input type="radio" class="visually-hidden" name="size" value="${esc(s)}"><span>${esc(s)}</span></label>`).join('')}</div>
         <span class="pdp__err" role="alert" data-size-err hidden>PICK A SIZE FIRST.</span>
-        <span class="pdp__note">${esc(p.fit)}</span>
-        <span class="pdp__model">${esc(p.model)}</span>
+        <span class="pdp__note">${esc(L(p, 'fit'))}</span>
+        <span class="pdp__model">${esc(L(p, 'model'))}</span>
         <div class="guide ovl" id="guide" hidden><table><caption>${esc(up(guide.caption))}</caption>
           <thead><tr>${guide.head.map((h) => `<th scope="col">${esc(up(h))}</th>`).join('')}</tr></thead>
           <tbody>${guide.rows.map((r) => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map((v) => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
@@ -430,11 +465,11 @@
       <li>Free EU shipping over ${money(D.freeShipping)}</li>
       <li>14-day returns, unworn with tags attached</li>
     </ul>
-    <div class="rte pdp__desc"><p>${esc(p.desc)}</p></div>
+    <div class="rte pdp__desc"><p>${esc(L(p, 'desc'))}</p></div>
     <div class="acc">
-      <details open><summary>FABRIC &amp; FIT<span class="pl" aria-hidden="true">${icon('plus', 16)}</span></summary><div class="rte acc__body"><ul>${p.fabric.map((f) => `<li>${esc(f)}</li>`).join('')}</ul></div></details>
+      <details open><summary>FABRIC &amp; FIT<span class="pl" aria-hidden="true">${icon('plus', 16)}</span></summary><div class="rte acc__body"><ul>${L(p, 'fabric').map((f) => `<li>${esc(f)}</li>`).join('')}</ul></div></details>
       <details><summary>SHIPPING &amp; RETURNS<span class="pl" aria-hidden="true">${icon('plus', 16)}</span></summary><div class="rte acc__body"><p>Ships from Athens within 1–2 business days. EU delivery in 2–5 business days; free over ${money(D.freeShipping)}, otherwise €6. You have 14 days from delivery to return unworn items with tags attached. <a href="info.html#returns">Full returns policy</a>.</p></div></details>
-      <details><summary>CARE<span class="pl" aria-hidden="true">${icon('plus', 16)}</span></summary><div class="rte acc__body"><p>${esc(p.care)}</p></div></details>
+      <details><summary>CARE<span class="pl" aria-hidden="true">${icon('plus', 16)}</span></summary><div class="rte acc__body"><p>${esc(L(p, 'care'))}</p></div></details>
     </div>
   </div></div>
 </div>
@@ -451,18 +486,18 @@
     function update() {
       $$('input[name=size]', form).forEach((r) => r.closest('label').classList.toggle('is-unavailable', !available(p, color, r.value)));
       $$('input[name=color]', form).forEach((r) => r.closest('label').classList.toggle('is-unavailable', !p.sizes.some((s) => available(p, r.value, s))));
-      $('[data-color-label]', root).textContent = up(color);
-      $('[data-size-label]', root).textContent = size || 'SELECT';
+      $('[data-color-label]', root).textContent = T(up(color));
+      $('[data-size-label]', root).textContent = size || T('SELECT');
       let label, disabled = false;
-      if (!size) label = 'SELECT A SIZE';
-      else if (!available(p, color, size)) { label = 'SOLD OUT'; disabled = true; }
-      else label = `ADD TO BAG — ${money(p.price)}`;
+      if (!size) label = T('SELECT A SIZE');
+      else if (!available(p, color, size)) { label = T('SOLD OUT'); disabled = true; }
+      else label = T('ADD TO BAG — {x}', { x: money(p.price) });
       addBtn.textContent = label;
       addBtn.disabled = disabled;
-      sticky.textContent = !size ? 'SELECT SIZE' : disabled ? 'SOLD OUT' : 'ADD TO BAG';
+      sticky.textContent = !size ? T('SELECT SIZE') : disabled ? T('SOLD OUT') : T('ADD TO BAG');
       sticky.disabled = disabled;
       sticky.classList.toggle('is-select', !size);
-      $('[data-sticky-meta]', root).textContent = [money(p.price), up(color), size || 'NO SIZE'].join(' · ');
+      $('[data-sticky-meta]', root).textContent = [money(p.price), T(up(color)), size || T('NO SIZE')].join(' · ');
     }
     function flagSize() {
       err.hidden = false;
@@ -477,7 +512,7 @@
     }
     form.addEventListener('change', (e) => {
       if (e.target.name === 'color') { color = e.target.value; if (size && !available(p, color, size)) { /* keep choice, show sold out */ } }
-      if (e.target.name === 'size') { size = e.target.value; err.hidden = true; err.textContent = 'PICK A SIZE FIRST.'; }
+      if (e.target.name === 'size') { size = e.target.value; err.hidden = true; err.textContent = T('PICK A SIZE FIRST.'); }
       update();
     });
     form.addEventListener('submit', (e) => { e.preventDefault(); submit(); });
@@ -526,13 +561,13 @@
       if (bad) {
         bad.setAttribute('aria-invalid', 'true');
         msg.className = 'form-msg form-msg--err';
-        msg.textContent = bad.type === 'email' ? 'Enter a valid email address.' : 'Fill in this field.';
+        msg.textContent = T(bad.type === 'email' ? 'Enter a valid email address.' : 'Fill in this field.');
         msg.hidden = false; bad.focus(); return;
       }
       msg.className = 'form-msg form-msg--ok';
-      msg.textContent = f.dataset.demoForm === 'newsletter'
+      msg.textContent = T(f.dataset.demoForm === 'newsletter'
         ? 'YOU’RE IN. 地下へようこそ。 (Demo: nothing was sent or stored.)'
-        : 'Message ready. (Demo: this concept store sends nothing. A live store would deliver it to the brand’s inbox.)';
+        : 'Message ready. (Demo: this concept store sends nothing. A live store would deliver it to the brand’s inbox.)');
       msg.hidden = false;
       f.reset();
       if (email) email.blur();
@@ -564,14 +599,14 @@
     }
     if (t.closest('[data-search-close]')) { closeLayer(); return; }
     const mq = t.closest('[data-mq-toggle]');
-    if (mq) { const on = mq.getAttribute('aria-pressed') !== 'true'; mq.setAttribute('aria-pressed', String(on)); mq.textContent = on ? 'PLAY' : 'PAUSE'; $$('.ticker, .city-mq').forEach((m) => m.classList.toggle('is-paused', on)); return; }
+    if (mq) { const on = mq.getAttribute('aria-pressed') !== 'true'; mq.setAttribute('aria-pressed', String(on)); mq.textContent = T(on ? 'PLAY' : 'PAUSE'); $$('.ticker, .city-mq').forEach((m) => m.classList.toggle('is-paused', on)); return; }
 
     const sw = t.closest('[data-card-color]');
     if (sw) {
       const c = sw.closest('[data-card]');
       c.dataset.color = sw.dataset.cardColor;
       $$('[data-card-color]', c).forEach((b) => b.setAttribute('aria-pressed', String(b === sw)));
-      $('[data-card-color-name]', c).textContent = up(sw.dataset.cardColor);
+      $('[data-card-color-name]', c).textContent = T(up(sw.dataset.cardColor));
       syncCard(c);
       return;
     }
@@ -622,11 +657,19 @@
   const top = $('#chrome-top'), bottom = $('#chrome-bottom');
   if (top) top.outerHTML = chromeTop();
   if (bottom) bottom.outerHTML = chromeBottom();
+  if (LANG === 'el') {
+    translate(document.body);
+    document.title = T(document.title);
+    new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(translate))).observe(document.body, { childList: true, subtree: true });
+  }
+  if (new URLSearchParams(location.search).has('lang')) {
+    const u = new URL(location.href); u.searchParams.delete('lang'); history.replaceState(null, '', u.pathname + u.search + u.hash);
+  }
   renderCart();
   initHome(); initShop(); initProduct(); initInfo(); initForms();
   $$('[data-hero-img], [data-media]').forEach((el) => {
     const m = D.media[el.dataset.media || 'hero'];
-    el.innerHTML = pic(m, { cls: el.dataset.cls || 'ph', eager: el.hasAttribute('data-eager'), alt: m.alt }) + el.innerHTML;
+    el.innerHTML = pic(m, { cls: el.dataset.cls || 'ph', eager: el.hasAttribute('data-eager'), alt: (LANG === 'el' && m.altEl) || m.alt }) + el.innerHTML;
   });
   window.addEventListener('storage', (e) => { if (e.key === KEY) { try { Cart.items = JSON.parse(e.newValue) || []; } catch (_) { Cart.items = []; } renderCart(); } });
 })();

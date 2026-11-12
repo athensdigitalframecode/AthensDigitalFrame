@@ -9,11 +9,11 @@ window.EE_DATA = {
     'Deep Red': '#A51F25'
   },
   collections: [
-    { id: 'new', title: 'New arrivals', jp: '新着' },
-    { id: 'tees', title: 'T-shirts', jp: 'Tシャツ' },
-    { id: 'hoodies', title: 'Hoodies', jp: 'フーディー' },
-    { id: 'bottoms', title: 'Bottoms', jp: 'ボトムス' },
-    { id: 'accessories', title: 'Accessories', jp: 'アクセサリー', soon: 'DROP 02' }
+    { id: 'new', title: 'New arrivals', el: 'Νέες αφίξεις', jp: '新着' },
+    { id: 'tees', title: 'T-shirts', el: 'T-shirts', jp: 'Tシャツ' },
+    { id: 'hoodies', title: 'Hoodies', el: 'Hoodies', jp: 'フーディー' },
+    { id: 'bottoms', title: 'Bottoms', el: 'Παντελόνια', jp: 'ボトムス' },
+    { id: 'accessories', title: 'Accessories', el: 'Αξεσουάρ', jp: 'アクセサリー', soon: 'DROP 02' }
   ],
   guides: {
     top: {
@@ -35,6 +35,7 @@ window.EE_DATA = {
   products: [
     {
       handle: 'tokyo-after-dark-hoodie',
+      el: {"desc": "Το κομμάτι γύρω από το οποίο χτίστηκε το drop. Βαρύ βουρτσισμένο φούτερ, κομμένο φαρδύ και μακρύ, με διπλή κουκούλα που κρατά το σχήμα της και μετά το τελευταίο τρένο.", "fit": "Oversized, φαρδιά εφαρμογή με πεσμένο ώμο. Πάρε το μέγεθος που φοράς συνήθως για την προβλεπόμενη πτώση ή ένα μικρότερο για πιο στενή εφαρμογή.", "model": "Το μοντέλο έχει ύψος 183 cm και φοράει M.", "fabric": ["Βουρτσισμένο φούτερ 480 GSM, 100% βαμβάκι", "Βαμμένο ως ρούχο και πλυμένο με ένζυμα", "Διπλή κουκούλα, χοντρά ριμπ σε μανίκια και τελείωμα"], "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Όχι στεγνωτήριο. Σιδέρωμα από την ανάποδη του τυπώματος."},
       name: 'Tokyo After Dark Hoodie',
       jp: '東京の夜',
       code: 'EE-01',
@@ -53,6 +54,7 @@ window.EE_DATA = {
     },
     {
       handle: 'no-signal-tee',
+      el: {"desc": "Βαρύ t-shirt με το όνομα του drop τυπωμένο στην πλάτη στα ιαπωνικά: 圏外, εκτός εμβέλειας.", "fit": "Χαλαρή, ελαφρώς κοντή φαρδιά εφαρμογή. Πάρε το κανονικό σου μέγεθος.", "model": "Το μοντέλο έχει ύψος 178 cm και φοράει L.", "fabric": ["Πενιέ βαμβακερό ζέρσεϊ 240 GSM", "Μεταξοτυπία με μελάνι νερού", "Ενισχυμένη λαιμόκοψη, διπλές ραφές"], "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Στέγνωμα στον αέρα."},
       name: 'No Signal Tee',
       jp: '圏外',
       code: 'EE-02',
@@ -71,6 +73,7 @@ window.EE_DATA = {
     },
     {
       handle: 'exarchia-wall-tee',
+      el: {"desc": "Ένα γκράφιτι από έναν τοίχο στα Εξάρχεια που ξαναβάφτηκε το επόμενο πρωί. Τυπωμένο μεγάλο, πλυμένο μαλακό.", "fit": "Χαλαρή, ελαφρώς κοντή φαρδιά εφαρμογή. Πάρε το κανονικό σου μέγεθος.", "model": "Το μοντέλο έχει ύψος 175 cm και φοράει M.", "fabric": ["Πενιέ βαμβακερό ζέρσεϊ 240 GSM", "Τύπωμα discharge, μαλακό στην αφή", "Ενισχυμένη λαιμόκοψη, διπλές ραφές"], "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Στέγνωμα στον αέρα."},
       name: 'Exarchia Wall Tee',
       jp: 'エクサルヒア',
       code: 'EE-03',
@@ -89,6 +92,7 @@ window.EE_DATA = {
     },
     {
       handle: 'last-train-cargo-pant',
+      el: {"desc": "Φαρδύ cargo με έξι τσέπες και ρυθμιζόμενο τελείωμα. Φτιαγμένο για κίνηση και για να κάθεσαι σε σκαλιά από μπετόν μέχρι το πρωί.", "fit": "Φαρδύ, ίσιο πόδι με μεσαίο καβάλο. Πάρε το κανονικό σου μέγεθος· το κορδόνι στο τελείωμα ρυθμίζει το μήκος.", "model": "Το μοντέλο έχει ύψος 183 cm και φοράει M.", "fabric": ["Βουρτσισμένο βαμβακερό twill 320 GSM", "Έξι τσέπες, φερμουάρ YKK", "Κορδόνι στο τελείωμα"], "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Όχι στεγνωτήριο."},
       name: 'Last Train Cargo Pant',
       jp: '終電',
       code: 'EE-04',
@@ -107,6 +111,7 @@ window.EE_DATA = {
     },
     {
       handle: 'shibuya-static-crewneck',
+      el: {"desc": "Φούτερ λαιμόκοψη από loopback βαμβάκι με τύπωμα «παράσιτα» στο στήθος, σαν οθόνη στη Shibuya όταν χάνεται το σήμα.", "fit": "Oversized με πεσμένο ώμο. Πάρε ένα μέγεθος μικρότερο για κανονική εφαρμογή.", "model": "Το μοντέλο έχει ύψος 180 cm και φοράει L.", "fabric": ["Loopback βαμβάκι 420 GSM", "Βαμμένο ως ρούχο", "Ριμπ σε λαιμό, μανίκια και τελείωμα"], "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Όχι στεγνωτήριο."},
       name: 'Shibuya Static Crewneck',
       jp: '渋谷',
       code: 'EE-05',
@@ -125,6 +130,7 @@ window.EE_DATA = {
     },
     {
       handle: 'monastiraki-track-pant',
+      el: {"desc": "Φόρμα για skate στο Μοναστηράκι τη νύχτα: μακρύ, χαλαρό πόδι, πλαϊνές ρίγες σε βαθύ κόκκινο και φερμουάρ στους αστραγάλους.", "fit": "Χαλαρό, μακρύ πόδι με λάστιχο και κορδόνι στη μέση. Πάρε το κανονικό σου μέγεθος.", "model": "Το μοντέλο έχει ύψος 178 cm και φοράει M.", "fabric": ["Βουρτσισμένο πολυβαμβακερό τρικό", "Πλαϊνή ρίγα", "Φερμουάρ στους αστραγάλους και τις τσέπες"], "care": "Πλύσιμο σε κρύο νερό. Στέγνωμα στον αέρα."},
       name: 'Monastiraki Track Pant',
       jp: 'モナスティラキ',
       code: 'EE-06',
@@ -143,11 +149,11 @@ window.EE_DATA = {
     }
   ],
   media: {
-    hero: { src: null, label: 'Hero · lifestyle', alt: 'A figure in the Tokyo After Dark Hoodie on a backstreet stairway at night' },
-    tokyo: { src: null, label: 'Tokyo street', alt: 'A Tokyo backstreet at night' },
-    athens: { src: null, label: 'Athens street', alt: 'Painted walls in Exarchia, Athens' },
-    campaign1: { src: null, label: 'Campaign 01', alt: 'Campaign photo on backstreet stairs' },
-    campaign2: { src: null, label: 'Campaign 02', alt: 'Campaign photo in Exarchia, Athens' },
-    campaign3: { src: null, label: 'Campaign 03', alt: 'Campaign photo in Shibuya after the last train' }
+    hero: { src: null, label: 'Hero · lifestyle', alt: 'A figure in the Tokyo After Dark Hoodie on a backstreet stairway at night', altEl: 'Μια φιγούρα με το Tokyo After Dark Hoodie σε σκάλες στενού τη νύχτα' },
+    tokyo: { src: null, label: 'Tokyo street', alt: 'A Tokyo backstreet at night', altEl: 'Ένα στενό στο Τόκιο τη νύχτα' },
+    athens: { src: null, label: 'Athens street', alt: 'Painted walls in Exarchia, Athens', altEl: 'Ζωγραφισμένοι τοίχοι στα Εξάρχεια, Αθήνα' },
+    campaign1: { src: null, label: 'Campaign 01', alt: 'Campaign photo on backstreet stairs', altEl: 'Φωτογραφία campaign σε σκάλες στενού' },
+    campaign2: { src: null, label: 'Campaign 02', alt: 'Campaign photo in Exarchia, Athens', altEl: 'Φωτογραφία campaign στα Εξάρχεια, Αθήνα' },
+    campaign3: { src: null, label: 'Campaign 03', alt: 'Campaign photo in Shibuya after the last train', altEl: 'Φωτογραφία campaign στη Shibuya μετά το τελευταίο τρένο' }
   }
 };

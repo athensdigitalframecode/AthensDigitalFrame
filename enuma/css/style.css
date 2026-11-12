@@ -8,7 +8,7 @@ body {
   min-height: 100svh;
   background: var(--c-black);
   color: var(--c-white);
-  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  font-family: 'IBM Plex Mono', 'Fira Mono', ui-monospace, Menlo, monospace;
   font-size: 13px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -24,7 +24,7 @@ h1, h2, h3, h4 { font-weight: 900; overflow-wrap: break-word; }
 [hidden] { display: none !important; }
 *:focus-visible { outline: 2px solid var(--c-blue); outline-offset: 3px; }
 ::selection { background: var(--c-red); color: var(--c-white); }
-.d { font-family: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif; }
+.d { font-family: 'Big Shoulders Display', 'Fira Sans Extra Condensed', 'Arial Narrow', Impact, sans-serif; }
 .jp { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; }
 .visually-hidden {
   position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -687,3 +687,8 @@ h1, h2, h3, h4 { font-weight: 900; overflow-wrap: break-word; }
 .hero__title .rv > span { white-space: nowrap; }
 .d { font-stretch: condensed; }
 .hero { grid-template-columns: minmax(0, 1fr); overflow: hidden; }
+
+/* language switch */
+.lang { height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: .16em; text-decoration: none; border: 1px solid var(--line-3); margin-right: 6px; }
+.lang:hover { border-color: var(--c-white); color: var(--c-white); }
+.notice__box h2 { font-family: 'Big Shoulders Display', 'Fira Sans Extra Condensed', Impact, sans-serif; }

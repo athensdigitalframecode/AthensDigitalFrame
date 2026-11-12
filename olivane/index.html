@@ -978,7 +978,7 @@ const statsEl=$('stats'),statC=$('statC'),nums=[...document.querySelectorAll('[d
 const bls=[...document.querySelectorAll('#stats .bl')];
 function renderStats(){
   const r=statsEl.getBoundingClientRect(),s=clamp((VH-r.top)/(VH*1.05)),e=reduce?(s>.1?1:0):1-Math.pow(1-s,3);
-  nums.forEach(n=>{n.textContent=Math.round(+n.dataset.n*e)+(n.dataset.s||'')});
+  nums.forEach(n=>{const v=Math.round(+n.dataset.n*e)+(n.dataset.s||'');if(n.textContent!==v)n.textContent=v});
   bls.forEach((b,i)=>b.classList.toggle('in',s>.18+i*.08));
 }
 
@@ -1085,10 +1085,17 @@ function markSection(){
 const spbar=$('spbar');
 const prog=(el,k=2)=>{const r=el.getBoundingClientRect();return clamp(-r.top/(el.offsetHeight-VH*k))};
 let sp={hero:-1,home:-1,work:-1},tg={hero:0,home:0,work:0},cur={hero:0,home:0,work:0};
-const ease=reduce?1:.13;
-function tick(){
+/* visuals follow the scroll with a short time constant, the same at any frame rate (a fixed 13% per frame left them up to half a second behind);
+   when nothing moves the loop does no layout reads and no repaints */
+const TAU=reduce?0:60;let lastT=0,lastY=-1;
+const near=(a,b)=>Math.abs(a-b)<=.0003;
+function tick(now){
+  now=now||performance.now();const dt=Math.min(100,now-(lastT||now));lastT=now;
+  if(scrollY===lastY&&cur.hero===tg.hero&&cur.home===tg.home&&cur.work===tg.work&&near(sp.hero,cur.hero)&&near(sp.home,cur.home)&&near(sp.work,cur.work)){requestAnimationFrame(tick);return}
+  lastY=scrollY;
   tg.hero=prog(heroEl);tg.home=prog(homeEl);tg.work=prog(workEl);
-  for(const k in cur){cur[k]+=(tg[k]-cur[k])*ease;if(Math.abs(tg[k]-cur[k])<.0004)cur[k]=tg[k]}
+  const f=TAU?1-Math.exp(-dt/TAU):1;
+  for(const k in cur){cur[k]+=(tg[k]-cur[k])*f;if(Math.abs(tg[k]-cur[k])<.0004)cur[k]=tg[k]}
   if(Math.abs(cur.hero-sp.hero)>.0003){sp.hero=cur.hero;renderHero(cur.hero);hudHero(cur.hero)}
   if(Math.abs(cur.home-sp.home)>.0003){sp.home=cur.home;renderHome(cur.home)}
   if(Math.abs(cur.work-sp.work)>.0003){sp.work=cur.work;renderWork(cur.work)}

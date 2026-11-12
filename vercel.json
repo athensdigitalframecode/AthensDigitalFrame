@@ -84,5 +84,22 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/enuma-elish/:path*",
+      "destination": "/enuma/",
+      "permanent": true
+    },
+    {
+      "source": "/work/enuma-elish.html",
+      "destination": "/work/enuma.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/work/enuma-elish.html",
+      "destination": "/en/work/enuma.html",
+      "permanent": true
+    }
   ]
 }

@@ -316,6 +316,7 @@ class Page:
 <div class="rv d1">{s.form()}</div>
 </div><i class="mk a"></i><i class="mk b"></i><i class="mk c"></i><i class="mk d"></i></div></div></section>
 '''
+        out += s.navcube()
         out += s.footer(''.join(f'\n<script src="{u}" defer></script>' for u in CUBE))
         return out
 
@@ -353,13 +354,27 @@ class Page:
         """One project in Selected Work: a large framed preview that opens the case study, then one meta row."""
         t = s.t; c = CASES[key]; case = s.case(key)
         pv = s.frame(f'<a class="lnk" href="{case}" aria-label="{c["name"]}: {t("case study", "case study")}">' + s.browser(key + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt'])) + '</a>')
-        return f'''<article class="work">
+        return f'''<article class="work" id="work-{key}">
 <div class="pv rv">{pv}{s.phone(key + '-m.webp', c['name'] + ' ' + t('σε κινητό', 'on a phone'))}</div>
 <div class="work-meta rv d1"><span class="n">{i + 1:02d}</span><div class="work-t"><h3>{c['name']}</h3><p class="k">{esc(t(*c['sector']))}</p></div>
 <p class="work-d"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία', 'Self-initiated concept · fictional company')}</span>{esc(t(*c['lead']))}</p>
 <div class="btns"><a class="btn" href="{case}">{t('Διάβασε το case study', 'Read the case study')} {ARROW}</a><a class="btn ghost" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} ↗</a></div></div>
 </article>'''
     def case(s, key): return f'{s.pre}/work/{key}.html'
+    def navcube(s):
+        """Small cube docked bottom-right on wide screens once the hero is gone: it turns to the section being read, a click on a
+        face goes there, and the two concept faces open their demo. The header menu is the accessible navigation, so this is hidden.
+        Faces follow a path of neighbours on the cube (4,0,1,5,3,2), so each step down the page is a quarter turn."""
+        t = s.t; out = ''
+        rows = [('services', '02', t('Υπηρεσίες', 'Services')), 'olivane', 'arclines', ('process', '04', t('Διαδικασία', 'Process')),
+                ('pricing', '05', t('Τιμές', 'Pricing')), ('contact', '08', t('Επικοινωνία', 'Contact'))]
+        for f, r in zip((4, 0, 1, 5, 3, 2), rows):
+            if isinstance(r, str):
+                c = CASES[r]
+                out += f'<a class="nq-f nq-p" data-f="{f}" href="{c["live"]}" tabindex="-1"><img src="/assets/{r}-d.webp" alt="" loading="lazy" decoding="async"><b>Concept</b><span>{c["name"]}</span></a>'
+            else:
+                out += f'<a class="nq-f" data-f="{f}" href="#{r[0]}" tabindex="-1"><b>{r[1]}</b><span>{r[2]}</span></a>'
+        return f'<div class="nq" id="navcube" aria-hidden="true"><div class="nq-c">{out}</div></div>\n'
     def build_case(s, key):
         t = s.t; c = CASES[key]; p = lambda x: esc(t(*x)); o = CASES[c['other']]
         img = key  # assets/<key>-d.webp and -m.webp

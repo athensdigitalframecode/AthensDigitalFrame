@@ -35,14 +35,12 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     'vec3 V=normalize(uEye-vP),L=normalize(vec3(.45,-.6,.66));float dif=max(dot(n,L),0.);' +
     'float fr=.05+.95*pow(1.-max(dot(n,V),0.),5.);float sp=pow(max(dot(n,normalize(L+V)),0.),60.)*(.25+e*1.2);' +
     'vec3 c=alb*(plate?.84+dif*.3:.22+dif*1.05)+env(reflect(-V,n))*fr*(plate?.5:.9)+vec3(1.,.93,.8)*sp;' +
-    /* living logo: light only where the mark is (its own luminance), so shape and colours stay the original's.
-       A warm reflection travels across it on an uneven rhythm, a faint gold halo breathes around it from a blurred copy,
-       and its brightness drifts on two slow, unrelated sines. uT stays 0 under reduced motion: static, no sweep. */
+    /* living logo: light only where the mark is (its own luminance), so shape and colours stay the original's. A faint, steady gold
+       halo comes from a blurred copy; once every 11-17 s one soft reflection crosses it (uT = 0..1 while it travels, -1 = off). */
     'if(plate){float L=dot(tile(6.,uv),vec3(.3,.59,.11));' +
     'float Bl=dot(texture2D(uTex,(vec2(2.,1.)+uv)*vec2(.25,.5),3.5).rgb,vec3(.3,.59,.11));float H=max(Bl-L*.65,0.);' +
-    'float ph=fract((uT+.8*sin(uT*.21))/5.2);float pos=mix(-.6,2.1,smoothstep(0.,.42,ph));' +
-    'float sw=exp(-pow((uv.x*.8+uv.y*.6-pos)/.085,2.));float pu=.05*sin(uT*1.3)+.03*sin(uT*.71+1.7);' +
-    'c+=vec3(1.,.93,.8)*sw*L*.6+vec3(.79,.66,.43)*H*(.3+.12*sin(uT*.9))+alb*L*pu;}' +
+    'float sw=uT>=0.?exp(-pow((uv.x*.8+uv.y*.6-mix(-.6,2.1,smoothstep(0.,1.,uT)))/.085,2.)):0.;' +
+    'c+=vec3(1.,.93,.8)*sw*L*.55+vec3(.79,.66,.43)*H*.3;}' +
     'c+=vec3(1.,.86,.6)*exp(-pow((row-uSolid)/uBand,2.))*.35;' +                                  /* the solid front glows as it builds the face */
     /* light that follows the cursor: a soft gloss under the pointer slides across the faces, stronger on the gold bevel
        and on faces turned to the viewer (uLp: pointer in canvas pixels from the top left, z = on) */

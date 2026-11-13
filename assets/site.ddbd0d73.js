@@ -11,16 +11,14 @@ if(bt){bt.addEventListener('click',function(){menu(bt.getAttribute('aria-expande
 /* section headings rise word by word as they come into view (plain-text headings only; the label keeps them whole for screen readers) */
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.querySelectorAll('.rv .h2'),function(h){if(h.childElementCount)return;var s=h.textContent.trim();h.setAttribute('aria-label',s);
  h.innerHTML=s.split(/\s+/).map(function(w,i){return '<span class="w" aria-hidden="true" style="--i:'+i+'">'+w.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span>'}).join(' ')});
-/* hero headline: each word sits in a mask and rises with its line when the cube locks (cube.js adds .hero-go);
-   the text stays real text, nothing is hidden without JavaScript, and a timer reveals it if the cube never locks */
+/* hero headline: each word sits in a mask and rises with its line right after load (it never waits for the cube);
+   the text stays real text and nothing is hidden without JavaScript */
 var hh=d.querySelector('.hero .h1');if(hh&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
  (function wrap(n){[].slice.call(n.childNodes).forEach(function(c){if(c.nodeType===1)return wrap(c);if(c.nodeType!==3)return;var f=d.createDocumentFragment();
   c.textContent.split(/(\s+)/).forEach(function(w){if(!w)return;if(/^\s+$/.test(w)){f.appendChild(d.createTextNode(w));return}var o=d.createElement('span'),i=d.createElement('span');o.className='ln';i.textContent=w;o.appendChild(i);f.appendChild(o)});
   n.replaceChild(f,c)})})(hh);
  var top=null,ln=-1;[].forEach.call(hh.querySelectorAll('.ln'),function(w){var y=w.getBoundingClientRect().top;if(top===null||Math.abs(y-top)>4){top=y;ln++}w.style.setProperty('--i',ln)});
- hh.classList.add('hl');var cs=d.getElementById('cube-stage'),cr=cs&&cs.getBoundingClientRect();
- /* the cube is below the fold (phones): nothing to wait for, the headline rises right away */
- setTimeout(function(){d.documentElement.classList.add('hero-go')},cr&&(Math.min(cr.bottom,innerHeight)-Math.max(cr.top,0))/cr.height>=.4?3200:150)}
+ hh.classList.add('hl');setTimeout(function(){d.documentElement.classList.add('hero-go')},120)}
 /* reveal */
 var rv=[].slice.call(d.querySelectorAll('.rv,.reveal-img'));
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});rv.forEach(function(n){io.observe(n)})}else rv.forEach(function(n){n.classList.add('in')});

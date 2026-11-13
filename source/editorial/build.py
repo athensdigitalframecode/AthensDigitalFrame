@@ -226,7 +226,7 @@ class Page:
             descs += f'<p><b>{name}.</b> {esc(t(xel, xen))}</p>'
         return f'''<div class="cb-wrap">
 <div class="cb" id="cube-stage" data-logo="/assets/df-logo-1024.jpg" aria-hidden="true"><div class="cb-cube" id="cube">{faces}</div><div class="cb-floor"></div></div>
-<button type="button" class="cb-reset" id="cube-reset" hidden>{t('Πίσω στο λογότυπο','Back to the logo')}</button>
+<button type="button" class="cb-reset" id="cube-reset" hidden>{t('Επαναφορά','Reset view')}</button>
 <ol class="cb-list" id="cube-svc" aria-label="{t('Υπηρεσίες','Services')}">{lst}</ol>
 <div class="cb-descs" id="cube-descs" aria-live="polite"><p class="cb-hint is-on">{t('Γύρισε τον κύβο ή διάλεξε υπηρεσία.','Turn the cube or pick a service.')}</p>{descs}</div>
 </div>'''

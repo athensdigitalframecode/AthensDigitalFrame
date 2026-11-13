@@ -37,10 +37,10 @@
   var plate = 1, gl3 = null;
   /* page-open intro, a scanner: one thin gold line sweeps down the stage (SCAN ms) and the cube is built behind it,
      first as gold wireframe, then solid LAG ms later. At LOCK (the solid front reaches the bottom) the edges settle,
-     a soft light pool fades in under the cube, the headline rises line by line (root .hero-go), then the logo plate
+     a soft light pool fades in under the cube, then the logo plate
      pops (POP ms) and holds 5 s. It plays once, waits while the tab is hidden, and is simply there under reduced motion. */
   var SCAN = 1100, LAG = 380, LOCK = SCAN + LAG, POP = 750;
-  var introAt = 0, introDone = still, doneAt = 0, hidAt = 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = 0, I = null;
+  var introAt = 0, introDone = still, doneAt = 0, hidAt = 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = -1, I = null;   /* lt: logo-light sweep 0..1, -1 = off */
   var lite = matchMedia('(pointer:coarse)').matches && ((navigator.deviceMemory || 8) <= 4 || (navigator.hardwareConcurrency || 8) <= 4);
   var scan = d.createElement('i'); scan.className = 'cb-scan'; stage.appendChild(scan);
   function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
@@ -53,9 +53,9 @@
           set: Math.pow(1 - clamp((t - LOCK) / 350), 3) };       /* built 3% small and 3 deg off, it settles into place at the lock */
     scan.style.transform = 'translateY(' + w.toFixed(1) + 'px)'; scan.style.opacity = clamp(Math.min(t / 120, (SCAN + 200 - t) / 250)).toFixed(3);
     var u = clamp((t - LOCK - 150) / POP);
-    pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45); lt = Math.max(0, (t - LOCK - 150) / 1000);
-    if (t >= LOCK && !stage.classList.contains('is-lock')) { stage.classList.add('is-lock'); root.classList.add('hero-go'); }
-    if (t >= LOCK + 150 + POP) { introDone = true; doneAt = now; I = null; stage.classList.add('is-ready'); scan.remove(); }
+    pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45);
+    if (t >= LOCK && !stage.classList.contains('is-lock')) stage.classList.add('is-lock');
+    if (t >= LOCK + 150 + POP) { introDone = true; doneAt = now; I = null; stage.classList.add('is-ready'); scan.remove(); markLater(); }
     return !introDone;
   }
   function startIntro() {
@@ -64,7 +64,7 @@
     if (!seen) { waitView = true; return; }                      /* below the fold (phones): play it when the cube scrolls in */
     introAt = performance.now(); stage.classList.add('is-in');
     holdUntil = introAt + LOCK + 150 + 5000;                    /* the logo stays 5 s after it appears, then the cycle starts */
-    if (still) { stage.classList.add('is-ready', 'is-lock'); root.classList.add('hero-go'); scan.remove(); paint(); return; }
+    if (still) { stage.classList.add('is-ready', 'is-lock'); scan.remove(); paint(); return; }
     introTick(introAt); paint();
     if (!raf) { last = introAt; raf = requestAnimationFrame(frame); }
   }
@@ -91,7 +91,7 @@
   stage.addEventListener('pointerleave', function () { ptr = [0, 0]; pOn = 0; });
   stage.addEventListener('pointerdown', function () { ptr = [0, 0]; pOn = 0; });
   function opts() {
-    var o = { plate: plate, pa: pa, pop: pop, lt: still ? 0 : lt, lp: [ptrS[0], ptrS[1], drifts ? pOnS : 0] };
+    var o = { plate: plate, pa: pa, pop: pop, lt: still ? -1 : lt, lp: [ptrS[0], ptrS[1], drifts ? pOnS : 0] };
     if (I) for (var k in I) o[k] = I[k];
     return o;
   }
@@ -104,7 +104,7 @@
     /* shadow width = the cube's on-screen width: |x| extent of the rotated unit axes (1 face-on, ~1.41 on an edge) */
     var x = q[0], y = q[1], z = q[2], w = q[3];
     stage.style.setProperty('--shw', (Math.abs(1-2*(y*y+z*z)) + Math.abs(2*(x*y-z*w)) + Math.abs(2*(x*z+y*w))).toFixed(3));
-    if (gl3 && (plate > .01 || pOn)) wake();
+    if (gl3 && pOn) wake();
     var r = spun();
     if (gl3) { gl3.draw(r, opts()); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
     cube.style.setProperty('--m', css(r));
@@ -116,12 +116,20 @@
       s.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3));
     });
   }
-  /* the logo's light keeps moving while the plate is visible: redraw at ~30 fps, only on screen, never under reduced motion */
-  var aliveRaf = 0, aliveLast = 0;
+  /* the WebGL cube is redrawn (about 30 fps) only while something on it moves: the cursor light settling, or the soft light that
+     crosses the logo once every 11-17 s (about 1.4 s long, only while the logo is showing). Otherwise it draws once and stops.
+     Nothing runs off screen, in a background tab or under reduced motion. */
+  var aliveRaf = 0, aliveLast = 0, markAt = 0, markT = 0;
+  function markLater() {
+    clearTimeout(markT); if (still || !gl3) return;
+    markT = setTimeout(function () { if (inView && !d.hidden && plate > .5) { markAt = performance.now(); wake(); } else markLater(); }, 11000 + Math.random() * 6000);
+  }
   function alive(now) {
     aliveRaf = 0;
-    if (!gl3 || still || !inView || d.hidden || (plate <= .01 && !pOn && pOnS < .01)) return;
-    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; if (introAt) lt = (now - introAt - LOCK - 150) / 1000; gl3.draw(spun(), opts()); }
+    if (!gl3 || still || !inView || d.hidden) return;
+    if (markAt) { lt = (now - markAt) / 1400; if (lt >= 1 || plate < .5) { lt = -1; markAt = 0; markLater(); } }
+    if (!markAt && !pOn && pOnS < .01) { if (!raf) gl3.draw(spun(), opts()); return; }   /* settled: one last draw, then stop */
+    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; gl3.draw(spun(), opts()); }
     aliveRaf = requestAnimationFrame(alive);
   }
   function wake() { if (!aliveRaf && !still) aliveRaf = requestAnimationFrame(alive); }

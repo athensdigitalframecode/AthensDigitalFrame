@@ -334,11 +334,14 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .cb-gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;visibility:hidden}.cb.is-gl .cb-gl{visibility:visible}
 .cb.is-gl .cb-cube{visibility:hidden}
 /* service index and the one description that follows the active face */
-.cb-list{list-style:none;margin:0;padding:var(--s3) 0 0;display:flex;flex-wrap:wrap;gap:0 var(--s5);border-top:1px solid var(--line)}
-.cb-list button{background:none;border:0;min-height:44px;padding:10px 0;cursor:pointer;font:600 12px/1.5 var(--body);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.72);border-bottom:1px solid transparent;transition:color .3s var(--ease),border-color .3s var(--ease)}
+.cb-list{list-style:none;margin:0;padding:var(--s3) 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--s4);border-top:1px solid var(--line)}
+@media(min-width:1200px){.cb-list{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--s5)}}
+.cb-list button{position:relative;width:100%;text-align:left;background:none;border:0;min-height:44px;padding:12px 0 10px;cursor:pointer;font:600 12px/1.5 var(--body);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.72);transition:color .3s var(--ease)}
+.cb-list button::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:0 50%;transition:transform .45s var(--ease)}
+.cb-list button:hover::after{transform:scaleX(.3)}.cb-list .is-on button::after{transform:scaleX(1)}
+.cb-list button:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
 .cb-list i{font-style:normal;color:var(--gold);margin-right:8px}
 .cb-list button:hover,.cb-list .is-on button{color:var(--cream)}
-.cb-list .is-on button{border-bottom-color:var(--gold)}
 .cb-descs{display:grid;margin-top:var(--s3);min-height:4.8em}
 .cb-descs p{margin:0 0 var(--s2);color:var(--muted);font-size:var(--fs-0);max-width:56ch}
 .cb-descs b{color:var(--cream);font-weight:600}
@@ -436,11 +439,12 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .hd{position:sticky;top:0;z-index:50;color:var(--cream);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid var(--line);transition:background .4s var(--ease);animation:hdin .7s var(--ease) both}
 
 @media(prefers-reduced-motion:reduce){.hd,.hero .cb-list,.hero .cb-descs{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.cb-list button::after{transition:none}}
 /* living logo, CSS cube (no WebGL): the same warm reflection crossing the mark, masked by the logo itself so only the mark lights up */
 .cb-plate::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(255,238,205,.55) 50%,transparent 58%) 0 0/300% 100% no-repeat;
  -webkit-mask:url(/assets/df-logo-1024.jpg) 50% 50%/182% no-repeat;mask:url(/assets/df-logo-1024.jpg) 50% 50%/182% no-repeat;mask-mode:luminance;
- animation:logosweep 5.2s cubic-bezier(.45,0,.2,1) 1.6s infinite}
-@keyframes logosweep{0%{background-position:120% 0}42%,100%{background-position:-20% 0}}
+ animation:logosweep 14s ease-in-out 4s infinite}
+@keyframes logosweep{0%,90%{background-position:130% 0}100%{background-position:-30% 0}}
 @media(prefers-reduced-motion:reduce){.cb-plate::before{animation:none;opacity:0}}
 /* cube intro: the stage stays empty until the morph starts (cube.js adds .is-in), the service list rises with it;
    during the intro the plate follows the script frame by frame, so its usual transition is off until .is-ready */

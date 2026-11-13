@@ -35,27 +35,57 @@
   /* WebGL when available (cube-gl.js, ?nogl turns it off); otherwise the CSS cube below is the renderer */
   /* started when the browser is idle, so the first screen is not blocked; cube-gl.js adds .is-gl once its faces are painted */
   var plate = 1, gl3 = null;
-  /* page-open intro, a scanner: one thin gold line sweeps down the stage (SCAN ms) and the cube is built behind it,
-     first as gold wireframe, then solid LAG ms later. At LOCK (the solid front reaches the bottom) the edges settle,
-     a soft light pool fades in under the cube, then the logo plate
-     pops (POP ms) and holds 5 s. It plays once, waits while the tab is hidden, and is simply there under reduced motion. */
-  var SCAN = 1100, LAG = 380, LOCK = SCAN + LAG, POP = 750;
+  /* page-open intro, "the dimensional fold" (one timeline, ms from its start, plays once).
+     The six faces hang apart around the cube's place, half-clear and turned 90 deg about their own normals, while a tesseract
+     (4D hypercube) wireframe turns in the XW and ZW planes around them. Opposite faces travel as pairs on curved paths (an
+     orbit about the cube's centre that closes as they come in), flip the last 90 deg just before contact and lock with a
+     small magnetic snap and recoil: top and bottom first, then the two sides, then front and back (LOCK). Every lock sends
+     one thin ring out in the plane of that face. As the last pair locks the cage flattens onto the cube's twelve edges and
+     fades, one rim light crosses the cube, the light pool fades in and the logo plate pops (POP ms), then holds 5 s.
+     The view starts a little further back and turned, and eases to rest. It waits while the tab is hidden and is simply
+     there under reduced motion. For inspection: ?fold=slow plays it at quarter speed, ?cage=0 hides the cage. */
+  var FLY = 1000, WAVE0 = [0, 420, 880], LOCK = WAVE0[2] + FLY, POP = 750, END = LOCK + 80 + POP;
+  var SLOW = /[?&]fold=slow/.test(location.search) ? .25 : 1;
   var introAt = 0, introDone = still, doneAt = 0, hidAt = 0, pop = still ? 1 : 0, pa = still ? 1 : 0, lt = -1, I = null;   /* lt: logo-light sweep 0..1, -1 = off */
   var lite = matchMedia('(pointer:coarse)').matches && ((navigator.deviceMemory || 8) <= 4 || (navigator.hardwareConcurrency || 8) <= 4);
-  var scan = d.createElement('i'); scan.className = 'cb-scan'; stage.appendChild(scan);
+  /* per face: its wave, the axis and angle of its approach orbit (deg), and how far out it starts (cube = 1) */
+  var WAVE = [2, 1, 2, 1, 0, 0], ORB = [[1,0,0, 12], [0,1,0, -24], [1,0,0, 12], [0,1,0, -24], [0,0,1, 40], [0,0,1, 40]], DIST = [.6, .62, .6, .62, .5, .5];
+  var FM = [], FO = [], FA = new Float32Array(6), FG = new Float32Array(6), FR = new Float32Array(6), CG = { a: 0, b: 0, flat: 1, k: 1, al: 0 };
+  faces.forEach(function () { FM.push(new Float32Array(9)); FO.push(new Float32Array(3)); });   /* where each face is while it folds in: 3x3 turn + offset */
+  var IO = { fold: { m: FM, o: FO, a: FA, g: FG, r: FR, cage: lite || /[?&]cage=0/.test(location.search) ? null : CG }, zoom: 1, yaw: 0, pitch: 0, sweep: -1 };
+  var BASE = ['', 'rotateY(90deg) ', 'rotateY(180deg) ', 'rotateY(-90deg) ', 'rotateX(90deg) ', 'rotateX(-90deg) '];   /* the faces' own turns in the stylesheet */
   function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
   function sweep(x) { x = clamp(x); return x * x * (3 - 2 * x); }
+  function eio(x) { x = clamp(x); return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2; }
   function easeBack(t) { var c = 1.6; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); }   /* small overshoot */
+  function qm(a, m) { var x = a[0], y = a[1], z = a[2], w = a[3];   /* quaternion -> 3x3, same layout as css() and the shader's uR */
+    m[0] = 1-2*(y*y+z*z); m[1] = 2*(x*y+z*w); m[2] = 2*(x*z-y*w); m[3] = 2*(x*y-z*w); m[4] = 1-2*(x*x+z*z); m[5] = 2*(y*z+x*w); m[6] = 2*(x*z+y*w); m[7] = 2*(y*z-x*w); m[8] = 1-2*(x*x+y*y); }
   function introTick(now) {
     if (!introAt || introDone) return false;
-    var t = now - introAt, H = stage.clientHeight, w = sweep(t / SCAN) * (H + 16) - 8;
-    I = { wire: w, solid: sweep((t - LAG) / SCAN) * (H + 16) - 8, frame: t < LOCK ? 1 : clamp(1 - (t - LOCK) / 500),
-          set: Math.pow(1 - clamp((t - LOCK) / 350), 3) };       /* built 3% small and 3 deg off, it settles into place at the lock */
-    scan.style.transform = 'translateY(' + w.toFixed(1) + 'px)'; scan.style.opacity = clamp(Math.min(t / 120, (SCAN + 200 - t) / 250)).toFixed(3);
-    var u = clamp((t - LOCK - 150) / POP);
+    var t = (now - introAt) * SLOW;
+    for (var i = 0; i < 6; i++) {
+      var st = WAVE0[WAVE[i]], x = (t - st) / FLY, tc = t - st - FLY, p, rec = 0;
+      if (x < 0) p = -.07 * (st - t) / st;                                  /* waiting for its wave: a slow drift inwards */
+      else if (x < .86) p = .94 * eio(x / .86);                             /* the approach */
+      else if (x < 1) p = .94 + .06 * Math.pow((x - .86) / .14, 2);         /* the last 6% closes fast, like a magnet */
+      else { p = 1; if (tc < 420) rec = .028 * Math.abs(Math.sin(Math.PI * tc / 140)) * Math.exp(-tc / 95); }   /* locked: micro-recoil, outwards only */
+      var k = 1 - p, o = ORB[i], n = NORMAL[i], Qo = axis(o[0], o[1], o[2], o[3] * k);
+      qm(mul(Qo, axis(n[0], n[1], n[2], (i % 2 ? -90 : 90) * (1 - eio((x - .5) / .34)))), FM[i]);   /* orbit, and the 90 deg flip that ends just before contact */
+      var c = rot(Qo, n), far = k * DIST[i] + rec;
+      FO[i][0] = c[0] * far; FO[i][1] = c[1] * far; FO[i][2] = c[2] * far;
+      FA[i] = clamp((t - 70 * WAVE[i]) / 360) * (.45 + .55 * sweep((x - .4) / .42));
+      FG[i] = x < 1 ? .5 * clamp(t / 300) * (1 - .5 * clamp(p)) : .8 * Math.exp(-tc / 210);
+      FR[i] = !lite && tc >= 0 && tc < 560 ? tc / 560 : -1;
+    }
+    var T = clamp(t / LOCK), dec = Math.pow(1 - T, 1.6), e = eio(T);       /* the cage turns fast at first and slows into alignment */
+    CG.a = -2.6 * dec; CG.b = -1.7 * dec; CG.flat = 1 - sweep((T - .55) / .45); CG.k = .72 + .28 * sweep((T - .5) / .5);
+    CG.al = clamp(t / 350) * (t < LOCK ? .5 + .25 * sweep((T - .85) / .15) : .75 * clamp(1 - (t - LOCK) / 520));
+    IO.zoom = .78 + .22 * e; IO.yaw = -10 * (1 - e); IO.pitch = 3 * (1 - e); IO.sweep = t > LOCK && t < LOCK + 700 ? (t - LOCK) / 700 : -1;
+    I = IO;
+    var u = clamp((t - LOCK - 80) / POP);
     pop = .55 + .45 * easeBack(u); pa = Math.min(1, u / .45);
     if (t >= LOCK && !stage.classList.contains('is-lock')) stage.classList.add('is-lock');
-    if (t >= LOCK + 150 + POP) { introDone = true; doneAt = now; I = null; stage.classList.add('is-ready'); scan.remove(); markLater(); }
+    if (t >= END) { introDone = true; doneAt = now; I = null; stage.classList.add('is-ready'); faces.forEach(function (f) { f.style.transform = ''; }); markLater(); }
     return !introDone;
   }
   function startIntro() {
@@ -63,8 +93,8 @@
     if (d.hidden) { hidAt = -1; return; }                        /* opened in a background tab: play it when the tab is shown */
     if (!seen) { waitView = true; return; }                      /* below the fold (phones): play it when the cube scrolls in */
     introAt = performance.now(); stage.classList.add('is-in');
-    holdUntil = introAt + LOCK + 150 + 5000;                    /* the logo stays 5 s after it appears, then the cycle starts */
-    if (still) { stage.classList.add('is-ready', 'is-lock'); scan.remove(); paint(); return; }
+    holdUntil = introAt + (LOCK + 80) / SLOW + 5000;            /* the logo stays 5 s after it appears, then the cycle starts */
+    if (still) { stage.classList.add('is-ready', 'is-lock'); paint(); return; }
     introTick(introAt); paint();
     if (!raf) { last = introAt; raf = requestAnimationFrame(frame); }
   }
@@ -78,7 +108,7 @@
      second highlight follows the cursor across the faces (WebGL, not on weak phones) */
   var ptr = [0, 0], ptrS = [0, 0], pOn = 0, pOnS = 0, drifts = !still && !lite;
   function spun() {
-    if (I) return mul(axis(0,1,0, -3 * I.set), q);
+    if (I) return mul(mul(axis(0,1,0, I.yaw), axis(1,0,0, I.pitch)), q);   /* the intro's camera: turned a little, easing to rest */
     if (!drifts || !introDone || !gl3) return q;
     var s = (performance.now() - doneAt) / 1000, u = clamp(s / 3), k = plate * plate * u * u * (3 - 2 * u);   /* drift starts at zero and eases in, so nothing jumps when the intro hands over */
     ptrS[0] += (ptr[0] - ptrS[0]) * .08; ptrS[1] += (ptr[1] - ptrS[1]) * .08; pOnS += (pOn - pOnS) * .08;
@@ -107,12 +137,15 @@
     if (gl3 && pOn) wake();
     var r = spun();
     if (gl3) { gl3.draw(r, opts()); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
-    cube.style.setProperty('--m', css(r));
+    var zm = I ? I.zoom.toFixed(4) : '';
+    cube.style.setProperty('--m', css(r) + (I ? ' scale3d(' + zm + ',' + zm + ',' + zm + ')' : ''));
     cube.style.setProperty('--pop', pop.toFixed(3)); cube.style.setProperty('--pa', pa.toFixed(3));
-    var cs = cube.offsetWidth, cy = stage.clientHeight / 2;
-    faces.forEach(function (f, i) {                              /* CSS cube: each face fades in as the scan's solid front passes it */
+    var cs = cube.offsetWidth;
+    faces.forEach(function (f, i) {                              /* CSS cube: the same fold, without the cage, the rings and the rim light */
       var n = rot(r, NORMAL[i]), s = f.style;
-      s.setProperty('--fa', (I ? clamp((I.solid - (cy + n[1] * cs * .5 - cs * .4)) / (cs * .8)) : 1).toFixed(3));
+      if (I) { var m = FM[i], o = FO[i];
+        s.transform = 'matrix3d(' + [m[0], m[1], m[2], 0, m[3], m[4], m[5], 0, m[6], m[7], m[8], 0, o[0] * cs, o[1] * cs, o[2] * cs, 1].map(function (v) { return v.toFixed(4); }) + ') ' + BASE[i] + 'translateZ(var(--h))'; }
+      s.setProperty('--fa', (I ? FA[i] : 1).toFixed(3));
       s.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3));
     });
   }

@@ -455,8 +455,6 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 /* the light pool under the cube fades in when the faces lock (not on weak phones); the headline rises line by line then */
 .cb-floor::after{content:"";position:absolute;left:4%;right:4%;top:calc(var(--cs)*-.2);height:calc(var(--cs)*.4);background:radial-gradient(closest-side,rgba(201,169,110,.34),rgba(201,169,110,.1) 55%,transparent);opacity:0;transition:opacity 1.4s var(--ease)}
 .cb.is-lock .cb-floor::after{opacity:1}
-/* the scanner line of the intro: moved by cube.js with transform, removed when the intro ends */
-.cb-scan{position:absolute;left:6%;right:6%;top:0;height:1px;pointer-events:none;opacity:0;z-index:2;background:linear-gradient(90deg,transparent,#E8D3A6 18%,#fff6e2 50%,#E8D3A6 82%,transparent);box-shadow:0 0 12px 1px rgba(201,169,110,.55),0 0 34px 4px rgba(201,169,110,.18)}.cb.is-lite .cb-floor::after{display:none}
 .hero .h1.hl{animation:none!important}
 .hl .ln{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .1em .14em .02em;margin:0 -.1em -.14em -.02em}
 .hl .ln>span{display:inline-block;transform:translateY(112%)}

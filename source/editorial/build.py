@@ -99,7 +99,7 @@ CASES = {
         motion=('Οι σκηνές οδηγούνται από τη θέση της κύλισης. Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, η σελίδα το σέβεται.', 'The scenes are driven by scroll position. If you have asked your device for reduced motion, the page respects it.'),
         sample=('Η εταιρεία, τα στατιστικά, οι μαρτυρίες, τα ονόματα πελατών και τα νέα είναι δείγματα χωρίς αντίκρισμα.', 'The company, statistics, testimonials, client names and news are placeholders.')),
     'enuma': dict(
-        name='ENUMA ELISH', live='/enuma/', og='enuma/og.jpg', other='olivane',
+        name='ENUMA ELISH', live='/enuma/', og='enuma/og.jpg', other='last-train',
         sector=('E-shop · Streetwear', 'E-shop · Streetwear'),
         alt=('Το concept e-shop ENUMA ELISH: ο τεράστιος τίτλος ENUMA ELISH πάνω σε κόκκινη, ασπρόμαυρη φωτογραφία δρόμου', 'ENUMA ELISH concept e-shop: the oversized ENUMA ELISH title over a red-tinted black-and-white street photo'),
         lead=('E-shop για ένα φανταστικό streetwear brand ανάμεσα στο Τόκιο και την Αθήνα. Το καλάθι δουλεύει· το checkout και τα προϊόντα είναι δείγματα.', 'An e-shop for a fictional streetwear label between Tokyo and Athens. The bag works; the checkout and the products are samples.'),
@@ -118,6 +118,27 @@ CASES = {
         responsive=('Στο κινητό οι φωτογραφίες προϊόντος γίνονται συρόμενες και το κουμπί αγοράς μένει κολλημένο στο κάτω μέρος.', 'On phones the product photos become swipeable and the add-to-bag button stays fixed at the bottom.'),
         motion=('Κυλιόμενα κείμενα με κουμπί παύσης και ένα reveal στον τίτλο. Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, όλα σταματούν.', 'Scrolling tickers with a pause button and one reveal on the title. If you have asked your device for reduced motion, it all stops.'),
         sample=('Το brand, τα προϊόντα, οι τιμές, το απόθεμα και οι πολιτικές είναι δείγματα. Το καλάθι μένει μόνο στον browser σου· το checkout και οι φόρμες δεν στέλνουν τίποτα.', 'The brand, products, prices, stock and policies are samples. The bag stays only in your browser; the checkout and forms send nothing.')),
+    'last-train': dict(
+        name='ENUMA ELISH · Last Train', live='/last-train/', og='last-train/og.jpg', other='olivane',
+        sector=('E-shop · Streetwear drop', 'E-shop · Streetwear drop'),
+        alt=('Το concept e-shop ENUMA ELISH Last Train: οι λέξεις ENUMA και ELISH δεξιά κι αριστερά από φωτογραφία αποβάθρας του μετρό της Αθήνας', 'ENUMA ELISH Last Train concept e-shop: the words ENUMA and ELISH either side of a photo of an Athens metro platform'),
+        lead=('Ένα drop για το ίδιο φανταστικό brand: η αποβάθρα του μετρό της Αθήνας συναντά το τελευταίο τρένο του Τόκιο. Το τρένο μπαίνει στον σταθμό καθώς κυλάς. Το καλάθι δουλεύει· τα προϊόντα και οι τιμές είναι δείγματα.', "A drop for the same fictional label: an Athens metro platform meets Tokyo's last train. The train pulls into the station as you scroll. The bag works; the products and prices are samples."),
+        brief=[('Το brief: ένα fashion e-shop που μοιάζει με brand με δική του art direction και όχι με template, εμπνευσμένο από το μετρό της Αθήνας και την street κουλτούρα του Τόκιο. Δεν υπάρχει πελάτης.', 'The brief: a fashion e-shop that feels like an art-directed label rather than a template, drawn from the Athens metro and Tokyo street culture. There is no client.'),
+               ('Χτίστηκε ως θέμα Shopify με οκτώ δείγματα προϊόντων. Εδώ βλέπεις μια στατική εκδοχή της αρχικής του σελίδας: το καλάθι μένει στον browser σου και δεν υπάρχει checkout.', 'It was built as a Shopify theme with eight sample products. This is a static version of its home page: the bag stays in your browser and there is no checkout.')],
+        direction=[('Μαύρο του τούνελ, γκρι πλακάκι, πράσινο σίδερο και κίτρινο νατρίου: τα χρώματα της αποβάθρας. Φωτογραφίες από σταθμό και κείμενα σε ελληνικά, αγγλικά και ιαπωνικά.', 'Tunnel black, tile grey, iron green and sodium yellow: the colours of the platform. Station photographs, and copy in Greek, English and Japanese.'),
+                   ('Η πλοήγηση μιλάει σαν μετρό: η «επόμενη στάση» αλλάζει σε κάθε ενότητα, ένας πίνακας αναχωρήσεων μετράει αντίστροφα και το footer είναι χάρτης γραμμής.', 'The navigation talks like a metro: the "next stop" changes with each section, a departure board counts down and the footer is a line map.')],
+        palette=['#0d0e0c', '#ece9e1', '#f2b705', '#24342a'],
+        fonts=[('Commissioner', ('τίτλοι και κείμενα', 'headlines and text')), ('JetBrains Mono', ('πινακίδες και ετικέτες', 'signs and labels'))],
+        stages=[('/assets/last-train-s1', False, ('Το τρένο μπαίνει στον σταθμό καθώς κυλάς', 'The train pulls into the station as you scroll')),
+                ('/assets/last-train-s2', False, ('Η κρεμάστρα: κάθε κομμάτι γυρίζει όταν περνάς από πάνω', 'The rail: each piece turns when you hover over it')),
+                ('/assets/last-train-s3', False, ('Ένα κομμάτι ανοίγει πάνω από την αποβάθρα, με μεγέθη και καλάθι', 'A piece opens over the platform, with sizes and the bag'))],
+        parts=[(('Hero με τρένο', 'Train hero'), ('Το τρένο φτάνει καρέ-καρέ καθώς κυλάς, ενώ ένας πίνακας αναχωρήσεων μετράει αντίστροφα.', 'The train arrives frame by frame as you scroll, while a departure board counts down.')),
+               (('Η κρεμάστρα', 'The rail'), ('Οκτώ κομμάτια σε μια ράγα που κυλάει οριζόντια· το καθένα γυρίζει όταν περνάς από πάνω.', 'Eight pieces on a rail that moves sideways; each one turns when you hover over it.')),
+               (('Καμπάνια', 'Campaign'), ('Φωτογραφίες της αποβάθρας με parallax και κείμενα σε τρεις γλώσσες.', 'Platform photographs with parallax and copy in three languages.')),
+               (('Συλλογή και καλάθι', 'Collection and bag'), ('Πλέγμα με φίλτρα ανά κατηγορία, γρήγορη προσθήκη ανά μέγεθος και συρτάρι καλαθιού.', 'A grid with category filters, quick add by size and a slide-out bag.'))],
+        responsive=('Στο κινητό το τρένο φορτώνει τα μισά καρέ και η κρεμάστρα γίνεται λωρίδα που σύρεις με το δάχτυλο.', 'On phones the train loads half the frames and the rail becomes a strip you swipe with your finger.'),
+        motion=('Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, το parallax σταματά και το τρένο ακολουθεί το scroll χωρίς εξομάλυνση.', 'If you have asked your device for reduced motion, the parallax stops and the train follows the scroll without easing.'),
+        sample=('Το brand, τα προϊόντα, οι τιμές, τα υλικά και οι χρόνοι αποστολής είναι δείγματα. Το καλάθι μένει μόνο στον browser σου· το checkout και η φόρμα newsletter δεν στέλνουν τίποτα.', 'The brand, products, prices, fabrics and shipping times are samples. The bag stays only in your browser; the checkout and the newsletter form send nothing.')),
 }
 
 class Page:
@@ -363,15 +384,16 @@ class Page:
     def case(s, key): return f'{s.pre}/work/{key}.html'
     def navcube(s):
         """Small cube docked bottom-right on wide screens once the hero is gone: it turns to the section being read, a click on a
-        face goes there, and the two concept faces open their demo. The header menu is the accessible navigation, so this is hidden.
+        face goes there, and a concept face opens its demo. Two concepts share each project face and swap as you scroll. The header menu is the accessible navigation, so this is hidden.
         Faces follow a path of neighbours on the cube (4,0,1,5,3,2), so each step down the page is a quarter turn."""
         t = s.t; out = ''
-        rows = [('services', '02', t('Υπηρεσίες', 'Services')), 'olivane', 'arclines', ('process', '04', t('Διαδικασία', 'Process')),
+        rows = [('services', '02', t('Υπηρεσίες', 'Services')), ('olivane', 'enuma'), ('arclines', 'last-train'), ('process', '04', t('Διαδικασία', 'Process')),
                 ('pricing', '05', t('Τιμές', 'Pricing')), ('contact', '08', t('Επικοινωνία', 'Contact'))]
         for f, r in zip((4, 0, 1, 5, 3, 2), rows):
-            if isinstance(r, str):
-                c = CASES[r]
-                out += f'<a class="nq-f nq-p" data-f="{f}" href="{c["live"]}" tabindex="-1"><img src="/assets/{r}-d.webp" alt="" loading="lazy" decoding="async"><b>Concept</b><span>{c["name"]}</span></a>'
+            if r[0] in CASES:                                    # a project face: two concepts take turns on it
+              for n, k in enumerate(r):
+                c = CASES[k]
+                out += f'<a class="nq-f nq-p" data-f="{f}" data-pj="{k}" href="{c["live"]}" tabindex="-1"{" hidden" if n else ""}><img src="/assets/{k}-d.webp" alt="" loading="lazy" decoding="async"><b>Concept</b><span>{c["name"]}</span></a>'
             else:
                 out += f'<a class="nq-f" data-f="{f}" href="#{r[0]}" tabindex="-1"><b>{r[1]}</b><span>{r[2]}</span></a>'
         return f'<div class="nq" id="navcube" aria-hidden="true"><div class="nq-c">{out}</div></div>\n'

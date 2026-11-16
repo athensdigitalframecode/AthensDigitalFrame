@@ -467,6 +467,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .nq.is-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}}
 .nq-c{position:absolute;inset:0;transform-style:preserve-3d;transform:translateZ(calc(var(--q)*-.5)) var(--m,rotateX(-14deg) rotateY(-24deg))}
 .nq-f{position:absolute;inset:0;--lit:.6;backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:9px;overflow:hidden;background:linear-gradient(145deg,#2a2a2d,#141416 70%);border:1px solid rgba(201,169,110,.5);color:var(--cream);text-decoration:none;font:500 8.5px/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase;transition:border-color .3s var(--ease)}
+.nq-f[hidden]{display:none}
 .nq-f:hover{border-color:var(--gold)}
 .nq-f[data-f="0"]{transform:translateZ(calc(var(--q)*.5))}
 .nq-f[data-f="1"]{transform:rotateY(90deg) translateZ(calc(var(--q)*.5))}

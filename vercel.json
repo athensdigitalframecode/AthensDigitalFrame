@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/((?!olivane/)(?!arclines/)(?!enuma/).*)",
+      "source": "/((?!olivane/)(?!arclines/)(?!enuma/)(?!last-train/).*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "source": "/(olivane|arclines|enuma)/(.*)",
+      "source": "/(olivane|arclines|enuma|last-train)/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",

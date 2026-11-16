@@ -6,3 +6,4 @@
 - Not tested: real iPhone/Android, Safari, Firefox, Lighthouse after the cube changes.
 - Rules: fetch before push, never force-push, Claude Chat also pushes to main, no partner, never invent content.
 - Intro: "dimensional fold" (tesseract cage, paired faces, lock rings) replaced the scanner on `redesign`; the scanner is in 8de975d if it has to come back.
+- 4th concept "ENUMA ELISH · Last Train" at /last-train/ (static build of the owner's Shopify theme zip; build script kept outside the repo in the session scratchpad). Docked cube swaps concepts on its two project faces.

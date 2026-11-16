@@ -1,7 +1,7 @@
 # Athens DigitalFrame
 
 Статичный сайт, Vercel деплоит из `main`. Владелец работает один. Основной язык EL, есть EN (`en/`).
-Демо `/olivane/`, `/arclines/`, `/enuma/` живут отдельно (их JS не хэшируется: после правок Ctrl+Shift+R).
+Демо `/olivane/`, `/arclines/`, `/enuma/`, `/last-train/` живут отдельно (их JS не хэшируется: после правок Ctrl+Shift+R).
 
 ## Сборка
 Страницы генерирует `python source/editorial/build.py` (стили `site.css`, скрипт `site.js`, тексты EL/EN в build.py через `t(el,en)`). HTML не править руками; `source/` и `docs/` не публикуются (`.vercelignore`).

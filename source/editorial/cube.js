@@ -273,7 +273,9 @@
   var nq = d.getElementById('navcube');
   if (nq && 'IntersectionObserver' in window) {
     var nc = nq.firstElementChild, nf = [].slice.call(nc.children), PATH = [4, 0, 1, 5, 3, 2], nk = 0, nQ = TARGET[PATH[0]], nFrom, nTo, nT0 = 0, nRaf = 0;
-    var NMAP = { studio: 0, services: 0, 'work-olivane': 1, 'work-arclines': 2, 'work-enuma': 2, process: 3, pricing: 4, about: 5, faq: 5, contact: 5 };
+    var NMAP = { studio: 0, services: 0, 'work-olivane': 1, 'work-arclines': 2, 'work-enuma': 1, 'work-last-train': 2, process: 3, pricing: 4, about: 5, faq: 5, contact: 5 };
+    var pjShow = function (id) { var k = id.replace(/^work-/, ''), on = nf.filter(function (f) { return f.getAttribute('data-pj') === k; })[0];   /* swap the concept shown on a shared face */
+      if (on) nf.forEach(function (f) { if (f.getAttribute('data-f') === on.getAttribute('data-f')) f.hidden = f !== on; }); };
     var nPaint = function (r) {
       nc.style.setProperty('--m', css(r));
       nf.forEach(function (f) { var n = rot(r, NORMAL[+f.getAttribute('data-f')]); f.style.setProperty('--lit', Math.max(0, n[0]*LIGHT[0] + n[1]*LIGHT[1] + n[2]*LIGHT[2]).toFixed(3)); });
@@ -288,7 +290,7 @@
       nFrom = nQ; nT0 = performance.now(); if (!nRaf) nRaf = requestAnimationFrame(nTick);
     };
     nPaint(nQ);
-    var nio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) nGo(NMAP[e.target.id]); }); }, { rootMargin: '-45% 0px -50% 0px' });
+    var nio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { if (/^work-/.test(e.target.id)) pjShow(e.target.id); nGo(NMAP[e.target.id]); } }); }, { rootMargin: '-45% 0px -50% 0px' });
     Object.keys(NMAP).forEach(function (id) { var el = d.getElementById(id); if (el) nio.observe(el); });
     var hero = d.querySelector('.hero');
     if (hero) new IntersectionObserver(function (es) { nq.classList.toggle('is-on', !es[0].isIntersecting && es[0].boundingClientRect.top < 0); }).observe(hero);

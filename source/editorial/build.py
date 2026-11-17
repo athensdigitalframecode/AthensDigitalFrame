@@ -280,7 +280,7 @@ class Page:
         out += s.header()
         out += f'''<section class="hero dark"><div class="wrap grid">
 <div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
-<h1 class="h1">{t('Ιστοσελίδες, <em>προσεκτικά</em> χτισμένες.','Websites, <em>thoughtfully</em> constructed.')}</h1>
+<h1 class="h1">{t('<span class="hw">Ιστοσελίδες,</span> <em class="hw">προσεκτικά</em> <span class="hw">χτισμένες.</span>','<span class="hw">Websites,</span> <em class="hw">thoughtfully</em> <span class="hw">constructed.</span>')}</h1>
 <p class="lead">{t('Σχεδιάζουμε και κατασκευάζουμε σύγχρονες ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','We design and build modern websites and e-shops for businesses that want to stand out.')}</p>
 <div class="btns"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn ghost" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')}</a></div>
 <div class="meta"><div><b>3–5</b>{t('ημέρες έως το live','days to go live')}</div><div><b>300€</b>{t('ιστοσελίδα, εφάπαξ','website, one-time')}</div><div><b>0€</b>{t('πριν δεις το demo','before you see the demo')}</div></div></div>

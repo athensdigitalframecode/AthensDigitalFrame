@@ -469,10 +469,17 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 /* the light pool under the cube fades in when the faces lock (not on weak phones); the headline rises line by line then */
 .cb-floor::after{content:"";position:absolute;left:4%;right:4%;top:calc(var(--cs)*-.2);height:calc(var(--cs)*.4);background:radial-gradient(closest-side,rgba(201,169,110,.2),rgba(201,169,110,.06) 55%,transparent);opacity:0;transition:opacity 1.4s var(--ease)}
 .cb.is-lock .cb-floor::after{opacity:1}
-.hero .h1.hl{animation:none!important}
-.hl .ln{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .1em .14em .02em;margin:0 -.1em -.14em -.02em}
-.hl .ln>span{display:inline-block;transform:translateY(112%)}
-.hero-go .hl .ln>span{transform:none;transition:transform 1s cubic-bezier(.16,1,.3,1) calc(var(--i) * 130ms)}
+/* hero headline, once on load (CSS only, the text stays real text): the three parts rise out of a soft blur in turn,
+   then a gold hairline is drawn under the italic word and settles to a trace. Timing: the delays below; travel and blur: @keyframes hw */
+.hero .h1{animation:none!important}
+.hw{display:inline-block;animation:hw .88s cubic-bezier(.19,1,.22,1) .13s both}
+.hw:nth-child(2){position:relative;animation-duration:.96s;animation-delay:.36s;--y:30px}
+.hw:nth-child(3){animation-duration:.93s;animation-delay:.61s}
+@keyframes hw{from{opacity:0;transform:translateY(var(--y,26px));filter:blur(7px)}}
+.hw:nth-child(2)::after{content:"";position:absolute;left:.06em;right:.1em;bottom:.04em;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;animation:hwline 1.6s cubic-bezier(.19,1,.22,1) 1.34s both}
+@keyframes hwline{0%{transform:scaleX(0);opacity:.9}42%{transform:scaleX(1);opacity:.9}100%{transform:scaleX(1);opacity:.3}}
+@media(max-width:699px){@keyframes hw{from{opacity:0;transform:translateY(calc(var(--y,26px) * .7));filter:blur(4px)}}}
+@media(prefers-reduced-motion:reduce){.hw,.hw:nth-child(2)::after{animation:none}}
 @media(prefers-reduced-motion:reduce){.cb-floor::after,.cb-floor::before{transition:none}}
 /* docked navigation cube (cube.js): wide screens with a mouse only, shown once the hero has scrolled away */
 .nq{display:none}

@@ -361,7 +361,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .caps h3{font-size:var(--fs-2)}
 .caps p{color:var(--muted);font-size:var(--fs-0);max-width:40ch}
 @media(min-width:760px){.caps{grid-template-columns:repeat(2,1fr);column-gap:48px}}
-@media(min-width:1100px){.caps{grid-template-columns:repeat(3,1fr)}.caps li{padding-inline:28px;border-right:1px solid var(--line)}.caps li:nth-child(3n+1){padding-left:0}.caps li:nth-child(3n){border-right:0}}
+@media(min-width:1100px){.caps{grid-template-columns:repeat(3,1fr);column-gap:0}.caps li{padding-inline:28px;border-right:1px solid var(--line)}.caps li:nth-child(3n+1){padding-left:0}.caps li:nth-child(3n){border-right:0}}
 /* number, title and text line up across a row even when one title wraps and its neighbour does not */
 @supports(grid-template-rows:subgrid){@media(min-width:760px){.caps li{grid-row:span 3;grid-template-rows:subgrid}}@media(min-width:1100px){.adv li{grid-row:span 3;grid-template-rows:subgrid}}}
 /* case studies (work/*.html): reuse .phero,.about,.facts,.caps,.pv; only these three parts are new */

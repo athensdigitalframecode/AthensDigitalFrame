@@ -272,7 +272,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(min-width:1280px){.hd .in{display:grid;grid-template-columns:1fr auto 1fr}.hd .right{justify-self:end}.nav{display:flex}}
 /* ---- remaining components on the dark system ---- */
 .adv,.why dl,.facts,.three{border-top-color:var(--rule)}
-.adv li{display:grid;gap:10px;transition:background .4s var(--ease)}
+.adv li{display:grid;align-content:start;gap:10px;transition:background .4s var(--ease)}
 .ft{border-top-color:var(--line)}
 .pull,.guar{color:var(--gold-lt)}
 .status{padding:14px 16px;background:rgba(201,169,110,.08);font-size:15px;border-radius:0 2px 2px 0}
@@ -362,6 +362,8 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .caps p{color:var(--muted);font-size:var(--fs-0);max-width:40ch}
 @media(min-width:760px){.caps{grid-template-columns:repeat(2,1fr);column-gap:48px}}
 @media(min-width:1100px){.caps{grid-template-columns:repeat(3,1fr)}.caps li{padding-inline:28px;border-right:1px solid var(--line)}.caps li:nth-child(3n+1){padding-left:0}.caps li:nth-child(3n){border-right:0}}
+/* number, title and text line up across a row even when one title wraps and its neighbour does not */
+@supports(grid-template-rows:subgrid){@media(min-width:760px){.caps li{grid-row:span 3;grid-template-rows:subgrid}}@media(min-width:1100px){.adv li{grid-row:span 3;grid-template-rows:subgrid}}}
 /* case studies (work/*.html): reuse .phero,.about,.facts,.caps,.pv; only these three parts are new */
 .cs-pv{max-width:1040px;margin-inline:auto}
 .sw{list-style:none;margin:var(--s6) 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s4) var(--s5);font:600 12px/1.6 var(--body);letter-spacing:.1em;color:var(--muted)}

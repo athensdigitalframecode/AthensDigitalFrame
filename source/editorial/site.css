@@ -29,6 +29,7 @@ section{position:relative}
 /* buttons */
 
 .btns{display:flex;flex-wrap:wrap;gap:12px}
+@media(max-width:559px){.btns>.btn{flex:1 1 100%}}
 /* header: brand black,white df mark,gold CTA */
 
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:400 15px/1 var(--mark);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
@@ -52,7 +53,7 @@ body.lock{overflow:hidden}
 .dark .fr::before{border-color:var(--line-gold)}
 .browser{position:relative;z-index:1;background:var(--s2);border:1px solid rgba(245,241,232,.14);border-radius:6px;box-shadow:0 40px 80px -34px rgba(0,0,0,.9),0 0 60px -20px rgba(201,169,110,.16);overflow:hidden}
 .browser .bar{height:28px;background:var(--s0);display:flex;align-items:center;gap:6px;padding:0 12px}.browser .bar i{width:8px;height:8px;border-radius:50%;background:rgba(244,239,230,.35)}
-.browser .bar span{margin-left:10px;font:500 11px/1 var(--body);color:rgba(245,241,232,.72);letter-spacing:.04em}
+.browser .bar span{margin-left:10px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:500 11px/1 var(--body);color:rgba(245,241,232,.72);letter-spacing:.04em}
 .browser img{width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover}
 .phone{position:relative;z-index:2;width:100%;background:var(--s0);box-shadow:0 0 0 1px var(--line-gold),0 30px 50px -25px rgba(0,0,0,.6);border-radius:26px;padding:7px;}
 .phone img{width:100%;height:auto;aspect-ratio:390/844;object-fit:cover;border-radius:20px}
@@ -65,6 +66,7 @@ body.lock{overflow:hidden}
 .hero .lead{margin-bottom:var(--s6);color:rgba(245,241,232,.82)}
 .hero .meta{margin-top:var(--s7);display:flex;gap:clamp(20px,4vw,48px);padding-top:var(--s5);border-top:1px solid var(--line-gold)}
 .hero .meta div{font:600 12px/1.5 var(--body);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.72)}
+@media(max-width:559px){.hero .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.hero .meta div{font-size:10.5px;letter-spacing:.08em}}
 /* advantages */
 .adv{display:grid;border-top:1px solid var(--rule)}
 .adv li{padding:var(--s5) 0 var(--s6);border-bottom:1px solid var(--line)}

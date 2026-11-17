@@ -257,8 +257,8 @@ class Page:
         faqcats = [(t('Ιστοσελίδες', 'Websites'), [1, 3, 4]), ('E-commerce', [10, 11, 12, 13]), (t('Τιμές', 'Pricing'), [0, 5, 14]),
                    (t('Hosting & συντήρηση', 'Hosting & maintenance'), [8, 9]), (t('Διαδικασία', 'Process'), [2, 6]), (t('Ιδιοκτησία & υποστήριξη', 'Ownership & support'), [7, 15])]
         pick = lambda p: p[1] if s.l == 'en' else p[0]
+        tabs = f'<div class="fq-tabs" role="group" aria-label="{t("Φίλτρο ερωτήσεων", "Filter questions")}"><button type="button" aria-pressed="true" data-cat="all">{t("Όλες", "All")}</button>' + ''.join(f'<button type="button" aria-pressed="false" data-cat="{n}">{esc(title)}</button>' for n, (title, _) in enumerate(faqcats)) + '</div>'
         faq = ''
-        faq = f'<div class="fq-tabs" role="group" aria-label="{t("Φίλτρο ερωτήσεων", "Filter questions")}"><button type="button" aria-pressed="true" data-cat="all">{t("Όλες", "All")}</button>' + ''.join(f'<button type="button" aria-pressed="false" data-cat="{n}">{esc(title)}</button>' for n, (title, _) in enumerate(faqcats)) + '</div>'
         for n, (title, idx) in enumerate(faqcats):
             faq += f'<div class="fcat rv" data-cat="{n}"><h3>{esc(title)}</h3>' + ''.join(f'<details><summary>{esc(pick(QA[i][0]))}</summary><div class="ans"><p>{esc(pick(QA[i][1]))}</p></div></details>' for i in idx) + '</div>'
         def panel(pid, steps, hidden, note):
@@ -329,7 +329,7 @@ class Page:
 <dt>{t('Οργανωμένη διαδικασία','Organised process')}</dt><dd>{t('Πέντε σαφή βήματα, live σε 3–5 ημέρες.','Five clear steps, live in 3–5 days.')}</dd></dl>
 </div></section>
 <section class="sec" id="faq" aria-labelledby="fqh"><div class="wrap faq">
-<div class="side rv"><p class="eyebrow">07 — FAQ</p><h2 class="h2" id="fqh">{t('Πριν μας στείλεις μήνυμα.','Before you message us.')}</h2></div><div>{faq}</div>
+<div class="side rv"><p class="eyebrow">07 — FAQ</p><h2 class="h2" id="fqh">{t('Πριν μας στείλεις μήνυμα.','Before you message us.')}</h2>{tabs}</div><div>{faq}</div>
 </div></section>
 <section class="sec dark" id="contact" aria-labelledby="cth"><div class="wrap"><div class="fr closing">{LOGO}<div class="contact">
 <div class="rv"><p class="eyebrow">08 — {t('Επικοινωνία','Contact')}</p><h2 class="h2" id="cth">{t('Δες πώς θα φαινόταν το δικό σου site.','See how your own site would look.')}</h2><p class="lead" style="margin-top:20px">{t('Το δωρεάν demo έρχεται πριν από οποιαδήποτε πληρωμή. Δεν σου αρέσει; Δεν πληρώνεις τίποτα.','The free demo comes before any payment. Do not like it? You pay nothing.')}</p>

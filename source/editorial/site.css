@@ -122,7 +122,9 @@ body.lock{overflow:hidden}
 .facts{border-top:1px solid var(--rule)}.facts li{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;font-size:var(--fs-0)}.facts span{overflow-wrap:anywhere}
 .facts b{font:600 12px/1.6 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
 /* faq */
-.faq{display:grid;gap:clamp(32px,5vw,64px)}
+.faq{display:grid;gap:clamp(32px,5vw,64px)}.faq>*{min-width:0}
+/* filtering hides question groups: never anchor the scroll on them, or the page jumps */
+.fcat{overflow-anchor:none}
 @media(min-width:900px){.faq{grid-template-columns:.7fr 1.3fr}.faq .side{position:sticky;top:100px;align-self:start}}
 .fcat{margin-bottom:var(--s7)}.fcat h3{font:600 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:var(--s3)}
 details{border-bottom:1px solid var(--line)}details:first-of-type{border-top:1px solid var(--rule)}
@@ -210,7 +212,7 @@ a[href*="instagram.com"]{display:inline-block;padding:10px 0}
    DARK STUDIO SYSTEM: layered graphite surfaces,one warm key light,material grain,ruler geometry,pill controls.
    =================================================================== */
 /* ---- surfaces: every section is a lit plane,never a flat fill ---- */
-.sec,.hero,.phero,.ft2{position:relative;isolation:isolate;overflow:hidden}
+.sec,.hero,.phero,.ft2{position:relative;isolation:isolate;overflow:hidden;overflow:clip}
 .sec{padding:clamp(72px,10vw,136px) 0;background:linear-gradient(180deg,rgba(245,241,232,.04) 0,transparent 160px),var(--s1)}
 .sec.paper{background:linear-gradient(180deg,rgba(245,241,232,.05) 0,transparent 180px),var(--s2)}
 .sec.dark{background:linear-gradient(180deg,rgba(201,169,110,.06) 0,transparent 200px),var(--s0)}
@@ -409,10 +411,17 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .pts dt::before{content:counter(pt,decimal-leading-zero);font:500 14px/1 var(--display);color:var(--gold);letter-spacing:.06em}
 .pts dd{padding-left:calc(2ch + 16px)}
 /* FAQ group filter */
-.fq-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--s6)}
+.fq-tabs{display:flex;gap:8px;margin-top:var(--s5)}
 .fq-tabs button{min-height:44px;padding:0 16px;border:1px solid var(--line);border-radius:2px;background:none;color:rgba(245,241,232,.78);font:600 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .3s,color .3s,background .3s}
 .fq-tabs button:hover{border-color:var(--gold);color:var(--cream)}
 .fq-tabs button[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+/* phones/tablets: one swipeable row under the heading instead of three wrapped rows */
+@media(max-width:899px){.fq-tabs{overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad);-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 40px),transparent)}.fq-tabs::-webkit-scrollbar{display:none}.fq-tabs button{flex:none}}
+/* desktop: a quiet index in the sticky side column, active item marked like the nav (gold) */
+@media(min-width:900px){.fq-tabs{flex-direction:column;gap:0;border-left:1px solid var(--line);margin-top:var(--s6)}
+.fq-tabs button{min-height:40px;padding:0 0 0 18px;margin-left:-1px;border:0;border-left:1px solid transparent;text-align:left;background:none}
+.fq-tabs button:hover{color:var(--cream);border-left-color:var(--line-gold)}
+.fq-tabs button[aria-pressed=true]{background:none;color:var(--gold);border-left-color:var(--gold)}}
 .nojs .fq-tabs{display:none}
 /* contact closing: the whole block inside one gold frame with crop marks and the df mark (brief 5.8) */
 .closing{padding:clamp(28px,5vw,72px) clamp(20px,4.5vw,64px)}

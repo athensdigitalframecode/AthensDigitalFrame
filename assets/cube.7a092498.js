@@ -134,6 +134,8 @@
     /* shadow width = the cube's on-screen width: |x| extent of the rotated unit axes (1 face-on, ~1.41 on an edge) */
     var x = q[0], y = q[1], z = q[2], w = q[3];
     stage.style.setProperty('--shw', (Math.abs(1-2*(y*y+z*z)) + Math.abs(2*(x*y-z*w)) + Math.abs(2*(x*z+y*w))).toFixed(3));
+    /* how far the cube's lowest corner reaches below its centre (cube = 1), so the contact shadow sits right under it in every turn */
+    stage.style.setProperty('--shy', (.5 * (Math.abs(2*(x*y+z*w)) + Math.abs(1-2*(x*x+z*z)) + Math.abs(2*(y*z-x*w)))).toFixed(3));
     if (gl3 && pOn) wake();
     var r = spun();
     if (gl3) { gl3.draw(r, opts()); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */

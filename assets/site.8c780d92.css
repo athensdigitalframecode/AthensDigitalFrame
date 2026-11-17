@@ -330,7 +330,8 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .cb-face[data-f="0"]>:not(.cb-plate){transition:opacity .5s var(--ease)}
 .cb-cube:not(.is-open) .cb-face[data-f="0"]>:not(.cb-plate){opacity:0}
 .cb-floor{position:absolute;left:8%;right:8%;bottom:calc(var(--cs)*.05);height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,.55) 20%,rgba(201,169,110,.55) 80%,transparent)}
-.cb-floor::before{content:"";position:absolute;left:18%;right:18%;top:calc(var(--cs)*-.09);height:calc(var(--cs)*.18);background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);filter:blur(6px);transform:scaleX(calc(var(--shw,1.3) / 1.3))}
+.cb-floor::before{content:"";position:absolute;left:50%;width:calc(var(--cs)*.92);height:calc(var(--cs)*.17);top:calc(var(--cs) * (var(--shy,.62) * .95 - .75) - var(--cs) * .085);margin-left:calc(var(--cs) * -.5);background:radial-gradient(closest-side,rgba(0,0,0,.9),rgba(0,0,0,.55) 40%,transparent 75%) 50% 46%/70% 52% no-repeat,radial-gradient(closest-side,rgba(0,0,0,.5),rgba(0,0,0,.18) 55%,transparent);filter:blur(2px);transform:scaleX(calc(var(--shw,1.3) / 1.3));opacity:0;transition:opacity .6s var(--ease)}
+.cb.is-lock .cb-floor::before{opacity:1}
 .cb-gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;visibility:hidden}.cb.is-gl .cb-gl{visibility:visible}
 .cb.is-gl .cb-cube{visibility:hidden}
 /* service index and the one description that follows the active face */
@@ -453,13 +454,13 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .cb:not(.is-ready) .cb-face>.cb-plate{transition:none}
 .hero .cb-list,.hero .cb-descs{animation:heroin .8s var(--ease) .9s both}
 /* the light pool under the cube fades in when the faces lock (not on weak phones); the headline rises line by line then */
-.cb-floor::after{content:"";position:absolute;left:4%;right:4%;top:calc(var(--cs)*-.2);height:calc(var(--cs)*.4);background:radial-gradient(closest-side,rgba(201,169,110,.34),rgba(201,169,110,.1) 55%,transparent);opacity:0;transition:opacity 1.4s var(--ease)}
+.cb-floor::after{content:"";position:absolute;left:4%;right:4%;top:calc(var(--cs)*-.2);height:calc(var(--cs)*.4);background:radial-gradient(closest-side,rgba(201,169,110,.2),rgba(201,169,110,.06) 55%,transparent);opacity:0;transition:opacity 1.4s var(--ease)}
 .cb.is-lock .cb-floor::after{opacity:1}
 .hero .h1.hl{animation:none!important}
 .hl .ln{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .1em .14em .02em;margin:0 -.1em -.14em -.02em}
 .hl .ln>span{display:inline-block;transform:translateY(112%)}
 .hero-go .hl .ln>span{transform:none;transition:transform 1s cubic-bezier(.16,1,.3,1) calc(var(--i) * 130ms)}
-@media(prefers-reduced-motion:reduce){.cb-floor::after{transition:none}}
+@media(prefers-reduced-motion:reduce){.cb-floor::after,.cb-floor::before{transition:none}}
 /* docked navigation cube (cube.js): wide screens with a mouse only, shown once the hero has scrolled away */
 .nq{display:none}
 @media(min-width:1280px) and (hover:hover){

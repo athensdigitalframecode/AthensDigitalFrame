@@ -1231,7 +1231,7 @@ addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!lb.hidden)closePla
 /* ---------- menu bar over the homes list, gentle day-to-dusk tint ---------- */
 const navEl=document.querySelector('.nav'),lstEl=$('listings'),tintEl=$('tint');
 function pageState(){
-  const r=lstEl.getBoundingClientRect(),on=r.top<=60&&r.bottom>140;
+  const r=lstEl.getBoundingClientRect(),on=r.top<=60&&r.bottom>140||$('foot').getBoundingClientRect().top<=80;
   navEl.classList.toggle('stuck',on);document.documentElement.classList.toggle('inlist',on);
   {const ce=$('caps');if(ce){const he=clamp((scrollY+innerHeight-homeEl.offsetTop-innerHeight*.05)/(innerHeight*.45));ce.style.opacity=(1-he).toFixed(3)}}
   if(tintEl){const p=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight)),k=ss(.05,.8,p);

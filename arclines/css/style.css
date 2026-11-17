@@ -102,8 +102,6 @@ svg{display:block}
 .stats::before{content:"";position:absolute;left:0;right:0;top:0;height:78vh;z-index:3;pointer-events:none;
   background:radial-gradient(ellipse 140% 100% at 50% 0%,#000 0 38%,#0a10ff 58%,#53b9ff 74%,rgba(233,237,246,0) 100%)}
 .stats__sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.stats__img{position:absolute;left:3.2vw;top:0;width:21vw;aspect-ratio:1.62;overflow:hidden;border-radius:2px;will-change:transform;filter:grayscale(1) contrast(1.1)}
-.stats__img svg{width:100%;height:100%}
 .stats__title{position:absolute;left:3.2vw;top:0;font-size:clamp(1.8rem,4.9vw,8rem);max-width:48vw;will-change:transform}
 .stats__title .w{display:inline-block;margin-right:.25em;color:#a6abb9;transition:none}
 .stats__right{position:absolute;right:3.2vw;top:0;width:31vw;will-change:transform}
@@ -161,7 +159,7 @@ svg{display:block}
 .a-cont .f-end{background:linear-gradient(90deg,transparent 48%,rgba(0,0,0,.35) 49% 51%,transparent 52%),linear-gradient(180deg,#d4d7de,#b9bdc7);border:calc(var(--u)*.6) solid #8e93a0}
 .a-cont .spreader{inset:auto;left:-1%;right:-1%;top:calc(var(--u)*-2.6);height:calc(var(--u)*2.6);background:linear-gradient(#1a1c21,#0f1013);border-radius:3px}
 .a-cont .spreader::before{content:"";position:absolute;left:50%;top:-80%;width:calc(var(--u)*5);height:120%;transform:translateX(-50%);background:#101114;border-radius:4px 4px 0 0}
-.a-topdown{width:calc(var(--u)*88.4);height:calc(var(--u)*19.5);opacity:0;z-index:4}
+.a-topdown{position:absolute;left:0;top:0;width:calc(var(--u)*88.4);height:calc(var(--u)*19.5);opacity:0;z-index:4}
 .a-topdown svg{width:100%;height:100%}
 
 /* ----- Scene B ----- */
@@ -352,7 +350,6 @@ svg{display:block}
   .hero__sub{max-width:80vw;font-size:12px}
   .pill{font-size:11px}
   .stats{height:340vh}
-  .stats__img{display:none}
   .stats__title{left:0;width:100%;z-index:2;background:var(--paper);padding:2vh 6vw 3vh;font-size:clamp(1.8rem,10vw,3.6rem);max-width:none}
   .stats__right{right:6vw;left:6vw;width:auto}
   .stats__copy{font-size:13px}

@@ -49,7 +49,7 @@
     ['#aTopdown', 'assets/truck-top.webp', 'contain'],
     ['#bTruck', 'assets/truck-top.webp', 'contain'],
     ['#bShip', 'assets/ship-top.webp', 'contain']
-    /* optional photo slots (add a file + entry to enable): ['.stats__img','assets/stats-road.jpg','cover'], ['.foot-img','assets/footer-warehouse.jpg','cover'] */
+    /* optional photo slot (add a file + entry to enable): ['.foot-img','assets/footer-warehouse.jpg','cover'] */
   ];
   /* reach stacker: 3 photo layers (body / cylinder / boom) so the boom can really lift */
   const STK = { W: 1060, H: 789, P: [148, 438], S: [895, 320], A: [342, 298], B: [535, 622], k: 41.5 / 789, L0: 74 };
@@ -418,7 +418,7 @@
     el.stacker.style.transform = `translate3d(${STK.L0 * u + sx}px,${51.5 * u + rise * u}px,0)`;
     el.stacker.style.opacity = 1 - seg(p, .44, .5);
     el.stack.style.transform = `translate3d(0,${rise * u}px,0)`;
-    el.stack.style.opacity = 1 - seg(p, .38, .5);
+    el.stack.style.opacity = p < .15 ? 1 : 0;                  // the black and red boxes vanish the moment the lift starts
     if (stk.boom) {
       stk.boom.style.transform = `rotate(${th}deg)`;
       const a0 = Math.atan2(STK.A[1] - STK.B[1], STK.A[0] - STK.B[0]), A1 = rotPt(STK.A, th), a1 = Math.atan2(A1[1] - STK.B[1], A1[0] - STK.B[0]);
@@ -447,9 +447,9 @@
     el.ghost.style.opacity = seg(p, .56, .68) * (1 - seg(p, .88, .95));
     el.ghost.style.transform = snap(`translate3d(${lerp(.15 * W, -.62 * W, seg(p, .55, .92))}px,0,0)`);
     el.bot.style.transform = snap(`translateY(${T(p, [[.9, H], [1, H * .84]])}px)`);
-    const tdS = 2.6;
     el.topdown.style.opacity = seg(p, .9, .97);
-    el.topdown.style.transform = `translate3d(${W * (mobA ? .4 : .3) - 44.2 * u}px,${H * (mobA ? .52 : .42) - 9.75 * u}px,0) scale(${tdS / 2.6})`;
+    const out = Math.max(0, c - (A.top + A.h - H));        // stage already scrolling away: keep the truck still on screen (scene B's truck takes over below the seam)
+    el.topdown.style.transform = truckPose(0, mobA, out);
   }
 
   /* =========================================================
@@ -465,6 +465,24 @@
     const s = elm.style;
     s.left = x + '%'; s.top = y + '%'; s.width = w + '%'; s.height = h + '%';
     s.borderRadius = `${tl}vw ${tr}vw ${br}vw ${bl}vw`;
+  }
+  function truckPose(p, mob, dy) {                         // the truck's transform at scene-B progress p; scene A's hand-off truck uses p = 0, so the two match exactly
+    const u = U;
+    let lane = 0;
+    if (!mob) { const so = b.truck.offsetParent, lr = b.L.getBoundingClientRect(), rr = b.R.getBoundingClientRect(); lane = (lr.right + rr.left) / 2 - (so ? so.getBoundingClientRect().left : 0); }
+    const tp = truckPath(W, H, mob, lane);
+    const tk = clamp(p / (mob ? .12 : .42)), sp = tk * .85 + ease(tk) * .15;                  // near-constant speed, soft start
+    const tsc = lerp(2.6, mob ? 1.25 : .95, ease(clamp(p / .14)));
+    // both axles ride on the route: front and rear points half a truck length ahead/behind; the body points from rear to front,
+    // so on the bend the trailer cuts inside the curve instead of the whole truck sliding sideways around its middle
+    const at = qq => { const last = tp.n - 1;
+      if (qq <= 0) { const r = tp.a[0] * Math.PI / 180; return [tp.x[0] + Math.cos(r) * qq * tp.ds, tp.y[0] + Math.sin(r) * qq * tp.ds]; }
+      if (qq >= last) { const r = tp.a[last - 1] * Math.PI / 180, e = (qq - last) * tp.ds; return [tp.x[last] + Math.cos(r) * e, tp.y[last] + Math.sin(r) * e]; }
+      const i = Math.floor(qq), f = qq - i; return [lerp(tp.x[i], tp.x[i + 1], f), lerp(tp.y[i], tp.y[i + 1], f)]; };
+    const q = sp * (tp.n - 1), half = 44.2 * u * (tsc / 2.6) * .8 / tp.ds;                  // axle-to-axle is ~80% of the body
+    const Fp = at(q + half), Bp = at(q - half);
+    const tcx = (Fp[0] + Bp[0]) / 2, tcy = (Fp[1] + Bp[1]) / 2, trot = Math.atan2(Fp[1] - Bp[1], Fp[0] - Bp[0]) * 180 / Math.PI;
+    return `translate3d(${tcx - 44.2 * u}px,${tcy - 9.75 * u + dy}px,0) rotate(${trot}deg) scale(${tsc / 2.6})`;
   }
   function updB(c) {
     const B = sc.B, p = clamp((c - B.top) / (B.h - H)), u = U;
@@ -496,21 +514,8 @@
     // truck (top-down)
     // path = Catmull-Rom spline (% of viewport); heading follows the tangent, so the turn is a real arc
     // path: leaves the scene-A hand-off point heading right, eases onto a straight lane, then one clockwise arc into the gap between the panels
-    let lane = 0;
-    if (!mob) { const so = b.truck.offsetParent, lr = b.L.getBoundingClientRect(), rr = b.R.getBoundingClientRect(); lane = (lr.right + rr.left) / 2 - (so ? so.getBoundingClientRect().left : 0); }
-    const tp = truckPath(W, H, mob, lane);
-    const tk = clamp(p / (mob ? .12 : .42)), sp = tk * .85 + ease(tk) * .15;                  // near-constant speed, soft start
-    const tsc = lerp(2.6, mob ? 1.25 : .95, ease(clamp(p / .14)));
-    // both axles ride on the route: front and rear points half a truck length ahead/behind; the body points from rear to front,
-    // so on the bend the trailer cuts inside the curve instead of the whole truck sliding sideways around its middle
-    const at = qq => { const last = tp.n - 1;
-      if (qq <= 0) { const r = tp.a[0] * Math.PI / 180; return [tp.x[0] + Math.cos(r) * qq * tp.ds, tp.y[0] + Math.sin(r) * qq * tp.ds]; }
-      if (qq >= last) { const r = tp.a[last - 1] * Math.PI / 180, e = (qq - last) * tp.ds; return [tp.x[last] + Math.cos(r) * e, tp.y[last] + Math.sin(r) * e]; }
-      const i = Math.floor(qq), f = qq - i; return [lerp(tp.x[i], tp.x[i + 1], f), lerp(tp.y[i], tp.y[i + 1], f)]; };
-    const q = sp * (tp.n - 1), half = 44.2 * u * (tsc / 2.6) * .8 / tp.ds;                  // axle-to-axle is ~80% of the body
-    const Fp = at(q + half), Bp = at(q - half);
-    const tcx = (Fp[0] + Bp[0]) / 2, tcy = (Fp[1] + Bp[1]) / 2, trot = Math.atan2(Fp[1] - Bp[1], Fp[0] - Bp[0]) * 180 / Math.PI;
-    b.truck.style.transform = `translate3d(${tcx - 44.2 * u}px,${tcy - 9.75 * u}px,0) rotate(${trot}deg) scale(${tsc / 2.6})`;
+    const pre = Math.max(0, B.top - c);                      // stage still scrolling in: same screen spot as scene A's truck, so only one truck shows
+    b.truck.style.transform = truckPose(p, mob, -pre);
     b.truck.style.opacity = mob ? 1 - seg(p, .2, .24) : 1 - seg(p, .52, .6);
 
     // ocean + ship
@@ -547,11 +552,10 @@
   /* =========================================================
      STATS + TRUSTED
      ========================================================= */
-  const st = { img: $('.stats__img'), title: $('#statsTitle'), right: $('#statsRight') };
+  const st = { title: $('#statsTitle'), right: $('#statsRight') };
   function updS(c) {
     const S = sc.S, p = clamp((c - S.top) / (S.h - H));
     const mob = (W <= 820 || LAND.matches);
-    st.img.style.transform = snap(`translate3d(0,${lerp(H * .42, -H * .3, ease(seg(p, 0, .75)))}px,0)`);
     if (mob) {
       st.title.style.transform = snap(`translate3d(0,${lerp(H * .5, H * .07, ease(seg(p, 0, .2)))}px,0)`);
       st.right.style.transform = snap(`translate3d(0,${lerp(H * .62, -(st.right.offsetHeight - H * .5), seg(p, 0, 1))}px,0)`);
@@ -601,7 +605,7 @@
     if (c < H * 1.4 && now - lastGlobe > 20) { lastGlobe = now; drawGlobe(t, c); }
     updS(c);
     if (c > sc.A.top - H && c < sc.A.top + sc.A.h) updA(c);
-    if (c > sc.B.top - H && c < sc.B.top + sc.B.h) {
+    if (c > sc.B.top - 2 * H && c < sc.B.top + sc.B.h) {   // a screen early, so its panels (and the truck's lane) are laid out before the hand-off
       updB(c);
       if (parseFloat(b.oceanCv.style.opacity) > .001 && now - lastOcean > 30) { lastOcean = now; drawOcean(t); }
     }

@@ -348,7 +348,7 @@ svg{display:block}
   .hero__sub{max-width:80vw;font-size:12px}
   .pill{font-size:11px}
   .stats{height:340vh}
-  .stats__title{left:0;width:100%;z-index:2;background:var(--paper);padding:2vh 6vw 3vh;font-size:clamp(1.8rem,10vw,3.6rem);max-width:none}
+  .stats__title{left:0;width:100%;z-index:2;background:linear-gradient(var(--paper) calc(100% - 4vh),rgba(233,237,246,0));padding:2vh 6vw 4vh;font-size:clamp(1.8rem,10vw,3.6rem);max-width:none}
   .stats__right{right:6vw;left:6vw;width:auto}
   .stats__copy{font-size:13px}
   .stat b{font-size:22vw}.stat span{font-size:12px}

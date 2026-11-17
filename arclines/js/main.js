@@ -418,7 +418,7 @@
     el.stacker.style.transform = `translate3d(${STK.L0 * u + sx}px,${51.5 * u + rise * u}px,0)`;
     el.stacker.style.opacity = 1 - seg(p, .44, .5);
     el.stack.style.transform = `translate3d(0,${rise * u}px,0)`;
-    el.stack.style.opacity = p < .15 ? 1 : 0;                  // the black and red boxes vanish the moment the lift starts
+    el.stack.style.opacity = 1 - seg(p, .15, .3);              // the black and red boxes fade out over the lift (same range as the boom angle)
     if (stk.boom) {
       stk.boom.style.transform = `rotate(${th}deg)`;
       const a0 = Math.atan2(STK.A[1] - STK.B[1], STK.A[0] - STK.B[0]), A1 = rotPt(STK.A, th), a1 = Math.atan2(A1[1] - STK.B[1], A1[0] - STK.B[0]);

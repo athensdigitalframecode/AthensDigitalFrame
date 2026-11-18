@@ -364,6 +364,9 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(min-width:1100px){.caps{grid-template-columns:repeat(3,1fr);column-gap:0}.caps li{padding-inline:28px;border-right:1px solid var(--line)}.caps li:nth-child(3n+1){padding-left:0}.caps li:nth-child(3n){border-right:0}}
 /* number, title and text line up across a row even when one title wraps and its neighbour does not */
 @supports(grid-template-rows:subgrid){@media(min-width:760px){.caps li{grid-row:span 3;grid-template-rows:subgrid}}@media(min-width:1100px){.adv li{grid-row:span 3;grid-template-rows:subgrid}}}
+/* home services: an editorial index, one service per row; a gold hairline draws under the row being read */
+@media(min-width:900px){.caps.idx{grid-template-columns:1fr}.caps.idx li,.caps.idx li:nth-child(n){grid-row:auto;grid-template-rows:none;grid-template-columns:72px minmax(0,1fr) minmax(0,1.15fr);align-items:baseline;column-gap:32px;padding:var(--s5) 0;border-right:0;position:relative}.caps.idx h3{font-size:var(--fs-3)}.caps.idx p{max-width:48ch}
+.caps.idx li::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}.caps.idx li:hover::after{transform:scaleX(1)}}
 /* case studies (work/*.html): reuse .phero,.about,.facts,.caps,.pv; only these three parts are new */
 .cs-pv{max-width:1040px;margin-inline:auto}
 .sw{list-style:none;margin:var(--s6) 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s4) var(--s5);font:600 12px/1.6 var(--body);letter-spacing:.1em;color:var(--muted)}

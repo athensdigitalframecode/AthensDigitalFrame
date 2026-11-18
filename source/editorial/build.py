@@ -296,7 +296,7 @@ class Page:
 </div></section>
 <section class="sec" id="services" aria-labelledby="svch"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">02 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Έξι πλευρές ενός στούντιο.','Six sides of one studio.')}</h2></div></div>
-<ol class="caps">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
+<ol class="caps idx">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
 </div></section>
 <section class="sec paper" id="projects" aria-labelledby="projh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Projects, σχεδιασμένα από εμάς.','Projects, designed by us.')}</h2></div>

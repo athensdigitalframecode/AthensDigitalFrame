@@ -21,7 +21,7 @@ section{position:relative}
 .eyebrow{font:600 12px/1.4 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);display:flex;align-items:center;gap:12px}
 .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
 .dark .eyebrow{color:var(--gold)}
-.h2{font-size:clamp(26px,min(2.6vw + 16px,6.4vh),54px);line-height:1.06;letter-spacing:-.015em;max-width:20ch;margin-top:var(--s4)}
+.h2{font-size:clamp(28px,min(3vw + 14px,6.4vh),64px);line-height:1.06;letter-spacing:-.015em;max-width:24ch;margin-top:var(--s4)}
 .h2 em,.h1 em{font-style:italic;font-weight:400;color:var(--gold-lt)}
 .lead{font-size:var(--fs-2);line-height:1.5;color:var(--muted);max-width:46ch}.dark .lead{color:rgba(245,241,232,.8)}
 .sechead{display:grid;gap:var(--s5);margin-bottom:clamp(40px,6vw,72px)}
@@ -70,7 +70,7 @@ body.lock{overflow:hidden}
 /* advantages */
 .adv{display:grid;border-top:1px solid var(--rule)}
 .adv li{padding:var(--s5) 0 var(--s6);border-bottom:1px solid var(--line)}
-.adv .n{font:500 14px/1 var(--display);color:var(--gold-deep);letter-spacing:.06em}.adv h3{font-size:var(--fs-2)}.adv p{color:var(--muted);font-size:var(--fs-0);max-width:34ch}
+.adv .n{font:500 14px/1 var(--display);color:var(--gold-deep);letter-spacing:.06em}.adv h3{font-size:var(--fs-2)}.adv p{color:var(--muted);font-size:var(--fs-1);max-width:34ch}
 @media(min-width:760px){.adv{grid-template-columns:repeat(2,1fr);column-gap:48px}}
 @media(min-width:1100px){.adv{grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}.adv li{padding-right:28px;border-bottom:0;border-right:1px solid var(--line);padding-left:28px}.adv li:first-child{padding-left:0}.adv li:last-child{border-right:0}}
 /* projects */
@@ -359,7 +359,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .caps li{display:grid;gap:10px;align-content:start;padding:var(--s5) 0 var(--s6);border-bottom:1px solid var(--line)}
 .caps .n{font:500 14px/1 var(--display);color:var(--gold);letter-spacing:.06em}
 .caps h3{font-size:var(--fs-2)}
-.caps p{color:var(--muted);font-size:var(--fs-0);max-width:40ch}
+.caps p{color:var(--muted);font-size:var(--fs-1);max-width:40ch}
 @media(min-width:760px){.caps{grid-template-columns:repeat(2,1fr);column-gap:48px}}
 @media(min-width:1100px){.caps{grid-template-columns:repeat(3,1fr);column-gap:0}.caps li{padding-inline:28px;border-right:1px solid var(--line)}.caps li:nth-child(3n+1){padding-left:0}.caps li:nth-child(3n){border-right:0}}
 /* number, title and text line up across a row even when one title wraps and its neighbour does not */

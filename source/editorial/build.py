@@ -580,12 +580,15 @@ class Page:
         out = s.head(f'{title} | Athens Digital Frame', t('Ιστοσελίδες, κρατήσεις και αυτοματισμοί για 15 κλάδους: κομμωτήρια, οδοντιατρεία, studios, ξενοδοχεία, μεσιτικά, boutiques και άλλους.', 'Websites, booking and automation for 15 industries: salons, dental clinics, studios, hotels, real estate, boutiques and more.'),
                      url, '/en' + url, 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
         out += s.header('industries', url)
-        items = ''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{p(name)}</h3><div><p><b>{t("Προτεινόμενη λύση", "Suggested offer")}:</b> {p(offer)}</p><ul class="ft">{"".join(f"<li>{p(f)}</li>" for f in feats)}</ul></div></li>'
+        slug = lambda name: re.sub(r'[^a-z]+', '-', name[1].lower()).strip('-')   # English slug on both languages, so a shared link works on either
+        items = ''.join(f'<li class="rv" id="{slug(name)}"><span class="n">{i + 1:02d}</span><h3>{p(name)}</h3><div><p><b>{t("Προτεινόμενη λύση", "Suggested offer")}:</b> {p(offer)}</p><ul class="ft">{"".join(f"<li>{p(f)}</li>" for f in feats)}</ul></div></li>'
                         for i, (name, offer, feats) in enumerate(INDUSTRIES))
-        out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Κλάδοι', 'Industries')}</p>
+        index = ''.join(f'<li><a href="#{slug(name)}"><span>{i + 1:02d}</span>{p(name)}</a></li>' for i, (name, _, _) in enumerate(INDUSTRIES))
+        out += f'''<section class="phero dark"><div class="wrap ind-hero"><div><p class="eyebrow">{t('Κλάδοι', 'Industries')}</p>
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{t('Λύσεις <em>ανά κλάδο.</em>', 'Services <em>by industry.</em>')}</h1>
-<p class="lead" style="max-width:46ch">{t('Ιστοσελίδα, κρατήσεις και αυτοματισμοί, προσαρμοσμένα στον τρόπο που δουλεύει ο κλάδος σου.', 'A website, bookings and automation, shaped around the way your industry works.')}</p></div></section>
-<section class="sec"><div class="wrap"><ol class="caps">{items}</ol>
+<p class="lead" style="max-width:46ch">{t('Ιστοσελίδα, κρατήσεις και αυτοματισμοί, προσαρμοσμένα στον τρόπο που δουλεύει ο κλάδος σου.', 'A website, bookings and automation, shaped around the way your industry works.')}</p></div>
+<nav class="ind-ix" aria-label="{t('Οι κλάδοι', 'All industries')}"><ol>{index}</ol></nav></div></section>
+<section class="sec"><div class="wrap"><ol class="caps ind">{items}</ol>
 <div class="btns" style="margin-top:32px"><a class="btn gold" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn ghost" href="{s.prices()}">{t('Δες τις τιμές', 'See pricing')}</a></div></div></section>
 '''
         out += s.footer()

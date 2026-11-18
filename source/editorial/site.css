@@ -377,6 +377,16 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(min-width:900px){.caps.idx{grid-template-columns:1fr}.caps.idx li,.caps.idx li:nth-child(n){grid-row:auto;grid-template-rows:none;grid-template-columns:72px minmax(0,1fr) minmax(0,1.15fr);align-items:baseline;column-gap:32px;padding:var(--s5) 0;border-right:0;position:relative}.caps.idx h3{font-size:var(--fs-3)}.caps.idx p{max-width:48ch}
 .caps.idx li::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}.caps.idx li:hover::after{transform:scaleX(1)}}
 .caps .ft li,.caps .ft li:nth-child(n){display:flex;grid-row:auto;padding:10px 0;border-right:0}   /* industries: a feature list inside a .caps item */
+/* industries: hero index (links to each industry) and the frame that marks the industry you jumped to */
+.ind-hero{display:grid;gap:clamp(40px,5vw,72px)}@media(min-width:1000px){.ind-hero{grid-template-columns:1fr 1fr;align-items:end}}
+.ind-ix ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-gold)}@media(min-width:560px){.ind-ix ol{columns:2;column-gap:32px}}
+.ind-ix li{break-inside:avoid}.ind-ix a{display:flex;gap:12px;align-items:baseline;padding:11px 0;min-height:44px;border-bottom:1px solid var(--line);text-decoration:none;color:rgba(245,241,232,.82);font-size:14px;line-height:1.35;transition:color .3s,padding-left .35s var(--ease)}
+.ind-ix a span{font:500 12px/1 var(--display);color:var(--gold);letter-spacing:.06em;flex:none}.ind-ix a:hover,.ind-ix a:focus-visible{color:var(--gold-lt);padding-left:6px}
+.ind>li{position:relative;isolation:isolate}
+.ind>li:target::before{content:"";position:absolute;inset:0 -14px;z-index:-1;pointer-events:none;border:1px solid var(--line-gold);background-origin:border-box;background-repeat:no-repeat;
+ background-image:linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),radial-gradient(90% 55% at 50% 0%,rgba(201,169,110,.12),transparent 72%);
+ background-size:16px 1px,1px 16px,16px 1px,1px 16px,16px 1px,1px 16px,16px 1px,1px 16px,100% 100%;background-position:0 0,0 0,100% 0,100% 0,0 100%,0 100%,100% 100%,100% 100%,0 0;animation:ind-in .8s var(--ease) both}
+@keyframes ind-in{from{opacity:0;transform:scale(1.03)}}
 /* case studies (work/*.html): reuse .phero,.about,.facts,.caps,.pv; only these three parts are new */
 .cs-pv{max-width:1040px;margin-inline:auto}
 .sw{list-style:none;margin:var(--s6) 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s4) var(--s5);font:600 12px/1.6 var(--body);letter-spacing:.1em;color:var(--muted)}

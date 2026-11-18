@@ -287,7 +287,7 @@ class Page:
 {s.cube()}
 </div></section>
 <section class="sec paper" id="studio" aria-labelledby="advh"><div class="wrap">
-<div class="sechead rv"><div><p class="eyebrow">01 — {t('Το στούντιο','Studio')}</p><h2 class="h2" id="advh">{t('Σχεδιασμένο με προσοχή. Φτιαγμένο για την επιχείρησή σου.','Thoughtfully made. Built for your business.')}</h2></div></div>
+<div class="sechead rv"><div><p class="eyebrow">01 — {t('Γιατί εμάς','Why us')}</p><h2 class="h2" id="advh">{t('Σχεδιασμένο με προσοχή. Φτιαγμένο για την επιχείρησή σου.','Thoughtfully made. Built for your business.')}</h2></div></div>
 <ul class="adv">
 <li class="rv"><span class="n">01</span><h3>{t('Προσεγμένος σχεδιασμός','Thoughtful design')}</h3><p>{t('Πρώτα για κινητό, με καθαρή δομή και γρήγορη φόρτωση. Ελέγχουμε την ταχύτητα σε κινητό πριν βγει live.','Mobile-first, with a clear structure and fast loading. We check mobile speed before launch.')}</p></li>
 <li class="rv d1"><span class="n">02</span><h3>{t('Φτιαγμένο για επιχειρήσεις','Built for business')}</h3><p>{t('Φόρμα επικοινωνίας, Google Maps και βασικό local SEO, ώστε οι πελάτες να σε βρίσκουν και να σε προσεγγίζουν εύκολα.','A contact form, Google Maps and local SEO basics, so customers can find and reach you easily.')}</p></li>

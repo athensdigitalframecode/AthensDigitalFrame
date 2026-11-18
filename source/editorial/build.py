@@ -323,9 +323,6 @@ class Page:
 <p class="pull">{t('Ένα site που ξέρεις ότι φτιάχτηκε για σένα.','A site you know was made for you.')}</p>
 <ul class="facts"><li><b>{t('Έδρα','Base')}</b><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></li><li><b>{t('Γλώσσες','Languages')}</b><span>{t('Ελληνικά και English','Greek and English')}</span></li><li><b>Instagram</b><span><a href="{IG}" target="_blank" rel="noopener">@athens.digitalframe</a></span></li></ul></div>
 <dl class="rv d1 pts"><dt>{t('Φιλοσοφία','Philosophy')}</dt><dd>{t('Κάθε επιχείρηση χρειάζεται ένα site που εξηγεί καθαρά τι κάνει και κάνει εύκολο το επόμενο βήμα. Αυτό σχεδιάζουμε πρώτα, πριν από τα στολίδια.','Every business needs a site that explains clearly what it does and makes the next step easy. We design that first, before the decoration.')}</dd>
-<dt>{t('Προσοχή στη λεπτομέρεια','Attention to detail')}</dt><dd>{t('Μελετάμε την επιχείρησή σου και την περιοχή σου, και ελέγχουμε την ταχύτητα σε κινητό πριν από το live.','We study your business and your area, and check mobile speed before launch.')}</dd>
-<dt>{t('Άμεση επικοινωνία','Direct communication')}</dt><dd>{t('Μιλάς απευθείας με εμάς, με DM, WhatsApp, τηλέφωνο ή email.','You talk directly to us, by DM, WhatsApp, phone or email.')}</dd>
-<dt>{t('Διαφανείς τιμές','Transparent pricing')}</dt><dd>{t('Οι τιμές είναι γραμμένες πάνω στο site, ξεχωριστά οι εφάπαξ και οι μηνιαίες, και το demo είναι δωρεάν.','Prices are written on the site, with one-time and recurring costs kept apart, and the demo is free.')}</dd>
 <dt>{t('Οργανωμένη διαδικασία','Organised process')}</dt><dd>{t('Πέντε σαφή βήματα, live σε 3–5 ημέρες.','Five clear steps, live in 3–5 days.')}</dd></dl>
 </div></section>
 <section class="sec" id="faq" aria-labelledby="fqh"><div class="wrap faq">

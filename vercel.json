@@ -92,6 +92,31 @@
       "permanent": true
     },
     {
+      "source": "/enuma-elish/",
+      "destination": "/enuma/",
+      "permanent": true
+    },
+    {
+      "source": "/:p(prices|privacy)",
+      "destination": "/:p.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/:p(prices|privacy)",
+      "destination": "/en/:p.html",
+      "permanent": true
+    },
+    {
+      "source": "/work/:k(olivane|arclines|enuma|last-train)",
+      "destination": "/work/:k.html",
+      "permanent": true
+    },
+    {
+      "source": "/en/work/:k(olivane|arclines|enuma|last-train)",
+      "destination": "/en/work/:k.html",
+      "permanent": true
+    },
+    {
       "source": "/work/enuma-elish.html",
       "destination": "/work/enuma.html",
       "permanent": true

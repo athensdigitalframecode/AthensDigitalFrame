@@ -279,7 +279,7 @@ class Page:
                      '/', '/en/', 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
         out += s.header()
         out += f'''<section class="hero dark"><div class="wrap grid">
-<div><p class="eyebrow">Athens Digital Frame — Digital Studio</p>
+<div>
 <h1 class="h1">{t('<span class="hw">Ιστοσελίδες,</span> <em class="hw">προσεκτικά</em> <span class="hw">χτισμένες.</span>','<span class="hw">Websites,</span> <em class="hw">thoughtfully</em> <span class="hw">constructed.</span>')}</h1>
 <p class="lead">{t('Σχεδιάζουμε και κατασκευάζουμε σύγχρονες ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','We design and build modern websites and e-shops for businesses that want to stand out.')}</p>
 <div class="btns"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn ghost" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')}</a></div>

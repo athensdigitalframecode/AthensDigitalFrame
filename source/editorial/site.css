@@ -66,7 +66,7 @@ body.lock{overflow:hidden}
 .hero .lead{margin-bottom:var(--s6);color:rgba(245,241,232,.82)}
 .hero .meta{margin-top:var(--s7);display:flex;gap:clamp(20px,4vw,48px);padding-top:var(--s5);border-top:1px solid var(--line-gold)}
 .hero .meta div{font:600 12px/1.5 var(--body);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,232,.72)}
-@media(max-width:559px){.hero .meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.hero .meta div{font-size:10.5px;letter-spacing:.08em}}
+@media(max-width:559px){.hero .grid{gap:24px}.hero .meta{margin-top:32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.hero .meta div{font-size:10.5px;letter-spacing:.08em}}
 /* advantages */
 .adv{display:grid;border-top:1px solid var(--rule)}
 .adv li{padding:var(--s5) 0 var(--s6);border-bottom:1px solid var(--line)}
@@ -294,7 +294,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(min-width:700px){
  .hero{padding:clamp(14px,3vh,48px) 0 clamp(16px,3.2vh,48px)}
  .hero .grid{gap:clamp(24px,3.5vw,64px)}
- .hero .h1{font-size:clamp(30px,min(4.4vw + 10px,7vh),84px);max-width:16ch;margin:clamp(8px,1.8vh,20px) 0}
+ .hero .h1{font-size:clamp(30px,min(4.4vw + 10px,7.8vh),84px);max-width:16ch;margin:0 0 clamp(8px,1.8vh,20px)}
  .hero .lead{font-size:clamp(15px,min(.9vw + 12px,2.5vh),22px);margin-bottom:clamp(12px,2.4vh,28px)}
  .hero .meta{margin-top:clamp(12px,2.6vh,36px);padding-top:clamp(10px,1.8vh,22px)}
  .hero .meta b{font-size:clamp(20px,3vh,28px)}

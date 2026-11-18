@@ -50,6 +50,10 @@ body.lock{overflow:hidden}
 .fr>.mk{position:absolute;width:16px;height:16px;border:2px solid var(--gold);z-index:3;pointer-events:none}
 .fr>.mk.a{left:-10px;top:-10px;border-right:0;border-bottom:0}.fr>.mk.b{right:-10px;top:-10px;border-left:0;border-bottom:0}
 .fr>.mk.c{left:-10px;bottom:-10px;border-right:0;border-top:0}.fr>.mk.d{right:-10px;bottom:-10px;border-left:0;border-top:0}
+/* focus: on hover or keyboard focus of a framed link the four crop marks close in, like a lens finding focus */
+.fr>.mk{transition:transform .6s var(--ease)}
+.fr>a:hover~.mk.a,.fr>a:focus-visible~.mk.a{transform:translate(6px,6px)}.fr>a:hover~.mk.b,.fr>a:focus-visible~.mk.b{transform:translate(-6px,6px)}
+.fr>a:hover~.mk.c,.fr>a:focus-visible~.mk.c{transform:translate(6px,-6px)}.fr>a:hover~.mk.d,.fr>a:focus-visible~.mk.d{transform:translate(-6px,-6px)}
 .dark .fr::before{border-color:var(--line-gold)}
 .browser{position:relative;z-index:1;background:var(--s2);border:1px solid rgba(245,241,232,.14);border-radius:6px;box-shadow:0 40px 80px -34px rgba(0,0,0,.9),0 0 60px -20px rgba(201,169,110,.16);overflow:hidden}
 .browser .bar{height:28px;background:var(--s0);display:flex;align-items:center;gap:6px;padding:0 12px}.browser .bar i{width:8px;height:8px;border-radius:50%;background:rgba(244,239,230,.35)}

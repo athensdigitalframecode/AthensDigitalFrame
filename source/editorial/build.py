@@ -141,6 +141,115 @@ CASES = {
         sample=('Το brand, τα προϊόντα, οι τιμές, τα υλικά και οι χρόνοι αποστολής είναι δείγματα. Το καλάθι μένει μόνο στον browser σου· το checkout και η φόρμα newsletter δεν στέλνουν τίποτα.', 'The brand, products, prices, fabrics and shipping times are samples. The bag stays only in your browser; the checkout and the newsletter form send nothing.')),
 }
 
+# Industries page: (industry, offer, six features), each as (el, en). English copy from the owner; no prices here yet.
+INDUSTRIES = [
+    (('Κομμωτήρια & κλινικές αισθητικής', 'Beauty Salons & Aesthetic Clinics'), ('Σύστημα κρατήσεων & διατήρησης πελατών', 'Salon Booking & Retention System'), [
+        ('Online κρατήσεις ραντεβού και προκαταβολές', 'Online appointment scheduling and deposits'),
+        ('Αυτόματες υπενθυμίσεις ραντεβού μέσω WhatsApp/SMS', 'Automated WhatsApp/SMS appointment reminders'),
+        ('Υπενθυμίσεις για νέο ραντεβού μετά την επίσκεψη', 'Rebooking reminders after appointments'),
+        ('Αυτόματη κάλυψη ακυρώσεων από λίστα αναμονής', 'Automated waitlist filling after cancellations'),
+        ('Αιτήματα για κριτικές στο Google', 'Google review requests'),
+        ('Καμπάνιες επανασύνδεσης με ανενεργούς πελάτες', 'Inactive customer re-engagement campaigns')]),
+    (('Οδοντιατρεία & οδοντίατροι', 'Dental Clinics & Dentists'), ('Σύστημα ραντεβού & επανεξέτασης ασθενών', 'Patient Appointment & Recall System'), [
+        ('Φόρμες για νέους ασθενείς και ειδοποιήσεις για επανάκληση', 'New patient inquiry forms and callback alerts'),
+        ('Υπενθυμίσεις και αλλαγές ραντεβού', 'Appointment reminders and rescheduling'),
+        ('Υπενθυμίσεις για τακτικό έλεγχο και καθαρισμό', 'Routine checkup and cleaning recall reminders'),
+        ('Αυτόματη απάντηση σε αναπάντητες κλήσεις', 'Missed-call follow-up automation'),
+        ('Βελτιστοποίηση προφίλ στο Google Maps', 'Google Maps profile optimization'),
+        ('Αιτήματα για κριτικές ασθενών', 'Patient review requests')]),
+    (('Δερματολόγοι & κλινικές αισθητικής ιατρικής', 'Dermatologists & Cosmetic Medicine Clinics'), ('Σύστημα μετατροπής αιτημάτων σε συνεδρίες', 'Consultation Conversion System'), [
+        ('Landing pages για αιτήματα συνεδρίας', 'Consultation request landing pages'),
+        ('Αυτόματες απαντήσεις σε νέα αιτήματα', 'Automated responses to new inquiries'),
+        ('Online κράτηση συνεδρίας', 'Online consultation appointment scheduling'),
+        ('Follow-up σε αιτήματα που έμειναν αναπάντητα', 'Follow-up on unanswered inquiries'),
+        ('Ενημερωτικές συχνές ερωτήσεις και σελίδες θεραπειών', 'Educational FAQs and treatment/service pages'),
+        ('Υπενθυμίσεις για επόμενες συνεδρίες', 'Follow-up reminders for future consultations')]),
+    (('Studios pilates, yoga & γυμναστήρια', 'Pilates, Yoga & Fitness Studios'), ('Σύστημα ανάπτυξης συνδρομών', 'Membership Growth System'), [
+        ('Landing pages για δωρεάν δοκιμαστικό μάθημα', 'Free-trial class landing pages'),
+        ('Αυτόματο follow-up από τη δοκιμή στη συνδρομή', 'Trial-to-membership automated follow-ups'),
+        ('Αυτόματες υπενθυμίσεις κρατήσεων μαθημάτων', 'Automated class booking reminders'),
+        ('Λίστες αναμονής για γεμάτα μαθήματα', 'Waitlists for fully booked classes'),
+        ('Καμπάνιες επανασύνδεσης με ανενεργά μέλη', 'Inactive-member re-engagement campaigns'),
+        ('Υπενθυμίσεις ανανέωσης συνδρομής', 'Membership renewal reminders')]),
+    (('Εταιρείες ανακαινίσεων & κατασκευών', 'Home Renovation & Construction Companies'), ('Σύστημα αυτοματισμού από το αίτημα στην προσφορά', 'Lead-to-Quote Automation System'), [
+        ('Φόρμες αιτήματος προσφοράς', 'Quote request forms'),
+        ('Αυτόματες απαντήσεις σε νέα αιτήματα', 'Automated responses to new leads'),
+        ('Προγραμματισμός συναντήσεων και αυτοψιών', 'Consultation and site-visit scheduling'),
+        ('Follow-up σε προσφορές που δεν έχουν εγκριθεί', 'Follow-ups on unaccepted quotations'),
+        ('Galleries έργων πριν και μετά', 'Before-and-after project galleries'),
+        ('Παρακολούθηση πορείας υποψήφιων πελατών', 'Lead pipeline tracking')]),
+    (('Διακοσμητές & αρχιτέκτονες', 'Interior Designers & Architects'), ('Σύστημα αιτημάτων έργου & follow-up', 'Project Inquiry & Follow-Up System'), [
+        ('Premium ιστοσελίδες portfolio', 'High-end portfolio websites'),
+        ('Φόρμες αιτήματος έργου με αξιολόγηση προϋπολογισμού', 'Project inquiry forms with budget qualification'),
+        ('Αυτόματος προγραμματισμός συναντήσεων', 'Automated consultation scheduling'),
+        ('Follow-up σε προτάσεις', 'Follow-ups on proposals'),
+        ('Αυτοματοποιημένη υποδοχή νέων πελατών', 'Client onboarding automation'),
+        ('Ενημερώσεις πορείας έργου και επικοινωνία', 'Project status updates and communication')]),
+    (('Boutique ξενοδοχεία & πολυτελή διαμερίσματα', 'Boutique Hotels & Luxury Apartments'), ('Σύστημα απευθείας κρατήσεων & εμπειρίας επισκέπτη', 'Direct Booking & Guest Experience System'), [
+        ('Ιστοσελίδες που φέρνουν κρατήσεις, με απευθείας κράτηση', 'High-converting websites with direct booking integration'),
+        ('Αυτόματες απαντήσεις σε αιτήματα κράτησης', 'Automated responses to booking inquiries'),
+        ('Μηνύματα WhatsApp/email πριν την άφιξη με οδηγίες check-in', 'Pre-arrival WhatsApp/email messages with check-in information'),
+        ('Αυτόματες προτάσεις για επιπλέον υπηρεσίες και εμπειρίες', 'Automated upselling of additional services and experiences'),
+        ('Αιτήματα για κριτικές στο Google μετά το check-out', 'Post-checkout Google review requests'),
+        ('Καμπάνιες και προσφορές για επαναλαμβανόμενους επισκέπτες', 'Repeat-guest campaigns and special offers')]),
+    (('Καταστήματα επίπλων & διακόσμησης', 'Furniture & Home Decor Stores'), ('Σύστημα αιτημάτων προϊόντων & πωλήσεων', 'Product Inquiry & Sales Conversion System'), [
+        ('Premium ιστοσελίδες καταλόγου και e-shops', 'Premium product catalog websites and e-commerce stores'),
+        ('Φόρμες ερωτήσεων για προϊόντα και αυτόματες απαντήσεις', 'Product inquiry forms and automated responses'),
+        ('Follow-up σε εγκαταλελειμμένα καλάθια και ημιτελείς αγορές', 'Abandoned cart and incomplete purchase follow-ups'),
+        ('Αυτόματες ειδοποιήσεις για παράδοση και κατάσταση παραγγελίας', 'Automated delivery and order status notifications'),
+        ('Καμπάνιες με εξατομικευμένες προτάσεις προϊόντων', 'Personalized product recommendation campaigns'),
+        ('Καμπάνιες για κριτικές και επαναλαμβανόμενες αγορές', 'Customer review and repeat-purchase campaigns')]),
+    (('Κοσμηματοπωλεία & boutiques μόδας', 'Jewelry & Fashion Boutiques'), ('Σύστημα πωλήσεων & διατήρησης πελατών για boutiques', 'Boutique Sales & Customer Retention System'), [
+        ('Premium e-shops και ψηφιακοί κατάλογοι', 'Premium e-commerce websites and digital catalogs'),
+        ('Κρατήσεις για ιδιωτικά ραντεβού αγορών', 'Private shopping appointment scheduling'),
+        ('Αυτόματες απαντήσεις για διαθεσιμότητα προϊόντων', 'Automated responses to product availability inquiries'),
+        ('Μηνύματα ανάκτησης εγκαταλελειμμένων καλαθιών', 'Abandoned cart recovery messages'),
+        ('Καμπάνιες VIP πελατών και ανακοινώσεις νέων συλλογών', 'VIP customer campaigns and new collection announcements'),
+        ('Εξατομικευμένο follow-up και καμπάνιες επιβράβευσης', 'Personalized customer follow-ups and loyalty campaigns')]),
+    (('Κέντρα φυσικοθεραπείας', 'Physiotherapy Clinics'), ('Σύστημα κρατήσεων & διατήρησης ασθενών', 'Patient Booking & Retention System'), [
+        ('Online κράτηση ραντεβού και αξιολόγησης', 'Online appointment and assessment scheduling'),
+        ('Αυτόματες υπενθυμίσεις ραντεβού', 'Automated appointment reminders'),
+        ('Υπενθυμίσεις για τις προτεινόμενες συνεδρίες θεραπείας', 'Follow-up reminders for recommended treatment sessions'),
+        ('Follow-up σε χαμένα ραντεβού και ακυρώσεις', 'Missed appointment and cancellation follow-ups'),
+        ('Καμπάνιες για νέα ραντεβού και επανασύνδεση ασθενών', 'Patient rebooking and re-engagement campaigns'),
+        ('Αιτήματα για κριτικές στο Google και τοπικό SEO', 'Google review requests and local search optimization')]),
+    (('Μεσιτικά γραφεία', 'Real Estate Agencies'), ('Σύστημα αυτοματισμού αιτημάτων & επισκέψεων ακινήτων', 'Property Lead & Viewing Automation System'), [
+        ('Ιστοσελίδες αγγελιών ακινήτων και landing pages', 'Property listing websites and landing pages'),
+        ('Φόρμες αιτημάτων για αγοραστές και πωλητές', 'Buyer and seller inquiry forms'),
+        ('Αυτόματες απαντήσεις σε ερωτήσεις για ακίνητα', 'Automated responses to property inquiries'),
+        ('Προγραμματισμός επισκέψεων σε ακίνητα', 'Property viewing appointment scheduling'),
+        ('Αυτόματο follow-up με ενδιαφερόμενους αγοραστές και ενοικιαστές', 'Automated follow-ups with interested buyers and renters'),
+        ('Αξιολόγηση υποψήφιων πελατών και παρακολούθηση σε CRM', 'Lead qualification and CRM pipeline tracking')]),
+    (('Car detailing & premium υπηρεσίες αυτοκινήτου', 'Car Detailing & Premium Auto Services'), ('Σύστημα κρατήσεων & επαναλαμβανόμενων πελατών', 'Auto Booking & Repeat Customer System'), [
+        ('Online κράτηση υπηρεσίας και προκαταβολή', 'Online service booking and deposit collection'),
+        ('Αυτόματες επιβεβαιώσεις και υπενθυμίσεις ραντεβού', 'Automated appointment confirmations and reminders'),
+        ('Φόρμες αιτήματος προσφοράς για premium υπηρεσίες', 'Quote request forms for premium services'),
+        ('Follow-up μετά την υπηρεσία και υπενθυμίσεις για νέο ραντεβού', 'Service follow-up and repeat booking reminders'),
+        ('Αιτήματα για κριτικές στο Google μετά την υπηρεσία', 'Google review requests after completed services'),
+        ('Καμπάνιες επανασύνδεσης και εποχικές προσφορές', 'Customer reactivation and seasonal promotion campaigns')]),
+    (('Wedding planners & εταιρείες εκδηλώσεων', 'Wedding Planners & Event Companies'), ('Σύστημα αιτημάτων & κρατήσεων εκδηλώσεων', 'Event Inquiry & Booking Conversion System'), [
+        ('Premium ιστοσελίδες portfolio και galleries εκδηλώσεων', 'Premium portfolio websites and event galleries'),
+        ('Φόρμες αιτήματος με ημερομηνία, προϋπολογισμό και αριθμό καλεσμένων', 'Event inquiry forms with date, budget, and guest-count qualification'),
+        ('Αυτόματες απαντήσεις σε νέα αιτήματα', 'Automated responses to new inquiries'),
+        ('Προγραμματισμός συναντήσεων', 'Consultation scheduling'),
+        ('Αυτόματο follow-up σε προτάσεις και προσφορές', 'Automated proposal and quotation follow-ups'),
+        ('Υποδοχή πελατών και ενημερώσεις για την προετοιμασία', 'Client onboarding and event planning updates')]),
+    (('Brands εκλεκτών τροφίμων, καφέ & gourmet', 'Specialty Food, Coffee & Gourmet Brands'), ('Σύστημα e-shop & επιβράβευσης πελατών', 'E-Commerce & Customer Loyalty System'), [
+        ('Branded e-shops και κατάλογοι προϊόντων', 'Branded e-commerce websites and product catalogs'),
+        ('Online παραγγελίες και προπαραγγελίες', 'Online ordering and preorder systems'),
+        ('Αυτόματη ανάκτηση εγκαταλελειμμένων καλαθιών', 'Abandoned cart recovery automation'),
+        ('Καμπάνιες επιβράβευσης και επαναλαμβανόμενων αγορών', 'Customer loyalty and repeat-purchase campaigns'),
+        ('Καμπάνιες για νέα προϊόντα και εποχικές προσφορές', 'New product launch and seasonal promotion campaigns'),
+        ('Φόρμες για χονδρική και επαγγελματικές συνεργασίες', 'Wholesale and business partnership inquiry forms')]),
+    (('Grooming κατοικιδίων & κτηνιατρεία', 'Pet Grooming & Veterinary Clinics'), ('Σύστημα ραντεβού & διατήρησης για κατοικίδια', 'Pet Appointment & Retention System'), [
+        ('Online ραντεβού για grooming και κτηνίατρο', 'Online grooming and veterinary appointment scheduling'),
+        ('Αυτόματες υπενθυμίσεις ραντεβού μέσω WhatsApp/SMS', 'Automated appointment reminders via WhatsApp/SMS'),
+        ('Υπενθυμίσεις για νέο grooming και τακτικό έλεγχο', 'Grooming rebooking and routine wellness visit reminders'),
+        ('Υπενθυμίσεις εμβολίων και πρόληψης για πελάτες του κτηνιατρείου', 'Vaccination and preventive-care reminders for veterinary clients'),
+        ('Follow-up σε χαμένα ραντεβού και ακυρώσεις', 'Missed appointment and cancellation follow-ups'),
+        ('Αιτήματα για κριτικές στο Google και καμπάνιες διατήρησης πελατών', 'Google review requests and customer retention campaigns')]),
+]
+
 class Page:
     def __init__(s, lang): s.l = lang
     def t(s, el, en): return en if s.l == 'en' else el
@@ -179,10 +288,11 @@ class Page:
 '''
     def header(s, cur='', path=''):   # path: this page's Greek path, when it is not home or prices
         t = s.t; H = s.home
-        items = [('services', t('Υπηρεσίες', 'Services')), ('projects', t('Projects', 'Projects')), ('process', t('Διαδικασία', 'Process')),
+        items = [('services', t('Υπηρεσίες', 'Services')), ('industries', t('Κλάδοι', 'Industries')), ('projects', t('Projects', 'Projects')), ('process', t('Διαδικασία', 'Process')),
                  ('pricing', t('Τιμές', 'Pricing')), ('about', t('Το στούντιο', 'About')), ('contact', t('Επικοινωνία', 'Contact'))]
-        def href(k): return s.prices() if k == 'pricing' else H('#' + k)
-        nav = ''.join(f'<a href="{href(k)}"{" aria-current=page" if k=="pricing" and cur=="prices" else ""}>{esc(n)}</a>' for k, n in items)
+        pages = {'pricing': ('prices', s.prices()), 'industries': ('industries', s.pre + '/industries.html')}   # nav items that are pages, not home sections
+        def href(k): return pages[k][1] if k in pages else H('#' + k)
+        nav = ''.join(f'<a href="{href(k)}"{" aria-current=page" if k in pages and pages[k][0] == cur else ""}>{esc(n)}</a>' for k, n in items)
         sheet = ''.join(f'<a class="l" href="{href(k)}">{esc(n)}<span aria-hidden="true">→</span></a>' for k, n in items)
         path = path or ('/prices.html' if cur == 'prices' else '/'); other = path if s.l == 'en' else '/en' + path
         ol, on = ('EL', 'Ελληνικά') if s.l == 'en' else ('EN', 'English')
@@ -202,7 +312,7 @@ class Page:
 <footer class="ft2"><div class="wrap"><div class="g">
 <div><a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <p>{t('Ψηφιακό στούντιο στην Αθήνα. Ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','A digital studio in Athens. Websites and e-shops for businesses that want to stand out.')}</p></div>
-<div><h4>{t('Πλοήγηση','Navigate')}</h4><ul><li><a href="{H('#projects')}">Projects</a></li><li><a href="{H('#process')}">{t('Διαδικασία','Process')}</a></li><li><a href="{s.prices()}">{t('Τιμές','Pricing')}</a></li><li><a href="{H('#about')}">{t('Το στούντιο','About')}</a></li><li><a href="{H('#faq')}">FAQ</a></li></ul></div>
+<div><h4>{t('Πλοήγηση','Navigate')}</h4><ul><li><a href="{s.pre}/industries.html">{t('Κλάδοι','Industries')}</a></li><li><a href="{H('#projects')}">Projects</a></li><li><a href="{H('#process')}">{t('Διαδικασία','Process')}</a></li><li><a href="{s.prices()}">{t('Τιμές','Pricing')}</a></li><li><a href="{H('#about')}">{t('Το στούντιο','About')}</a></li><li><a href="{H('#faq')}">FAQ</a></li></ul></div>
 <div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#pricing')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#pricing')}">E-shops</a></li><li><a href="{H('#pricing')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
 <h4 style="margin-top:28px">{t('Νομικά','Legal')}</h4><ul><li><a href="{s.pre}/privacy.html">{t('Πολιτική απορρήτου','Privacy policy')}</a></li><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Όροι χρήσης (σύντομα)','Terms (coming soon)')}</span></li></ul></div>
 <div><h4>{t('Επικοινωνία','Contact')}</h4><ul><li><a href="{IG}" rel="noopener" target="_blank">Instagram @athens.digitalframe</a></li><li><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp +30 698 186 2732</a></li><li><a href="tel:{TEL}">{t('Τηλέφωνο','Phone')} +30 698 186 2732</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
@@ -462,6 +572,25 @@ class Page:
         out += s.footer()
         return out
 
+    def build_industries(s):
+        """Offers by industry, copy from the owner (EN) with Greek translation. Prices are added later, with the owner."""
+        t = s.t; url = '/industries.html'; p = lambda x: esc(t(*x))
+        title = t('Λύσεις ανά κλάδο', 'Services by industry')
+        ld = {"@context": "https://schema.org", "@type": "WebPage", "name": f'{title} | Athens Digital Frame', "url": SITE + s.pre + url, "inLanguage": s.l, "isPartOf": {"@id": SITE + "/#org"}}
+        out = s.head(f'{title} | Athens Digital Frame', t('Ιστοσελίδες, κρατήσεις και αυτοματισμοί για 15 κλάδους: κομμωτήρια, οδοντιατρεία, studios, ξενοδοχεία, μεσιτικά, boutiques και άλλους.', 'Websites, booking and automation for 15 industries: salons, dental clinics, studios, hotels, real estate, boutiques and more.'),
+                     url, '/en' + url, 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
+        out += s.header('industries', url)
+        items = ''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{p(name)}</h3><div><p><b>{t("Προτεινόμενη λύση", "Suggested offer")}:</b> {p(offer)}</p><ul class="ft">{"".join(f"<li>{p(f)}</li>" for f in feats)}</ul></div></li>'
+                        for i, (name, offer, feats) in enumerate(INDUSTRIES))
+        out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">{t('Κλάδοι', 'Industries')}</p>
+<h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{t('Λύσεις <em>ανά κλάδο.</em>', 'Services <em>by industry.</em>')}</h1>
+<p class="lead" style="max-width:46ch">{t('Ιστοσελίδα, κρατήσεις και αυτοματισμοί, προσαρμοσμένα στον τρόπο που δουλεύει ο κλάδος σου.', 'A website, bookings and automation, shaped around the way your industry works.')}</p></div></section>
+<section class="sec"><div class="wrap"><ol class="caps">{items}</ol>
+<div class="btns" style="margin-top:32px"><a class="btn gold" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn ghost" href="{s.prices()}">{t('Δες τις τιμές', 'See pricing')}</a></div></div></section>
+'''
+        out += s.footer()
+        return out
+
     def build_404(s):
         """Vercel serves /404.html for every unknown path, Greek or English, so the page carries both languages."""
         t = s.t; H = s.home
@@ -511,10 +640,10 @@ if __name__ == '__main__':
         p = Page(lang); pre = 'en/' if lang == 'en' else ''
         w(pre + 'index.html', p.build_home()); w(pre + 'prices.html', p.build_prices())
         for k in CASES: w(pre + f'work/{k}.html', p.build_case(k))
-        w(pre + 'privacy.html', p.build_privacy())
+        w(pre + 'privacy.html', p.build_privacy()); w(pre + 'industries.html', p.build_industries())
     w('404.html', Page('el').build_404())
     # sitemap from the same list of pages, so a new page cannot be forgotten
-    pages = ['/', '/prices.html', '/privacy.html'] + [f'/work/{k}.html' for k in CASES]
+    pages = ['/', '/prices.html', '/industries.html', '/privacy.html'] + [f'/work/{k}.html' for k in CASES]
     alt = lambda u: f'\n    <xhtml:link rel="alternate" hreflang="el" href="{SITE}{u}"/>\n    <xhtml:link rel="alternate" hreflang="en" href="{SITE}/en{u}"/>'
     w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
       + ''.join(f'  <url><loc>{SITE}{l}{u}</loc>{alt(u)}</url>\n' for u in pages for l in ('', '/en')) + '</urlset>\n')

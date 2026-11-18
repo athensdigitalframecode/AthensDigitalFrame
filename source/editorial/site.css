@@ -519,3 +519,5 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @view-transition{navigation:auto}
 ::view-transition-group(*){animation-duration:.7s;animation-timing-function:cubic-bezier(.22,.61,.36,1)}
 @media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+/* footer sign-off: the wordmark set across the full content width (Marcellus, 12.75em wide at .08em tracking), low contrast, rises once */
+.ft2 .wrap{container-type:inline-size}.ft2 .ft-mark{max-width:none;margin:clamp(48px,7vw,96px) 0 0;font:400 7.6cqi/1 var(--brand,Marcellus,'Marcellus Fallback',serif);letter-spacing:.08em;margin-right:-.08em;text-transform:uppercase;white-space:nowrap;color:rgba(245,241,232,.13);text-align:center;user-select:none}

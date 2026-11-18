@@ -206,7 +206,7 @@ class Page:
 <div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#pricing')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#pricing')}">E-shops</a></li><li><a href="{H('#pricing')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
 <h4 style="margin-top:28px">{t('Νομικά','Legal')}</h4><ul><li><a href="{s.pre}/privacy.html">{t('Πολιτική απορρήτου','Privacy policy')}</a></li><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Όροι χρήσης (σύντομα)','Terms (coming soon)')}</span></li></ul></div>
 <div><h4>{t('Επικοινωνία','Contact')}</h4><ul><li><a href="{IG}" rel="noopener" target="_blank">Instagram @athens.digitalframe</a></li><li><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp +30 698 186 2732</a></li><li><a href="tel:{TEL}">{t('Τηλέφωνο','Phone')} +30 698 186 2732</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
-</div><div class="base"><span>© <span id="yr">2026</span> Athens Digital Frame · {t('Οι τιμές δεν υπόκεινται σε ΦΠΑ.','Prices are not subject to VAT.')}</span><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></div></div></footer>
+</div><p class="ft-mark rv" aria-hidden="true" translate="no">Athens Digital Frame</p><div class="base"><span>© <span id="yr">2026</span> Athens Digital Frame · {t('Οι τιμές δεν υπόκεινται σε ΦΠΑ.','Prices are not subject to VAT.')}</span><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></div></div></footer>
 <script src="{JS}" defer></script>{scripts}
 </body></html>
 '''

@@ -229,8 +229,8 @@ class Page:
 <p class="small">{t('Δεν υπάρχει server: η φόρμα ανοίγει το WhatsApp ή το email σου με έτοιμο μήνυμα. Τίποτα δεν στέλνεται μέχρι να πατήσεις αποστολή εκεί.','There is no server: the form opens your WhatsApp or email with a ready message. Nothing is sent until you press send there.')}</p>
 </form>'''
 
-    def frame(s, inner):
-        return f'<div class="fr">{inner}<i class="mk a"></i><i class="mk b"></i><i class="mk c"></i><i class="mk d"></i></div>'
+    def frame(s, inner, vt=''):   # vt: view-transition name shared by the home preview and its case-study preview
+        return f'<div class="fr"{f" style=view-transition-name:{vt}" if vt else ""}>{inner}<i class="mk a"></i><i class="mk b"></i><i class="mk c"></i><i class="mk d"></i></div>'
     def browser(s, img, url, alt, w=1200, h=630, eager=False):
         return f'<div class="browser"><div class="bar"><i></i><i></i><i></i><span>{url}</span></div><img src="/assets/{img}" width="{w}" height="{h}" alt="{esc(alt)}" {"fetchpriority=high" if eager else "loading=lazy"} decoding="async"></div>'
     def phone(s, img, alt, eager=False):
@@ -371,7 +371,7 @@ class Page:
     def work(s, i, key):
         """One project in Selected Work: a large framed preview that opens the case study, then one meta row."""
         t = s.t; c = CASES[key]; case = s.case(key)
-        pv = s.frame(f'<a class="lnk" href="{case}" aria-label="{c["name"]}: {t("case study", "case study")}">' + s.browser(key + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt'])) + '</a>')
+        pv = s.frame(f'<a class="lnk" href="{case}" aria-label="{c["name"]}: {t("case study", "case study")}">' + s.browser(key + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt'])) + '</a>', 'pv-' + key)
         return f'''<article class="work" id="work-{key}">
 <div class="pv rv">{pv}{s.phone(key + '-m.webp', c['name'] + ' ' + t('σε κινητό', 'on a phone'))}</div>
 <div class="work-meta rv d1"><span class="n">{i + 1:02d}</span><div class="work-t"><h3>{c['name']}</h3><p class="k">{esc(t(*c['sector']))}</p></div>
@@ -408,7 +408,7 @@ class Page:
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{c['name']}</h1>
 <p class="lead" style="max-width:46ch">{p(c['lead'])}</p>
 <div class="btns" style="margin-top:32px"><a class="btn gold" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} {ARROW}</a><a class="btn ghost" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')}</a></div></div></section>
-<section class="sec paper"><div class="wrap"><div class="pv cs-pv rv">{s.frame(s.browser(img + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt']), eager=True))}<div class="phone"><img src="/assets/{img}-m.webp" width="390" height="844" alt="{c['name']} {t('σε κινητό', 'on a phone')}" loading="lazy" decoding="async"></div></div></div></section>
+<section class="sec paper"><div class="wrap"><div class="pv cs-pv rv">{s.frame(s.browser(img + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt']), eager=True), 'pv-' + key)}<div class="phone"><img src="/assets/{img}-m.webp" width="390" height="844" alt="{c['name']} {t('σε κινητό', 'on a phone')}" loading="lazy" decoding="async"></div></div></div></section>
 <section class="sec" aria-labelledby="cs1"><div class="wrap about">
 <div class="rv"><p class="eyebrow">01 — Brief</p><h2 class="h2" id="cs1">{t('Το brief που θέσαμε.', 'The brief we set.')}</h2></div>
 <div class="txt rv d1">{''.join(f'<p>{p(x)}</p>' for x in c['brief'])}

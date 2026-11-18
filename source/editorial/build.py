@@ -150,8 +150,10 @@ class Page:
     def prices(s): return s.pre + '/prices.html'
 
     # ----- shared parts -----
-    def head(s, title, desc, path_el, path_en, og, ld):
+    def head(s, title, desc, path_el, path_en, og, ld, noindex=False):
         t = s.t; canon = SITE + (path_en if s.l == 'en' else path_el)
+        links = '<meta name="robots" content="noindex">' if noindex else f'''<link rel="canonical" href="{canon}">
+<link rel="alternate" hreflang="el" href="{SITE}{path_el}"><link rel="alternate" hreflang="en" href="{SITE}{path_en}"><link rel="alternate" hreflang="x-default" href="{SITE}{path_el}">'''
         return f'''<!doctype html>
 <html lang="{s.l}" class="nojs">
 <head>
@@ -159,8 +161,7 @@ class Page:
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <meta name="theme-color" content="#09090A"><meta name="color-scheme" content="dark">
-<link rel="canonical" href="{canon}">
-<link rel="alternate" hreflang="el" href="{SITE}{path_el}"><link rel="alternate" hreflang="en" href="{SITE}{path_en}"><link rel="alternate" hreflang="x-default" href="{SITE}{path_el}">
+{links}
 <meta property="og:type" content="website"><meta property="og:site_name" content="Athens Digital Frame"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{canon}"><meta property="og:image" content="{SITE}/{og}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:locale" content="{'en_GB' if s.l=='en' else 'el_GR'}"><meta name="twitter:card" content="summary_large_image">
@@ -467,6 +468,21 @@ class Page:
         out += s.footer()
         return out
 
+    def build_404(s):
+        """Vercel serves /404.html for every unknown path, Greek or English, so the page carries both languages."""
+        t = s.t; H = s.home
+        ld = {"@context": "https://schema.org", "@type": "WebPage", "name": 'Page not found | Athens Digital Frame', "isPartOf": {"@id": SITE + "/#org"}}
+        out = s.head('Η σελίδα δεν βρέθηκε | Page not found | Athens Digital Frame', 'Η σελίδα δεν υπάρχει. The page does not exist.', '/', '/en/', 'og-v5.jpg', ld, noindex=True)
+        out += s.header()
+        out += f'''<section class="phero dark"><div class="wrap"><p class="eyebrow">404</p>
+<h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">Η σελίδα <em>δεν βρέθηκε.</em></h1>
+<p class="lead" style="max-width:46ch">Ίσως άλλαξε διεύθυνση ή γράφτηκε λάθος. Ξεκίνα από την αρχική ή δες τα projects.</p>
+<p class="lead" style="max-width:46ch;margin-top:16px;color:var(--muted)" lang="en">Page not found. The address may have changed or been mistyped.</p>
+<div class="btns" style="margin-top:32px"><a class="btn gold" href="{H()}">Αρχική σελίδα {ARROW}</a><a class="btn ghost" href="{H('#projects')}">Projects</a><a class="btn ghost" href="/en/" lang="en">English site</a></div></div></section>
+'''
+        out += s.footer()
+        return out
+
     def build_prices(s):
         t = s.t
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": t('Τιμές | Athens Digital Frame', 'Pricing | Athens Digital Frame'), "url": SITE + s.prices(), "inLanguage": s.l,
@@ -502,6 +518,7 @@ if __name__ == '__main__':
         w(pre + 'index.html', p.build_home()); w(pre + 'prices.html', p.build_prices())
         for k in CASES: w(pre + f'work/{k}.html', p.build_case(k))
         w(pre + 'privacy.html', p.build_privacy())
+    w('404.html', Page('el').build_404())
     # sitemap from the same list of pages, so a new page cannot be forgotten
     pages = ['/', '/prices.html', '/privacy.html'] + [f'/work/{k}.html' for k in CASES]
     alt = lambda u: f'\n    <xhtml:link rel="alternate" hreflang="el" href="{SITE}{u}"/>\n    <xhtml:link rel="alternate" hreflang="en" href="{SITE}/en{u}"/>'

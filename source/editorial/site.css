@@ -164,7 +164,7 @@ fieldset.f{border:0;padding:0;margin:0}
 .ft2{background:var(--s0);color:var(--cream);padding:clamp(56px,8vw,96px) 0 32px}
 .ft2 .g{display:grid;gap:36px}@media(min-width:900px){.ft2 .g{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
 .ft2 h4{font:600 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.ft2 li a,.ft2 li span.soon{display:inline-block;padding:6px 0;text-decoration:none;color:rgba(245,241,232,.88);font-size:15px}.ft2 li a:hover{text-decoration:underline}
+.ft2 li a,.ft2 li span.soon{display:inline-block;padding:6px 0;text-decoration:none;color:rgba(245,241,232,.88);font-size:15px}
 .ft2 .soon{opacity:.6}
 .ft2 p{color:rgba(245,241,232,.72);font-size:15px;max-width:34ch;margin-top:16px}
 .ft2 .base{margin-top:clamp(40px,6vw,72px);padding-top:20px;border-top:1px solid var(--line-gold);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:rgba(245,241,232,.7)}
@@ -523,3 +523,5 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .ft2 .wrap{container-type:inline-size}.ft2 .ft-mark{max-width:none;margin:clamp(48px,7vw,96px) 0 0;font:400 7.6cqi/1 var(--brand,Marcellus,'Marcellus Fallback',serif);letter-spacing:.08em;margin-right:-.08em;text-transform:uppercase;white-space:nowrap;color:rgba(245,241,232,.13);text-align:center;user-select:none}
 /* FAQ: answers open and close with a short height ease where the browser supports ::details-content; elsewhere instant */
 @supports selector(::details-content){:root{interpolate-size:allow-keywords}details::details-content{height:0;overflow:clip;transition:height .45s var(--ease),content-visibility .45s allow-discrete}details[open]::details-content{height:auto}@media(prefers-reduced-motion:reduce){details::details-content{transition:none}}}
+/* footer links: a gold hairline draws in from the left on hover or keyboard focus */
+.ft2 ul a{background:linear-gradient(var(--gold),var(--gold)) 0 calc(100% - 3px)/0 1px no-repeat;transition:background-size .5s var(--ease),color .3s}.ft2 ul a:hover,.ft2 ul a:focus-visible{background-size:100% 1px;color:var(--cream);text-decoration:none}

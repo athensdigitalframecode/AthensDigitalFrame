@@ -521,3 +521,5 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}
 /* footer sign-off: the wordmark set across the full content width (Marcellus, 12.75em wide at .08em tracking), low contrast, rises once */
 .ft2 .wrap{container-type:inline-size}.ft2 .ft-mark{max-width:none;margin:clamp(48px,7vw,96px) 0 0;font:400 7.6cqi/1 var(--brand,Marcellus,'Marcellus Fallback',serif);letter-spacing:.08em;margin-right:-.08em;text-transform:uppercase;white-space:nowrap;color:rgba(245,241,232,.13);text-align:center;user-select:none}
+/* FAQ: answers open and close with a short height ease where the browser supports ::details-content; elsewhere instant */
+@supports selector(::details-content){:root{interpolate-size:allow-keywords}details::details-content{height:0;overflow:clip;transition:height .45s var(--ease),content-visibility .45s allow-discrete}details[open]::details-content{height:auto}@media(prefers-reduced-motion:reduce){details::details-content{transition:none}}}

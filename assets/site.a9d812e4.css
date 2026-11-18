@@ -114,7 +114,8 @@ body.lock{overflow:hidden}
 }
 .panel[hidden]{display:none}
 .panel .note{margin-top:var(--s6);padding-top:var(--s5);border-top:1px solid var(--line-gold);color:rgba(245,241,232,.8);max-width:60ch}
-.nojs .panel[hidden]{display:block}
+.nojs .panel[hidden],.nojs .ver[hidden]{display:block}.nojs .vtabs{display:none}
+.vtabs{margin-bottom:var(--s5)}.nojs .ver+.ver{margin-top:clamp(64px,9vw,128px)}
 
 .pcard{background:var(--s2);border:1px solid rgba(245,241,232,.13);border-radius:2px;padding:clamp(24px,3.4vw,48px);display:flex;flex-direction:column;transition:border-color .4s var(--ease),transform .5s var(--ease)}.pcard:hover{border-color:var(--line-gold)}
 .pcard h3{font-size:var(--fs-3)}.pcard>p.d{color:var(--muted);margin-top:10px}

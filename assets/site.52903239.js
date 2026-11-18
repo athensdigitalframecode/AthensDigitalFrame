@@ -15,9 +15,10 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.quer
 var rv=[].slice.call(d.querySelectorAll('.rv,.reveal-img'));
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px 12% 0px',threshold:0});rv.forEach(function(n){io.observe(n)})}else rv.forEach(function(n){n.classList.add('in')});
 /* process tabs + animated steps */
-var tabs=[].slice.call(d.querySelectorAll('[role=tab]')),panels=[].slice.call(d.querySelectorAll('.panel'));
-function pick(t){tabs.forEach(function(x){x.setAttribute('aria-selected',x===t)});panels.forEach(function(p){p.hidden=p.id!==t.getAttribute('aria-controls')});anim()}
-tabs.forEach(function(t,i){t.addEventListener('click',function(){pick(t)});t.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;if(n===null)return;n=(n+tabs.length)%tabs.length;tabs[n].focus();pick(tabs[n]);e.preventDefault()})});
+var panels=[].slice.call(d.querySelectorAll('.panel'));
+[].forEach.call(d.querySelectorAll('[role=tablist]'),function(l){var tabs=[].slice.call(l.querySelectorAll('[role=tab]'));   /* each tab set switches only its own panels */
+function pick(t){tabs.forEach(function(x){x.setAttribute('aria-selected',x===t);d.getElementById(x.getAttribute('aria-controls')).hidden=x!==t});anim()}
+tabs.forEach(function(t,i){t.addEventListener('click',function(){pick(t)});t.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;if(n===null)return;n=(n+tabs.length)%tabs.length;tabs[n].focus();pick(tabs[n]);e.preventDefault()})});});
 /* steps follow the scroll: the line fills and each step lights as the reader moves through the section (all lit under reduced motion) */
 var still=matchMedia('(prefers-reduced-motion:reduce)').matches,sq=false;
 function anim(){sq=false;var p=panels.filter(function(x){return !x.hidden})[0],s=p&&p.querySelector('.steps');if(!s)return;var r=s.getBoundingClientRect(),v=innerHeight,k=still?1:Math.max(0,Math.min(1,(v*.85-r.top)/(v*.5)));

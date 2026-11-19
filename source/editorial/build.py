@@ -250,6 +250,26 @@ INDUSTRIES = [
         ('Αιτήματα για κριτικές στο Google και καμπάνιες διατήρησης πελατών', 'Google review requests and customer retention campaigns')]),
 ]
 
+# Line icons for INDUSTRIES, same order (24x24, stroke only, drawn in the cube glyphs' style)
+IND_ICONS = [
+    '<circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.2 16 18 3M15.8 16 6 3"/>',
+    '<path d="M7 3C4.5 3 3 5 3 7.5c0 3 1.5 4.5 2 7.5.5 3.5 1 6 2.5 6s1.5-4 2.5-6c.5-1 1.5-1 2 0 1 2 1 6 2.5 6s2-2.5 2.5-6c.5-3 2-4.5 2-7.5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3z"/>',
+    '<path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
+    '<circle cx="12" cy="5" r="2"/><path d="M4 11l8 1 8-1M12 12v4M12 16l-5 5M12 16l5 5"/>',
+    '<path d="M3.5 20.5 13 11M9.5 7.5l3-3 7 7-3 3zM12.5 4.5 11 3"/>',
+    '<path d="M12 3v2M12 5 6 21M12 5l6 16M8.3 15h7.4"/>',
+    '<path d="M3 6v13M3 15h18v4M21 15v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="12" r="1.5"/>',
+    '<path d="M6 11V7h12v4M4 11a2 2 0 0 1 2 2v3h12v-3a2 2 0 0 1 4 0v5H2v-5a2 2 0 0 1 2-2zM5 18v2M19 18v2"/>',
+    '<path d="M6 4h12l4 5-10 11L2 9zM2 9h20M9 4 7 9l5 11 5-11-2-5"/>',
+    '<path d="M12 20s-8-5-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-2.5 2 4 1.5-1.5h4"/>',
+    '<path d="M4 21V8l8-5 8 5v13M2 21h20M9 21v-6h6v6"/>',
+    '<path d="M3 16v-4l2.5-5h13L21 12v4M3 12h18M9 17h6"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>',
+    '<circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/><path d="M10 4h4l-2 3z"/>',
+    '<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3M3 21h16"/>',
+    '<circle cx="8" cy="6.5" r="1.8"/><circle cx="16" cy="6.5" r="1.8"/><circle cx="4.5" cy="11.5" r="1.8"/><circle cx="19.5" cy="11.5" r="1.8"/><path d="M12 12c-3 0-5.5 4-5.5 6 0 1.5 1.5 2 3 1.5s3.5-.5 5 0 3 0 3-1.5c0-2-2.5-6-5.5-6z"/>',
+]
+assert len(IND_ICONS) == len(INDUSTRIES)
+
 class Page:
     def __init__(s, lang): s.l = lang
     def t(s, el, en): return en if s.l == 'en' else el
@@ -588,10 +608,11 @@ class Page:
         out = s.head(f'{title} | Athens Digital Frame', t('Ιστοσελίδες, κρατήσεις και αυτοματισμοί για 15 κλάδους: κομμωτήρια, οδοντιατρεία, studios, ξενοδοχεία, μεσιτικά, boutiques και άλλους.', 'Websites, booking and automation for 15 industries: salons, dental clinics, studios, hotels, real estate, boutiques and more.'),
                      url, '/en' + url, 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
         out += s.header('industries', url)
+        ico = lambda i: f'<svg class="ind-i" viewBox="0 0 24 24" aria-hidden="true">{IND_ICONS[i]}</svg>'
         slug = lambda name: re.sub(r'[^a-z]+', '-', name[1].lower()).strip('-')   # English slug on both languages, so a shared link works on either
-        items = ''.join(f'<li class="rv" id="{slug(name)}"><span class="n">{i + 1:02d}</span><h3>{p(name)}</h3><div><p><b>{t("Προτεινόμενη λύση", "Suggested offer")}:</b> {p(offer)}</p><ul class="ft">{"".join(f"<li>{p(f)}</li>" for f in feats)}</ul></div></li>'
+        items = ''.join(f'<li class="rv" id="{slug(name)}"><span class="n">{i + 1:02d}{ico(i)}</span><h3>{p(name)}</h3><div><p><b>{t("Προτεινόμενη λύση", "Suggested offer")}:</b> {p(offer)}</p><ul class="ft">{"".join(f"<li>{p(f)}</li>" for f in feats)}</ul></div></li>'
                         for i, (name, offer, feats) in enumerate(INDUSTRIES))
-        index = ''.join(f'<li><a href="#{slug(name)}"><span>{i + 1:02d}</span>{p(name)}</a></li>' for i, (name, _, _) in enumerate(INDUSTRIES))
+        index = ''.join(f'<li><a href="#{slug(name)}"><span>{i + 1:02d}</span>{ico(i)}{p(name)}</a></li>' for i, (name, _, _) in enumerate(INDUSTRIES))
         out += f'''<section class="phero dark"><div class="wrap ind-hero"><div><p class="eyebrow">{t('Κλάδοι', 'Industries')}</p>
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{t('Λύσεις <em>ανά κλάδο.</em>', 'Services <em>by industry.</em>')}</h1>
 <p class="lead" style="max-width:46ch">{t('Ιστοσελίδα, κρατήσεις και αυτοματισμοί, προσαρμοσμένα στον τρόπο που δουλεύει ο κλάδος σου.', 'A website, bookings and automation, shaped around the way your industry works.')}</p></div>

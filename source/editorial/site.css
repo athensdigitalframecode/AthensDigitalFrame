@@ -392,6 +392,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
  background-image:linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold)),radial-gradient(90% 55% at 50% 0%,rgba(201,169,110,.12),transparent 72%);
  background-size:16px 1px,1px 16px,16px 1px,1px 16px,16px 1px,1px 16px,16px 1px,1px 16px,100% 100%;background-position:0 0,0 0,100% 0,100% 0,0 100%,0 100%,100% 100%,100% 100%,0 0;animation:ind-in .8s var(--ease) both}
 @keyframes ind-in{from{opacity:0;transform:scale(1.03)}}
+.ind>li{transition:opacity .6s var(--ease),transform .6s var(--ease)}.ind:has(>li:target)>li:not(:target){opacity:.22}.ind:has(>li:target)>li:not(:target):is(:hover,:focus-within){opacity:.85}   /* the industry jumped to stays lit, the rest step back */
 /* case studies (work/*.html): reuse .phero,.about,.facts,.caps,.pv; only these three parts are new */
 .cs-pv{max-width:1040px;margin-inline:auto}
 .sw{list-style:none;margin:var(--s6) 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s4) var(--s5);font:600 12px/1.6 var(--body);letter-spacing:.1em;color:var(--muted)}

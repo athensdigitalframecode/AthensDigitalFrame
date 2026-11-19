@@ -48,6 +48,7 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     'vec3 V=normalize(uEye-vP),L=normalize(vec3(.45,-.6,.66));float dif=max(dot(n,L),0.);' +
     'float fr=.05+.95*pow(1.-max(dot(n,V),0.),5.);float sp=pow(max(dot(n,normalize(L+V)),0.),60.)*(.25+e*1.2);' +
     'vec3 c=alb*(plate?.84+dif*.3:.22+dif*1.05)+env(reflect(-V,n))*fr*(plate?.5:.9)+vec3(1.,.93,.8)*sp;' +
+    'if(!plate)c+=AU*pow(1.-max(dot(n,V),0.),3.)*.1;' +                                           /* a faint gold sheen as a face turns away */
     /* living logo: light only where the mark is (its own luminance), so shape and colours stay the original's. A faint, steady gold
        halo comes from a blurred copy; once every 11-17 s one soft reflection crosses it (uT = 0..1 while it travels, -1 = off). */
     'if(plate){float L=dot(tile(6.,uv),vec3(.3,.59,.11));' +
@@ -115,8 +116,15 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
   var S = 512, at = document.createElement('canvas'), c = at.getContext('2d'), logo = new Image(), tex = gl.createTexture();
   at.width = 4 * S; at.height = 2 * S;
   var GOLD = '#C9A96E', CREAM = '#F5F1E8';
+  /* brushed metal: fine horizontal streaks, baked into the atlas so mipmaps keep them from shimmering while the cube turns */
+  var GR = document.createElement('canvas'), gc = GR.getContext('2d'), seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }   /* fixed seed: every repaint is identical */
+  GR.width = GR.height = S;
+  for (var gy = 0; gy < S; gy++) for (var gx = 0; gx < S;) {
+    var gl0 = 30 + rnd() * 220; gc.fillStyle = (rnd() < .5 ? 'rgba(255,255,255,' : 'rgba(0,0,0,') + (rnd() * .035).toFixed(3) + ')'; gc.fillRect(gx, gy, gl0, 1); gx += gl0; }
   function blank(x, y) {
     var g = c.createLinearGradient(x, y, x + S, y + S); g.addColorStop(0, '#2b2b2e'); g.addColorStop(.7, '#1b1b1d'); c.fillStyle = g; c.fillRect(x, y, S, S);
+    c.drawImage(GR, x, y);
     c.fillStyle = GOLD; c.globalAlpha = .85; var m = S * .04, l = S * .045;                       /* crop marks */
     [[m, m, 1, 1], [S - m, m, -1, 1], [m, S - m, 1, -1], [S - m, S - m, -1, -1]].forEach(function (k) {
       c.fillRect(x + k[0], y + k[1], l * k[2], 2 * k[3]); c.fillRect(x + k[0], y + k[1], 2 * k[2], l * k[3]); });

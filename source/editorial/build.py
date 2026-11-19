@@ -269,6 +269,9 @@ IND_ICONS = [
     '<circle cx="8" cy="6.5" r="1.8"/><circle cx="16" cy="6.5" r="1.8"/><circle cx="4.5" cy="11.5" r="1.8"/><circle cx="19.5" cy="11.5" r="1.8"/><path d="M12 12c-3 0-5.5 4-5.5 6 0 1.5 1.5 2 3 1.5s3.5-.5 5 0 3 0 3-1.5c0-2-2.5-6-5.5-6z"/>',
 ]
 assert len(IND_ICONS) == len(INDUSTRIES)
+# Contact-form category for each industry (index into the cats list in Page.form()), same order
+IND_CATS = [0, 1, 1, 0, 0, 0, 6, 3, 3, 1, 0, 0, 0, 4, 1]
+assert len(IND_CATS) == len(INDUSTRIES)
 
 class Page:
     def __init__(s, lang): s.l = lang
@@ -427,6 +430,7 @@ class Page:
 <section class="sec" id="services" aria-labelledby="svch"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">02 — {t('Υπηρεσίες','Services')}</p><h2 class="h2" id="svch">{t('Έξι πλευρές ενός στούντιο.','Six sides of one studio.')}</h2></div></div>
 <ol class="caps idx">{''.join(f'<li class="rv"><span class="n">{i + 1:02d}</span><h3>{esc(t(a, b))}</h3><p>{esc(t(c, d))}</p></li>' for i, (a, b, c, d, _) in enumerate(SERVICES))}</ol>
+<div class="btns rv" style="margin-top:32px"><a class="btn" href="{s.pre}/industries.html">{t('Λύσεις ανά κλάδο', 'Services by industry')} {ARROW}</a></div>
 </div></section>
 <section class="sec paper" id="projects" aria-labelledby="projh"><div class="wrap">
 <div class="sechead rv"><div><p class="eyebrow">03 — Projects</p><h2 class="h2" id="projh">{t('Projects, σχεδιασμένα από εμάς.','Projects, designed by us.')}</h2></div>
@@ -604,13 +608,20 @@ class Page:
         """Offers by industry, copy from the owner (EN) with Greek translation. Prices are added later, with the owner."""
         t = s.t; url = '/industries.html'; p = lambda x: esc(t(*x))
         title = t('Λύσεις ανά κλάδο', 'Services by industry')
-        ld = {"@context": "https://schema.org", "@type": "WebPage", "name": f'{title} | Athens Digital Frame', "url": SITE + s.pre + url, "inLanguage": s.l, "isPartOf": {"@id": SITE + "/#org"}}
+        ld = {"@context": "https://schema.org", "@type": "WebPage", "name": f'{title} | Athens Digital Frame', "url": SITE + s.pre + url, "inLanguage": s.l, "isPartOf": {"@id": SITE + "/#org"},
+              "mainEntity": {"@type": "OfferCatalog", "name": title, "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": t(*offer), "audience": {"@type": "BusinessAudience", "name": t(*name)},
+                  "description": '; '.join(t(*f) for f in feats), "provider": {"@id": SITE + "/#org"}}} for name, offer, feats in INDUSTRIES]}}
         out = s.head(f'{title} | Athens Digital Frame', t('Ιστοσελίδες, κρατήσεις και αυτοματισμοί για 15 κλάδους: κομμωτήρια, οδοντιατρεία, studios, ξενοδοχεία, μεσιτικά, boutiques και άλλους.', 'Websites, booking and automation for 15 industries: salons, dental clinics, studios, hotels, real estate, boutiques and more.'),
                      url, '/en' + url, 'og-v5.jpg' if s.l == 'el' else 'og-en-v3.jpg', ld)
         out += s.header('industries', url)
         ico = lambda i: f'<svg class="ind-i" viewBox="0 0 24 24" aria-hidden="true">{IND_ICONS[i]}</svg>'
         slug = lambda name: re.sub(r'[^a-z]+', '-', name[1].lower()).strip('-')   # English slug on both languages, so a shared link works on either
-        items = ''.join(f'<li class="rv" id="{slug(name)}"><span class="n">{i + 1:02d}{ico(i)}</span><h3>{p(name)}</h3><div><p><b>{t("Προτεινόμενη λύση", "Suggested offer")}:</b> {p(offer)}</p><ul class="ft">{"".join(f"<li>{p(f)}</li>" for f in feats)}</ul></div></li>'
+        def go(i, name, offer):   # demo button (fills the form below via site.js; without JS it just jumps there) and the link to the next industry
+            nxt = INDUSTRIES[(i + 1) % len(INDUSTRIES)][0]
+            pre = esc(f"{t('Κλάδος', 'Industry')}: {t(*name)}. {t('Ενδιαφέρομαι για', 'Interested in')}: {t(*offer)}.")
+            return (f'<div class="ind-go"><a class="btn" href="#contact" data-ind="{pre}" data-cat="{IND_CATS[i]}">{t("Ζήτησε demo για τον κλάδο σου", "Request a demo for your business")} {ARROW}</a>'
+                    f'<a class="ind-nx" href="#{slug(nxt)}">{t("Επόμενος κλάδος", "Next industry")}: {p(nxt)} <span aria-hidden="true">→</span></a></div>')
+        items = ''.join(f'<li class="rv" id="{slug(name)}"><span class="n">{i + 1:02d}{ico(i)}</span><h3>{p(name)}</h3><div><p><b>{t("Προτεινόμενη λύση", "Suggested offer")}:</b> {p(offer)}</p><ul class="ft">{"".join(f"<li>{p(f)}</li>" for f in feats)}</ul>{go(i, name, offer)}</div></li>'
                         for i, (name, offer, feats) in enumerate(INDUSTRIES))
         index = ''.join(f'<li><a href="#{slug(name)}"><span>{i + 1:02d}</span>{ico(i)}{p(name)}</a></li>' for i, (name, _, _) in enumerate(INDUSTRIES))
         out += f'''<section class="phero dark"><div class="wrap ind-hero"><div><p class="eyebrow">{t('Κλάδοι', 'Industries')}</p>
@@ -618,7 +629,11 @@ class Page:
 <p class="lead" style="max-width:46ch">{t('Ιστοσελίδα, κρατήσεις και αυτοματισμοί, προσαρμοσμένα στον τρόπο που δουλεύει ο κλάδος σου.', 'A website, bookings and automation, shaped around the way your industry works.')}</p></div>
 <nav class="ind-ix" aria-label="{t('Οι κλάδοι', 'All industries')}"><ol>{index}</ol></nav></div></section>
 <section class="sec"><div class="wrap"><ol class="caps ind">{items}</ol>
-<div class="btns" style="margin-top:32px"><a class="btn gold" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn ghost" href="{s.prices()}">{t('Δες τις τιμές', 'See pricing')}</a></div></div></section>
+<div class="pcard rv" style="background:transparent;margin-top:clamp(40px,5vw,72px)"><span class="eyebrow">{t('Άλλος κλάδος', 'Other industries')}</span><h3 style="margin-top:12px">{t('Δεν βλέπεις τον κλάδο σου;', 'Not on the list?')}</h3>
+<p class="d">{t('Φτιάχνουμε ιστοσελίδες, e-shops και αυτοματισμούς για κάθε είδους επιχείρηση. Πες μας τι κάνεις και σου προτείνουμε τι ταιριάζει.', 'We build websites, e-shops and automation for every kind of business. Tell us what you do and we suggest what fits.')}</p>
+<div class="btns" style="margin-top:24px"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn ghost" href="{s.prices()}">{t('Δες τις τιμές', 'See pricing')}</a></div></div></div></section>
+{s.steps3('sec paper')}
+{s.guarantee()}
 '''
         out += s.footer()
         return out
@@ -638,6 +653,16 @@ class Page:
         out += s.footer()
         return out
 
+    def steps3(s, cls='sec'):
+        t = s.t
+        return f'''<section class="{cls}" id="process"><div class="wrap"><div class="sechead"><div><p class="eyebrow">{t('Διαδικασία','Process')}</p><h2 class="h2">{t('Πώς δουλεύουμε','How we work')}</h2></div></div>
+<ol class="three"><li><span class="n">1</span><h3>{t('Στέλνεις μήνυμα','You message us')}</h3><p>{t('Μας λες τι δουλειά κάνεις και τι χρειάζεσαι.','Tell us what you do and what you need.')}</p></li><li><span class="n">2</span><h3>{t('Δωρεάν demo','Free demo')}</h3><p>{t('Φτιάχνουμε ένα demo για την επιχείρησή σου.','We build a demo for your business.')}</p></li><li><span class="n">3</span><h3>{t('Live σε 3–5 ημέρες','Live in 3–5 days')}</h3><p>{t('Αν σου αρέσει, ανεβαίνει και είναι έτοιμο.','If you like it, it goes live and it is ready.')}</p></li></ol></div></section>'''
+    def guarantee(s):
+        t = s.t
+        return f'''<section class="sec dark" id="contact"><div class="wrap contact"><div><p class="eyebrow">{t('Εγγύηση','Guarantee')}</p><h2 class="h2" style="max-width:14ch">{t('Δεν σου αρέσει το demo; <em>Δεν πληρώνεις τίποτα.</em>','Do not like the demo? <em>You pay nothing.</em>')}</h2><p class="lead" style="margin-top:20px">{t('Θες να δεις πώς θα φαίνεται η δική σου; Στείλε μας μήνυμα και φτιάχνουμε δωρεάν demo.','Want to see how yours would look? Message us and we build a free demo.')}</p>
+<div class="ways"><a href="{DM}" target="_blank" rel="noopener"><span>Instagram DM</span><span>@athens.digitalframe</span></a><a href="mailto:{MAIL}"><span>Email</span><span>{MAIL}</span></a><a href="https://wa.me/{WA}" target="_blank" rel="noopener"><span>WhatsApp</span><span>+30 698 186 2732</span></a></div></div>
+<div>{s.form()}</div></div></section>'''
+
     def build_prices(s):
         t = s.t
         ld = {"@context": "https://schema.org", "@type": "WebPage", "name": t('Τιμές | Athens Digital Frame', 'Pricing | Athens Digital Frame'), "url": SITE + s.prices(), "inLanguage": s.l,
@@ -652,15 +677,12 @@ class Page:
 {s.plans()}
 <p class="vat">{t('Οι τιμές δεν υπόκεινται σε ΦΠΑ.','Prices are not subject to VAT.')}</p></div></section>
 <section class="sec paper"><div class="wrap"><div class="pcard" style="background:transparent;margin-top:clamp(20px,3vw,40px)"><span class="eyebrow">{t('Συστάσεις','Referrals')}</span><h3 style="margin-top:12px">{t('Πρόγραμμα συστάσεων','Referral programme')}</h3><p class="d">{t('Συστήνεις μια επιχείρηση και κερδίζεις 50€ μετρητά ή 2 μήνες δωρεάν συντήρηση. Ο φίλος σου παίρνει 10% έκπτωση.','Refer a business and earn €50 cash or 2 months of free maintenance. Your friend gets 10% off.')}</p></div></div></section>
-<section class="sec" id="process"><div class="wrap"><div class="sechead"><div><p class="eyebrow">{t('Διαδικασία','Process')}</p><h2 class="h2">{t('Πώς δουλεύουμε','How we work')}</h2></div></div>
-<ol class="three"><li><span class="n">1</span><h3>{t('Στέλνεις μήνυμα','You message us')}</h3><p>{t('Μας λες τι δουλειά κάνεις και τι χρειάζεσαι.','Tell us what you do and what you need.')}</p></li><li><span class="n">2</span><h3>{t('Δωρεάν demo','Free demo')}</h3><p>{t('Φτιάχνουμε ένα demo για την επιχείρησή σου.','We build a demo for your business.')}</p></li><li><span class="n">3</span><h3>{t('Live σε 3–5 ημέρες','Live in 3–5 days')}</h3><p>{t('Αν σου αρέσει, ανεβαίνει και είναι έτοιμο.','If you like it, it goes live and it is ready.')}</p></li></ol></div></section>
+{s.steps3()}
 <section class="sec paper"><div class="wrap incl"><div><p class="eyebrow">{t('Περιλαμβάνεται','Included')}</p><h2 class="h2" style="max-width:none">{t('Τι περιλαμβάνεται','What is included')}</h2>
 <div class="incl" style="margin-top:32px"><div><h3 style="font-size:var(--fs-2)">{t('Ιστοσελίδα','Website')}</h3><ul class="ft"><li>Hosting &amp; domain</li><li>{t('Έως 3 σελίδες','Up to 3 pages')}</li><li>{t('Φόρμα επικοινωνίας','Contact form')}</li><li>Google Maps</li><li>{t('Βασικό τοπικό SEO','Local SEO basics')}</li></ul></div>
 <div><h3 style="font-size:var(--fs-2)">E-shop</h3><ul class="ft"><li>{t('Πληρωμές με κάρτα','Card payments')}</li><li>{t('Αποστολές & αντικαταβολή','Shipping & cash on delivery')}</li><li>{t('Διαχείριση από κινητό','Manage from your phone')}</li></ul></div></div></div>
 <div><p class="eyebrow">{t('Από εσένα','From you')}</p><h2 class="h2" style="max-width:none">{t('Τι χρειάζομαι από σένα','What we need from you')}</h2><p class="lead" style="margin-top:20px">{t('Το λογότυπό σου και μερικές φωτογραφίες, αν έχεις. Για τα κείμενα μην ανησυχείς, τα γράφουμε εμείς.','Your logo and a few photos, if you have them. Do not worry about the copy, we write it.')}</p></div></div></section>
-<section class="sec dark" id="contact"><div class="wrap contact"><div><p class="eyebrow">{t('Εγγύηση','Guarantee')}</p><h2 class="h2" style="max-width:14ch">{t('Δεν σου αρέσει το demo; <em>Δεν πληρώνεις τίποτα.</em>','Do not like the demo? <em>You pay nothing.</em>')}</h2><p class="lead" style="margin-top:20px">{t('Θες να δεις πώς θα φαίνεται η δική σου; Στείλε μας μήνυμα και φτιάχνουμε δωρεάν demo.','Want to see how yours would look? Message us and we build a free demo.')}</p>
-<div class="ways"><a href="{DM}" target="_blank" rel="noopener"><span>Instagram DM</span><span>@athens.digitalframe</span></a><a href="mailto:{MAIL}"><span>Email</span><span>{MAIL}</span></a><a href="https://wa.me/{WA}" target="_blank" rel="noopener"><span>WhatsApp</span><span>+30 698 186 2732</span></a></div></div>
-<div>{s.form()}</div></div></section>
+{s.guarantee()}
 '''
         out += s.footer()
         return out

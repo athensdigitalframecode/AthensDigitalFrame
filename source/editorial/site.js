@@ -56,6 +56,9 @@ if(f){var WA='306981862732',MAIL='athens.digitalframe@gmail.com';
    btn.disabled=false;btn.removeAttribute('aria-busy');btn.textContent=T.sendLbl},250)}
  f.addEventListener('submit',function(e){e.preventDefault();go(method()==='email'?'mail':'wa')});
  if(mail)mail.addEventListener('click',function(){go('mail')});
+ /* industries page: a demo button fills category and note; a note the visitor wrote is never overwritten */
+ var last='';d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-ind]');if(!a)return;var k=$('lf-k'),n=$('lf-d');
+  if(k)k.selectedIndex=+a.getAttribute('data-cat')+1;if(n&&(!n.value.trim()||n.value===last)){n.value=last=a.getAttribute('data-ind')}});
 }
 
 /* header glass + reading progress; hero light follows the pointer (desktop, motion allowed) */

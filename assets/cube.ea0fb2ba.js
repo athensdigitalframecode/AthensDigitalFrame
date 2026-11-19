@@ -41,7 +41,7 @@
      orbit about the cube's centre that closes as they come in), flip the last 90 deg just before contact and lock with a
      small magnetic snap and recoil: top and bottom first, then the two sides, then front and back (LOCK). Every lock sends
      one thin ring out in the plane of that face. As the last pair locks the cage flattens onto the cube's twelve edges and
-     fades, one rim light crosses the cube, the light pool fades in and the logo plate pops (POP ms), then holds 5 s.
+     fades, one rim light crosses the cube, the light pool fades in and the logo plate pops (POP ms), then holds 1.5 s.
      The view starts a little further back and turned, and eases to rest. It waits while the tab is hidden and is simply
      there under reduced motion. For inspection: ?fold=slow plays it at quarter speed, ?cage=0 hides the cage. */
   var FLY = 1000, WAVE0 = [0, 420, 880], LOCK = WAVE0[2] + FLY, POP = 750, END = LOCK + 80 + POP;
@@ -93,7 +93,7 @@
     if (d.hidden) { hidAt = -1; return; }                        /* opened in a background tab: play it when the tab is shown */
     if (!seen) { waitView = true; return; }                      /* below the fold (phones): play it when the cube scrolls in */
     introAt = performance.now(); stage.classList.add('is-in');
-    holdUntil = introAt + (LOCK + 80) / SLOW + 5000;            /* the logo stays 5 s after it appears, then the cycle starts */
+    holdUntil = introAt + (LOCK + 80) / SLOW + 1500;            /* the logo stays 1.5 s after it appears, then the cycle starts */
     if (still) { stage.classList.add('is-ready', 'is-lock'); paint(); return; }
     introTick(introAt); paint();
     if (!raf) { last = introAt; raf = requestAnimationFrame(frame); }
@@ -107,12 +107,20 @@
   /* after the intro: at rest a very slow drift; with a mouse over the cube it leans a few degrees toward it and a soft
      second highlight follows the cursor across the faces (WebGL, not on weak phones) */
   var ptr = [0, 0], ptrS = [0, 0], pOn = 0, pOnS = 0, drifts = !still && !lite;
+  /* slow orbit: during the face tour the cube keeps turning (ORBIT deg/s, the tour's own direction), so each turn glides into
+     the next instead of stopping dead. ca is folded into q when a turn or drag starts, so nothing jumps. */
+  var ORBIT = -6, ca = 0, cv = 0, cLast = 0;
+  function orbits() { return drifts && introDone && mode === 'tour' && !hovering && !focused && !down; }
+  function fold() { if (ca) { q = norm(mul(axis(0,1,0, ca), q)); ca = 0; } }
   function spun() {
     if (I) return mul(mul(axis(0,1,0, I.yaw), axis(1,0,0, I.pitch)), q);   /* the intro's camera: turned a little, easing to rest */
-    if (!drifts || !introDone || !gl3) return q;
-    var s = (performance.now() - doneAt) / 1000, u = clamp(s / 3), k = plate * plate * u * u * (3 - 2 * u);   /* drift starts at zero and eases in, so nothing jumps when the intro hands over */
+    var now = performance.now(), dt = Math.min(.1, (now - (cLast || now)) / 1000); cLast = now;
+    cv += ((orbits() ? ORBIT : 0) - cv) * (1 - Math.exp(-dt / .8)); ca += cv * dt;   /* eases in and out over about a second */
+    var o = ca ? mul(axis(0,1,0, ca), q) : q;
+    if (!drifts || !introDone || !gl3) return o;
+    var s = (now - doneAt) / 1000, u = clamp(s / 3), k = plate * plate * u * u * (3 - 2 * u);   /* drift starts at zero and eases in, so nothing jumps when the intro hands over */
     ptrS[0] += (ptr[0] - ptrS[0]) * .08; ptrS[1] += (ptr[1] - ptrS[1]) * .08; pOnS += (pOn - pOnS) * .08;
-    return mul(mul(axis(0,1,0, k * 2.2 * Math.sin(s * .33) + 4 * ptrS[0]), axis(1,0,0, k * 1.4 * Math.sin(s * .27 + 1) - 3 * ptrS[1])), q);
+    return mul(mul(axis(0,1,0, k * 2.2 * Math.sin(s * .33) + 4 * ptrS[0]), axis(1,0,0, k * 1.4 * Math.sin(s * .27 + 1) - 3 * ptrS[1])), o);
   }
   stage.addEventListener('pointermove', function (e) {
     if (e.pointerType !== 'mouse' || down) return;
@@ -130,14 +138,17 @@
     gl3 = window.ADFCubeGL(stage, cube, faces, FACE, rot, function () { gl3 = null; stage.classList.remove('is-gl'); paint(); });
   }
   if (lite) stage.classList.add('is-lite');
-  function paint() {
+  function shade(q) {
     /* shadow width = the cube's on-screen width: |x| extent of the rotated unit axes (1 face-on, ~1.41 on an edge) */
     var x = q[0], y = q[1], z = q[2], w = q[3];
     stage.style.setProperty('--shw', (Math.abs(1-2*(y*y+z*z)) + Math.abs(2*(x*y-z*w)) + Math.abs(2*(x*z+y*w))).toFixed(3));
     /* how far the cube's lowest corner reaches below its centre (cube = 1), so the contact shadow sits right under it in every turn */
     stage.style.setProperty('--shy', (.5 * (Math.abs(2*(x*y+z*w)) + Math.abs(1-2*(x*x+z*z)) + Math.abs(2*(y*z-x*w)))).toFixed(3));
+  }
+  function paint() {
     if (gl3 && pOn) wake();
     var r = spun();
+    shade(ca ? mul(axis(0,1,0, ca), q) : q);
     if (gl3) { gl3.draw(r, opts()); if (stage.classList.contains('is-gl')) return; }   /* keep the CSS cube moving until WebGL is ready */
     var zm = I ? I.zoom.toFixed(4) : '';
     cube.style.setProperty('--m', css(r) + (I ? ' scale3d(' + zm + ',' + zm + ',' + zm + ')' : ''));
@@ -161,10 +172,12 @@
   }
   function alive(now) {
     aliveRaf = 0;
-    if (!gl3 || still || !inView || d.hidden) return;
+    var orb = orbits() || Math.abs(cv) > .05;
+    if ((!gl3 && !orb) || still || !inView || d.hidden) return;
+    if (!gl3) { if (!raf) paint(); aliveRaf = requestAnimationFrame(alive); return; }   /* CSS cube: only the orbit runs here */
     if (markAt) { lt = (now - markAt) / 1400; if (lt >= 1 || plate < .5) { lt = -1; markAt = 0; markLater(); } }
-    if (!markAt && !pOn && pOnS < .01) { if (!raf) gl3.draw(spun(), opts()); return; }   /* settled: one last draw, then stop */
-    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; gl3.draw(spun(), opts()); }
+    if (!markAt && !pOn && pOnS < .01 && !orb) { if (!raf) gl3.draw(spun(), opts()); return; }   /* settled: one last draw, then stop */
+    if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; gl3.draw(spun(), opts()); if (orb) shade(mul(axis(0,1,0, ca), q)); }
     aliveRaf = requestAnimationFrame(alive);
   }
   function wake() { if (!aliveRaf && !still) aliveRaf = requestAnimationFrame(alive); }
@@ -193,10 +206,10 @@
       if (Math.hypot(vel[0], vel[1]) < .02) { pin(nearest()); if (!hovering) resume(3000); return; }   /* a touch flick has no later 'leave' */
     }
     paint();
-    if (tween || mode === 'coast' || moving || intro) raf = requestAnimationFrame(frame);
+    if (tween || mode === 'coast' || moving || intro) raf = requestAnimationFrame(frame); else wake();   /* the orbit carries on */
   }
   function go(to, done) {
-    stop();
+    stop(); fold();
     if (still) { q = to; paint(); if (done) done(); return; }
     var ang = 2 * Math.acos(Math.min(1, Math.abs(dot(q, to))));
     tween = { from: q, to: to, t0: performance.now(), ms: 520 + 620 * ang / Math.PI, done: done };
@@ -214,7 +227,7 @@
      off screen or in a background tab, and while a service picked from the list is shown; off under reduced motion ---- */
   var fineHover = matchMedia('(hover:hover)').matches;   /* the cube can slide in under a still mouse without an 'enter' event */
   function canAuto() { return !still && introAt && !hovering && !(fineHover && stage.matches(':hover')) && !focused && !down && inView && !d.hidden && !listPin && mode !== 'drag' && mode !== 'coast'; }
-  var holdUntil = 5000;                                         /* performance.now() counts from page open: the logo holds until 5 s, whatever resumes the cycle first */
+  var holdUntil = 1500;                                         /* performance.now() counts from page open: the logo holds until 1.5 s, whatever resumes the cycle first */
   function autoLater(ms) { clearTimeout(autoTimer); if (!still) autoTimer = setTimeout(autoStep, Math.max(ms, holdUntil - performance.now())); }
   function autoStep() {
     if (performance.now() < holdUntil - 20) { autoLater(0); return; }   /* the hold may have grown since this timer was set */
@@ -246,7 +259,7 @@
     if (!down) return;
     var dx = e.clientX - px, dy = e.clientY - py, dt = Math.max(1, e.timeStamp - pt); px = e.clientX; py = e.clientY; pt = e.timeStamp;
     moved += Math.abs(dx) + Math.abs(dy); if (moved < 6) return;
-    if (mode !== 'drag') { stop(); clearTimeout(autoTimer); listPin = false; speak(true); setMode('drag'); stage.classList.add('is-drag'); }
+    if (mode !== 'drag') { stop(); fold(); clearTimeout(autoTimer); listPin = false; speak(true); setMode('drag'); stage.classList.add('is-drag'); }
     var s = 220 / stage.clientWidth;                             /* degrees per pixel, same feel at every size */
     q = norm(mul(axis(0,1,0, dx*s), mul(axis(1,0,0, -dy*s), q)));
     vel = [vel[0]*.6 + dx*s/dt*.4, vel[1]*.6 - dy*s/dt*.4]; show(nearest()); paint();

@@ -129,7 +129,7 @@
   stage.addEventListener('pointerleave', function () { ptr = [0, 0]; pOn = 0; });
   stage.addEventListener('pointerdown', function () { ptr = [0, 0]; pOn = 0; });
   function opts() {
-    var o = { plate: plate, pa: pa, pop: pop, lt: still ? -1 : lt, lp: [ptrS[0], ptrS[1], drifts ? pOnS : 0] };
+    var o = { plate: plate, pa: pa, pop: pop, lt: still ? -1 : lt, lp: [ptrS[0], ptrS[1], drifts ? pOnS : 0], ar: arAt ? [arF, (performance.now() - arAt) / 1400] : null };
     if (I) for (var k in I) o[k] = I[k];
     return o;
   }
@@ -165,7 +165,8 @@
   /* the WebGL cube is redrawn (about 30 fps) only while something on it moves: the cursor light settling, or the soft light that
      crosses the logo once every 11-17 s (about 1.4 s long, only while the logo is showing). Otherwise it draws once and stops.
      Nothing runs off screen, in a background tab or under reduced motion. */
-  var aliveRaf = 0, aliveLast = 0, markAt = 0, markT = 0;
+  var aliveRaf = 0, aliveLast = 0, markAt = 0, markT = 0, arAt = 0, arF = 0;
+  function arrive(i) { if (!still && gl3) { arF = i; arAt = performance.now(); wake(); } }   /* the face the tour or a pick settles on: light across its title (cube-gl.js) */
   function markLater() {
     clearTimeout(markT); if (still || !gl3) return;
     markT = setTimeout(function () { if (inView && !d.hidden && plate > .5) { markAt = performance.now(); wake(); } else markLater(); }, 11000 + Math.random() * 6000);
@@ -176,7 +177,8 @@
     if ((!gl3 && !orb) || still || !inView || d.hidden) return;
     if (!gl3) { if (!raf) paint(); aliveRaf = requestAnimationFrame(alive); return; }   /* CSS cube: only the orbit runs here */
     if (markAt) { lt = (now - markAt) / 1400; if (lt >= 1 || plate < .5) { lt = -1; markAt = 0; markLater(); } }
-    if (!markAt && !pOn && pOnS < .01 && !orb) { if (!raf) gl3.draw(spun(), opts()); return; }   /* settled: one last draw, then stop */
+    if (arAt && now - arAt > 1400) arAt = 0;
+    if (!arAt && !markAt && !pOn && pOnS < .01 && !orb) { if (!raf) gl3.draw(spun(), opts()); return; }   /* settled: one last draw, then stop */
     if (now - aliveLast > 32 && stage.classList.contains('is-gl') && !raf) { aliveLast = now; gl3.draw(spun(), opts()); if (orb) shade(mul(axis(0,1,0, ca), q)); }
     aliveRaf = requestAnimationFrame(alive);
   }
@@ -220,7 +222,7 @@
   var descBox = d.getElementById('cube-descs'), autoTimer = 0, hovering = false, focused = false, inView = true, listPin = false;
   var r0 = stage.getBoundingClientRect(), seen = (Math.min(r0.bottom, innerHeight) - Math.max(r0.top, 0)) / r0.height >= .4, waitView = false;
   function speak(on) { if (descBox) descBox.setAttribute('aria-live', on ? 'polite' : 'off'); }
-  function pin(i, fromList) { clearTimeout(autoTimer); listPin = !!fromList; speak(true); setMode('pinned'); show(i); setMode('pinned'); go(TARGET[i]); }
+  function pin(i, fromList) { clearTimeout(autoTimer); listPin = !!fromList; speak(true); setMode('pinned'); show(i); setMode('pinned'); go(TARGET[i], function () { arrive(i); }); }
   function rest() { stop(); clearTimeout(autoTimer); listPin = false; setMode('rest'); show(-1); go(TILT); autoLater(3000); }
 
   /* ---- automatic cycle: 01 -> 06 every 3 s, then back to 01. Paused while the cube is hovered or focused, dragged,
@@ -233,7 +235,7 @@
     if (performance.now() < holdUntil - 20) { autoLater(0); return; }   /* the hold may have grown since this timer was set */
     if (!canAuto()) return;                                     /* resumed by the event that ends the pause */
     var next = mode === 'rest' ? 0 : (active + 1) % 6;
-    speak(false); setMode('tour'); show(next); go(TARGET[next]);
+    speak(false); setMode('tour'); show(next); go(TARGET[next], function () { arrive(next); });
     autoLater(3000);
   }
   function resume(ms) { if (canAuto() && (mode === 'tour' || mode === 'pinned' || mode === 'rest')) { if (mode === 'pinned') setMode('tour'); autoLater(ms); } }

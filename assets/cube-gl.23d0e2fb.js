@@ -22,7 +22,7 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     'vec3 w=uR*(uM*p+uO);vP=w;vN=uR*(uM*aN);vT=uR*(uM*aT);vB=uR*(uM*aB);' +                        /* uM, uO: where a face is while it folds in (identity, 0 once locked) */
     'float zc=uK.z-w.z;gl_Position=vec4(w.x*uK.x,-w.y*uK.y,((f+n)*zc-2.*f*n)/(f-n),zc);}';
   /* space: x right, y DOWN, z to the viewer (same as CSS), so the light and targets are shared with the CSS cube */
-  var FS = 'precision highp float;uniform sampler2D uTex;uniform float uPlate,uCover,uT,uMode,uH,uA,uGlow,uSw,uRip;uniform vec3 uEye,uLp;' +
+  var FS = 'precision highp float;uniform sampler2D uTex;uniform float uPlate,uCover,uT,uMode,uH,uA,uGlow,uSw,uRip;uniform vec3 uEye,uLp;uniform vec2 uAr;' +
     'const vec3 AU=vec3(.79,.66,.43);' +                                                           /* the brand gold, #C9A96E */
     'varying vec3 vP,vN,vT,vB;varying vec2 vUV;varying float vTile;' +
     'vec3 env(vec3 r){float up=-r.y;vec3 c=mix(vec3(.015),vec3(.09,.09,.10),smoothstep(-.3,1.,up));' +
@@ -41,7 +41,7 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
        no mirrored artwork, and none of the lighting work below */
     'if(dot(vN,uEye-vP)<0.){float sb=smoothstep(.02,0.,min(min(vUV.x,1.-vUV.x),min(vUV.y,1.-vUV.y))),ab=plate?uPlate:uA;' +
     'gl_FragColor=vec4((vec3(.03,.03,.034)+AU*sb*(.3+uGlow))*ab,ab);return;}' +
-    'if(t<.5)alb=mix(alb,tile(7.,uv),uCover);' +                                                   /* DISCOVER hides under the plate */
+    'if(t<.5)alb=mix(alb,tile(7.,uv),uCover);vec3 a0=alb;' +                                                  /* DISCOVER hides under the plate */
     'float b=plate?.014:.02;float eu=smoothstep(1.-b,1.,vUV.x)-smoothstep(b,0.,vUV.x),ev=smoothstep(1.-b,1.,vUV.y)-smoothstep(b,0.,vUV.y);' +
     'vec3 n=normalize(vN+vT*eu*.85+vB*ev*.85);float e=max(abs(eu),abs(ev));' +                     /* bevel: bend the normal at the edges */
     'alb=mix(alb,vec3(.79,.66,.43)*.55,e*.85);' +                                                  /* gold edge */
@@ -50,6 +50,12 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     'vec3 c=alb*(plate?.84+dif*.3:.22+dif*1.05)+env(reflect(-V,n))*fr*(plate?.5:.9)+vec3(1.,.93,.8)*sp;' +
     'if(!plate)c+=AU*pow(1.-max(dot(n,V),0.),3.)*.1' +                                            /* a faint gold sheen as a face turns away */
     '+mix(vec3(1.,.93,.8),AU,.35)*pow(max(dot(n,normalize(L+V)),0.),280.)*e*e*2.4;' +             /* edge glint: a bevel that turns into the key light flashes thin gold */
+    /* arrival (uAr = face, 0..1; -1 = off): when the tour settles on a face, one light crosses its title and a gold hairline
+       draws in under it from the left, like the section rulers, then both fade */
+    'if(!plate&&uAr.y>=0.&&abs(t-uAr.x)<.5){float sx=mix(-.15,1.15,smoothstep(0.,.7,uAr.y)),fo=1.-smoothstep(.7,1.,uAr.y);' +
+    'float tl=smoothstep(.45,.85,dot(a0,vec3(.3,.59,.11)))*step(.74,uv.y)*step(uv.y,.94);' +
+    'float ul=exp(-pow((uv.y-.946)/.0035,2.))*step(.085,uv.x)*step(uv.x,min(sx,.915));' +
+    'c+=vec3(1.,.93,.8)*exp(-pow((uv.x+(uv.y-.86)*.3-sx)/.07,2.))*tl*.5*fo+AU*ul*.9*fo;}' +
     /* living logo: light only where the mark is (its own luminance), so shape and colours stay the original's. A faint, steady gold
        halo comes from a blurred copy; once every 11-17 s one soft reflection crosses it (uT = 0..1 while it travels, -1 = off). */
     'if(plate){float L=dot(tile(6.,uv),vec3(.3,.59,.11));' +
@@ -110,7 +116,7 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
   }
   [['aP', 3, 0], ['aN', 3, 3], ['aT', 3, 6], ['aB', 3, 9], ['aUV', 2, 12], ['aTile', 1, 14]].forEach(function (a) {
     var l = gl.getAttribLocation(pr, a[0]); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, a[1], gl.FLOAT, false, 60, a[2] * 4); });
-  var U = {}; ['uR', 'uK', 'uPz', 'uPlate', 'uCover', 'uEye', 'uTex', 'uT', 'uPop', 'uMode', 'uH', 'uLp', 'uM', 'uO', 'uA', 'uGlow', 'uSw', 'uRip', 'uVp', 'uLw'].forEach(function (n) { U[n] = gl.getUniformLocation(pr, n); });
+  var U = {}; ['uR', 'uK', 'uPz', 'uPlate', 'uCover', 'uEye', 'uTex', 'uT', 'uPop', 'uMode', 'uH', 'uLp', 'uM', 'uO', 'uA', 'uGlow', 'uSw', 'uRip', 'uVp', 'uLw', 'uAr'].forEach(function (n) { U[n] = gl.getUniformLocation(pr, n); });
   gl.enable(gl.DEPTH_TEST); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.uniform3f(U.uEye, 0, 0, 4.7); gl.uniform1i(U.uTex, 0);
 
   /* atlas: 4x2 tiles of 512 px. 0-5 service faces, 6 logo plate, 7 blank face */
@@ -173,7 +179,8 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     gl.uniform3f(U.uK, 8.4 * s / W, 8.4 * s / H, 4.7);                                              /* same perspective as the CSS cube: 4.2 x size */
     gl.uniform1f(U.uPlate, plate * o.pa); gl.uniform1f(U.uCover, plate); gl.uniform1f(U.uPz, .004 + .034 * plate); gl.uniform1f(U.uT, o.lt);
     gl.uniform1f(U.uPop, o.pop); gl.uniform1f(U.uMode, 0); gl.uniform1f(U.uH, H); gl.uniform1f(U.uSw, o.sweep == null ? -1 : o.sweep);
-    var lp = o.lp || [0, 0, 0]; gl.uniform3f(U.uLp, (lp[0] + 1) / 2 * W, (lp[1] + 1) / 2 * H, lp[2]);
+    var ar = o.ar || [-1, -1]; gl.uniform2f(U.uAr, ar[0], ar[1]);
+    var lp = o.lp || [0, 0, 0];gl.uniform3f(U.uLp, (lp[0] + 1) / 2 * W, (lp[1] + 1) / 2 * H, lp[2]);
     gl.uniformMatrix3fv(U.uM, false, ID); gl.uniform3f(U.uO, 0, 0, 0); gl.uniform1f(U.uA, 1); gl.uniform1f(U.uGlow, 0);
     if (!F) { gl.disable(gl.BLEND); gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0); }
     else {

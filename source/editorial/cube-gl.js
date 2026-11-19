@@ -48,7 +48,8 @@ window.ADFCubeGL = function (stage, cubeEl, faces, FACE, rot, onLost) {
     'vec3 V=normalize(uEye-vP),L=normalize(vec3(.45,-.6,.66));float dif=max(dot(n,L),0.);' +
     'float fr=.05+.95*pow(1.-max(dot(n,V),0.),5.);float sp=pow(max(dot(n,normalize(L+V)),0.),60.)*(.25+e*1.2);' +
     'vec3 c=alb*(plate?.84+dif*.3:.22+dif*1.05)+env(reflect(-V,n))*fr*(plate?.5:.9)+vec3(1.,.93,.8)*sp;' +
-    'if(!plate)c+=AU*pow(1.-max(dot(n,V),0.),3.)*.1;' +                                           /* a faint gold sheen as a face turns away */
+    'if(!plate)c+=AU*pow(1.-max(dot(n,V),0.),3.)*.1' +                                            /* a faint gold sheen as a face turns away */
+    '+mix(vec3(1.,.93,.8),AU,.35)*pow(max(dot(n,normalize(L+V)),0.),280.)*e*e*2.4;' +             /* edge glint: a bevel that turns into the key light flashes thin gold */
     /* living logo: light only where the mark is (its own luminance), so shape and colours stay the original's. A faint, steady gold
        halo comes from a blurred copy; once every 11-17 s one soft reflection crosses it (uT = 0..1 while it travels, -1 = off). */
     'if(plate){float L=dot(tile(6.,uv),vec3(.3,.59,.11));' +

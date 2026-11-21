@@ -8,7 +8,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 LEG = os.path.join(HERE, '..', 'legacy')
 SITE = 'https://athensdigitalframe.vercel.app'
-WA, MAIL, TEL = '306981862732', 'athens.digitalframe@gmail.com', '+306981862732'
+WA, MAIL = '306981862732', 'athens.digitalframe@gmail.com'
 IG = 'https://www.instagram.com/athens.digitalframe/'; DM = 'https://ig.me/m/athens.digitalframe'
 
 def esc(s): return html.escape(s, quote=True)
@@ -338,7 +338,7 @@ class Page:
 <div><h4>{t('Πλοήγηση','Navigate')}</h4><ul><li><a href="{s.pre}/industries.html">{t('Κλάδοι','Industries')}</a></li><li><a href="{H('#projects')}">Projects</a></li><li><a href="{H('#process')}">{t('Διαδικασία','Process')}</a></li><li><a href="{s.prices()}">{t('Τιμές','Pricing')}</a></li><li><a href="{H('#about')}">{t('Το στούντιο','About')}</a></li><li><a href="{H('#faq')}">FAQ</a></li></ul></div>
 <div><h4>{t('Υπηρεσίες','Services')}</h4><ul><li><a href="{H('#pricing')}">{t('Ιστοσελίδες επιχειρήσεων','Business websites')}</a></li><li><a href="{H('#pricing')}">E-shops</a></li><li><a href="{H('#pricing')}">{t('Custom λύσεις','Custom solutions')}</a></li></ul>
 <h4 style="margin-top:28px">{t('Νομικά','Legal')}</h4><ul><li><a href="{s.pre}/privacy.html">{t('Πολιτική απορρήτου','Privacy policy')}</a></li><li><span class="soon" title="{t('Δεν έχει δημοσιευτεί ακόμα','Not published yet')}">{t('Όροι χρήσης (σύντομα)','Terms (coming soon)')}</span></li></ul></div>
-<div><h4>{t('Επικοινωνία','Contact')}</h4><ul><li><a href="{IG}" rel="noopener" target="_blank">Instagram @athens.digitalframe</a></li><li><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp +30 698 186 2732</a></li><li><a href="tel:{TEL}">{t('Τηλέφωνο','Phone')} +30 698 186 2732</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
+<div><h4>{t('Επικοινωνία','Contact')}</h4><ul><li><a href="{IG}" rel="noopener" target="_blank">Instagram @athens.digitalframe</a></li><li><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp +30 698 186 2732</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
 </div><p class="ft-mark rv" aria-hidden="true" translate="no">Athens Digital Frame</p><div class="base"><span>© <span id="yr">2026</span> Athens Digital Frame · {t('Οι τιμές δεν υπόκεινται σε ΦΠΑ.','Prices are not subject to VAT.')}</span><span>{t('Αθήνα, Ελλάδα','Athens, Greece')}</span></div></div></footer>
 <script src="{JS}" defer></script>{scripts}
 </body></html>
@@ -401,7 +401,7 @@ class Page:
         ld = {"@context": "https://schema.org", "@graph": [
             {"@type": "ProfessionalService", "@id": SITE + "/#org", "name": "Athens Digital Frame", "url": SITE + "/", "image": SITE + "/og-v5.jpg", "logo": SITE + "/assets/df-mark.png",
              "description": t('Ψηφιακό στούντιο στην Αθήνα: ιστοσελίδες και e-shops για επιχειρήσεις.', 'Digital studio in Athens: websites and e-shops for businesses.'),
-             "email": MAIL, "telephone": TEL, "sameAs": [IG], "areaServed": "Athens, Greece", "address": {"@type": "PostalAddress", "addressLocality": "Athens", "addressCountry": "GR"},
+             "email": MAIL, "sameAs": [IG], "areaServed": "Athens, Greece", "address": {"@type": "PostalAddress", "addressLocality": "Athens", "addressCountry": "GR"},
              "knowsLanguage": ["el", "en"],
              "hasOfferCatalog": {"@type": "OfferCatalog", "name": t('Υπηρεσίες', 'Services'), "itemListElement": [
                  {"@type": "Offer", "itemOffered": {"@type": "Service", "name": t(a, b), "description": t(c, d)}} for a, b, c, d, _ in SERVICES]}},
@@ -464,7 +464,7 @@ class Page:
 </div></section>
 <section class="sec dark" id="contact" aria-labelledby="cth"><div class="wrap"><div class="fr closing">{LOGO}<div class="contact">
 <div class="rv"><p class="eyebrow">08 — {t('Επικοινωνία','Contact')}</p><h2 class="h2" id="cth">{t('Δες πώς θα φαινόταν το δικό σου site.','See how your own site would look.')}</h2><p class="lead" style="margin-top:20px">{t('Το δωρεάν demo έρχεται πριν από οποιαδήποτε πληρωμή. Δεν σου αρέσει; Δεν πληρώνεις τίποτα.','The free demo comes before any payment. Do not like it? You pay nothing.')}</p>
-<div class="ways"><a href="{DM}" target="_blank" rel="noopener"><span>Instagram DM</span><span>@athens.digitalframe</span></a><a href="https://wa.me/{WA}" target="_blank" rel="noopener"><span>WhatsApp</span><span>+30 698 186 2732</span></a><a href="tel:{TEL}"><span>{t('Τηλέφωνο','Phone')}</span><span>+30 698 186 2732</span></a><a href="mailto:{MAIL}"><span>Email</span><span>{MAIL}</span></a></div></div>
+<div class="ways"><a href="{DM}" target="_blank" rel="noopener"><span>Instagram DM</span><span>@athens.digitalframe</span></a><a href="https://wa.me/{WA}" target="_blank" rel="noopener"><span>WhatsApp</span><span>+30 698 186 2732</span></a><a href="mailto:{MAIL}"><span>Email</span><span>{MAIL}</span></a></div></div>
 <div class="rv d1">{s.form()}</div>
 </div><i class="mk a"></i><i class="mk b"></i><i class="mk c"></i><i class="mk d"></i></div></div></section>
 '''

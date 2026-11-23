@@ -39,7 +39,8 @@ SITE_STEPS = [HW[7 + i * 3:10 + i * 3] for i in range(5)]
 SHOP_STEPS = [HW[24 + i * 3:27 + i * 3] for i in range(5)]
 
 LOGO = '<img class="mark" src="/assets/df-mark.png" width="145" height="121" alt="" decoding="async">'
-ARROW = '<span class="ar" aria-hidden="true">→</span>'
+ARROW = '<span class="ar" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11.5M9 3.5 13.5 8 9 12.5"/></svg></span>'
+ARROW_X = '<span class="ar x" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></span>'  # external link
 
 # ---------- six services = the six cube faces (wording from the master brief, section 4.5) ----------
 # (title el, title en, text el, text en, face drawing: frame parts only, no arcs except the Discover lens)
@@ -323,7 +324,7 @@ class Page:
 <a class="brand" href="{H()}" aria-label="Athens Digital Frame">{LOGO}<span translate="no">Athens Digital Frame</span></a>
 <nav class="nav" aria-label="{t('Κύριο μενού','Main')}">{nav}</nav>
 <div class="right"><a class="lang" href="{other}" hreflang="{ol.lower()}" lang="{ol.lower()}" aria-label="{ol}, {on}">{ol}</a>
-<a class="btn gold" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span><span class="ar" aria-hidden="true">→</span></a>
+<a class="btn gold" href="{H('#contact')}"><span class="cta-long">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span><span class="cta-short">Demo</span>{ARROW}</a>
 <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="sheet" aria-label="{t('Άνοιγμα μενού','Open menu')}"><i></i><i></i><i></i></button></div>
 </div></header>
 <div class="sheet" id="sheet">{sheet}<a class="btn gold" href="{H('#contact')}">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a></div>
@@ -358,7 +359,7 @@ class Page:
 <div class="f"><label for="lf-c" id="lf-c-l">{t('Τηλέφωνο','Phone number')}</label><input id="lf-c" spellcheck="false" type="tel" inputmode="tel" autocomplete="tel" required maxlength="80" aria-describedby="lf-c-e"><p class="err" id="lf-c-e" role="alert"></p></div>
 <div class="f"><label for="lf-d">{t('Περιγραφή project','Project description')} <span class="opt">({t('προαιρετικό','optional')})</span></label><textarea id="lf-d" maxlength="600"></textarea></div>
 <div class="status" role="status" aria-live="polite" hidden></div>
-<div class="btns"><button class="btn gold" type="submit">{t('Ζήτησε δωρεάν demo','Request a free demo')}</button><button class="btn ghost" type="button" id="lf-mail">{t('Αποστολή με email','Send by email')}</button></div>
+<div class="btns"><button class="btn gold" type="submit"><span class="bl">{t('Ζήτησε δωρεάν demo','Request a free demo')}</span>{ARROW}</button><button class="btn" type="button" id="lf-mail">{t('Αποστολή με email','Send by email')} {ARROW}</button></div>
 <p class="small">{t('Δεν υπάρχει server: η φόρμα ανοίγει το WhatsApp ή το email σου με έτοιμο μήνυμα. Τίποτα δεν στέλνεται μέχρι να πατήσεις αποστολή εκεί.','There is no server: the form opens your WhatsApp or email with a ready message. Nothing is sent until you press send there.')}</p>
 </form>'''
 
@@ -415,7 +416,7 @@ class Page:
 <div>
 <h1 class="h1">{t('<span class="hw">Ιστοσελίδες,</span> <em class="hw">προσεκτικά</em> <span class="hw">χτισμένες.</span>','<span class="hw">Websites,</span> <em class="hw">thoughtfully</em> <span class="hw">constructed.</span>')}</h1>
 <p class="lead">{t('Σχεδιάζουμε και κατασκευάζουμε σύγχρονες ιστοσελίδες και e-shops για επιχειρήσεις που θέλουν να ξεχωρίζουν.','We design and build modern websites and e-shops for businesses that want to stand out.')}</p>
-<div class="btns"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn ghost" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')}</a></div>
+<div class="btns"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a><a class="btn" href="#projects">{t('Ανακάλυψε τα projects','Explore the projects')} {ARROW}</a></div>
 <div class="meta"><div><b>3–5</b>{t('ημέρες έως το live','days to go live')}</div><div><b>300€</b>{t('ιστοσελίδα, εφάπαξ','website, one-time')}</div><div><b>0€</b>{t('πριν δεις το demo','before you see the demo')}</div></div></div>
 {s.cube()}
 </div></section>
@@ -448,7 +449,7 @@ class Page:
 <div class="sechead rv"><div><p class="eyebrow">05 — {t('Τιμές','Pricing')}</p><h2 class="h2" id="prh">{t('Ξεκάθαρες τιμές. Τίποτα κρυφό.','Clear prices. Nothing hidden.')}</h2></div><p class="lead">{t('Εφάπαξ, επαναλαμβανόμενα, υποχρεωτικά και προαιρετικά κόστη, ξεχωριστά.','One-time, recurring, mandatory and optional costs, kept apart.')}</p></div>
 {s.plans()}
 <p class="vat">{t('Οι τιμές δεν υπόκεινται σε ΦΠΑ. Πιο σύνθετα sites τιμολογούνται ανάλογα με την πολυπλοκότητα.','Prices are not subject to VAT. More complex sites are quoted by complexity.')}</p>
-<div class="btns" style="margin-top:32px"><a class="btn" href="{s.prices()}">{t('Δες όλες τις τιμές','See all pricing')} {ARROW}</a><a class="btn ghost" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')}</a></div>
+<div class="btns" style="margin-top:32px"><a class="btn" href="{s.prices()}">{t('Δες όλες τις τιμές','See all pricing')} {ARROW}</a><a class="btn" href="#contact">{t('Ζήτησε δωρεάν demo','Request a free demo')} {ARROW}</a></div>
 </div></section>
 <section class="sec paper" id="about" aria-labelledby="abh"><div class="wrap why">
 <div class="rv"><p class="eyebrow">06 — {t('Το στούντιο','About')}</p><h2 class="h2" id="abh">{t('Ένα μικρό στούντιο στην Αθήνα.','A small studio in Athens.')}</h2>
@@ -519,7 +520,7 @@ class Page:
         return f'''<div class="pv rv">{pv}{s.phone(key + '-m.webp', c['name'] + ' ' + t('σε κινητό', 'on a phone'))}</div>
 <div class="work-meta rv d1"><span class="n">{i + 1:02d}</span><div class="work-t"><h3>{c['name']}</h3><p class="k">{esc(t(*c['sector']))}</p></div>
 <p class="work-d"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία', 'Self-initiated concept · fictional company')}</span>{esc(t(*c['lead']))}</p>
-<div class="btns"><a class="btn" href="{case}">{t('Διάβασε το case study', 'Read the case study')} {ARROW}</a><a class="btn ghost" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} ↗</a></div></div>'''
+<div class="btns"><a class="btn tl" href="{case}">{t('Διάβασε το case study', 'Read the case study')} {ARROW}</a><a class="btn tl" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} {ARROW_X}</a></div></div>'''
     def case(s, key): return f'{s.pre}/work/{key}.html'
     def navcube(s):
         """Small cube docked bottom-right on wide screens once the hero is gone: it turns to the section being read, a click on a
@@ -549,7 +550,7 @@ class Page:
         out += f'''<section class="phero dark"><div class="wrap">{chip}<p class="eyebrow">{p(c['sector'])}</p>
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">{c['name']}</h1>
 <p class="lead" style="max-width:46ch">{p(c['lead'])}</p>
-<div class="btns" style="margin-top:32px"><a class="btn gold" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} {ARROW}</a><a class="btn ghost" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')}</a></div></div></section>
+<div class="btns" style="margin-top:32px"><a class="btn gold" href="{c['live']}" target="_blank" rel="noopener">{t('Δες το live', 'View live')} {ARROW_X}</a><a class="btn" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a></div></div></section>
 <section class="sec paper"><div class="wrap"><div class="pv cs-pv rv">{s.frame(s.browser(img + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt']), eager=True), 'pv-' + key)}<div class="phone"><img src="/assets/{img}-m.webp" width="390" height="844" alt="{c['name']} {t('σε κινητό', 'on a phone')}" loading="lazy" decoding="async"></div></div></div></section>
 <section class="sec" aria-labelledby="cs1"><div class="wrap about">
 <div class="rv"><p class="eyebrow">01 — Brief</p><h2 class="h2" id="cs1">{t('Το brief που θέσαμε.', 'The brief we set.')}</h2></div>
@@ -573,7 +574,7 @@ class Page:
 <section class="sec dark" aria-labelledby="cs5"><div class="wrap about">
 <div class="rv"><p class="eyebrow">05 — {t('Επόμενο βήμα', 'Next step')}</p><h2 class="h2" id="cs5">{t('Δες πώς θα φαινόταν το δικό σου site.', 'See how your own site would look.')}</h2></div>
 <div class="txt rv d1"><p>{t('Το δωρεάν demo έρχεται πριν από οποιαδήποτε πληρωμή. Δεν σου αρέσει; Δεν πληρώνεις τίποτα.', 'The free demo comes before any payment. Do not like it? You pay nothing.')}</p>
-<div class="btns" style="margin-top:24px"><a class="btn gold" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn ghost" href="{s.case(c['other'])}">{t('Επόμενο concept', 'Next concept')}: {o['name']}</a></div></div>
+<div class="btns" style="margin-top:24px"><a class="btn gold" href="{s.home('#contact')}">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn" href="{s.case(c['other'])}">{t('Επόμενο concept', 'Next concept')}: {o['name']} {ARROW}</a></div></div>
 </div></section>
 '''
         out += s.footer()
@@ -631,7 +632,7 @@ class Page:
 <section class="sec"><div class="wrap"><ol class="caps ind">{items}</ol>
 <div class="pcard rv" style="background:transparent;margin-top:clamp(40px,5vw,72px)"><span class="eyebrow">{t('Άλλος κλάδος', 'Other industries')}</span><h3 style="margin-top:12px">{t('Δεν βλέπεις τον κλάδο σου;', 'Not on the list?')}</h3>
 <p class="d">{t('Φτιάχνουμε ιστοσελίδες, e-shops και αυτοματισμούς για κάθε είδους επιχείρηση. Πες μας τι κάνεις και σου προτείνουμε τι ταιριάζει.', 'We build websites, e-shops and automation for every kind of business. Tell us what you do and we suggest what fits.')}</p>
-<div class="btns" style="margin-top:24px"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn ghost" href="{s.prices()}">{t('Δες τις τιμές', 'See pricing')}</a></div></div></div></section>
+<div class="btns" style="margin-top:24px"><a class="btn gold" href="#contact">{t('Ζήτησε δωρεάν demo', 'Request a free demo')} {ARROW}</a><a class="btn" href="{s.prices()}">{t('Δες τις τιμές', 'See pricing')} {ARROW}</a></div></div></div></section>
 {s.steps3('sec paper')}
 {s.guarantee()}
 '''
@@ -648,7 +649,7 @@ class Page:
 <h1 class="h1" style="max-width:14ch;font-size:clamp(38px,5vw + 14px,76px)">Η σελίδα <em>δεν βρέθηκε.</em></h1>
 <p class="lead" style="max-width:46ch">Ίσως άλλαξε διεύθυνση ή γράφτηκε λάθος. Ξεκίνα από την αρχική ή δες τα projects.</p>
 <p class="lead" style="max-width:46ch;margin-top:16px;color:var(--muted)" lang="en">Page not found. The address may have changed or been mistyped.</p>
-<div class="btns" style="margin-top:32px"><a class="btn gold" href="{H()}">Αρχική σελίδα {ARROW}</a><a class="btn ghost" href="{H('#projects')}">Projects</a><a class="btn ghost" href="/en/" lang="en">English site</a></div></div></section>
+<div class="btns" style="margin-top:32px"><a class="btn gold" href="{H()}">Αρχική σελίδα {ARROW}</a><a class="btn" href="{H('#projects')}">Projects {ARROW}</a><a class="btn" href="/en/" lang="en">English site {ARROW}</a></div></div></section>
 '''
         out += s.footer()
         return out

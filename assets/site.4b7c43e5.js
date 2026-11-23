@@ -34,7 +34,7 @@ if(f){var WA='306981862732',MAIL='athens.digitalframe@gmail.com';
  :{n:'Γράψε το ονοματεπώνυμό σου.',b:'Γράψε το όνομα της επιχείρησής σου.',c:'Γράψε ένα έγκυρο email.',p:'Γράψε ένα έγκυρο τηλέφωνο (τουλάχιστον 8 ψηφία).',busy:'Ετοιμάζεται…',sendLbl:f.querySelector('[type=submit]').textContent,
   okwa:'Άνοιξε το WhatsApp με το μήνυμά σου. Πάτα αποστολή εκεί: δεν λαμβάνουμε τίποτα μέχρι να το κάνεις.',okml:'Άνοιξε η εφαρμογή email με το μήνυμά σου. Πάτα αποστολή εκεί: δεν λαμβάνουμε τίποτα μέχρι να το κάνεις.',
   block:'Ο browser μπλόκαρε το παράθυρο. Άνοιξε το WhatsApp χειροκίνητα:',fix:'Διόρθωσε τα επισημασμένα πεδία.',hi:'Γεια σας! Θέλω ένα δωρεάν demo.',nm:'Όνομα',bz:'Επιχείρηση',ct:'Κατηγορία',pm:'Προτιμώμενη επικοινωνία',nt:'Σημείωση',call:'Τηλεφωνική κλήση',subj:'Αίτημα για δωρεάν demo'};
- var st=f.querySelector('.status'),btn=f.querySelector('[type=submit]'),mail=d.getElementById('lf-mail');
+ var st=f.querySelector('.status'),btn=f.querySelector('[type=submit]'),lbl=btn.querySelector('.bl')||btn,mail=d.getElementById('lf-mail');
  var $=function(id){return d.getElementById(id)};
  function method(){return f.querySelector('input[name=m]:checked').value}
  f.addEventListener('change',function(e){if(e.target.name==='m'){var v=method(),c=$('lf-c');c.type=v==='email'?'email':'tel';c.setAttribute('inputmode',v==='email'?'email':'tel');c.autocomplete=v==='email'?'email':'tel';
@@ -48,12 +48,12 @@ if(f){var WA='306981862732',MAIL='athens.digitalframe@gmail.com';
  function msg(){var v=method(),cat=$('lf-k').value,note=$('lf-d').value.trim();
   return T.hi+'\n'+T.nm+': '+$('lf-n').value.trim()+'\n'+T.bz+': '+$('lf-b').value.trim()+(cat?'\n'+T.ct+': '+cat:'')+'\n'+T.pm+': '+(v==='phone'?T.call:v==='email'?'Email':'WhatsApp')+' ('+$('lf-c').value.trim()+')'+(note?'\n'+T.nt+': '+note:'')}
  function ev(n){if(window.va){try{window.va('event',{name:n})}catch(x){}}}
- function go(kind){if(!val())return;btn.disabled=true;btn.setAttribute('aria-busy','true');btn.textContent=T.busy;st.hidden=true;
+ function go(kind){if(!val())return;btn.disabled=true;btn.setAttribute('aria-busy','true');lbl.textContent=T.busy;st.hidden=true;
   var m=msg();setTimeout(function(){
    if(kind==='mail'){ev('form_email');location.href='mailto:'+MAIL+'?subject='+encodeURIComponent(T.subj)+'&body='+encodeURIComponent(m);st.className='status';st.textContent=T.okml;st.hidden=false}
    else{ev('form_whatsapp');var u='https://wa.me/'+WA+'?text='+encodeURIComponent(m),w=window.open(u,'_blank');if(w){try{w.opener=null}catch(x){}}
     if(!w){st.className='status bad';st.textContent=T.block+' ';var a=d.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';a.textContent='wa.me/'+WA;st.appendChild(a)}else{st.className='status';st.textContent=T.okwa}st.hidden=false}
-   btn.disabled=false;btn.removeAttribute('aria-busy');btn.textContent=T.sendLbl},250)}
+   btn.disabled=false;btn.removeAttribute('aria-busy');lbl.textContent=T.sendLbl},250)}
  f.addEventListener('submit',function(e){e.preventDefault();go(method()==='email'?'mail':'wa')});
  if(mail)mail.addEventListener('click',function(){go('mail')});
  /* industries page: a demo button fills category and note; a note the visitor wrote is never overwritten */
@@ -77,10 +77,6 @@ var ids=Object.keys(map);if(!ids.length)return;
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.removeAttribute('aria-current')});if(map[e.target.id])map[e.target.id].setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
 [].forEach.call(d.querySelectorAll('section[id]'),function(x){io.observe(x)});   /* sections without a nav link (FAQ) clear the mark */
 addEventListener('scroll',function(){if((pageYOffset||0)<200)links.forEach(function(a){a.removeAttribute('aria-current')})},{passive:true})})();
-/* magnetic primary buttons: lean a few px toward a fine pointer (transform only, off under reduced motion) */
-if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches)[].forEach.call(d.querySelectorAll('.btn.gold'),function(b){
- b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.setProperty('--mx',(((e.clientX-r.left)/r.width-.5)*8).toFixed(1)+'px');b.style.setProperty('--my',(((e.clientY-r.top)/r.height-.5)*6).toFixed(1)+'px')});
- b.addEventListener('pointerleave',function(){b.style.removeProperty('--mx');b.style.removeProperty('--my')})});
 /* FAQ group filter (without JS every group shows) */
 var fb=[].slice.call(d.querySelectorAll('.fq-tabs button')),fc=[].slice.call(d.querySelectorAll('.fcat'));
 fb.forEach(function(b){b.addEventListener('click',function(){var c=b.getAttribute('data-cat');fb.forEach(function(x){x.setAttribute('aria-pressed',x===b)});fc.forEach(function(g){g.hidden=c!=='all'&&g.getAttribute('data-cat')!==c})})});

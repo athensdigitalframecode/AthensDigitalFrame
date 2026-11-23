@@ -29,7 +29,7 @@ section{position:relative}
 /* buttons */
 
 .btns{display:flex;flex-wrap:wrap;gap:12px}
-@media(max-width:559px){.btns>.btn{flex:1 1 100%}}
+@media(max-width:559px){.btns{flex-direction:column;align-items:stretch;gap:8px}.btns>.btn{justify-content:space-between}}
 /* header: brand black,white df mark,gold CTA */
 
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:400 15px/1 var(--mark);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
@@ -248,19 +248,29 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .pv::before{content:"";position:absolute;inset:-14% -10%;z-index:0;pointer-events:none;background:radial-gradient(closest-side,rgba(201,169,110,.13),transparent 78%)}
 .pv>*{position:relative;z-index:1}.pv .phone{right:0;bottom:0;width:23%;max-width:150px;position:absolute}
 /* ---- buttons: pill,glass secondary,lit gold primary ---- */
-.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:0 26px;font:600 14.5px/1 var(--body);letter-spacing:.03em;text-decoration:none;border:1px solid rgba(245,241,232,.22);border-radius:var(--pill);background:rgba(245,241,232,.06);color:var(--cream);cursor:pointer;transition:background .35s var(--ease),border-color .35s var(--ease),color .3s,transform .25s var(--ease),box-shadow .4s var(--ease)}
-.btn:hover{background:rgba(201,169,110,.12);border-color:var(--gold);color:var(--gold-soft)}
-.btn:active{transform:scale(.975)}
-.btn .ar{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:-10px;border-radius:2px;background:rgba(245,241,232,.1);font-size:13px;line-height:1;transition:transform .35s var(--ease),background .3s}
-.btn:hover .ar{transform:translateX(3px);background:rgba(201,169,110,.25)}
-.btn.ghost{background:transparent;box-shadow:none;border-color:rgba(245,241,232,.3)}
-.btn.ghost:hover{background:rgba(245,241,232,.07);border-color:var(--cream);color:var(--cream)}
-.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
-.btn.gold .ar{background:rgba(11,11,11,.16)}
-.btn.gold:hover{background:var(--gold-lt);border-color:var(--gold-lt);color:var(--ink)}
-.btn.gold:hover .ar{background:rgba(11,11,11,.26)}
-.btn.gold::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.45) 50%,transparent 62%);transform:translateX(-130%);transition:transform .8s var(--ease);pointer-events:none}
-.btn.gold:hover::after{transform:translateX(130%)}
+/* Editorial Ink V3 buttons. Primary .btn.gold: gold label + engineered arrow rail (divider, clipped corner, inverts to ink on hover).
+   Secondary .btn: frameless, hairline rule that fills gold. Tertiary .btn.tl: small caps, rule revealed on hover. No scale, no layout shift. */
+.btn{position:relative;display:inline-flex;align-items:center;gap:14px;min-height:48px;padding:0 2px;font:600 14.5px/1.25 var(--body);letter-spacing:.03em;text-decoration:none;color:var(--cream);background:none;border:0;border-radius:0;cursor:pointer;transition:color .26s var(--ease)}
+.btn::before,.btn::after{content:"";position:absolute;left:0;right:0;bottom:9px;height:1px;background:var(--rule);pointer-events:none}
+.btn::after{background:var(--gold);transform:scaleX(.18);transform-origin:left;transition:transform .26s var(--ease)}
+.btn:hover,.btn:focus-visible{color:var(--gold-soft)}.btn:active{color:var(--gold)}
+.btn:hover::after,.btn:focus-visible::after{transform:scaleX(1)}
+.ar{display:inline-grid;place-items:center;flex:none;color:var(--gold)}
+.ar svg{display:block;width:16px;height:16px;transition:transform .26s var(--ease)}
+.btn:hover .ar svg,.btn:focus-visible .ar svg{transform:translate(4px,-4px) rotate(-45deg)}
+.btn:hover .ar.x svg,.btn:focus-visible .ar.x svg{transform:translate(3px,-3px)}
+.btn.tl{min-height:44px;gap:10px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase}
+.btn.tl::before{opacity:0}.btn.tl::after{transform:scaleX(0)}.btn.tl .ar svg{width:14px;height:14px}
+.btn.gold{--rail:56px;--cut:12px;min-height:56px;padding:0 0 0 28px;gap:0;color:var(--ink);background:linear-gradient(var(--gold),var(--gold)) 0 0/calc(100% - var(--rail)) 100% no-repeat}
+.btn.gold::before,.btn.gold::after{content:none}
+.btn.gold:hover,.btn.gold:focus-visible{color:var(--ink)}
+.btn.gold:active{background-image:linear-gradient(var(--gold-lt),var(--gold-lt))}
+.btn.gold .ar{position:relative;align-self:stretch;width:var(--rail);margin-left:26px;background:var(--gold);color:var(--ink);box-shadow:inset 1px 0 0 rgba(11,11,11,.5);clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,0 100%);transition:background-color .26s var(--ease),color .26s var(--ease),box-shadow .26s var(--ease)}
+.btn.gold .ar::before{content:"";position:absolute;top:calc(var(--cut)/2 - 1px);right:calc(var(--cut)*-.2071);width:calc(var(--cut)*1.4142);height:2px;background:var(--gold);transform:rotate(45deg);opacity:0;transition:opacity .26s var(--ease)}
+.btn.gold:hover .ar,.btn.gold:focus-visible .ar{background:var(--ink);color:var(--gold-lt);box-shadow:inset 0 0 0 1px var(--gold)}
+.btn.gold:hover .ar::before,.btn.gold:focus-visible .ar::before{opacity:1}
+.btn.gold:active .ar{background:var(--s3)}
+@media(prefers-reduced-motion:reduce){.btn .ar svg,.btn:hover .ar svg,.btn:focus-visible .ar svg{transform:none!important}}
 .btn[disabled]{opacity:.6;cursor:progress}
 /* ---- header: glass bar (the only blur on the site),plain text navigation ---- */
 .hd{background:rgba(9,9,10,.55)}
@@ -274,7 +284,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 .lang{display:inline-flex;align-items:center;justify-content:center;min-width:46px;min-height:44px;padding:0 4px;border:1px solid rgba(245,241,232,.22);border-radius:var(--pill);font:600 12px/1 var(--body);letter-spacing:.12em;text-decoration:none;color:rgba(245,241,232,.9);transition:border-color .3s,color .3s,background .3s}
 .lang:hover{border-color:var(--gold);color:var(--gold-soft);background:rgba(201,169,110,.08)}
 .hd .cta-long{display:none}
-.hd .btn .ar{width:22px;height:22px;margin-right:-8px}
+.hd .btn.gold{--rail:44px;--cut:9px}.hd .btn.gold .ar{margin-left:16px}.hd .btn.gold .ar svg{width:14px;height:14px}
 .burger{border-radius:var(--r);flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;color:var(--cream);border:1px solid rgba(245,241,232,.22);background:rgba(245,241,232,.05);transition:border-color .3s,background .3s}
 .burger:hover{border-color:var(--gold);background:rgba(201,169,110,.08)}
 .sheet{position:fixed;z-index:49;overflow:auto;flex-direction:column;overscroll-behavior:contain;inset:68px 0 0 0;background:radial-gradient(90% 46% at 100% 0%,rgba(201,169,110,.14),transparent 70%),var(--s0)}
@@ -291,7 +301,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 @media(min-width:1280px){.hd .cta-long{display:inline}.hd .cta-short{display:none}}
 
 .hero::before{transform:translate3d(var(--lx,0px),var(--ly,0px),0);content:"";position:absolute;z-index:-1;pointer-events:none;background:radial-gradient(44% 58% at 73% 44%,rgba(224,196,138,.30),rgba(201,169,110,.10) 46%,transparent 72%),radial-gradient(40% 50% at 6% 4%,rgba(140,150,172,.08),transparent 70%),radial-gradient(42% 52% at 4% 108%,rgba(201,169,110,.10),transparent 70%)}
-.hd .btn{min-height:44px;padding:0 18px;font-size:13px;white-space:nowrap}
+.hd .btn.gold{min-height:44px;padding-left:18px;font-size:13px;white-space:nowrap}
 @media(min-width:1280px){.hd .in{grid-template-columns:auto 1fr auto}.hd .nav{justify-self:center}}
 
 @media(max-width:699px){.hero::before{inset:-6%;background:radial-gradient(90% 38% at 78% 62%,rgba(224,196,138,.22),rgba(201,169,110,.07) 55%,transparent 78%),radial-gradient(70% 30% at 10% 8%,rgba(140,150,172,.09),transparent 72%)}}
@@ -308,7 +318,7 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
  .hero .lead{font-size:clamp(15px,min(.9vw + 12px,2.5vh),22px);margin-bottom:clamp(12px,2.4vh,28px)}
  .hero .meta{margin-top:clamp(12px,2.6vh,36px);padding-top:clamp(10px,1.8vh,22px)}
  .hero .meta b{font-size:clamp(20px,3vh,28px)}
- .hero .btn{min-height:clamp(40px,5.6vh,50px)}
+ .hero .btn.gold{min-height:clamp(48px,6.6vh,60px);font-size:15px}
 }
 @media(min-width:700px) and (max-width:999px){.hero .grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}.hero .meta{gap:16px}}
 
@@ -404,13 +414,12 @@ main>.sec:nth-of-type(even)::before{background:radial-gradient(46% 52% at 6% 0%,
 /* legal text (privacy.html) */
 .legal h2{font:500 var(--fs-2)/1.2 var(--display);margin:var(--s6) 0 var(--s3)}.legal h2:first-child{margin-top:0}
 .legal a{color:var(--gold-lt)}
-/* motion: hero entrance (one staggered rise on load) and the magnetic primary button */
+/* motion: hero entrance (one staggered rise on load) */
 @keyframes heroin{from{opacity:0;transform:translateY(14px)}}
 @keyframes heroslide{from{transform:translateY(14px)}}
 .hero .h1,.hero .lead{animation-name:heroslide!important}
 .hero .grid>div:first-child>*{animation:heroin .8s var(--ease) both}
 .hero .h1{animation-delay:.12s}.hero .lead{animation-delay:.24s}.hero .btns{animation-delay:.36s}.hero .meta{flex-wrap:wrap;animation-delay:.48s}
-.btn.gold{translate:var(--mx,0) var(--my,0);transition:background .35s var(--ease),border-color .35s var(--ease),translate .35s var(--ease)}
 @media(prefers-reduced-motion:reduce){.hero .grid>div:first-child>*{animation:none}}
 /* selected work: one large framed preview per project,then a single meta row (brief 5.2) */
 .work{margin-bottom:clamp(64px,9vw,128px)}

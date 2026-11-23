@@ -144,6 +144,7 @@
       <li><a href="shop.html">SHOP</a></li>
       <li><a href="./#collections">COLLECTIONS</a></li>
       <li><a href="./#world">OUR WORLD</a></li>
+      <li><a href="lookbook.html">LOOKBOOK</a></li>
       <li><a href="info.html#contact">CONTACT</a></li>
     </ul>
     <div class="site-header__icons">
@@ -159,7 +160,7 @@
   <div class="menu-overlay__head"><span class="d">ENUMA ELISH</span><button class="ib" type="button" data-menu-close aria-label="Close menu">${icon('close', 24)}</button></div>
   <nav class="menu-overlay__nav" aria-label="Mobile">
     <a href="shop.html" class="d ml">SHOP</a><a href="./#collections" class="d ml" data-menu-close>COLLECTIONS</a>
-    <a href="./#world" class="d ml" data-menu-close>OUR WORLD</a><a href="info.html#contact" class="d ml">CONTACT</a>
+    <a href="./#world" class="d ml" data-menu-close>OUR WORLD</a><a href="lookbook.html" class="d ml">LOOKBOOK</a><a href="info.html#contact" class="d ml">CONTACT</a>
   </nav>
   <div class="menu-overlay__foot"><span class="jp">東京 / ΑΘΗΝΑ</span><span>INSTAGRAM — TIKTOK</span></div>
 </div>

@@ -112,6 +112,7 @@ window.EE_EL = {
 
   /* info */
   'HELP & CONTACT': 'ΒΟΗΘΕΙΑ & ΕΠΙΚΟΙΝΩΝΙΑ',
+  'FRONT': 'ΜΠΡΟΣΤΑ', 'BACK': 'ΠΙΣΩ', 'DETAIL': 'ΛΕΠΤΟΜΕΡΕΙΑ', 'STREET': 'ΣΤΟ ΔΡΟΜΟ',
   'Sample policies for a concept store. On a live shop these come from the brand and its legal advisor.': 'Πολιτικές-δείγματα για ένα concept κατάστημα. Σε πραγματικό e-shop τις δίνει το brand και ο νομικός του σύμβουλος.',
   'Help topics': 'Θέματα βοήθειας', 'FAQ': 'ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ', 'LEGAL NOTICE': 'ΝΟΜΙΚΑ ΣΤΟΙΧΕΙΑ',
   'Orders ship from Athens within 1–2 business days.': 'Οι παραγγελίες φεύγουν από την Αθήνα μέσα σε 1–2 εργάσιμες.',

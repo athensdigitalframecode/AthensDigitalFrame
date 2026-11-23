@@ -504,19 +504,12 @@ class Page:
         out = f'<div class="plans">{cols}</div>'
         return re.sub(r'(\d[\d–]*)€', r'€\1', out) if s.l == 'en' else out   # English writes €300, Greek 300€
     def work(s, i, key):
-        """One project in Selected Work. The two ENUMA ELISH concepts share one entry: the original e-shop (version 1) shows first,
-        and a switch brings up Last Train (version 2); each keeps its own preview, live link and case study."""
-        t = s.t
-        if key == 'enuma': return ''                             # shown as version 1 inside the Last Train entry
-        if key != 'last-train': return f'<article class="work" id="work-{key}">{s.card(i, key)}</article>'
-        vs = (('enuma', 1), ('last-train', 2)); first = 'enuma'
-        tabs = ''.join(f'<button role="tab" type="button" id="v-{k}-t" aria-selected="{"true" if k == first else "false"}" aria-controls="v-{k}">{t("Έκδοση", "Version")} {n}</button>' for k, n in vs)
-        return (f'<article class="work" id="work-{key}"><div class="tabs vtabs rv" role="tablist" aria-label="ENUMA ELISH">{tabs}</div>'
-                + ''.join(f'<div class="ver" id="v-{k}" role="tabpanel" aria-labelledby="v-{k}-t"{"" if k == first else " hidden"}>{s.card(i - 1, k)}</div>' for k, _ in vs) + '</article>')
+        """One project in Selected Work; the two ENUMA ELISH concepts follow one another."""
+        return f'<article class="work" id="work-{key}">{s.card(i, key)}</article>'
     def card(s, i, key):
-        """A project's large framed preview that opens the case study, then one meta row."""
+        """A project's large framed preview that opens the live demo, then one meta row."""
         t = s.t; c = CASES[key]; case = s.case(key)
-        pv = s.frame(f'<a class="lnk" href="{case}" aria-label="{c["name"]}: {t("case study", "case study")}">' + s.browser(key + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt'])) + '</a>', 'pv-' + key)
+        pv = s.frame(f'<a class="lnk" href="{c['live']}" target="_blank" rel="noopener" aria-label="{c["name"]}: {t("δες το live", "view live")}">' + s.browser(key + '-d.webp', 'athensdigitalframe.vercel.app' + c['live'].rstrip('/'), t(*c['alt'])) + '</a>', 'pv-' + key)
         return f'''<div class="pv rv">{pv}{s.phone(key + '-m.webp', c['name'] + ' ' + t('σε κινητό', 'on a phone'))}</div>
 <div class="work-meta rv d1"><span class="n">{i + 1:02d}</span><div class="work-t"><h3>{c['name']}</h3><p class="k">{esc(t(*c['sector']))}</p></div>
 <p class="work-d"><span class="chip">{t('Self-initiated concept · φανταστική εταιρεία', 'Self-initiated concept · fictional company')}</span>{esc(t(*c['lead']))}</p>

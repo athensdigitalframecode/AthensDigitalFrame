@@ -74,7 +74,8 @@
   /* ---------- storage-safe cart ---------- */
   const KEY = 'ee-demo-cart';
   const Cart = {
-    items: (() => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (_) { return []; } })(),
+    /* lines for products or colours no longer in the catalogue are dropped */
+    items: (() => { try { return (JSON.parse(localStorage.getItem(KEY)) || []).filter((i) => byHandle(i.handle)?.colors.includes(i.color)); } catch (_) { return []; } })(),
     save() { try { localStorage.setItem(KEY, JSON.stringify(this.items)); } catch (_) { /* private mode: cart stays in memory */ } },
     count() { return this.items.reduce((n, i) => n + i.qty, 0); },
     total() { return this.items.reduce((n, i) => { const p = byHandle(i.handle); return n + (p ? p.price * i.qty : 0); }, 0); },
@@ -364,7 +365,7 @@
       const count = c.soon || T(n === 1 ? '{n} PIECE' : '{n} PIECES', { n: String(n).padStart(2, '0') });
       const inner = `<span class="muted">${String(i + 1).padStart(2, '0')}</span>
         <span class="row__t"><span class="d">${esc(up(ctitle(c)))}</span><span class="jp muted">${esc(c.jp)}</span></span>
-        <span class="muted row__count">${count}</span>`;
+        <span class="muted row__count">${count}</span>${c.img ? `<span class="row-img" aria-hidden="true">${pic({ src: c.img }, { cls: 'row-img__i' })}</span>` : ''}`;
       return c.soon ? `<div class="row row--soon" aria-label="${esc(T('{x}, coming with Drop 02', { x: ctitle(c) }))}">${inner}</div>` : `<a href="${url.shop(c.id)}" class="row">${inner}</a>`;
     }).join('');
   }

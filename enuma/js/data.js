@@ -14,25 +14,29 @@ window.EE_DATA = {
       "id": "new",
       "title": "New arrivals",
       "el": "Νέες αφίξεις",
-      "jp": "新着"
+      "jp": "新着",
+      "img": "img/collections/collections_03_underground_product_only.webp"
     },
     {
       "id": "tees",
       "title": "T-shirts",
       "el": "T-shirts",
-      "jp": "Tシャツ"
+      "jp": "Tシャツ",
+      "img": "img/collections/collections_02_athens_product_only.webp"
     },
     {
       "id": "hoodies",
       "title": "Hoodies",
       "el": "Hoodies",
-      "jp": "フーディー"
+      "jp": "フーディー",
+      "img": "img/collections/collections_01_tokyo_product_only.webp"
     },
     {
       "id": "bottoms",
       "title": "Bottoms",
       "el": "Παντελόνια",
-      "jp": "ボトムス"
+      "jp": "ボトムス",
+      "img": "img/drop/newdrop_04_cargo_trousers.webp"
     },
     {
       "id": "accessories",
@@ -182,8 +186,8 @@ window.EE_DATA = {
         "XL"
       ],
       "soldOut": [
-        "Bone/XS",
-        "Bone/XL"
+        "Washed Black/XS",
+        "Washed Black/XL"
       ],
       "handle": "athens-x-tokyo-hoodie",
       "name": "Athens × Tokyo Hoodie",
@@ -191,38 +195,31 @@ window.EE_DATA = {
       "code": "EE-01",
       "price": 140,
       "colors": [
-        "Bone"
+        "Washed Black"
       ],
-      "desc": "The two cities on one hoodie. An all-over print with the Parthenon, a meander border and an olive branch on one side, and a pagoda, a great wave and a samurai helmet on the other. Limited run.",
+      "desc": "The two cities on one hoodie: a skyline of temple columns and Tokyo towers, printed in faded stone grey across the chest and down both sleeves, on heavy washed-black fleece. Limited run.",
       "fit": "Relaxed fit with a dropped shoulder. Take your usual size.",
       "model": "Model is 180 cm and wears size M.",
       "fabric": [
         "420 GSM brushed-back cotton fleece, 100% cotton",
-        "All-over sublimation print, front, back and sleeves",
+        "Distressed screen print, front and sleeves",
         "Double-layer hood, rib cuffs and hem"
       ],
       "care": "Cold wash inside out. Do not tumble dry. Do not iron the print.",
       "images": [
         {
-          "src": "img/athx-a.webp",
-          "bg": "#d8d6d1",
-          "cover": true,
+          "src": "img/drop/newdrop_08_architecture_hoodie.webp",
+          "bg": "#1a1a1a",
           "label": "Front"
-        },
-        {
-          "src": "img/athx-b.webp",
-          "bg": "#e5e4e2",
-          "cover": true,
-          "label": "Side"
         }
       ],
       "el": {
-        "desc": "Οι δύο πόλεις σε ένα hoodie. Τύπωμα σε όλη την επιφάνεια: ο Παρθενώνας, ένας μαίανδρος και ένα κλαδί ελιάς από τη μία πλευρά, μια παγόδα, ένα μεγάλο κύμα και ένα κράνος σαμουράι από την άλλη. Περιορισμένη παραγωγή.",
+        "desc": "Οι δύο πόλεις σε ένα hoodie: ένας ορίζοντας με κίονες ναών και πύργους του Τόκιο, τυπωμένος σε ξεθωριασμένο γκρι της πέτρας στο στήθος και στα δύο μανίκια, πάνω σε βαρύ ξεβαμμένο μαύρο φούτερ. Περιορισμένη παραγωγή.",
         "fit": "Χαλαρή εφαρμογή με πεσμένο ώμο. Πάρε το κανονικό σου μέγεθος.",
         "model": "Το μοντέλο έχει ύψος 180 cm και φοράει M.",
         "fabric": [
           "Βουρτσισμένο φούτερ 420 GSM, 100% βαμβάκι",
-          "Τύπωμα sublimation σε μπροστά, πλάτη και μανίκια",
+          "Ξεθωριασμένη μεταξοτυπία μπροστά και στα μανίκια",
           "Διπλή κουκούλα, ριμπ σε μανίκια και τελείωμα"
         ],
         "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Όχι στεγνωτήριο. Μη σιδερώνεις το τύπωμα."
@@ -231,12 +228,12 @@ window.EE_DATA = {
     {
       "handle": "tokyo-after-dark-hoodie",
       "el": {
-        "desc": "Το κομμάτι γύρω από το οποίο χτίστηκε το drop. Βαρύ φούτερ με έναν σταυρό από πινελιά μελανιού στο στήθος και τη γραφή 東京テック (Tokyo Tech), πλαϊνά πάνελ από mesh και υφαντό ταμπελάκι στο μανίκι.",
+        "desc": "Το κομμάτι γύρω από το οποίο χτίστηκε το drop. Βαρύ ξεβαμμένο μαύρο φούτερ με ένα ξεθωριασμένο σχέδιο κωδωνοστασίου κάτω από το λογότυπο ENUMA ELISH στο στήθος.",
         "fit": "Oversized, φαρδιά εφαρμογή με πεσμένο ώμο. Πάρε το μέγεθος που φοράς συνήθως για την προβλεπόμενη πτώση ή ένα μικρότερο για πιο στενή εφαρμογή.",
         "model": "Το μοντέλο έχει ύψος 183 cm και φοράει M.",
         "fabric": [
           "Βουρτσισμένο φούτερ 480 GSM, 100% βαμβάκι",
-          "Μεταξοτυπία στο στήθος, πλαϊνά πάνελ mesh",
+          "Ξεθωριασμένη μεταξοτυπία στο στήθος",
           "Διπλή κουκούλα, χοντρά ριμπ σε μανίκια και τελείωμα"
         ],
         "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Όχι στεγνωτήριο. Σιδέρωμα από την ανάποδη του τυπώματος."
@@ -251,8 +248,7 @@ window.EE_DATA = {
       "guide": "top",
       "price": 95,
       "colors": [
-        "Washed Black",
-        "Dirty White"
+        "Washed Black"
       ],
       "sizes": [
         "XS",
@@ -262,42 +258,22 @@ window.EE_DATA = {
         "XL"
       ],
       "soldOut": [
-        "Washed Black/XS",
-        "Dirty White/XL"
+        "Washed Black/XS"
       ],
-      "desc": "The piece the drop is built around. Heavy fleece with a brushed-ink cross across the chest and 東京テック (Tokyo Tech) lettering, mesh side panels and a woven tab on the cuff.",
+      "desc": "The piece the drop is built around. Heavy washed-black fleece with a faded spire graphic under an ENUMA ELISH wordmark across the chest.",
       "fit": "Oversized, boxy fit with a dropped shoulder. Take your usual size for the intended drape, or size down for a closer fit.",
       "model": "Model is 183 cm and wears size M.",
       "fabric": [
         "480 GSM brushed-back fleece, 100% cotton",
-        "Screen-printed chest graphic, mesh side panels",
+        "Distressed screen-printed chest graphic",
         "Double-layer hood, heavy rib cuffs and hem"
       ],
       "care": "Cold wash inside out. Do not tumble dry. Iron on the reverse of the print.",
       "images": [
         {
-          "src": "img/crossb-a.webp",
-          "bg": "#ffffff",
-          "label": "Front",
-          "color": "Washed Black"
-        },
-        {
-          "src": "img/crossb-b.webp",
-          "bg": "#ffffff",
-          "label": "Side",
-          "color": "Washed Black"
-        },
-        {
-          "src": "img/crossw-a.webp",
-          "bg": "#ffffff",
-          "label": "Front",
-          "color": "Dirty White"
-        },
-        {
-          "src": "img/crossw-b.webp",
-          "bg": "#ffffff",
-          "label": "Side",
-          "color": "Dirty White"
+          "src": "img/drop/newdrop_07_spire_hoodie.webp",
+          "bg": "#1f1f1f",
+          "label": "Front"
         }
       ]
     },
@@ -317,42 +293,37 @@ window.EE_DATA = {
       "soldOut": [
         "Washed Black/S"
       ],
-      "handle": "exarchia-tag-hoodie",
-      "name": "Exarchia Tag Hoodie",
-      "jp": "エクサルヒア",
+      "handle": "no-signal-hoodie",
+      "name": "No Signal Hoodie",
+      "jp": "圏外",
       "code": "EE-03",
       "price": 110,
       "colors": [
         "Washed Black"
       ],
-      "desc": "Tags lifted from the walls of Exarchia and sprayed across the front, sleeve and pocket in white. No two walls are the same, and neither are the drips.",
+      "desc": "Named after the drop. An ENUMA ELISH wordmark over a small star emblem on the chest, printed in faded grey on washed-black fleece. Quiet from across the street, detailed up close.",
       "fit": "Oversized, boxy fit with a dropped shoulder. Size down for a regular fit.",
       "model": "Model is 178 cm and wears size L.",
       "fabric": [
         "450 GSM brushed-back fleece, 100% cotton",
-        "Puff and spray-effect screen prints",
+        "Distressed screen print",
         "Kangaroo pocket, rib cuffs and hem"
       ],
       "care": "Cold wash inside out. Do not tumble dry. Iron on the reverse of the print.",
       "images": [
         {
-          "src": "img/graffiti-a.webp",
-          "bg": "#ffffff",
+          "src": "img/drop/newdrop_01_no_signal_hoodie.webp",
+          "bg": "#1c1c1c",
           "label": "Front"
-        },
-        {
-          "src": "img/graffiti-b.webp",
-          "bg": "#ffffff",
-          "label": "Side"
         }
       ],
       "el": {
-        "desc": "Tags από τους τοίχους των Εξαρχείων, ψεκασμένα σε λευκό στο μπροστά μέρος, στο μανίκι και στην τσέπη. Δεν υπάρχουν δύο ίδιοι τοίχοι, ούτε δύο ίδιες σταγόνες.",
+        "desc": "Πήρε το όνομά του από το drop. Το λογότυπο ENUMA ELISH πάνω από ένα μικρό έμβλημα-αστέρι στο στήθος, τυπωμένο σε ξεθωριασμένο γκρι πάνω σε ξεβαμμένο μαύρο φούτερ. Διακριτικό από μακριά, γεμάτο λεπτομέρειες από κοντά.",
         "fit": "Oversized, φαρδιά εφαρμογή με πεσμένο ώμο. Πάρε ένα μέγεθος μικρότερο για κανονική εφαρμογή.",
         "model": "Το μοντέλο έχει ύψος 178 cm και φοράει L.",
         "fabric": [
           "Βουρτσισμένο φούτερ 450 GSM, 100% βαμβάκι",
-          "Τυπώματα puff και εφέ σπρέι",
+          "Ξεθωριασμένη μεταξοτυπία",
           "Τσέπη καγκουρό, ριμπ σε μανίκια και τελείωμα"
         ],
         "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Όχι στεγνωτήριο. Σιδέρωμα από την ανάποδη του τυπώματος."
@@ -372,53 +343,47 @@ window.EE_DATA = {
         "XL"
       ],
       "soldOut": [
-        "Dirty White/M"
+        "Washed Black/M"
       ],
-      "handle": "shibuya-dist-hoodie",
-      "name": "Shibuya Dist. Hoodie",
+      "handle": "shibuya-plain-hoodie",
+      "name": "Shibuya Plain Hoodie",
       "jp": "渋谷",
       "code": "EE-04",
       "price": 100,
       "colors": [
-        "Dirty White"
+        "Washed Black"
       ],
-      "desc": "A photo print of the Shibuya scramble at night under a TOKYO / SHIBUYA DIST. lockup, with a district tape running down the sleeve.",
+      "desc": "No print, no logo: just the wash. Garment-dyed charcoal fleece with a faded, uneven finish, a deep hood and a kangaroo pocket.",
       "fit": "Relaxed fit with a dropped shoulder. True to size.",
       "model": "Model is 183 cm and wears size L.",
       "fabric": [
         "420 GSM loopback cotton",
-        "Photographic screen print",
-        "Woven sleeve tape, rib cuffs and hem"
+        "Garment-dyed and stone-washed",
+        "Kangaroo pocket, rib cuffs and hem"
       ],
       "care": "Cold wash inside out. Line dry.",
       "images": [
         {
-          "src": "img/shibuya-a.webp",
-          "bg": "#f3f3f3",
+          "src": "img/drop/newdrop_05_plain_hoodie.webp",
+          "bg": "#131313",
           "label": "Front"
-        },
-        {
-          "src": "img/shibuya-b.webp",
-          "bg": "#f8f8f8",
-          "label": "Side"
         }
       ],
       "el": {
-        "desc": "Φωτογραφικό τύπωμα της διάβασης της Shibuya τη νύχτα, κάτω από το λογότυπο TOKYO / SHIBUYA DIST., και ταινία με την περιοχή κατά μήκος του μανικιού.",
+        "desc": "Χωρίς τύπωμα, χωρίς λογότυπο: μόνο το ξέβαμμα. Φούτερ βαμμένο σε ανθρακί μετά τη ραφή, με ξεθωριασμένο, ακανόνιστο φινίρισμα, βαθιά κουκούλα και τσέπη καγκουρό.",
         "fit": "Χαλαρή εφαρμογή με πεσμένο ώμο. Πάρε το κανονικό σου μέγεθος.",
         "model": "Το μοντέλο έχει ύψος 183 cm και φοράει L.",
         "fabric": [
           "Loopback βαμβάκι 420 GSM",
-          "Φωτογραφική μεταξοτυπία",
-          "Υφαντή ταινία στο μανίκι, ριμπ σε μανίκια και τελείωμα"
+          "Βαφή μετά τη ραφή και stone wash",
+          "Τσέπη καγκουρό, ριμπ σε μανίκια και τελείωμα"
         ],
         "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Στέγνωμα στον αέρα."
       }
     },
     {
       "collections": [
-        "new",
-        "hoodies"
+        "new"
       ],
       "guide": "top",
       "sizes": [
@@ -429,62 +394,57 @@ window.EE_DATA = {
         "XL"
       ],
       "soldOut": [],
-      "handle": "circuit-panel-hoodie",
-      "name": "Circuit Panel Hoodie",
+      "handle": "circuit-utility-jacket",
+      "name": "Circuit Utility Jacket",
       "jp": "回路",
       "code": "EE-05",
       "price": 125,
       "colors": [
-        "Concrete"
+        "Washed Black"
       ],
-      "desc": "Cut-and-sew panels in three greys, a circuit-board yoke under the cross graphic, mesh inserts and a zipped sleeve pocket for a transit card.",
-      "fit": "Regular fit with articulated sleeves. True to size.",
+      "desc": "A shell for the walk home after the last train: washed charcoal cotton canvas, a stand collar, two bellows chest pockets with buckle tabs and a drawcord hem.",
+      "fit": "Boxy fit with a dropped shoulder. True to size.",
       "model": "Model is 180 cm and wears size M.",
       "fabric": [
-        "Cotton fleece body with nylon-blend panels",
-        "Mesh inserts, zipped sleeve and pocket openings",
-        "Rib cuffs and hem"
+        "Washed cotton canvas",
+        "Bellows chest pockets with buckle tabs",
+        "Two-way zip, drawcord hem"
       ],
       "care": "Cold wash inside out. Do not tumble dry.",
       "images": [
         {
-          "src": "img/panel-a.webp",
-          "bg": "#ffffff",
+          "src": "img/drop/newdrop_03_utility_jacket.webp",
+          "bg": "#151516",
           "label": "Front"
-        },
-        {
-          "src": "img/panel-b.webp",
-          "bg": "#ffffff",
-          "label": "Side"
         }
       ],
       "el": {
-        "desc": "Πάνελ σε τρεις αποχρώσεις του γκρι, ένα κομμάτι με σχέδιο πλακέτας κάτω από τον σταυρό, ένθετα mesh και τσέπη με φερμουάρ στο μανίκι για την κάρτα του μετρό.",
-        "fit": "Κανονική εφαρμογή με ανατομικά μανίκια. Πάρε το κανονικό σου μέγεθος.",
+        "desc": "Ένα μπουφάν για τον δρόμο προς το σπίτι μετά το τελευταίο τρένο: ξεβαμμένος ανθρακί βαμβακερός καμβάς, όρθιος γιακάς, δύο τσέπες φυσαρμόνικα στο στήθος με πόρπες και κορδόνι στο τελείωμα.",
+        "fit": "Φαρδιά εφαρμογή με πεσμένο ώμο. Πάρε το κανονικό σου μέγεθος.",
         "model": "Το μοντέλο έχει ύψος 180 cm και φοράει M.",
         "fabric": [
-          "Βαμβακερό φούτερ με πάνελ από μείγμα νάιλον",
-          "Ένθετα mesh, φερμουάρ σε μανίκι και τσέπη",
-          "Ριμπ σε μανίκια και τελείωμα"
+          "Ξεβαμμένος βαμβακερός καμβάς",
+          "Τσέπες φυσαρμόνικα στο στήθος με πόρπες",
+          "Φερμουάρ διπλής κατεύθυνσης, κορδόνι στο τελείωμα"
         ],
         "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Όχι στεγνωτήριο."
       }
     },
     {
-      "handle": "no-signal-tee",
+      "handle": "monastiraki-tee",
       "el": {
-        "desc": "Βαρύ t-shirt με το όνομα του drop τυπωμένο στην πλάτη στα ιαπωνικά: 圏外, εκτός εμβέλειας.",
+        "desc": "Το καθημερινό. Βαρύ, φαρδύ t-shirt σε ξεβαμμένο ανθρακί χωρίς τύπωμα, κομμένο φαρδύ στο σώμα και στα μανίκια.",
         "fit": "Χαλαρή, ελαφρώς κοντή φαρδιά εφαρμογή. Πάρε το κανονικό σου μέγεθος.",
         "model": "Το μοντέλο έχει ύψος 178 cm και φοράει L.",
         "fabric": [
           "Πενιέ βαμβακερό ζέρσεϊ 240 GSM",
-          "Μεταξοτυπία με μελάνι νερού",
+          "Βαφή μετά τη ραφή και ξέβαμμα",
           "Ενισχυμένη λαιμόκοψη, διπλές ραφές"
         ],
         "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Στέγνωμα στον αέρα."
       },
-      "name": "No Signal Tee",
-      "jp": "圏外",
+      "name": "Monastiraki Tee",
+      "jp": "モナスティラキ",
       "code": "EE-06",
       "collections": [
         "tees"
@@ -492,8 +452,7 @@ window.EE_DATA = {
       "guide": "tee",
       "price": 45,
       "colors": [
-        "Washed Black",
-        "Dirty White"
+        "Washed Black"
       ],
       "sizes": [
         "XS",
@@ -502,28 +461,21 @@ window.EE_DATA = {
         "L",
         "XL"
       ],
-      "soldOut": [
-        "Dirty White/S"
-      ],
-      "desc": "A heavyweight tee with the drop name printed across the back in Japanese: 圏外, out of range.",
+      "soldOut": [],
+      "desc": "The everyday one. A heavyweight, boxy tee in washed charcoal with no print, cut wide in the body and the sleeve.",
       "fit": "Relaxed, slightly cropped boxy fit. True to size.",
       "model": "Model is 178 cm and wears size L.",
       "fabric": [
         "240 GSM combed cotton jersey",
-        "Water-based screen print",
+        "Garment-dyed and washed",
         "Taped neck, double-needle hems"
       ],
       "care": "Cold wash inside out. Line dry.",
       "images": [
         {
-          "src": "img/p2-a.webp",
-          "bg": "#c4c1b9",
-          "label": "Tee · front"
-        },
-        {
-          "src": "img/p2-b.webp",
-          "bg": "#333333",
-          "label": "Tee · back print"
+          "src": "img/drop/newdrop_06_plain_tee.webp",
+          "bg": "#0f0f0f",
+          "label": "Front"
         }
       ]
     },
@@ -549,8 +501,7 @@ window.EE_DATA = {
       "guide": "bottom",
       "price": 110,
       "colors": [
-        "Washed Black",
-        "Concrete"
+        "Washed Black"
       ],
       "sizes": [
         "XS",
@@ -560,7 +511,6 @@ window.EE_DATA = {
         "XL"
       ],
       "soldOut": [
-        "Concrete/XL",
         "Washed Black/XL"
       ],
       "desc": "Wide cargo pants with six pockets and an adjustable hem. Built to move, and to sit on concrete steps until morning.",
@@ -574,37 +524,32 @@ window.EE_DATA = {
       "care": "Cold wash inside out. Do not tumble dry.",
       "images": [
         {
-          "src": "img/p4-a.webp",
-          "bg": "#c6c3bb",
-          "label": "Cargo · front"
-        },
-        {
-          "src": "img/p4-b.webp",
-          "bg": "#313131",
-          "label": "Cargo · on model"
+          "src": "img/drop/newdrop_04_cargo_trousers.webp",
+          "bg": "#222224",
+          "label": "Front"
         }
       ]
     },
     {
-      "handle": "monastiraki-track-pant",
+      "handle": "exarchia-statue-tee",
       "el": {
-        "desc": "Φόρμα για skate στο Μοναστηράκι τη νύχτα: μακρύ, χαλαρό πόδι, πλαϊνές ρίγες σε βαθύ κόκκινο και φερμουάρ στους αστραγάλους.",
-        "fit": "Χαλαρό, μακρύ πόδι με λάστιχο και κορδόνι στη μέση. Πάρε το κανονικό σου μέγεθος.",
+        "desc": "Ένα κλασικό κεφάλι αγάλματος, σκισμένο σαν αφίσα σε τοίχο των Εξαρχείων: ξεθωριασμένο τύπωμα κάτω από το λογότυπο ENUMA ELISH, σε βαρύ ξεβαμμένο μαύρο t-shirt.",
+        "fit": "Χαλαρή, φαρδιά εφαρμογή με πεσμένο ώμο. Πάρε το κανονικό σου μέγεθος.",
         "model": "Το μοντέλο έχει ύψος 178 cm και φοράει M.",
         "fabric": [
-          "Βουρτσισμένο πολυβαμβακερό τρικό",
-          "Πλαϊνή ρίγα",
-          "Φερμουάρ στους αστραγάλους και τις τσέπες"
+          "Πενιέ βαμβακερό ζέρσεϊ 240 GSM",
+          "Ξεθωριασμένη μεταξοτυπία με μελάνι νερού",
+          "Ενισχυμένη λαιμόκοψη, διπλές ραφές"
         ],
-        "care": "Πλύσιμο σε κρύο νερό. Στέγνωμα στον αέρα."
+        "care": "Πλύσιμο σε κρύο νερό, από την ανάποδη. Στέγνωμα στον αέρα."
       },
-      "name": "Monastiraki Track Pant",
-      "jp": "モナスティラキ",
+      "name": "Exarchia Statue Tee",
+      "jp": "エクサルヒア",
       "code": "EE-08",
       "collections": [
-        "bottoms"
+        "tees"
       ],
-      "guide": "bottom",
+      "guide": "tee",
       "price": 90,
       "colors": [
         "Washed Black"
@@ -617,25 +562,20 @@ window.EE_DATA = {
         "XL"
       ],
       "soldOut": [],
-      "desc": "Track pants for skating Monastiraki at night: a long, loose leg, side stripes in deep red and zipped ankles.",
-      "fit": "Loose, long leg with an elastic waist and drawcord. True to size.",
+      "desc": "A classical head cut up like a poster on an Exarchia wall: a distressed statue print under an ENUMA ELISH wordmark, across a heavyweight washed-black tee.",
+      "fit": "Relaxed, boxy fit with a dropped shoulder. True to size.",
       "model": "Model is 178 cm and wears size M.",
       "fabric": [
-        "Brushed poly-cotton tricot",
-        "Side stripe tape",
-        "Zipped ankles and pockets"
+        "240 GSM combed cotton jersey",
+        "Distressed water-based screen print",
+        "Taped neck, double-needle hems"
       ],
-      "care": "Cold wash. Line dry.",
+      "care": "Cold wash inside out. Line dry.",
       "images": [
         {
-          "src": "img/p6-a.webp",
-          "bg": "#c4c0b8",
-          "label": "Track pant · front"
-        },
-        {
-          "src": "img/p6-b.webp",
-          "bg": "#313131",
-          "label": "Track pant · on model"
+          "src": "img/drop/newdrop_02_statue_graphic_tee.webp",
+          "bg": "#181818",
+          "label": "Front"
         }
       ]
     }

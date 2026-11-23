@@ -504,15 +504,15 @@ class Page:
         out = f'<div class="plans">{cols}</div>'
         return re.sub(r'(\d[\d–]*)€', r'€\1', out) if s.l == 'en' else out   # English writes €300, Greek 300€
     def work(s, i, key):
-        """One project in Selected Work. The two ENUMA ELISH concepts share one entry: Last Train (version 2) shows first,
-        and a switch brings up the original e-shop (version 1); each keeps its own preview, live link and case study."""
+        """One project in Selected Work. The two ENUMA ELISH concepts share one entry: the original e-shop (version 1) shows first,
+        and a switch brings up Last Train (version 2); each keeps its own preview, live link and case study."""
         t = s.t
         if key == 'enuma': return ''                             # shown as version 1 inside the Last Train entry
         if key != 'last-train': return f'<article class="work" id="work-{key}">{s.card(i, key)}</article>'
-        vs = (('enuma', 1), ('last-train', 2))
-        tabs = ''.join(f'<button role="tab" type="button" id="v-{k}-t" aria-selected="{"true" if k == key else "false"}" aria-controls="v-{k}">{t("Έκδοση", "Version")} {n}</button>' for k, n in vs)
+        vs = (('enuma', 1), ('last-train', 2)); first = 'enuma'
+        tabs = ''.join(f'<button role="tab" type="button" id="v-{k}-t" aria-selected="{"true" if k == first else "false"}" aria-controls="v-{k}">{t("Έκδοση", "Version")} {n}</button>' for k, n in vs)
         return (f'<article class="work" id="work-{key}"><div class="tabs vtabs rv" role="tablist" aria-label="ENUMA ELISH">{tabs}</div>'
-                + ''.join(f'<div class="ver" id="v-{k}" role="tabpanel" aria-labelledby="v-{k}-t"{"" if k == key else " hidden"}>{s.card(i - 1, k)}</div>' for k, _ in vs) + '</article>')
+                + ''.join(f'<div class="ver" id="v-{k}" role="tabpanel" aria-labelledby="v-{k}-t"{"" if k == first else " hidden"}>{s.card(i - 1, k)}</div>' for k, _ in vs) + '</article>')
     def card(s, i, key):
         """A project's large framed preview that opens the case study, then one meta row."""
         t = s.t; c = CASES[key]; case = s.case(key)

@@ -642,37 +642,38 @@ window.EE_DATA = {
   ],
   "media": {
     "hero": {
-      "src": "img/hero.webp",
+      "src": "img/editorial/01_homepage_hero_desktop.webp",
+      "srcM": "img/editorial/02_homepage_hero_mobile.webp",
       "label": "Hero · lifestyle",
-      "alt": "A figure in the Tokyo After Dark Hoodie on a backstreet stairway at night",
-      "altEl": "Μια φιγούρα με το Tokyo After Dark Hoodie σε σκάλες στενού τη νύχτα"
+      "alt": "A figure in a black hoodie on a backstreet stairway at night",
+      "altEl": "Μια φιγούρα με μαύρο φούτερ σε σκάλες στενού τη νύχτα"
     },
     "tokyo": {
-      "src": "img/tokyo.webp",
+      "src": "img/editorial/05_our_world_tokyo.webp",
       "label": "Tokyo street",
       "alt": "A Tokyo backstreet at night",
       "altEl": "Ένα στενό στο Τόκιο τη νύχτα"
     },
     "athens": {
-      "src": "img/athens.webp",
+      "src": "img/editorial/06_our_world_athens.webp",
       "label": "Athens street",
       "alt": "Painted walls in Exarchia, Athens",
       "altEl": "Ζωγραφισμένοι τοίχοι στα Εξάρχεια, Αθήνα"
     },
     "campaign1": {
-      "src": "img/campaign-1.webp",
+      "src": "img/editorial/10_campaign_backstreet_stairs.webp",
       "label": "Campaign 01",
       "alt": "Campaign photo on backstreet stairs",
       "altEl": "Φωτογραφία campaign σε σκάλες στενού"
     },
     "campaign2": {
-      "src": "img/campaign-2.webp",
+      "src": "img/editorial/11_campaign_exarchia.webp",
       "label": "Campaign 02",
       "alt": "Campaign photo in Exarchia, Athens",
       "altEl": "Φωτογραφία campaign στα Εξάρχεια, Αθήνα"
     },
     "campaign3": {
-      "src": "img/campaign-3.webp",
+      "src": "img/editorial/12_campaign_shibuya.webp",
       "label": "Campaign 03",
       "alt": "Campaign photo in Shibuya after the last train",
       "altEl": "Φωτογραφία campaign στη Shibuya μετά το τελευταίο τρένο"

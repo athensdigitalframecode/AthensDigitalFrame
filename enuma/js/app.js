@@ -57,6 +57,7 @@
 
   /* image or a labelled slot until the real photo is added */
   function pic(img, { cls = 'ph', alt = '', eager = false, sizes = '' } = {}) {
+    if (img && img.srcM) return `<picture><source media="(max-width: 900px)" srcset="${esc(img.srcM)}">${pic({ ...img, srcM: '' }, { cls, alt, eager, sizes })}</picture>`;
     if (img && img.src) {
       return `<img class="${cls}${img.cover ? ' pimg--cover' : ''}"${img.bg ? ` style="background-color:${esc(img.bg)}"` : ''} src="${esc(img.src)}" alt="${esc(alt || img.alt || '')}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"${sizes ? ` sizes="${sizes}"` : ''}>`;
     }

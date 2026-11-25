@@ -360,8 +360,8 @@ button{font:inherit;color:inherit}
 }
 
 /* ---------- Shopify: shared product visuals ---------- */
-.ov-g svg,.cm-g svg,.th svg{width:100%;height:auto}
-.g-img{display:block;width:100%;aspect-ratio:300/380;object-fit:contain}
+.ov-g svg,.cm-g svg,.th svg,.cm-g img{display:block;width:100%;height:auto}
+.g-img{display:block;width:100%;height:auto;aspect-ratio:300/380;object-fit:contain}
 .btn[disabled],.btn[aria-busy="true"]{opacity:.6;pointer-events:none}
 
 /* ---------- Shopify: rail hanger photography (side view → front view) ---------- */

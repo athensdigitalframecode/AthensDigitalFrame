@@ -191,12 +191,12 @@ svg{display:block}
 .rel-title .w{display:inline-block;margin-right:.25em;color:#a6abb9}
 .rel-para{position:absolute;left:3.6vw;bottom:5vh;width:22vw;min-width:230px;font-size:clamp(13px,.66vw,14px);line-height:1.32;color:#3b4052;font-weight:500}
 .feat-list{position:absolute;left:0;top:0;width:100%;will-change:transform}
-.feat{position:absolute;left:20%;width:48%}
-.feat:nth-child(1){top:36vh}.feat:nth-child(2){top:94vh}.feat:nth-child(3){top:152vh}
-.feat i{display:block;width:clamp(16px,1.35vw,26px);margin-bottom:1.6vh;color:#33384a}
+.feat{position:absolute;left:14%;width:66%}
+.feat:nth-child(1){top:14vh}.feat:nth-child(2){top:42vh}.feat:nth-child(3){top:70vh}
+.feat i{display:grid;place-items:center;width:clamp(44px,3.4vw,60px);aspect-ratio:1;padding:clamp(11px,.85vw,15px);margin-bottom:2vh;border-radius:50%;background:var(--blue);color:#fff}
 .feat i svg{width:100%}
-.feat h3{font-size:clamp(.78rem,1.02vw,1.6rem);margin-bottom:1.1vh;color:#0b0c10}
-.feat p{font-size:clamp(13px,.6vw,14px);line-height:1.35;color:#5a6073}
+.feat h3{font-size:clamp(1rem,1.5vw,2.2rem);margin-bottom:1.2vh;color:#0b0c10}
+.feat p{font-size:clamp(15px,.85vw,16px);line-height:1.45;max-width:30em;color:#5a6073}
 .b-truck{position:absolute;left:0;top:0;width:calc(var(--u)*88.4);height:calc(var(--u)*19.5);z-index:4;will-change:transform}
 .b-truck svg{width:100%;height:100%}
 

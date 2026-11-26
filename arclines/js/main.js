@@ -509,7 +509,7 @@
     // titles & features
     b.rel.style.transform = snap(`translate3d(0,${(1 - ease(seg(p, .1, .24))) * H * .48}px,0)`);
     reveal(relSplit, seg(p, .2, .3), '#b3b8c6', '#0b0c10');
-    b.feat.style.transform = snap(`translate3d(0,${T(p, [[.26, 0], [.5, -1.07 * H]], true)}px,0)`);
+    b.feat.style.transform = snap(`translate3d(0,${T(p, [[.26, 0], [.5, (mob ? -1.07 : -.1) * H]], true)}px,0)`);     // desktop: all three fit, gentle drift
 
     // truck (top-down)
     // path = Catmull-Rom spline (% of viewport); heading follows the tangent, so the turn is a real arc

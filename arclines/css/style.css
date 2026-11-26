@@ -107,10 +107,11 @@ svg{display:block}
 .stats__right{position:absolute;right:3.2vw;top:0;width:31vw;will-change:transform}
 .stats__copy{font-size:clamp(13px,.82vw,15px);line-height:1.3;font-weight:500;color:#2d3040;padding-bottom:7vh}
 .stats__copy p{margin-bottom:1.6vh}
-.link{display:inline-block;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(10.5px,.6vw,12px);letter-spacing:.05em;border-bottom:1px solid currentColor;padding-bottom:2px;margin-top:2vh}
+.link{display:inline-block;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(12px,.66vw,13px);letter-spacing:.05em;border-bottom:2px solid var(--blue);padding-bottom:2px;margin-top:2vh}
 .stat{padding:2vh 0 5vh}
 .stat b{display:block;font-size:clamp(3rem,7vw,11rem);line-height:.92;letter-spacing:-.02em}
-.stat span{display:block;margin-top:1.4vh;font-size:clamp(13px,.72vw,14px);color:#575d70}
+.stat b i{font-style:normal;color:var(--blue)}
+.stat span{display:block;margin-top:1.4vh;font-size:clamp(14px,.8vw,15px);color:#575d70}
 
 /* =========================================================
    SCENES (pinned)
@@ -263,7 +264,9 @@ svg{display:block}
 .faq-list{padding-top:1.2vh}
 .faq-list li{border-top:1px solid rgba(20,24,44,.14)}
 .faq-list li:last-child{border-bottom:1px solid rgba(20,24,44,.14)}
-.faq-list button{width:100%;display:grid;grid-template-columns:3vw 1fr 24px;align-items:center;text-align:left;padding:2.6vh 0;font-weight:700;font-size:clamp(13px,.86vw,16px);letter-spacing:-.005em;transition:padding .4s cubic-bezier(.16,1,.3,1)}
+.faq-list button{width:100%;display:grid;grid-template-columns:3vw 1fr 24px;align-items:center;text-align:left;padding:2.6vh 0;font-weight:700;font-size:clamp(15px,1.05vw,19px);letter-spacing:-.005em;transition:padding .4s cubic-bezier(.16,1,.3,1),color .3s}
+.faq-list li.open button,.faq-list li.open button span{color:var(--blue)}
+.faq-list li.open button i::before{background:var(--blue)}
 .faq-list button:hover{padding-left:.9vw}
 .faq-list button span{font-family:var(--display);font-size:.7em;color:#5c6277}
 .faq-list button i{position:relative;width:12px;height:12px;justify-self:end}
@@ -288,7 +291,7 @@ svg{display:block}
 .foot-col{display:flex;flex-direction:column;gap:.9vh;color:#2c3040}
 .foot-col small{color:#636a7f;font-size:.9em;margin-bottom:.8vh}
 .foot-col a:hover,.office a:hover{color:var(--blue)}
-.office a{text-decoration:underline;text-decoration-color:rgba(20,24,44,.25);text-underline-offset:3px}
+.office a{text-decoration:underline;text-decoration-color:var(--blue);text-underline-offset:3px}
 .foot-about p{line-height:1.35;color:#555b6f}
 .soc{display:flex;gap:.6vw}
 .soc a{width:2.2vw;min-width:24px;aspect-ratio:1;border:1px solid rgba(20,24,44,.2);border-radius:50%;display:grid;place-items:center;font-size:.9em;transition:background .3s,color .3s}

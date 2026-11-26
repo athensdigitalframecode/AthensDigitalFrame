@@ -164,10 +164,8 @@ window.ART = (function () {
 
   /* ---------- placeholder partner wordmarks (fictional) ---------- */
   const logos = [
-    ['ALTAIR', 'w'], ['Nordvik', 'i'], ['SEAWAY', 'b'], ['pacific arc', 'l'], ['KESTREL', 'w'],
-    ['ORION', 'b'], ['Tidewater', 'i'], ['HALO AIR', 'w'], ['mirai', 'l'], ['NORTHSTAR', 'b'],
-    ['Cobalt', 'i'], ['AEROLINE', 'w'], ['VESPER', 'b'], ['coralis', 'l'], ['SUNDA', 'w'],
-    ['Meridian', 'i'], ['TRANSPAC', 'b'], ['ZENITH', 'w'], ['harbor&co', 'l'], ['LUMEN', 'b']
+    ['ALTAIR', 'w'], ['nordvik', 'l'], ['SEAWAY', 'w'], ['pacific arc', 'l'], ['KESTREL', 'w'],
+    ['tidewater', 'l'], ['HALO AIR', 'w'], ['mirai', 'l'], ['NORTHSTAR', 'w'], ['coralis', 'l']
   ];
 
   return { stacker, truck, truckTop, ship, plane, icons, logos };

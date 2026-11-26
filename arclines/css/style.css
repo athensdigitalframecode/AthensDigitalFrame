@@ -316,7 +316,7 @@ svg{display:block}
 .foot-legal{display:flex;gap:2vw;margin-top:9vh;font-size:clamp(10.5px,.56vw,12px);color:#5c6277;padding-left:0}
 .foot-legal span:last-child{margin-left:auto}
 .foot-legal .ph{cursor:default}
-.foot-word{font-size:15.6vw;line-height:.78;font-weight:800;color:#d6dbea;white-space:nowrap;margin:4vh 0 -2.6vw -.8vw;letter-spacing:-.03em;text-transform:uppercase;user-select:none}
+.foot-word{font-size:17.4vw;line-height:.78;font-weight:800;color:#d6dbea;white-space:nowrap;margin:4vh 0 -2.9vw -.8vw;letter-spacing:-.03em;text-transform:uppercase;user-select:none}
 
 /* =========================================================
    reveal helper

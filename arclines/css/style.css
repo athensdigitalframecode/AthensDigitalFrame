@@ -250,10 +250,7 @@ svg{display:block}
 .ins-side{grid-column:3/4;grid-row:1/4;font-size:clamp(13px,.66vw,14px);line-height:1.35;color:#a6adbd;padding-top:4vh}
 .ins-side .pill{margin-top:2.6vh}
 .ins-thumb{margin-top:5vh;width:100%;aspect-ratio:1.28;border-radius:3px;overflow:hidden;background:#222;position:relative;transition:background .5s}
-.ins-thumb[data-i="1"]{background:linear-gradient(180deg,#9fb6d4 0,#41536f 55%,#0e1a2e 100%)}
-.ins-thumb[data-i="2"]{background:linear-gradient(180deg,#e9a56a 0,#b35b4f 40%,#1b2540 100%)}
-.ins-thumb[data-i="3"]{background:linear-gradient(135deg,#d8dde6 0,#6d7788 50%,#232a38 100%)}
-.ins-thumb::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.35) 0 14px,rgba(255,255,255,.12) 14px 16px)}
+.ins-thumb::after{content:none}
 
 /* =========================================================
    FAQ + CTA
@@ -394,9 +391,13 @@ svg{display:block}
 /* photographic asset slots (swapped in by JS when files exist) */
 .photo{width:100%;height:100%;object-fit:contain;display:block;user-select:none;-webkit-user-drag:none}
 .photo--cover{object-fit:cover}
-.ins-thumb[data-i="1"]{background-image:var(--ins1,none),linear-gradient(180deg,#9fb6d4 0,#41536f 55%,#0e1a2e 100%);background-size:cover;background-position:center}
-.ins-thumb[data-i="2"]{background-image:var(--ins2,none),linear-gradient(180deg,#e9a56a 0,#b35b4f 40%,#1b2540 100%);background-size:cover;background-position:center}
-.ins-thumb[data-i="3"]{background-image:var(--ins3,none),linear-gradient(135deg,#d8dde6 0,#6d7788 50%,#232a38 100%);background-size:cover;background-position:center}
+.ins-thumb{background:linear-gradient(160deg,rgba(10,18,255,.22),rgba(0,0,0,.6)),var(--contour,none) 0 0/600px 600px,#0b0e1c;border:1px solid rgba(255,255,255,.1)}
+.ins-thumb svg{width:100%;height:100%}
+.ins-thumb g{opacity:0;transition:opacity .5s}
+.ins-thumb[data-i="1"] .r1,.ins-thumb[data-i="2"] .r2,.ins-thumb[data-i="3"] .r3{opacity:1}
+.ins-thumb path{fill:none;stroke:#7d86ff;stroke-width:1.6;stroke-dasharray:4 5}
+.ins-thumb circle{fill:var(--ice)}
+.ins-thumb text{fill:#dfe4f2;font:700 11px var(--display);letter-spacing:.06em}
 .ins-thumb[style]::after,.ins-thumb{}
 
 /* smoother compositing + grounded vehicles */

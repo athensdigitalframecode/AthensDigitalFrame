@@ -172,12 +172,10 @@ svg{display:block}
 .co i svg{width:100%}
 .co h3{font-size:clamp(1.05rem,1.7vw,2.6rem);margin-bottom:1.4vh;line-height:1}
 .co p{font-size:clamp(12px,1vw,17px);line-height:1.4;color:rgba(228,236,255,.94)}
-.co--1,.co--3{left:auto;right:calc(50% + 3.5vw);text-align:right}
-.co--1 i,.co--3 i{margin-left:auto}
+.co--1,.co--3,.co--5{left:auto;right:calc(50% + 3.5vw);text-align:right}
+.co--1 i,.co--3 i,.co--5 i{margin-left:auto}
 .co--2,.co--4{left:calc(50% + 3.5vw)}
-.co--1,.co--2{top:42vh}.co--3,.co--4{top:80vh}
-.co--5{left:50%;margin-left:-13.5vw;text-align:center;top:122vh}
-.co--5 i{margin:0 auto 1.4vh}
+.co--1,.co--2{top:42vh}.co--3,.co--4{top:80vh}.co--5{top:122vh}
 .b-tag{position:absolute;left:0;right:0;top:24vh;text-align:center;color:#fff;font-size:clamp(1.5rem,3.7vw,5.6rem);line-height:.98;max-width:24vw;margin:0 auto;opacity:0;text-shadow:0 0 28px rgba(110,170,255,.55)}
 .b-clouds{position:absolute;inset:0;opacity:0;pointer-events:none;background:linear-gradient(180deg,#8dbaff 0%,#d4e1fb 60%,#dfe8f9 100%);will-change:opacity}
 .b-clouds i{position:absolute;border-radius:50%;filter:blur(6vh);background:radial-gradient(circle,#fff 0,rgba(255,255,255,.85) 35%,rgba(255,255,255,0) 70%);will-change:transform}
@@ -360,8 +358,8 @@ svg{display:block}
   .rel-title{font-size:clamp(1.5rem,7.4vw,2.8rem);width:80vw;left:6vw}
   .rel-para{left:6vw;width:80vw;font-size:12px}
   .feat{left:8%;width:84%}.feat h3{font-size:1.05rem}.feat p{font-size:12px}
-  .co{width:46vw}.co--1,.co--3{right:calc(50% + 4vw)}.co--2,.co--4{left:calc(50% + 4vw)}
-  .co h3{font-size:1.05rem}.co p{font-size:12.5px}.co--5{margin-left:-23vw;width:46vw}
+  .co{width:46vw}.co--1,.co--3,.co--5{right:calc(50% + 4vw)}.co--2,.co--4{left:calc(50% + 4vw)}
+  .co h3{font-size:1.05rem}.co p{font-size:12.5px}
   .b-tag{font-size:clamp(1.6rem,8.4vw,3rem);max-width:80vw}
   .tr-title{margin-left:6vw;font-size:clamp(1.8rem,9vw,3.4rem)}
   .tr-list{margin:10vh 6vw 0}
@@ -491,9 +489,9 @@ html{overflow-x:clip}
   .sv p,.sv-para,.feat p{font-size:13.5px;line-height:1.45}
   .rel-title{top:12vh}.rel-para{width:86vw;font-size:13px;line-height:1.4;bottom:3.5vh}
   .sv p{max-width:64vw}
-  .feat h3{font-size:1.15rem}.feat i{width:22px}
-  .co{width:38vw}.co--1,.co--3{right:calc(50% + 7vw)}.co--2,.co--4{left:calc(50% + 7vw)}
-  .co--5{width:50vw;margin-left:-25vw}
+  .feat h3{font-size:1.15rem}.feat i{width:40px;padding:10px}
+  .feat:nth-child(1){top:36vh}.feat:nth-child(2){top:94vh}.feat:nth-child(3){top:152vh}
+  .co{width:38vw}.co--1,.co--3,.co--5{right:calc(50% + 7vw)}.co--2,.co--4{left:calc(50% + 7vw)}
   .co h3{font-size:1.1rem}.co p{font-size:13px;line-height:1.4}.co i{width:24px}
   .tm__who b,.tm__who small,.ins-list time,.ins-list em,.stat span,.foot-legal{font-size:12.5px}
   .tm p{font-size:16px;line-height:1.5}
@@ -516,7 +514,7 @@ html{overflow-x:clip}
 }
 @media (max-width:380px){
   .hero h1{font-size:clamp(2.4rem,12.8vw,3.4rem)}
-  .co{width:40vw}.co--1,.co--3{right:calc(50% + 5vw)}.co--2,.co--4{left:calc(50% + 5vw)}
+  .co{width:40vw}.co--1,.co--3,.co--5{right:calc(50% + 5vw)}.co--2,.co--4{left:calc(50% + 5vw)}
   .co h3{font-size:1rem}.co p{font-size:12.5px}
   .tab{font-size:11px}
 }
@@ -591,5 +589,4 @@ html{overflow-x:clip}
 @media (max-height:520px) and (orientation:landscape) and (pointer:coarse){
   .rel-title{top:5vh}.rel-para{font-size:12px;bottom:2.5vh;width:80vw}
   .av{width:12vh;min-width:0;font-size:5vh}
-  .co--5{left:calc(50% + 7vw);margin-left:0;text-align:left;width:38vw}.co--5 i{margin:0 0 1vh}
 }

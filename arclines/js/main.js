@@ -244,9 +244,9 @@
     mouse.sx += (mouse.x - mouse.sx) * .05; mouse.sy += (mouse.y - mouse.sy) * .05;
     ctx.clearRect(0, 0, w, h);
     const R = Math.max(w * .335, Math.min(h * .62, 330));
-    const cx = w * (w < 820 ? .78 : .95) + (mouse.sx - .5) * -26;
+    const cx = w * (w < 820 ? .78 : .88) + (mouse.sx - .5) * -26;
     const cy = h * (w < 820 ? .34 : .575) - c * .06 + (mouse.sy - .5) * -18;
-    const rot = t * 2.6 + c * .035 + 30;
+    const rot = -t * 1.2 + c * .035 + 215;                    // starts with the APAC lanes on the visible side, slow drift keeps them there
     const zoom = 1 + clamp(c / H) * .12;
     const r = R * zoom;
 
@@ -304,18 +304,27 @@
     ctx.shadowBlur = 0; ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.35)';
     ctx.beginPath(); ctx.arc(cx, cy, r + 5, Math.PI * 1.1, Math.PI * 1.55); ctx.stroke();
 
-    // arcs
-    ctx.save(); ctx.lineWidth = 1.2; ctx.setLineDash([7, 9]); ctx.lineDashOffset = -t * 26;
+    // arcs: soft glow + dashed route + a pulse travelling along each lane
+    const glow = w >= 820;                                    // no shadow blur on phones (cost per frame)
+    ctx.save();
     arcs.forEach(([a, b], k) => {
-      const A = vec(cities[a][1], cities[a][2], rot), B = vec(cities[b][1], cities[b][2], rot);
-      ctx.beginPath(); let pen = false;
+      const A = vec(cities[a][1], cities[a][2], rot), B = vec(cities[b][1], cities[b][2], rot), pts = [];
       for (let s = 0; s <= 1.0001; s += .02) {
         let x = lerp(A[0], B[0], s), y = lerp(A[1], B[1], s), z = lerp(A[2], B[2], s);
-        const L = Math.hypot(x, y, z) || 1, lift = 1 + .5 * Math.sin(Math.PI * s) * (.4 + (k % 3) * .25);
-        x = x / L * lift; y = y / L * lift; z = z / L * lift;
-        if (z > -.15) { const px = cx + x * r, py = cy + y * r; pen ? ctx.lineTo(px, py) : ctx.moveTo(px, py); pen = true; } else pen = false;
+        const L = Math.hypot(x, y, z) || 1, lift = 1 + .3 * Math.sin(Math.PI * s) * (.4 + (k % 3) * .25);
+        pts.push([cx + x / L * lift * r, cy + y / L * lift * r, z / L * lift > -.15]);
       }
-      ctx.strokeStyle = k % 2 ? 'rgba(255,120,80,.75)' : 'rgba(255,170,130,.55)'; ctx.stroke();
+      const path = () => { ctx.beginPath(); let pen = false; pts.forEach(([px, py, v]) => { if (v) { pen ? ctx.lineTo(px, py) : ctx.moveTo(px, py); pen = true; } else pen = false; }); };
+      const col = k % 2 ? '255,120,80' : '255,170,130';
+      path(); ctx.setLineDash([]); ctx.lineWidth = 3; ctx.strokeStyle = `rgba(${col},.18)`;
+      if (glow) { ctx.shadowColor = `rgba(${col},.8)`; ctx.shadowBlur = 10; }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      path(); ctx.lineWidth = 1.2; ctx.setLineDash([7, 9]); ctx.lineDashOffset = -t * 26; ctx.strokeStyle = `rgba(${col},.8)`; ctx.stroke();
+      const hp = pts[Math.floor(((t * .18 + k * .37) % 1) * (pts.length - 1))];
+      if (hp[2]) {
+        ctx.fillStyle = '#fff'; if (glow) { ctx.shadowColor = `rgb(${col})`; ctx.shadowBlur = 14; }
+        ctx.beginPath(); ctx.arc(hp[0], hp[1], 2.6, 0, 7); ctx.fill(); ctx.shadowBlur = 0;
+      }
     });
     ctx.restore();
 

@@ -214,12 +214,14 @@
     footTop = ABS($('#contact'));
     svMax = Math.max(0, $('#svTrack').scrollWidth - W);
     sizeCanvas(globe); sizeCanvas(ocean);
+    heroTop = $('.hero__body').offsetTop;
   }
 
   /* =========================================================
      GLOBE
      ========================================================= */
   const globe = { cv: $('#globe') }; globe.ctx = globe.cv.getContext('2d');
+  let heroTop = 0;                                          // phones: routes and labels fade out above the headline
   const ocean = { cv: $('#ocean') }; ocean.ctx = ocean.cv.getContext('2d');
   function sizeCanvas(o) {
     const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -306,6 +308,7 @@
 
     // arcs: soft glow + dashed route + a pulse travelling along each lane
     const glow = w >= 820;                                    // no shadow blur on phones (cost per frame)
+    const fy = py => glow ? 1 : clamp((heroTop - py) / (h * .08));
     ctx.save();
     arcs.forEach(([a, b], k) => {
       const A = vec(cities[a][1], cities[a][2], rot), B = vec(cities[b][1], cities[b][2], rot), pts = [];
@@ -316,13 +319,14 @@
       }
       const path = () => { ctx.beginPath(); let pen = false; pts.forEach(([px, py, v]) => { if (v) { pen ? ctx.lineTo(px, py) : ctx.moveTo(px, py); pen = true; } else pen = false; }); };
       const col = k % 2 ? '255,120,80' : '255,170,130';
-      path(); ctx.setLineDash([]); ctx.lineWidth = 3; ctx.strokeStyle = `rgba(${col},.18)`;
+      const ink = al => { if (glow) return `rgba(${col},${al})`; const g = ctx.createLinearGradient(0, heroTop - h * .08, 0, heroTop); g.addColorStop(0, `rgba(${col},${al})`); g.addColorStop(1, `rgba(${col},0)`); return g; };
+      path(); ctx.setLineDash([]); ctx.lineWidth = 3; ctx.strokeStyle = ink(.18);
       if (glow) { ctx.shadowColor = `rgba(${col},.8)`; ctx.shadowBlur = 10; }
       ctx.stroke(); ctx.shadowBlur = 0;
-      path(); ctx.lineWidth = 1.2; ctx.setLineDash([7, 9]); ctx.lineDashOffset = -t * 26; ctx.strokeStyle = `rgba(${col},.8)`; ctx.stroke();
+      path(); ctx.lineWidth = 1.2; ctx.setLineDash([7, 9]); ctx.lineDashOffset = -t * 26; ctx.strokeStyle = ink(.8); ctx.stroke();
       const hp = pts[Math.floor(((t * .18 + k * .37) % 1) * (pts.length - 1))];
       if (hp[2]) {
-        ctx.fillStyle = '#fff'; if (glow) { ctx.shadowColor = `rgb(${col})`; ctx.shadowBlur = 14; }
+        ctx.fillStyle = `rgba(255,255,255,${fy(hp[1])})`; if (glow) { ctx.shadowColor = `rgb(${col})`; ctx.shadowBlur = 14; }
         ctx.beginPath(); ctx.arc(hp[0], hp[1], 2.6, 0, 7); ctx.fill(); ctx.shadowBlur = 0;
       }
     });
@@ -333,7 +337,7 @@
     cities.forEach(([n, la, lo]) => {
       const [x, y, z] = vec(la, lo, rot);
       if (z < .08) return;
-      const px = cx + x * r, py = cy + y * r, a = clamp((z - .08) * 3);
+      const px = cx + x * r, py = cy + y * r, a = clamp((z - .08) * 3) * fy(py);
       ctx.fillStyle = `rgba(255,255,255,${a})`; ctx.beginPath(); ctx.arc(px, py, 2.1, 0, 7); ctx.fill();
       ctx.strokeStyle = `rgba(255,255,255,${a * .35})`; ctx.beginPath(); ctx.arc(px, py, 6 + Math.sin(t * 2 + la) * 1.5, 0, 7); ctx.stroke();
       ctx.fillStyle = `rgba(200,210,235,${a * .8})`; ctx.fillText(n.toUpperCase(), px + 9, py);

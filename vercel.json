@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/((?!olivane/)(?!arclines/)(?!enuma/)(?!last-train/).*)",
+      "source": "/((?!olivane/)(?!arclines/)(?!enuma/)(?!last-train/)(?!tefraon/).*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "source": "/(olivane|arclines|enuma|last-train)/(.*)",
+      "source": "/(olivane|arclines|enuma|last-train|tefraon)/(.*)",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -107,12 +107,12 @@
       "permanent": true
     },
     {
-      "source": "/work/:k(olivane|arclines|enuma|last-train)",
+      "source": "/work/:k(olivane|arclines|enuma|last-train|tefraon)",
       "destination": "/work/:k.html",
       "permanent": true
     },
     {
-      "source": "/en/work/:k(olivane|arclines|enuma|last-train)",
+      "source": "/en/work/:k(olivane|arclines|enuma|last-train|tefraon)",
       "destination": "/en/work/:k.html",
       "permanent": true
     },

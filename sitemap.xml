@@ -48,4 +48,10 @@
   <url><loc>https://athensdigitalframe.vercel.app/en/work/last-train.html</loc>
     <xhtml:link rel="alternate" hreflang="el" href="https://athensdigitalframe.vercel.app/work/last-train.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://athensdigitalframe.vercel.app/en/work/last-train.html"/></url>
+  <url><loc>https://athensdigitalframe.vercel.app/work/tefraon.html</loc>
+    <xhtml:link rel="alternate" hreflang="el" href="https://athensdigitalframe.vercel.app/work/tefraon.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://athensdigitalframe.vercel.app/en/work/tefraon.html"/></url>
+  <url><loc>https://athensdigitalframe.vercel.app/en/work/tefraon.html</loc>
+    <xhtml:link rel="alternate" hreflang="el" href="https://athensdigitalframe.vercel.app/work/tefraon.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://athensdigitalframe.vercel.app/en/work/tefraon.html"/></url>
 </urlset>

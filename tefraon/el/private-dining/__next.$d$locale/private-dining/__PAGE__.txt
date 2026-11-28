@@ -1,0 +1,37 @@
+3:"$Sreact.fragment"
+4:"/tefraon/_next/static/chunks/0fc_co7sw6krq.js"
+5:I[65543,["$4"],"default"]
+6:I[75762,["$4"],"default"]
+b:"/tefraon/_next/static/chunks/3cle4-lp80ak3.js"
+c:"/tefraon/_next/static/chunks/2wp_xihcziyzy.js"
+d:"/tefraon/_next/static/chunks/35x62tsrhzi1h.js"
+e:"/tefraon/_next/static/chunks/1pkrhwo1p2y9_.js"
+f:"/tefraon/_next/static/chunks/1y_fnxghz_9eu.js"
+10:I[7290,["$b","$c","$d","$e","$f"],"PageMotion"]
+11:I[54737,["$b","$c","$d","$e","$f"],"Image"]
+12:I[19298,["$b","$c","$d","$e","$f"],"default"]
+13:I[31227,["$b","$c","$d","$e","$f"],"PrivateInquiry"]
+17:"ViewportBoundary"
+18:I[47366,["$4"],"$17"]
+19:"MetadataBoundary"
+1a:I[47366,["$4"],"$19"]
+1b:"$Sreact.suspense"
+1c:I[13137,["$4"],"IconMark"]
+8:X
+8:C
+9:X
+a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$3","c",{"children":[["$","$L10",null,{"children":[["$","header",null,{"className":"pt-[calc(var(--header-h)+clamp(4rem,10vw,9rem))]","children":[["$","div",null,{"className":"container-grid gap-y-8","children":[["$","p",null,{"data-hero-fade":true,"className":"eyebrow col-span-full text-sand","children":"Ιδιωτικό δείπνο"}],["$","h1",null,{"className":"col-span-full font-display text-h1 leading-[0.92] text-balance lg:col-span-9","children":["$","span",null,{"className":"-mt-[0.12em] -mb-[0.24em] block overflow-hidden pt-[0.12em] pb-[0.24em]","children":["$","span",null,{"data-hero-line":true,"className":"block","children":"Έξι θέσεις. Ένα τραπέζι. Η φωτιά κοντά."}]}]}],["$","div",null,{"data-hero-fade":true,"style":{"--i":1},"className":"col-span-full flex flex-col gap-8 lg:col-span-5 lg:col-start-8","children":[["$","p",null,{"className":"text-lead leading-snug text-ash/90","children":"Μια απόμερη αίθουσα από πέτρα και δρυ για γιορτές, συναντήσεις και ήσυχες περιστάσεις, με το πλήρες εποχικό μενού και προαιρετικό συνδυασμό κρασιών."}],"$undefined"]}]]}],["$","div",null,{"data-fx":"parallax","className":"relative overflow-hidden bg-wood mt-[clamp(3rem,7vw,7rem)] aspect-[4/5] w-full sm:aspect-[21/9]","children":["$","$L11",null,{"src":"/assets/images/architecture/private-dining.webp","alt":"Τραπέζι έξι θέσεων από σκούρα δρυ με κεριά και μαύρα κεραμικά.","fill":true,"sizes":"100vw","preload":true,"className":"object-cover"}]}]]}],["$","section",null,{"aria-labelledby":"room","className":"container-grid gap-y-10 py-[clamp(5rem,10vw,10rem)]","children":[["$","h2",null,{"id":"room","className":"eyebrow col-span-full text-sand lg:col-span-3","children":"Η αίθουσα"}],["$","ul",null,{"data-fade":true,"className":"col-span-full lg:col-span-6 lg:col-start-5","children":[["$","li","Έως έξι άτομα σε ένα δρύινο τραπέζι",{"className":"border-t border-ash/10 py-5 font-display text-h3 leading-snug last:border-b","children":"Έως έξι άτομα σε ένα δρύινο τραπέζι"}],["$","li","Το εποχικό μενού οκτώ πιάτων, με προαιρετικό συνδυασμό κρασιών",{"className":"border-t border-ash/10 py-5 font-display text-h3 leading-snug last:border-b","children":"Το εποχικό μενού οκτώ πιάτων, με προαιρετικό συνδυασμό κρασιών"}],["$","li","Το μενού μπορεί να συζητηθεί εκ των προτέρων για διατροφικές ανάγκες",{"className":"border-t border-ash/10 py-5 font-display text-h3 leading-snug last:border-b","children":"Το μενού μπορεί να συζητηθεί εκ των προτέρων για διατροφικές ανάγκες"}],["$","li","Μεγαλύτερες ομάδες: στείλτε αίτημα και θα προτείνουμε επιλογές",{"className":"border-t border-ash/10 py-5 font-display text-h3 leading-snug last:border-b","children":"Μεγαλύτερες ομάδες: στείλτε αίτημα και θα προτείνουμε επιλογές"}]]}],["$","div",null,{"data-fx":"reveal","className":"relative overflow-hidden bg-wood col-span-3 aspect-[3/4] lg:col-span-3 lg:col-start-1 lg:row-start-2 lg:-mt-40","children":["$","$L11",null,{"src":"/assets/images/architecture/private-dining.webp","alt":"","fill":true,"sizes":"(min-width: 1024px) 25vw, 60vw","className":"object-cover","style":{"objectPosition":"50% 62%"}}]}]]}],["$","section",null,{"id":"inquiry","aria-labelledby":"inquiry-title","className":"scroll-mt-(--header-h) border-t border-ash/10 py-[clamp(5rem,10vw,10rem)]","children":["$","div",null,{"className":"container-grid gap-y-10","children":[["$","div",null,{"className":"col-span-full lg:col-span-4","children":[["$","h2",null,{"id":"inquiry-title","className":"font-display text-h2","children":"Αίτημα ιδιωτικού δείπνου"}],["$","p",null,{"className":"mt-6 text-sm text-sand","children":["$","$L12",null,{"href":"/el/reservations","localeCookie":false,"className":"link-line","children":"Κάντε κράτηση"}]}]]}],["$","div",null,{"className":"col-span-full lg:col-span-7 lg:col-start-6","children":["$","$L13",null,{}]}]]}]}]]}],[["$","script","script-0",{"src":"/tefraon/_next/static/chunks/1pkrhwo1p2y9_.js","async":true}],"$L14"],"$L15"]}],"p":"$@16","v":null,"s":"$9"}}]]
+2:[["children",{"s":"private-dining","h":64,"d":{"r":["$","$3","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
+1:[["children",{"s":{"n":"locale","t":"d","k":"el","s":[]},"h":48,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":80,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L18",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#141310"}],["$","meta","3",{"name":"color-scheme","content":"dark"}]]}],["$","$L1a",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1b",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Ιδιωτικό δείπνο — ΤΕΦΡΑΟΝ"}],["$","meta","1",{"name":"description","content":"Μια αίθουσα έξι θέσεων για ιδιωτικές βραδιές γύρω από τη φωτιά."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"canonical","href":"https://athensdigitalframe.vercel.app/tefraon/el/private-dining/"}],["$","link","4",{"rel":"alternate","hrefLang":"en","href":"https://athensdigitalframe.vercel.app/tefraon/en/private-dining/"}],["$","link","5",{"rel":"alternate","hrefLang":"el","href":"https://athensdigitalframe.vercel.app/tefraon/el/private-dining/"}],["$","meta","6",{"property":"og:title","content":"Ιδιωτικό δείπνο — ΤΕΦΡΑΟΝ"}],["$","meta","7",{"property":"og:description","content":"Μια αίθουσα έξι θέσεων για ιδιωτικές βραδιές γύρω από τη φωτιά."}],["$","meta","8",{"property":"og:url","content":"https://athensdigitalframe.vercel.app/tefraon/el/private-dining/"}],["$","meta","9",{"property":"og:site_name","content":"TEFRAON"}],["$","meta","10",{"property":"og:locale","content":"el_GR"}],["$","meta","11",{"property":"og:type","content":"website"}],["$","meta","12",{"name":"twitter:card","content":"summary"}],["$","meta","13",{"name":"twitter:title","content":"Ιδιωτικό δείπνο — ΤΕΦΡΑΟΝ"}],["$","meta","14",{"name":"twitter:description","content":"Μια αίθουσα έξι θέσεων για ιδιωτικές βραδιές γύρω από τη φωτιά."}],["$","link","15",{"rel":"icon","href":"/tefraon/icon.svg?icon.2dvqf9d1tly0a.svg","sizes":"any","type":"image/svg+xml"}],["$","$L1c","16",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1d","v":null,"s":"$9"}},"a":"$@1e","u":"$@1f","b":"2D8GZDwkt_XFltlNyOpol"}
+20:I[47366,["$4"],"OutletBoundary"]
+14:["$","script","script-1",{"src":"/tefraon/_next/static/chunks/1y_fnxghz_9eu.js","async":true}]
+15:["$","$L20",null,{"children":["$","$1b",null,{"name":"Next.MetadataOutlet","children":"$@21"}]}]
+1f:true
+9:300
+21:null
+9:C
+1e:0
+7:"$undefined"
+1d:"$undefined"
+16:"$undefined"

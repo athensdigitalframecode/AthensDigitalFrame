@@ -290,7 +290,7 @@
   var nq = d.getElementById('navcube');
   if (nq && 'IntersectionObserver' in window) {
     var nc = nq.firstElementChild, nf = [].slice.call(nc.children), PATH = [4, 0, 1, 5, 3, 2], nk = 0, nQ = TARGET[PATH[0]], nFrom, nTo, nT0 = 0, nRaf = 0;
-    var NMAP = { studio: 0, services: 0, 'work-olivane': 1, 'work-arclines': 2, 'work-enuma': 1, 'work-last-train': 2, process: 3, pricing: 4, about: 5, faq: 5, contact: 5 };
+    var NMAP = { studio: 0, services: 0, 'work-olivane': 1, 'work-arclines': 2, 'work-enuma': 1, 'work-last-train': 2, 'work-tefraon': 1, process: 3, pricing: 4, about: 5, faq: 5, contact: 5 };
     var pjShow = function (id) { var k = id.replace(/^work-/, ''), on = nf.filter(function (f) { return f.getAttribute('data-pj') === k; })[0];   /* swap the concept shown on a shared face */
       if (on) nf.forEach(function (f) { if (f.getAttribute('data-f') === on.getAttribute('data-f')) f.hidden = f !== on; }); };
     var nPaint = function (r) {

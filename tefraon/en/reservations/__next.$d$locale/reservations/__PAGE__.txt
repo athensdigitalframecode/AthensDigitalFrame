@@ -1,0 +1,33 @@
+3:"$Sreact.fragment"
+4:"/tefraon/_next/static/chunks/0fc_co7sw6krq.js"
+5:I[65543,["$4"],"default"]
+6:I[75762,["$4"],"default"]
+b:"/tefraon/_next/static/chunks/3cle4-lp80ak3.js"
+c:"/tefraon/_next/static/chunks/2wp_xihcziyzy.js"
+d:"/tefraon/_next/static/chunks/35x62tsrhzi1h.js"
+e:"/tefraon/_next/static/chunks/14lm_8em_hq64.js"
+f:"/tefraon/_next/static/chunks/1y_fnxghz_9eu.js"
+10:I[7290,["$b","$c","$d","$e","$f"],"PageMotion"]
+11:I[55084,["$b","$c","$d","$e","$f"],"ReservationFlow"]
+12:I[47366,["$4"],"OutletBoundary"]
+13:"$Sreact.suspense"
+16:"ViewportBoundary"
+17:I[47366,["$4"],"$16"]
+18:"MetadataBoundary"
+19:I[47366,["$4"],"$18"]
+1a:I[13137,["$4"],"IconMark"]
+8:X
+8:C
+9:X
+a:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$3","c",{"children":[["$","$L10",null,{"children":[["$","header",null,{"className":"pt-[calc(var(--header-h)+clamp(4rem,10vw,9rem))]","children":[["$","div",null,{"className":"container-grid gap-y-8","children":[["$","p",null,{"data-hero-fade":true,"className":"eyebrow col-span-full text-sand","children":"Reservations · demonstration"}],["$","h1",null,{"className":"col-span-full font-display text-h1 leading-[0.92] text-balance lg:col-span-9","children":["$","span",null,{"className":"-mt-[0.12em] -mb-[0.24em] block overflow-hidden pt-[0.12em] pb-[0.24em]","children":["$","span",null,{"data-hero-line":true,"className":"block","children":"A place at our fire."}]}]}],["$","div",null,{"data-hero-fade":true,"style":{"--i":1},"className":"col-span-full flex flex-col gap-8 lg:col-span-5 lg:col-start-8","children":[["$","p",null,{"className":"text-lead leading-snug text-ash/90","children":"Choose a date, your experience and a table. This is a working demonstration: nothing is reserved, charged or sent."}],"$undefined"]}]]}],"$undefined"]}],["$","section",null,{"className":"container-grid py-[clamp(4rem,8vw,8rem)]","children":["$","div",null,{"className":"col-span-full","children":["$","$L11",null,{}]}]}]]}],[["$","script","script-0",{"src":"/tefraon/_next/static/chunks/14lm_8em_hq64.js","async":true}],["$","script","script-1",{"src":"/tefraon/_next/static/chunks/1y_fnxghz_9eu.js","async":true}]],["$","$L12",null,{"children":["$","$13",null,{"name":"Next.MetadataOutlet","children":"$@14"}]}]]}],"p":"$@15","v":null,"s":"$9"}}]]
+2:[["children",{"s":"reservations","h":64,"d":{"r":["$","$3","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}],"p":"$@7","v":"$8","s":"$9"},"c":"$Qa"}]]
+1:[["children",{"s":{"n":"locale","t":"d","k":"en","s":[]},"h":48,"c":"$Q2"}]]
+0:{"t":{"t":{"s":"","h":80,"c":"$Q1"},"h":{"r":["$","$3","h",{"children":[null,["$","$L17",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#141310"}],["$","meta","3",{"name":"color-scheme","content":"dark"}]]}],["$","$L19",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$13",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Reservations — TEFRAON"}],["$","meta","1",{"name":"description","content":"Reserve a table at TEFRAON (demonstration only)."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"canonical","href":"https://athensdigitalframe.vercel.app/tefraon/en/reservations/"}],["$","link","4",{"rel":"alternate","hrefLang":"en","href":"https://athensdigitalframe.vercel.app/tefraon/en/reservations/"}],["$","link","5",{"rel":"alternate","hrefLang":"el","href":"https://athensdigitalframe.vercel.app/tefraon/el/reservations/"}],["$","meta","6",{"property":"og:title","content":"Reservations — TEFRAON"}],["$","meta","7",{"property":"og:description","content":"Reserve a table at TEFRAON (demonstration only)."}],["$","meta","8",{"property":"og:url","content":"https://athensdigitalframe.vercel.app/tefraon/en/reservations/"}],["$","meta","9",{"property":"og:site_name","content":"TEFRAON"}],["$","meta","10",{"property":"og:locale","content":"en_GB"}],["$","meta","11",{"property":"og:type","content":"website"}],["$","meta","12",{"name":"twitter:card","content":"summary"}],["$","meta","13",{"name":"twitter:title","content":"Reservations — TEFRAON"}],["$","meta","14",{"name":"twitter:description","content":"Reserve a table at TEFRAON (demonstration only)."}],["$","link","15",{"rel":"icon","href":"/tefraon/icon.svg?icon.2dvqf9d1tly0a.svg","sizes":"any","type":"image/svg+xml"}],["$","$L1a","16",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1b","v":null,"s":"$9"}},"a":"$@1c","u":"$@1d","b":"2D8GZDwkt_XFltlNyOpol"}
+14:null
+1d:true
+9:300
+9:C
+1c:0
+7:"$undefined"
+1b:"$undefined"
+15:"$undefined"

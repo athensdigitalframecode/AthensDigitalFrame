@@ -1,0 +1,9 @@
+:HL["/tefraon/_next/static/chunks/0k_givqcd-fxv.css","style"]
+:HL["/tefraon/_next/static/media/4fa990ec435ab385-s.p.01c4fvj4x_1t2.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/tefraon/_next/static/media/7226b177135961b4-s.p.3mjzw95c0-_52.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/tefraon/_next/static/media/8b4c152875a47f7e-s.p.04nxxsnmfpknc.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/tefraon/_next/static/media/ca2e761ee981bb3c-s.p.1f0d9os9qfevp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+3:[["children",{"s":"__PAGE__","h":160}]]
+2:[["children",{"s":"space","h":64,"c":"$Q3"}]]
+1:[["children",{"s":{"n":"locale","t":"d","k":"en","s":[]},"h":48,"c":"$Q2"}]]
+0:{"b":"2D8GZDwkt_XFltlNyOpol","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

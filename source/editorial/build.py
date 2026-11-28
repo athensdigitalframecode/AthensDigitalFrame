@@ -120,7 +120,7 @@ CASES = {
         motion=('Κυλιόμενα κείμενα με κουμπί παύσης και ένα reveal στον τίτλο. Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, όλα σταματούν.', 'Scrolling tickers with a pause button and one reveal on the title. If you have asked your device for reduced motion, it all stops.'),
         sample=('Το brand, τα προϊόντα, οι τιμές, το απόθεμα και οι πολιτικές είναι δείγματα. Το καλάθι μένει μόνο στον browser σου· το checkout και οι φόρμες δεν στέλνουν τίποτα.', 'The brand, products, prices, stock and policies are samples. The bag stays only in your browser; the checkout and forms send nothing.')),
     'last-train': dict(
-        name='ENUMA ELISH · Last Train', live='/last-train/', og='last-train/og.jpg', other='olivane',
+        name='ENUMA ELISH · Last Train', live='/last-train/', og='last-train/og.jpg', other='tefraon',
         sector=('E-shop · Streetwear drop', 'E-shop · Streetwear drop'),
         alt=('Το concept e-shop ENUMA ELISH Last Train: οι λέξεις ENUMA και ELISH δεξιά κι αριστερά από φωτογραφία αποβάθρας του μετρό της Αθήνας', 'ENUMA ELISH Last Train concept e-shop: the words ENUMA and ELISH either side of a photo of an Athens metro platform'),
         lead=('Ένα drop για το ίδιο φανταστικό brand: η αποβάθρα του μετρό της Αθήνας συναντά το τελευταίο τρένο του Τόκιο. Το τρένο μπαίνει στον σταθμό καθώς κυλάς. Το καλάθι δουλεύει· τα προϊόντα και οι τιμές είναι δείγματα.', "A drop for the same fictional label: an Athens metro platform meets Tokyo's last train. The train pulls into the station as you scroll. The bag works; the products and prices are samples."),
@@ -140,6 +140,28 @@ CASES = {
         responsive=('Στο κινητό το τρένο φορτώνει τα μισά καρέ και η κρεμάστρα γίνεται λωρίδα που σύρεις με το δάχτυλο.', 'On phones the train loads half the frames and the rail becomes a strip you swipe with your finger.'),
         motion=('Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, το parallax σταματά και το τρένο ακολουθεί το scroll χωρίς εξομάλυνση.', 'If you have asked your device for reduced motion, the parallax stops and the train follows the scroll without easing.'),
         sample=('Το brand, τα προϊόντα, οι τιμές, τα υλικά και οι χρόνοι αποστολής είναι δείγματα. Το καλάθι μένει μόνο στον browser σου· το checkout και η φόρμα newsletter δεν στέλνουν τίποτα.', 'The brand, products, prices, fabrics and shipping times are samples. The bag stays only in your browser; the checkout and the newsletter form send nothing.')),
+    # Next.js static export; rebuild from the TEFRAON repo with `pnpm export:adf ../AthensDigitalFrame` (replaces tefraon/).
+    'tefraon': dict(
+        name='TEFRAON', live='/tefraon/', og='assets/tefraon-og.jpg', other='olivane',
+        sector=('Εστίαση · Αθήνα', 'Restaurant · Athens'),
+        alt=('Η concept ιστοσελίδα TEFRAON: ο τίτλος «Nothing remains unchanged.» πάνω από μελιτζάνα που ψήνεται σε ανοιχτή φωτιά', 'TEFRAON concept website: the headline "Nothing remains unchanged." over an aubergine roasting on an open fire'),
+        lead=('Δίγλωσση ιστοσελίδα για ένα φανταστικό εστιατόριο ανοιχτής φωτιάς στην Αθήνα. Η κράτηση δουλεύει ως επίδειξη· τίποτα δεν κρατείται ούτε αποστέλλεται.', 'A bilingual website for a fictional open-fire restaurant in Athens. The reservation works as a demo; nothing is booked or sent.'),
+        brief=[('Το TEFRAON είναι ένα εστιατόριο που επινοήσαμε: σύγχρονη ελληνική κουζίνα πάνω σε ανοιχτή φωτιά, στην Αθήνα. Το όνομα βγαίνει από την τέφρα. Δεν υπάρχει πελάτης· το brief το θέσαμε μόνοι μας.', 'TEFRAON is a restaurant we made up: contemporary Greek cooking over open fire, in Athens. The name comes from τέφρα, the Greek word for ash. There is no client; we set the brief ourselves.'),
+               ('Οι ιστοσελίδες εστιατορίων είναι συνήθως ή όμορφες και άβολες ή πρακτικές και αδιάφορες. Θέλαμε και τα δύο: κινηματογραφική αφήγηση που δεν κρύβει ποτέ το μενού, την κράτηση και τις πρακτικές πληροφορίες, σε κινητό και σε δύο γλώσσες.', 'Restaurant websites tend to be either beautiful and awkward, or practical and forgettable. We wanted both at once: cinematic storytelling that never hides the menu, the booking or the practical details, on phones and in two languages.')],
+        direction=[('Βασάλτης, καμένη δρυς, λινό και το φως της χόβολης δίνουν την παλέτα. Οι φωτογραφίες και το βίντεο είναι δημιουργημένα με AI και απλώνονται σε μεγάλη κλίμακα.', 'Basalt, blackened oak, linen and ember light set the palette. The photographs and the video are AI-generated and run at a dramatic scale.'),
+                   ('Η GFS Didot κρατά τους τίτλους με την ίδια φροντίδα σε ελληνικά και λατινικά και η Noto Sans τα κείμενα. Το σήμα είναι ένα λεπτό Τ δίπλα σε έναν μισό δίσκο.', 'GFS Didot carries the headlines with equal care in Greek and Latin, and Noto Sans the text. The mark is a thin T beside a half-disc.')],
+        palette=['#141310', '#eae3d8', '#b7a58c', '#ac482a'],
+        fonts=[('GFS Didot', ('τίτλοι', 'headlines')), ('Noto Sans', ('κείμενα και interface', 'text and interface')), ('Noto Serif Display', ('πλάγια', 'italics'))],
+        stages=[('/assets/tefraon-s1', False, ('Το κεφάλαιο «Ignition»: το έτοιμο πιάτο αρνιού, τέταρτο βήμα', 'The Ignition chapter: the finished lamb dish, step four')),
+                ('/assets/tefraon-s2', False, ('Το φθινοπωρινό μενού με ένα πιάτο ανοιχτό στον συνδυασμό κρασιού', 'The autumn menu with one course opened to its wine pairing')),
+                ('/assets/tefraon-s3', False, ('Κράτηση, τρίτο βήμα: τραπέζι σε διαδραστική κάτοψη', 'Reservation, step three: a table on an interactive floor plan'))],
+        parts=[(('Αφήγηση σε κεφάλαια', 'Story in chapters'), ('Από τις πρώτες ύλες στη φωτιά και στο πιάτο. Στον υπολογιστή το κεφάλαιο «Ignition» μένει σταθερό όσο κυλάς.', 'From raw ingredients through fire to the plate. On desktop the Ignition chapter holds still while you scroll.')),
+               (('Εποχικά μενού και κρασιά', 'Seasonal menus and wine'), ('Ένα μενού γευσιγνωσίας για κάθε εποχή, με συνδυασμούς από ελληνικές ποικιλίες.', 'A tasting menu for each season, with pairings by Greek grape variety.')),
+               (('Κράτηση σε πέντε βήματα', 'Five-step reservation'), ('Ημερομηνία, μενού, τραπέζι σε κάτοψη, στοιχεία και επιβεβαίωση. Δοκιμαστική: δεν κρατά και δεν στέλνει τίποτα.', 'Date, menu, a table on a floor plan, details and confirmation. Demo only: nothing is booked or sent.')),
+               (('Δύο γλώσσες', 'Two languages'), ('Κάθε σελίδα, μενού και μήνυμα υπάρχει σε ελληνικά και αγγλικά.', 'Every page, menu and message exists in Greek and English.'))],
+        responsive=('Στο κινητό η εισαγωγή παραλείπεται για να φορτώνει πιο γρήγορα, το βίντεο έρχεται σε κάθετη εκδοχή και η κάτοψη γίνεται λίστα τραπεζιών.', 'On phones the intro is skipped so the page loads faster, the video comes in a vertical cut and the floor plan becomes a list of tables.'),
+        motion=('Βίντεο στην αρχή, κεφάλαια με κύλιση και ένα προαιρετικό εφέ WebGL στο πιάτο, όλα με κουμπί παύσης. Αν έχεις ζητήσει μειωμένη κίνηση στη συσκευή σου, η σελίδα μένει στατική.', 'A hero video, scroll-driven chapters and an optional WebGL effect on the dish, each with a pause control. If you have asked your device for reduced motion, the page stays static.'),
+        sample=('Το εστιατόριο, ο σεφ, τα μενού, οι τιμές και η διαθεσιμότητα είναι επινοημένα. Οι φωτογραφίες και το βίντεο είναι δημιουργημένα με AI. Η κράτηση και η φόρμα ιδιωτικής εκδήλωσης δεν στέλνουν τίποτα.', 'The restaurant, chef, menus, prices and availability are invented. The photographs and the video are AI-generated. The reservation and the private-dining form send nothing.')),
 }
 
 # Industries page: (industry, offer, six features), each as (el, en). English copy from the owner; no prices here yet.
@@ -520,7 +542,7 @@ class Page:
         face goes there, and a concept face opens its demo. Two concepts share each project face and swap as you scroll. The header menu is the accessible navigation, so this is hidden.
         Faces follow a path of neighbours on the cube (4,0,1,5,3,2), so each step down the page is a quarter turn."""
         t = s.t; out = ''
-        rows = [('services', '02', t('Υπηρεσίες', 'Services')), ('olivane', 'enuma'), ('arclines', 'last-train'), ('process', '04', t('Διαδικασία', 'Process')),
+        rows = [('services', '02', t('Υπηρεσίες', 'Services')), ('olivane', 'enuma', 'tefraon'), ('arclines', 'last-train'), ('process', '04', t('Διαδικασία', 'Process')),
                 ('pricing', '05', t('Τιμές', 'Pricing')), ('contact', '08', t('Επικοινωνία', 'Contact'))]
         for f, r in zip((4, 0, 1, 5, 3, 2), rows):
             if r[0] in CASES:                                    # a project face: two concepts take turns on it
